@@ -1,7 +1,6 @@
 # **Wordle**
 Wordle is a web-based word game created and developed by the software engineer Josh Wardle. It is owned and published by The New York Times Company since 2022. You can check out and play the original game here:
-
-[Wordle - The New York Times](https://www.nytimes.com/games/wordle/index.html)
+[Original: Wordle - The New York Times](https://www.nytimes.com/games/wordle/index.html)
 
 ### Gameplay
 The player has six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position. The player wins, if he/she guesses all five letters correctly. If the player does not guess all five letters within the six tries, he/she loses the game and has no more options to guess the word. In this case the word be revealed, but the player does not get any points. 
