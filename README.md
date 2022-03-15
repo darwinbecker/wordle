@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# **Wordle**
+Wordle is a web-based word game created and developed by the software engineer Josh Wardle. It is owned and published by The New York Times Company since 2022. You can check out and play the original game here: [Wordle - The New York Times](https://www.nytimes.com/games/wordle/index.html)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Gameplay
+The player has six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position. The player wins, if he/she guesses all five letters correctly. If the player does not guess all five letters within the six tries, he/she loses the game and has no more options to guess the word. In this case the word be revealed, but the player does not get any points. 
 
-## Available Scripts
+### How to play
+To play the game simply type on your `keyboard` or use the keyboard displayed in the browser to enter a letter.
+You can type up to 5 letters and sumbit your answer by pressing `enter` on your keyboard.
+After every guess, each letter is marked as either green, yellow or gray: 
+- green indicates that letter is correct and in the correct position
+- yellow means it is in the answer but not in the right position
+- gray indicates it is not in the answer at all.
 
-In the project directory, you can run:
+Example:
+![image info](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wordle_196_example.svg/311px-Wordle_196_example.svg.png)
+*Game #196 complete in 4 guesses - [Wikipedia](https://en.wikipedia.org/wiki/Wordle#/media/File:Wordle_196_example.svg)*
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Database for words
+> Source: [OpenThesaurus](https://www.openthesaurus.de/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Total amount of words: **193.223**
+- words with length of 5: **4702**
 
-### `npm test`
+### Credit
+[Josh Wardle](https://powerlanguage.co.uk/)
+[OpenThesaurus](https://www.openthesaurus.de/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Bonus information about the game & the creator's story
+Excerpt from [Wikipedia](https://en.wikipedia.org/wiki/Josh_Wardle#Wordle):
 
-### `npm run build`
+In 2013, while working at Reddit, Josh Wardle made a prototype of word game Wordle, a play on his last name.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In January 2021, he returned to his 2013 prototype to create a word game for his partner, Palak Shah. During the COVID-19 pandemic, he and Shah had played many New York Times games including Spelling Bee, and he wanted to make a new word game that they could play together. Shah played a vital role in the game's development before it went public. She reviewed the English language's 12,000 five-letter words and narrowed them down to 2,500 commonly-known words that could be used in the daily puzzle.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+At first, only Wardle's family played Wordle, until Wardle made it widely available in October 2021 by posting it on his own website, powerlanguage.co.uk. Wordle had no advertisements and Wardle's goal was not to make money. Despite Wordle's success, Wardle did not want it to become his full-time job.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The game had 90 players by 1 November, within a month of Wardle making it public. Three months later the game had 300,000 daily players, which rose to two million by the following week.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+In January 2022, The New York Times Company announced that it had acquired Wordle "for an undisclosed price in the low-seven figures".
