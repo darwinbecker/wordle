@@ -8,7 +8,8 @@ The player has six attempts to guess a five-letter word, with feedback given for
 
 ### How to play
 To play the game simply type on your `keyboard` or use the keyboard displayed in the browser to enter a letter.
-You can type up to 5 letters and sumbit your answer by pressing `enter` on your keyboard.
+You can type up to 5 letters and sumbit your answer by pressing `enter` on your keyboard. 
+Typos or any spelling mistakes can be corrected by pressing `backspace`. Note: Once submitted, you cannot go back and change your answer!
 After every guess, each letter is marked as either green, yellow or gray: 
 - green indicates that letter is correct and in the correct position
 - yellow means it is in the answer but not in the right position
