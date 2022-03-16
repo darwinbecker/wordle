@@ -26,7 +26,7 @@ Example:
 > Source: [OpenThesaurus](https://www.openthesaurus.de/)
 
 - Total amount of words: **193.223**
-- words with length of 5: **4702**
+- words with length of 5: **4.702**
 
 ### Credit
 [Josh Wardle](https://powerlanguage.co.uk/)
