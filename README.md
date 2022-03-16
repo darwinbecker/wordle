@@ -4,7 +4,7 @@ Wordle is a web-based word game created and developed by the software engineer J
 [Original Wordle - The New York Times](https://www.nytimes.com/games/wordle/index.html)
 
 ### Gameplay
-The player has six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position. The player wins, if he/she guesses all five letters correctly. If the player does not guess all five letters within the six tries, he/she loses the game and has no more options to guess the word. In this case the word be revealed, but the player does not get any points. 
+The player has six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position. The player wins, if all five letters were guessed correctly. If the player does not guess all five letters correctly within the six tries, the game will be lost. In this case the searched word will be revealed and the player does not get any points. 
 
 ### How to play
 To play the game simply type on your `keyboard` or use the keyboard displayed in the browser to enter a letter.
