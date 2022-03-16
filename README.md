@@ -18,7 +18,7 @@ Example:
 
 ![image info](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wordle_196_example.svg/311px-Wordle_196_example.svg.png)
 
-*Game #196 complete in 4 guesses - [Wikipedia](https://en.wikipedia.org/wiki/Wordle#/media/File:Wordle_196_example.svg)*
+*Source: [Game #196 complete in 4 guesses - Wikipedia](https://en.wikipedia.org/wiki/File:Wordle_196_example.svg)*
 
 
 ### Database for words
