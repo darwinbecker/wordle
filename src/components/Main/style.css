@@ -1,0 +1,7 @@
+.table-content{
+    margin: auto;
+    width: 500px;
+    height: 200px;
+    border: 2px solid grey;
+    border-radius: 1rem;
+}
