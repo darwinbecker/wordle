@@ -2,15 +2,25 @@ import { Tile } from '../tile/tile';
 import { MAX_WORD_LENGTH } from '../../../config/settings';
 
 type RowProps = {
+    // columnIndex: number;
     letter: string;
 }
 
 const Tiles: React.FC<RowProps> = (props: RowProps) => {
+    const letterArray = props.letter ? props.letter.split("") : [];
     return (
         <>
             {
-                [...Array(MAX_WORD_LENGTH)].map((element, index) => {
-                    return <Tile key={index} letter={props.letter}></Tile>
+                // [...Array(MAX_WORD_LENGTH)].map((element, index) => {
+                //     return <Tile key={index} letter={props.letter}></Tile>
+                // })
+                letterArray.map((element, index) => {
+                    return <Tile key={index} letter={element}></Tile>
+                })
+            }
+            {
+                [...Array(MAX_WORD_LENGTH - letterArray.length)].map((element, index) => {
+                    return <Tile key={index} letter={element}></Tile>
                 })
             }
         </>

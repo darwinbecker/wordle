@@ -56,8 +56,10 @@ export const Main: React.FC = () => {
     const onEnter = () => {
         console.log("Submitted:")
         console.log(letter)
-        setRowIndex(rowIndex + 1);
-        setColumnIndex(0);
+        if (rowIndex < (MAX_GUESSES - 1)) {
+            setRowIndex(rowIndex + 1);
+            setColumnIndex(0);
+        }
     }
 
 
@@ -87,10 +89,13 @@ export const Main: React.FC = () => {
     return (
         <>
             {/* <div className="table-content" onClick={handleMouseEvent}> */}
+
+            {/* <Grid rowIndex={rowIndex} columnIndex={columnIndex} letter={letter}></Grid> */}
             <Grid rowIndex={rowIndex} letter={letter}></Grid>
-            <div className="table-content">
+
+            {/* <div className="table-content">
                 {letter}
-            </div>
+            </div> */}
             {/* <div className="table-content">
                 <div className="table-row">
                     <div className="table-tile"></div>
