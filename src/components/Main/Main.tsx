@@ -1,6 +1,8 @@
 import { useState, KeyboardEvent, MouseEvent, useEffect } from "react";
 import { useKeyDown } from "../useKeyDown/useKeyDown";
-
+import { MAX_WORD_LENGTH } from '../../config/settings';
+import { MAX_GUESSES } from '../../config/settings';
+import { Grid } from '../grid/root/grid';
 
 
 export const Main: React.FC = () => {
@@ -10,8 +12,9 @@ export const Main: React.FC = () => {
     // const foxPress = useKeyDown("f");
 
     const [letter, setLetter] = useState<string>("");
+    const [rowIndex, setRowIndex] = useState<number>(0);
+    const [columnIndex, setColumnIndex] = useState<number>(0);
     const pressedKey = useKeyDown(letter);
-    const MAX_WORD_LENGTH = 5;
 
     // const handleKeyboardEvent = (event: any) => {
     //     console.log(event.key);
@@ -37,20 +40,24 @@ export const Main: React.FC = () => {
         console.log(event);
     };
     const onChar = (value: string) => {
-        console.log(value);
         // && guesses.length < MAX_CHALLENGES && !isGameWon
-        if (value.length <= MAX_WORD_LENGTH) {
-            setLetter(`${letter}${value}`)
+        if (letter.length < MAX_WORD_LENGTH) {
+            setLetter(`${letter}${value}`);
+            setColumnIndex(columnIndex + 1);
         }
     }
 
     const onDelete = () => {
-        setLetter(letter.slice(0, -1));
-        console.log(letter);
+        if (letter.length > 0) {
+            setLetter(letter.slice(0, -1));
+            setColumnIndex(columnIndex - 1);
+        }
     }
     const onEnter = () => {
         console.log("Submitted:")
         console.log(letter)
+        setRowIndex(rowIndex + 1);
+        setColumnIndex(0);
     }
 
 
@@ -61,24 +68,26 @@ export const Main: React.FC = () => {
             } else if (event.code === 'Backspace') {
                 onDelete()
             } else {
-                // onChar(event.key)
-                // const key = localeAwareUpperCase(event.key)
-                // // TODO: check this test if the range works with non-english letters
-                  onChar(event.key)
-                // if (event.key.length == 1 && event.key >= 'A' && event.key <= 'Z') {
-                //   onChar(event.key)
-                // }
+                const key = event.key.toLocaleUpperCase();
+                // TODO remove A-Z => problem with german letters üäö 
+                if (key.length == 1 && key >= 'A' && key <= 'Z') {
+                    onChar(key)
+                }
             }
         }
         window.addEventListener('keyup', listener)
+        console.log("rowIndex:" + rowIndex)
+        console.log("columnIndex:" + columnIndex)
         return () => {
             window.removeEventListener('keyup', listener)
         }
+
     }, [onEnter, onDelete, onChar])
 
     return (
         <>
             {/* <div className="table-content" onClick={handleMouseEvent}> */}
+            <Grid rowIndex={rowIndex} letter={letter}></Grid>
             <div className="table-content">
                 {letter}
             </div>

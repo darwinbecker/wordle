@@ -1,5 +1,8 @@
 
 @import url("./components/Main/style.css");
+@import url("./components/grid/root/style.css");
+@import url("./components/grid/row/style.css");
+@import url("./components/grid/tile/style.css");
 
 
 .App {

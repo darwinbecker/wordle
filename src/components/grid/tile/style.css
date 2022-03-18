@@ -1,0 +1,7 @@
+.Tile{
+    font-size: 1.05rem;
+    padding: 1rem;
+    margin: 0.2rem;
+    border: 2px solid gray;
+    border-radius: 0.2rem;
+}
