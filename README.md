@@ -22,7 +22,7 @@ Example:
 *Source: [Game #196 complete in 4 guesses - Wikipedia](https://en.wikipedia.org/wiki/File:Wordle_196_example.svg)*
 
 
-### Database for words
+### Database for german words
 > Source: [OpenThesaurus](https://www.openthesaurus.de/)
 
 - Total amount of words: **193.223**
@@ -45,3 +45,5 @@ At first, only Wardle's family played Wordle, until Wardle made it widely availa
 The game had 90 players by 1 November, within a month of Wardle making it public. Three months later the game had 300,000 daily players, which rose to two million by the following week.
 
 In January 2022, The New York Times Company announced that it had acquired Wordle "for an undisclosed price in the low-seven figures".
+
+17. March, 2022 - Darwin Becker
