@@ -12,6 +12,8 @@ export const Main: React.FC = () => {
     // const foxPress = useKeyDown("f");
 
     const [letter, setLetter] = useState<string>("");
+    const [guessedWords, setGuessedWords] = useState<string[]>([]);
+
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
     const pressedKey = useKeyDown(letter);
@@ -57,8 +59,10 @@ export const Main: React.FC = () => {
         console.log("Submitted:")
         console.log(letter)
         if (rowIndex < (MAX_GUESSES - 1)) {
+            setGuessedWords([...guessedWords, letter]);
             setRowIndex(rowIndex + 1);
             setColumnIndex(0);
+            setLetter("");
         }
     }
 
@@ -91,7 +95,7 @@ export const Main: React.FC = () => {
             {/* <div className="table-content" onClick={handleMouseEvent}> */}
 
             {/* <Grid rowIndex={rowIndex} columnIndex={columnIndex} letter={letter}></Grid> */}
-            <Grid rowIndex={rowIndex} letter={letter}></Grid>
+            <Grid rowIndex={rowIndex} letter={letter} guessedWords={guessedWords} ></Grid>
 
             {/* <div className="table-content">
                 {letter}

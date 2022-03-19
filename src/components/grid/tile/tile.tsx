@@ -1,5 +1,6 @@
 type TileProps = {
     letter: string;
+    status?: string;
 }
 
 export const Tile: React.FC<TileProps> = (props: TileProps) => {

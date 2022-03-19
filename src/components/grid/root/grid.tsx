@@ -6,28 +6,27 @@ type GridProps = {
     rowIndex: number;
     // columnIndex: number;
     letter: string;
-}
-
-type RowsProps = {
-    // columnIndex: number;
-    letter: string;
+    guessedWords: string[];
 }
 
 const Rows: React.FC<GridProps> = (props: GridProps) => {
     return (
         <>
+
             {
-                // [...Array(MAX_GUESSES)].map((element, index) => {
-                //     return <Row key={index} letter={props.letter}></Row>
-                // })
-                // props.letter.split("").map((element, index) => {
-                //     return <Row key={index} letter={element}></Row>
-                // })
-                [...Array(props.rowIndex + 1)].map((element, index) => {
+                // set already guessed words
+                props.guessedWords.map((element, index) => {
+                    return <Row key={index} letter={element}></Row>
+                })
+            }
+            {
+                // set current guess
+                [...Array(props.guessedWords.length - props.rowIndex + 1)].map((element, index) => {
                     return <Row key={index} letter={props.letter}></Row>
                 })
             }
             {
+                // set empty rows
                 [...Array((MAX_GUESSES - 1) - props.rowIndex)].map((element, index) => {
                     return <Row key={index} letter={element}></Row>
                 })
@@ -51,7 +50,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
 export const Grid: React.FC<GridProps> = (props: GridProps) => {
     return (
         <div className="Grid">
-            <Rows letter={props.letter} rowIndex={props.rowIndex} />
+            <Rows letter={props.letter} rowIndex={props.rowIndex} guessedWords={props.guessedWords} />
         </div>
     );
 }
