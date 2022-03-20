@@ -1,8 +1,8 @@
 import { useState, KeyboardEvent, MouseEvent, useEffect } from "react";
-import { useKeyDown } from "../useKeyDown/useKeyDown";
 import { MAX_WORD_LENGTH } from '../../config/settings';
 import { MAX_GUESSES } from '../../config/settings';
-import { Grid } from '../grid/root/grid';
+import { Grid } from '../grid/root';
+import { checkstatus } from '../wordStatus';
 
 
 export const Main: React.FC = () => {
@@ -16,7 +16,6 @@ export const Main: React.FC = () => {
 
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
-    const pressedKey = useKeyDown(letter);
 
     // const handleKeyboardEvent = (event: any) => {
     //     console.log(event.key);
@@ -38,24 +37,27 @@ export const Main: React.FC = () => {
 
     const handleMouseEvent = (event: MouseEvent<HTMLImageElement>) => {
         // Do something
-        console.log("YEP");
         console.log(event);
     };
-    const onChar = (value: string) => {
+
+    const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon
         if (letter.length < MAX_WORD_LENGTH) {
             setLetter(`${letter}${value}`);
             setColumnIndex(columnIndex + 1);
+        } else {
+            // TODO: display feedback for user
         }
     }
 
-    const onDelete = () => {
+    const handleRemove = () => {
         if (letter.length > 0) {
             setLetter(letter.slice(0, -1));
             setColumnIndex(columnIndex - 1);
         }
     }
-    const onEnter = () => {
+
+    const handleSubmit = () => {
         console.log("Submitted:")
         console.log(letter)
         if (rowIndex < (MAX_GUESSES - 1)) {
@@ -63,6 +65,8 @@ export const Main: React.FC = () => {
             setRowIndex(rowIndex + 1);
             setColumnIndex(0);
             setLetter("");
+            const wordStatus = checkstatus(letter, "WORDS");
+            console.log(wordStatus)
         }
     }
 
@@ -70,25 +74,25 @@ export const Main: React.FC = () => {
     useEffect(() => {
         const listener = (event: globalThis.KeyboardEvent): any => {
             if (event.code === 'Enter') {
-                onEnter()
+                handleSubmit()
             } else if (event.code === 'Backspace') {
-                onDelete()
+                handleRemove()
             } else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO remove A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
-                    onChar(key)
+                    handleChange(key)
                 }
             }
         }
         window.addEventListener('keyup', listener)
-        console.log("rowIndex:" + rowIndex)
-        console.log("columnIndex:" + columnIndex)
+        // console.log("rowIndex:" + rowIndex)
+        // console.log("columnIndex:" + columnIndex)
         return () => {
             window.removeEventListener('keyup', listener)
         }
 
-    }, [onEnter, onDelete, onChar])
+    }, [handleSubmit, handleRemove, handleChange])
 
     return (
         <>
