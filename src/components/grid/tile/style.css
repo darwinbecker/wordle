@@ -1,9 +1,9 @@
 .Tile{
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     margin: 2px;
-    font-size: 1.05rem;
-    line-height: 3rem;
+    font-size: 1.8rem;
+    line-height: 4rem;
     border: 2px solid gray;
     border-radius: 0.2rem;
 }
