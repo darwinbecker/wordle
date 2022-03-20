@@ -1,4 +1,4 @@
-import { Row } from '../row/row';
+import { Row } from '../row';
 import { MAX_WORD_LENGTH } from '../../../config/settings';
 import { MAX_GUESSES } from '../../../config/settings';
 
@@ -12,7 +12,6 @@ type GridProps = {
 const Rows: React.FC<GridProps> = (props: GridProps) => {
     return (
         <>
-
             {
                 // set already guessed words
                 props.guessedWords.map((element, index) => {

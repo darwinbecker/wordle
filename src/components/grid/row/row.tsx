@@ -1,4 +1,4 @@
-import { Tile } from '../tile/tile';
+import { Tile } from '../tile';
 import { MAX_WORD_LENGTH } from '../../../config/settings';
 
 type RowProps = {

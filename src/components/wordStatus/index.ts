@@ -1,0 +1,1 @@
+export { checkstatus } from './wordStatus';
