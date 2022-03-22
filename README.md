@@ -27,6 +27,7 @@ Example:
 
 - Total amount of words: **193.223**
 - words with length of 5: **4.702**
+- unique words with length of 5: **2.734**
 
 ### Credit
 [Josh Wardle](https://powerlanguage.co.uk/)
