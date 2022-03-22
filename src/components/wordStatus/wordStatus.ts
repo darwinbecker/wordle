@@ -1,4 +1,4 @@
-export type StatusType = 'correct' | 'semi' | 'wrong'
+export type StatusType = 'correct' | 'semi' | 'wrong';
 
 export const checkstatus = (guess: string, solution: string): StatusType[] => {
     const guessChars = guess.split("");
@@ -17,7 +17,7 @@ export const checkstatus = (guess: string, solution: string): StatusType[] => {
             status[index] = 'wrong';
         }
     });
-    // console.log("-------MAP- END------")
+    // console.log("-------MAP-END------")
 
     return status;
 }

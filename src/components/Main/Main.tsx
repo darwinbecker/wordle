@@ -2,7 +2,7 @@ import { useState, KeyboardEvent, MouseEvent, useEffect } from "react";
 import { MAX_WORD_LENGTH } from '../../config/settings';
 import { MAX_GUESSES } from '../../config/settings';
 import { Grid } from '../grid/root';
-import { checkstatus } from '../wordStatus';
+import { checkstatus, StatusType } from '../wordStatus';
 
 
 export const Main: React.FC = () => {
@@ -16,6 +16,9 @@ export const Main: React.FC = () => {
 
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
+
+    // const [wordStatus, setWordStatus] = useState<StatusType[]>([]);
+    const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
 
     // const handleKeyboardEvent = (event: any) => {
     //     console.log(event.key);
@@ -60,13 +63,12 @@ export const Main: React.FC = () => {
     const handleSubmit = () => {
         console.log("Submitted:")
         console.log(letter)
-        if (rowIndex < (MAX_GUESSES - 1)) {
+        if (guessedWords.length < MAX_GUESSES) {
             setGuessedWords([...guessedWords, letter]);
             setRowIndex(rowIndex + 1);
             setColumnIndex(0);
             setLetter("");
-            const wordStatus = checkstatus(letter, "WORDS");
-            console.log(wordStatus)
+            setWordStatuses([...wordStatuses, checkstatus(letter, "WORDS")]);
         }
     }
 
@@ -86,8 +88,6 @@ export const Main: React.FC = () => {
             }
         }
         window.addEventListener('keyup', listener)
-        // console.log("rowIndex:" + rowIndex)
-        // console.log("columnIndex:" + columnIndex)
         return () => {
             window.removeEventListener('keyup', listener)
         }
@@ -99,7 +99,7 @@ export const Main: React.FC = () => {
             {/* <div className="table-content" onClick={handleMouseEvent}> */}
 
             {/* <Grid rowIndex={rowIndex} columnIndex={columnIndex} letter={letter}></Grid> */}
-            <Grid rowIndex={rowIndex} letter={letter} guessedWords={guessedWords} ></Grid>
+            <Grid letter={letter} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
 
             {/* <div className="table-content">
                 {letter}

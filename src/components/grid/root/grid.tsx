@@ -3,10 +3,9 @@ import { MAX_WORD_LENGTH } from '../../../config/settings';
 import { MAX_GUESSES } from '../../../config/settings';
 
 type GridProps = {
-    rowIndex: number;
-    // columnIndex: number;
     letter: string;
     guessedWords: string[];
+    wordStatuses?: string[][];
 }
 
 const Rows: React.FC<GridProps> = (props: GridProps) => {
@@ -15,20 +14,28 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
             {
                 // set already guessed words
                 props.guessedWords.map((element, index) => {
-                    return <Row key={index} letter={element}></Row>
+                    if (props.wordStatuses) {
+                        return <Row key={index} letter={element} wordStatus={props.wordStatuses[index]}></Row>
+                    }
                 })
             }
             {
-                // set current guess
-                [...Array(props.guessedWords.length - props.rowIndex + 1)].map((element, index) => {
-                    return <Row key={index} letter={props.letter}></Row>
-                })
+                props.guessedWords.length < MAX_GUESSES ?
+                    // set current guess
+                    [...Array(1)].map((element, index) => {
+                        return <Row key={index} letter={props.letter}></Row>
+                    })
+                    :
+                    <></>
             }
             {
-                // set empty rows
-                [...Array((MAX_GUESSES - 1) - props.rowIndex)].map((element, index) => {
-                    return <Row key={index} letter={element}></Row>
-                })
+                props.guessedWords.length < MAX_GUESSES ?
+
+                    [...Array((MAX_GUESSES - 1) - props.guessedWords.length)].map((element, index) => {
+                        return <Row key={index} letter={element}></Row>
+                    })
+                    :
+                    <></>
             }
 
 
@@ -49,7 +56,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
 export const Grid: React.FC<GridProps> = (props: GridProps) => {
     return (
         <div className="Grid">
-            <Rows letter={props.letter} rowIndex={props.rowIndex} guessedWords={props.guessedWords} />
+            <Rows letter={props.letter} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} />
         </div>
     );
 }
