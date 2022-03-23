@@ -1,161 +1,149 @@
 export const DICTIONARY = [
-    "Abart",
+    "Abart", // Biologie: ähnliche Art, Varietät
     "Abbau",
-    "Abece",
+    "Abece", // Alphabet- / Buchstabenfolge
     "Abend",
     "Abgas",
-    "Abies",
-    "Abjad",
-    "Abort",
+    "Abies", // Botanik: Weißtanne - Nadelbaumart
+    "Abjad", // Konsonantenschrift
+    "Abort", // Fehlgeburt / Schwangerschaftsabbruch
     "Abruf",
-    "Absud",
-    "Abtei",
-    "abtun",
-    "Abuja",
-    "Abweg",
+    "Absud", // Chemie: wässriger Extrakt
+    "Abtei", // Kloster
+    "abtun", // absetzen, ablegen
+    "Abuja", // Geografie
+    "Abweg", // falscher Weg, Irrweg
     "Abzug",
-    "Accra",
-    "Achat",
+    "Accra", // Geografie
+    "Achat", // Chemie: Stein / Quarz 
     "Achse",
     "Acker",
-    "Addon",
-    "adele",
-    "adeln",
-    "Adept",
+    "Addon", // IT: Erweiterung
+    "adeln", // aufwerten, erheben
+    "Adept", // Eingeweihter in geheime Wissenschaften und Künste
     "Adern",
     "adieu",
     "Adler",
     "adlig",
     "Admin",
-    "AdöR",
-    "Adria",
-    "aerob",
-    "AFAIK",
+    "AdöR", // Anstalt des öffentlichen Rechts
+    "Adria", // Geografie: Adriatisches Meer
+    "aerob", // Biologie: mit Sauerstoff
+    "AFAIK", // Abkürzung: as far as i know
     "affig",
     "affin",
-    "Affix",
-    "Afrik",
+    "Affix", // Vor- oder Nachsilbe
+    "Afrik", // Botanik: Palmfaser
     "After",
-    "Agens",
+    "Agens", // treibende Kraft
     "Agent",
-    "Agram",
     "Agrar",
     "Ahnen",
     "Ahorn",
-    "Aioli",
-    "AK-47",
-    "Aktei",
+    "Aioli", // Essen: kalte Creme (Vorspeise) / Knoblauchmayonnaise
+    "Aktei", // Aktensammlung
     "Aktie",
     "aktiv",
-    "Aktor",
+    "Aktor", // Elektrotechnik: antriebstechnische Baueinheit
     "Alarm",
-    "Albis",
-    "Albit",
+    "Albis", // Geografie: Fluss (Elbe)
+    "Albit", // Chemie: Mineral
     "Album",
-    "Albus",
-    "alert",
-    "Algin",
-    "ALGOL",
+    "Albus", // Weißpfennig, Groschenart aus Silber
+    "alert", // munter, aufgeweckt
+    "Algin", // Biologie: Alginsäure
+    "ALGOL", // IT: Algorithmic Language
     "Alias",
     "Alibi",
     "Alien",
-    "Alkan",
-    "Alken",
-    "Alkin",
-    "Alkor",
+    "Alkan", // Chemie: gesättigter Kohlenwasserstoff
+    "Alken", // Chemie: Alkene, chemische Verbindungen aus Gruppe der Kohlenwasserstoffen
+    "Alkin", // Chemie: ungesättigter Kohlenwasserstoff
+    "Alkor", // Astronomie: Stern (Reiterlein)
     "Allee",
     "alles",
-    "Allod",
+    "Allod", // Eigengut, Erbgut
     "allzu",
-    "Almer",
+    "Almer", // Geografie: westösterreichisch neben Senner
     "Alpen",
     "Alpha",
-    "alpin",
-    "Alsem",
-    "Altan",
+    "alpin", // bergig, gebirgig, in den Alpen / im Hochgebirge vorkommend
+    "Alsem", // Botanik: Pflanzenart
+    "Altan", // Architektur: vom Erdboden aus gestützter balkonartiger Anbau
     "Altar",
     "Alter",
-    "Alula",
-    "amber",
-    "ambig",
-    "Ambra",
-    "AMD64",
-    "Amman",
+    "Alula", // Biologie: Federn am Daumen des Vogelflügels
+    "ambig", // mehrdeutig, doppelsinnig
+    "Ambra", // Biologie: fettige Substanz aus dem Darm des Pottwals
+    "AMD64", // IT
+    "Amman", // Geografie
     "Ampel",
-    "Amrum",
-    "Amsel",
-    "Amtei",
-    "amten",
+    "Amrum", // Geografie: Nordseeinsel
+    "Amsel", // Biologie
+    "Amtei", // Jura: Amtsbezirk, Verwaltungsgemeinschaft
+    "amten", // Jura: ein Amt innehaben
     "Anbau",
     "anbei",
     "Anbot",
-    "Angel",
-    "Anger",
-    "Angie",
+    "Angel", // Österreichisch: auf eine Ausschreibung hin erstelltes Angebot, Kostenvoranschlag
+    "Anger", // Botanik: Grasfläche, Grasplatz
     "Angst",
-    "anhin",
+    "anhin", // Schweizerisch: bisher
     "Anime",
-    "Anken",
+    "Anken", // Essen/Schweizerisch: Butter
     "Anker",
     "Anmut",
-    "Annex",
-    "Anode",
-    "ANOVA",
+    "Annex", // Architektur: niedriger Anbau // Anhang, Zubehör
+    "Anode", // Physik: positiv geladene Elektrode
+    "ANOVA", // Varianzanalyse
     "Anruf",
     "antik",
     "antun",
-    "Anura",
+    "Anura", // Biologie/Tier: Froschlurch
     "Anzug",
-    "Aorta",
-    "apart",
-    "Apell",
-    "Apero",
+    "Aorta", // Biologie: Hauptschlagader
+    "apart", // anziehend
+    "Apero", // Schweizerisch: Aperitif, alkoholisches Getränk
     "Apfel",
-    "Aphel",
-    "Apnoe",
-    "Apona",
+    "Aphel", // Astronomie: Punkt der größten Entfernung eines Planeten von der Sonne
+    "Apnoe", // Medizin: Atemstillstand
     "April",
-    "Apsis",
-    "Arber",
-    "Areal",
+    "Apsis", // Architektur: Raumteil
+    "Arber", // Geografie: Berg
+    "Areal", // Geografie: Verbreitungsgebiet
     "Arena",
-    "Arete",
-    "Argon",
-    "Argot",
-    "Aries",
-    "arkan",
+    "Arete", // Güte, Tugend
+    "Argon", // Chemie: chemisches Element
+    "Argot", // Sondersprache der französischen Gauner und Bettler
+    "Aries", // Astronomie: das Sternbild Widder
+    "arkan", // geheim
     "Armee",
-    "Armer",
+    "Armer", // Bettler
     "Armut",
-    "Aroma",
-    "Array",
+    "Aroma", // Essen:
+    "Array", // IT
     "Arsch",
     "artig",
-    "Aruak",
+    "Aruak", // ?: indigenes Volk an der Nordküste Südamerikas
     "Asche",
-    "Ascot",
-    "äsen",
-    "Asien",
-    "Aspik",
-    "Asset",
-    "assig",
-    "asten",
-    "Athen",
-    "Atlas",
+    "Asien", // Geografie
+    "Aspik", // Essen: Gelee, das aus Fleisch oder Fisch hergestellt wird
+    "assig", // asozial
+    "asten", // sich sehr anstrengen
+    "Athen", // Geografie
+    "Atlas", // Geografie
     "atmen",
-    "Atoll",
-    "atzen",
-    "Audit",
-    "aufi!",
-    "Augur",
-    "Aulos",
-    "aural",
-    "Aurum",
+    "Atoll", // Geografie: ringförmiges Riff
+    "atzen", // Biologie: die Vogelbrut füttern
+    "Audit", // Überprüfung
+    "Augur", // Eingeweihter, der künftige Entwicklungen vorhersagt
+    "Aulos", // Musik: griechische Doppelflöte
+    "aural", // Biologie/Medizin: das Ohr betreffend, Ohrmuschel
     "Autor",
-    "Avers",
-    "Aviso",
-    "axial",
-    "Axiom",
+    "Avers", // Vorderseite einer Münze oder einer Medaille
+    "Aviso", // Österreichisch: Ankündigung, Benachrichtigung
+    "axial", // Mathe/IT: in Achsenrichtung
+    "Axiom", // Beschluss, Grundsatz
     "Azubi",
     "Bache",
     "Backe",
@@ -166,17 +154,17 @@ export const DICTIONARY = [
     "Bahre",
     "Baiji",
     "balde",
-    "Balun",
+    "Balun", // Bauteil in der Elektrotechnik
     "banal",
     "Bande",
     "bange",
     "Barbe",
-    "Barde",
+    "Barde", // Dichter und Sänger
     "Bares",
-    "Barge",
+    "Barge", // flaches Mehrzweckfahrzeug für den Hafenbetrieb / Lastschiff
     "Barke",
     "Baron",
-    "basal",
+    "basal", // fundamental
     "Basar",
     "Basis",
     "Bauch",
@@ -191,13 +179,12 @@ export const DICTIONARY = [
     "Beize",
     "Belag",
     "Beleg",
-    "Bemme",
+    "Bemme", // bestrichene, belegte Brotscheibe
     "Berge",
     "Beruf",
     "Besan",
     "Besen",
     "beten",
-    "betr.",
     "Beule",
     "Beute",
     "bevor",
@@ -207,12 +194,10 @@ export const DICTIONARY = [
     "Biene",
     "bienn",
     "Biest",
-    "Bijou",
     "Biker",
     "Bilge",
-    "Bimbo",
     "Binde",
-    "Binse",
+    "Binse", // Botanik: Pflanze
     "biped",
     "Birke",
     "Birma",
