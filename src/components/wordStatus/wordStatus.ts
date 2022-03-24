@@ -6,10 +6,8 @@ export const checkstatus = (guess: string, solution: string): StatusType[] => {
 
     const status: StatusType[] = [];
 
-    // console.log("-------MAP-------")
     guessChars.map((char, index) => {
         if (char == solutionChars[index]) {
-            console.log()
             status[index] = 'correct';
         } else if (solutionChars.includes(char)) {
             status[index] = 'semi';
@@ -17,7 +15,6 @@ export const checkstatus = (guess: string, solution: string): StatusType[] => {
             status[index] = 'wrong';
         }
     });
-    // console.log("-------MAP-END------")
 
     return status;
 }

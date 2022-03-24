@@ -12,7 +12,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
     return (
         <>
             {
-                // set already guessed words
+                // set already guessed words in row
                 props.guessedWords.map((element, index) => {
                     if (props.wordStatuses) {
                         return <Row key={index} letter={element} wordStatus={props.wordStatuses[index]}></Row>
@@ -20,8 +20,8 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                 })
             }
             {
+                // set current guess word in row
                 props.guessedWords.length < MAX_GUESSES ?
-                    // set current guess
                     [...Array(1)].map((element, index) => {
                         return <Row key={index} letter={props.letter}></Row>
                     })
@@ -29,25 +29,14 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                     <></>
             }
             {
+                // set empty rows
                 props.guessedWords.length < MAX_GUESSES ?
-
                     [...Array((MAX_GUESSES - 1) - props.guessedWords.length)].map((element, index) => {
                         return <Row key={index} letter={element}></Row>
                     })
                     :
                     <></>
             }
-
-
-            {/* {
-                [...Array(MAX_GUESSES)].map((element, index) => {
-                    if (index == props.rowIndex) {
-                        return <Row key={index} letter={props.letter}></Row>
-                    } else {
-                        return <Row key={index} letter={element}></Row>
-                    }
-                })
-            } */}
         </>
 
     );

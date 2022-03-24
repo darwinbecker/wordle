@@ -1,11 +1,10 @@
 // https://github.com/cwackerfuss/react-wordle/blob/main/src/lib/words.ts#L77
 export const WORD_OF_THE_DAY = () => {
-    // January 1, 2022 Game Epoch
-    const epochMs = new Date(2022, 0).valueOf()
-    const now = Date.now()
-    const msInDay = 86400000
-    const index = Math.floor((now - epochMs) / msInDay)
-    const nextday = (index + 1) * msInDay + epochMs
+    const epochMs = new Date(2022, 0).valueOf(); // January 1, 2022 Game Epoch
+    const now = Date.now();
+    const msInDay = 86400000;
+    const index = Math.floor((now - epochMs) / msInDay);
+    const nextday = (index + 1) * msInDay + epochMs;
     console.log("---------");
     console.log(epochMs);
     console.log(index);
@@ -14,13 +13,13 @@ export const WORD_OF_THE_DAY = () => {
     console.log(WORDLIST[index % WORDLIST.length].toUpperCase());
     console.log(nextday);
     console.log();
-  
+
     return {
-      solution: WORDLIST[index % WORDLIST.length].toUpperCase(),
-      solutionIndex: index,
-      tomorrow: nextday,
+        solution: WORDLIST[index % WORDLIST.length].toUpperCase(),
+        solutionIndex: index,
+        tomorrow: nextday,
     }
-  }
+}
 
 
 // export const WORD_OF_THE_DAY = {

@@ -67,9 +67,10 @@ export const Main: React.FC = () => {
     const handleSubmit = () => {
         console.log("Submitted:")
         console.log(guessedWord)
+
         if (guessedWords.length < MAX_GUESSES) {
             // TODO check if guessWord is in dictionary
-            if(!isInDictionary(guessedWord)){ 
+            if (!isInDictionary(guessedWord)) {
                 console.log("WORD IS NOT IN DICTIONARY");
                 return;
             }
@@ -79,7 +80,6 @@ export const Main: React.FC = () => {
             setColumnIndex(0);
             setGuessedWord("");
             const status = checkstatus(guessedWord, "WORDS");
-            console.log(status);
             setWordStatuses([...wordStatuses, status]);
 
             if (!status.includes('semi') && !status.includes('wrong')) {
@@ -129,34 +129,7 @@ export const Main: React.FC = () => {
 
     return (
         <>
-            {/* <div className="table-content" onClick={handleMouseEvent}> */}
-
-            {/* <Grid rowIndex={rowIndex} columnIndex={columnIndex} letter={letter}></Grid> */}
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-
-            {/* <div className="table-content">
-                {letter}
-            </div> */}
-            {/* <div className="table-content">
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-                <div className="table-row">
-                    <div className="table-tile"></div>
-                </div>
-            </div> */}
         </>
     );
 }
