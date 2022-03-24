@@ -3,6 +3,8 @@ import { MAX_WORD_LENGTH } from '../../config/settings';
 import { MAX_GUESSES } from '../../config/settings';
 import { Grid } from '../grid/root';
 import { checkstatus, StatusType } from '../wordStatus';
+import { isInDictionary, DICTIONARY } from '../../config/dictionary';
+import { WORD_OF_THE_DAY } from '../../config/wordlist';
 
 
 export const Main: React.FC = () => {
@@ -10,8 +12,7 @@ export const Main: React.FC = () => {
     // const sadPress = useKeyDown("s");
     // const robotPress = useKeyDown("r");
     // const foxPress = useKeyDown("f");
-
-    const [letter, setLetter] = useState<string>("");
+    const [guessedWord, setGuessedWord] = useState<string>("");
     const [guessedWords, setGuessedWords] = useState<string[]>([]);
 
     const [rowIndex, setRowIndex] = useState<number>(0);
@@ -19,6 +20,9 @@ export const Main: React.FC = () => {
 
     // const [wordStatus, setWordStatus] = useState<StatusType[]>([]);
     const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
+
+    const [youWin, setYouWin] = useState<boolean>(false);
+    const [youLose, setYouLose] = useState<boolean>(false);
 
     // const handleKeyboardEvent = (event: any) => {
     //     console.log(event.key);
@@ -45,8 +49,8 @@ export const Main: React.FC = () => {
 
     const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon
-        if (letter.length < MAX_WORD_LENGTH) {
-            setLetter(`${letter}${value}`);
+        if (guessedWord.length < MAX_WORD_LENGTH) {
+            setGuessedWord(`${guessedWord}${value}`);
             setColumnIndex(columnIndex + 1);
         } else {
             // TODO: display feedback for user
@@ -54,29 +58,58 @@ export const Main: React.FC = () => {
     }
 
     const handleRemove = () => {
-        if (letter.length > 0) {
-            setLetter(letter.slice(0, -1));
+        if (guessedWord.length > 0) {
+            setGuessedWord(guessedWord.slice(0, -1));
             setColumnIndex(columnIndex - 1);
         }
     }
 
     const handleSubmit = () => {
         console.log("Submitted:")
-        console.log(letter)
+        console.log(guessedWord)
         if (guessedWords.length < MAX_GUESSES) {
-            setGuessedWords([...guessedWords, letter]);
+            // TODO check if guessWord is in dictionary
+            if(!isInDictionary(guessedWord)){ 
+                console.log("WORD IS NOT IN DICTIONARY");
+                return;
+            }
+
+            setGuessedWords([...guessedWords, guessedWord]);
             setRowIndex(rowIndex + 1);
             setColumnIndex(0);
-            setLetter("");
-            setWordStatuses([...wordStatuses, checkstatus(letter, "WORDS")]);
+            setGuessedWord("");
+            const status = checkstatus(guessedWord, "WORDS");
+            console.log(status);
+            setWordStatuses([...wordStatuses, status]);
+
+            if (!status.includes('semi') && !status.includes('wrong')) {
+                setYouWin(true);
+            }
+
+            // last guess
+            if (guessedWords.length == MAX_GUESSES - 1) {
+                if (status.includes('semi') || status.includes('wrong')) {
+                    setYouLose(true);
+                    console.log("YOU LOSE!");
+                }
+            }
+
         }
     }
 
 
     useEffect(() => {
+        WORD_OF_THE_DAY();
+        if (youWin || youLose) return;
         const listener = (event: globalThis.KeyboardEvent): any => {
             if (event.code === 'Enter') {
-                handleSubmit()
+                if (guessedWord.length == 5) {
+                    handleSubmit()
+                }
+                else {
+                    // TODO enter 5 characters => shake animation
+                    console.log("enter 5 characters")
+                }
             } else if (event.code === 'Backspace') {
                 handleRemove()
             } else {
@@ -99,7 +132,7 @@ export const Main: React.FC = () => {
             {/* <div className="table-content" onClick={handleMouseEvent}> */}
 
             {/* <Grid rowIndex={rowIndex} columnIndex={columnIndex} letter={letter}></Grid> */}
-            <Grid letter={letter} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
+            <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
 
             {/* <div className="table-content">
                 {letter}
