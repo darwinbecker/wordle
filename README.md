@@ -30,6 +30,21 @@ Example:
 - unique words with length of 5: **2.734**
 - unique words with length of 5 in their baseform: **1466**
 
+Amount of words after cleanup: **~2500**
+
+cleanup means:
+- changing characters like: "ä, ö, ü, ß" to: "ae, oe, ue, ss"
+- removing special character like: ".", "-", "!", "?"
+- remobing words, which contains multiple words like: "zu je"
+- removing abbreviations like: "ADOER" (Anstalt des öffentlichen Rechts), 
+- removing slang & english words that are uncommon: "AFAIK" (as far as i know)
+- removing names like: "Adele", "VW AG"
+- removing words with numbers like: "AMD64", "AK-47"
+
+word descriptions are mostly taken from here:
+> Source: [Digitales Wörterbuch der deutschen Sprache](https://www.dwds.de/)
+
+
 ### Credit
 [Josh Wardle](https://powerlanguage.co.uk/)
 
