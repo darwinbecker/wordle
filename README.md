@@ -28,7 +28,6 @@ Example:
 - Total amount of words: **193.223**
 - words with length of 5: **4.702**
 - unique words with length of 5: **2.734**
-- unique words with length of 5 in their baseform: **1466**
 
 Amount of words after cleanup: **~2500**
 
@@ -43,7 +42,6 @@ cleanup means:
 
 word descriptions are mostly taken from here:
 > Source: [Digitales Wörterbuch der deutschen Sprache](https://www.dwds.de/)
-
 
 ### Credit
 [Josh Wardle](https://powerlanguage.co.uk/)
