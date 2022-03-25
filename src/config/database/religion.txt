@@ -1,0 +1,4 @@
+insert into words values (default, "Abtei", "Gebäude, Gebiet eines größeren Klosters, Frauenkloster, Nonnenkloster");
+insert into words values (default, "Altar", "erhöhter Aufbau für gottesdienstliche Handlungen");
+
+

@@ -1,0 +1,6 @@
+insert into words values (default, "Abort", "Fehlgeburt, Schwangerschaftsabbruch");
+insert into words values (default, "Agens", "treibende Kraft oder medizinisch wirksamer Stoff; krank machender Faktor");
+insert into words values (default, "Apnoe", "(kurzzeitiges) krankhaftes Aussetzen der Atmung");
+insert into words values (default, "aural", "das Ohr betreffend, Ohrmuschel");
+
+

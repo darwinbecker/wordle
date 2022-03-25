@@ -1,0 +1,5 @@
+insert into words values (default, "Achse", "gedachte Linie, um die sich ein Körper dreht. Drehachse, Koordinatenachse");
+insert into words values (default, "Alpha", "Bezeichnung eines Winkels; insbesondere nach Konvention im Polygon der zur Ecke A gehörende Winkel");
+insert into words values (default, "ANOVA", "Varianzanalyse");
+insert into words values (default, "axial", "in Achsenrichtung");
+

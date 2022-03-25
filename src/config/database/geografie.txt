@@ -1,0 +1,18 @@
+insert into words values (default, "Abuja");
+insert into words values (default, "Accra");
+insert into words values (default, "Adria");
+insert into words values (default, "Albis");
+insert into words values (default, "Almer");
+insert into words values (default, "Alpen", "Berggruppe, Hochgebirge, Gipfel");
+insert into words values (default, "alpin", "Hochgebirgs-; alpin, bergig, gebirgig");
+insert into words values (default, "Amman");
+insert into words values (default, "Amrum");
+insert into words values (default, "Arber", "Großer Arber, höchster Berg des Böhmerwaldes / Bayerischen Waldes");
+insert into words values (default, "Areal", "Gebiet, Region, Bereich, Sektor");
+insert into words values (default, "Asien", "Erdteil, Kontinent");
+insert into words values (default, "Athen", "Hauptstadt von Griechenland");
+insert into words values (default, "Atlas", "Sammlung (gleichartig bearbeiteter) geographischer Karten in Buchform");
+insert into words values (default, "Atoll", "ringförmiges, eine Lagune umgebendes Korallenriff, das sich zum Teil über den Meeresspiegel erhebt");
+
+
+

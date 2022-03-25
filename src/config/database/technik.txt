@@ -1,0 +1,4 @@
+insert into words values (default, "Abgas", "bei Verbrennungsvorgängen abströmendes Gas");
+insert into words values (default, "Aktor", "Bauelement am Ausgangsteil einer Steuer- oder Regelstrecke, der in Energie- oder Massenströme eingreift und darin als veränderlicher Widerstand wirkt");
+
+

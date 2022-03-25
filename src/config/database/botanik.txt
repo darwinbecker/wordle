@@ -1,0 +1,9 @@
+insert into words values (default, "Abies", "Wissenschaftlicher Name für: Tanne,Tannenbaum");
+insert into words values (default, "Afrik", "Palmfaser");
+insert into words values (default, "Ahorn", "Laubbaum mit handförmigen, gelappten Blättern und geflügelter, zweiteiliger Frucht");
+insert into words values (default, "Allee", "von (hohen) Bäumen eingefasste Straße");
+insert into words values (default, "Alsem", "Pflanzenart; Bitterer Beifuß, Echt-Wermut, Echter Wermut");
+insert into words values (default, "Anbau", "das Anpflanzen");
+
+
+

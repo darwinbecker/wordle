@@ -1,0 +1,4 @@
+insert into words values (default, "Anode", "positive Elektrode");
+
+
+

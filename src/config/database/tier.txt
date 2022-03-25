@@ -1,0 +1,7 @@
+insert into words values (default, "Adler", "großer, seltener Raubvogel mit hakenförmigem Schnabel und stark gekrümmten Krallen, der seinen Horst gern in großer Höhe auf hervorspringenden Felsplatten baut");
+insert into words values (default, "Amsel", "in Europa sehr häufiger Vogel (Turdus merula) aus der Familie der Drosseln, bei dem das Männchen ein charakteristisches schwarzes Gefieder und einen gelben Schnabel besitzt");
+insert into words values (default, "Anura", "Froschlurch");
+insert into words values (default, "Bache", "weibliches Wildschwein");
+
+
+

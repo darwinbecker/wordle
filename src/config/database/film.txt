@@ -1,0 +1,5 @@
+insert into words values (default, "Anime", "Animationsfilm, Zeichentrickfilm, Cartoon");
+insert into words values (default, "Autor", "Verfasser eines Textes");
+
+
+

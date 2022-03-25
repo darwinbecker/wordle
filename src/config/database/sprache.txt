@@ -1,0 +1,17 @@
+insert into words values (default, "Abjad", "Konsonantenschrift");
+insert into words values (default, "Affix", "Bildungselement, das zur Wurzel oder zum Stamm eines Wortes hinzutritt (Präfix, Infix und Suffix)");
+insert into words values (default, "Alias", "Pseudonym, Nickname, Zweitname, falscher Name");
+insert into words values (default, "Alibi", "Beweis der Abwesenheit vom Tatort");
+insert into words values (default, "ambig", "Doppeldeutigkeit oder Mehrdeutigkeit eines sprachlichen Ausdrucks oder Textes");
+insert into words values (default, "anhin", "schweizerisch: am nächsten, bisher, ebenhin, gerade eben, geradehin, vor kurzer Zeit");
+insert into words values (default, "Anken", "schweizerisch: Butter");
+insert into words values (default, "Argot", "Sondersprache der französischen Gauner und Bettler");
+insert into words values (default, "Arete", "Güte, Tugend");
+insert into words values (default, "assig", "asozial, gegen die Gesellschaft");
+insert into words values (default, "Audit", "Überprüfung, Revision");
+insert into words values (default, "Augur", "Eingeweihter, der künftige Entwicklungen vorhersagt");
+insert into words values (default, "Avers", "Vorderseite einer Münze oder einer Medaille");
+insert into words values (default, "Aviso", "österreichisch: Ankündigung, Benachrichtigung");
+insert into words values (default, "Axiom", "als absolut richtig anerkannter Grundsatz, feststehende Wahrheit, die keines Beweises bedarf; Beschluss, Grundsatz");
+
+

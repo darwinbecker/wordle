@@ -44,7 +44,7 @@ export const DICTIONARY = [
     "Aktei", // Aktensammlung
     "Aktie",
     "aktiv",
-    "Aktor", // Elektrotechnik: antriebstechnische Baueinheit
+    "Aktor", // Technik/Elektrotechnik: antriebstechnische Baueinheit
     "Alarm",
     "Albis", // Geografie: Fluss (Elbe)
     "Albit", // Chemie: Mineral
@@ -154,7 +154,7 @@ export const DICTIONARY = [
     "Bahre",
     "Baiji",
     "balde",
-    "Balun", // Bauteil in der Elektrotechnik
+    "Balun", // Technik/Elektrotechnik: Bauteil in der Elektrotechnik
     "banal",
     "Bande",
     "bange",
@@ -1602,7 +1602,7 @@ export const DICTIONARY = [
     "Nanny",
     "nanu!",
     "Narbe",
-    "Narde",
+    "Narde", // Botanik: Pflanze
     "nasal",
     "nasch",
     "Natel",

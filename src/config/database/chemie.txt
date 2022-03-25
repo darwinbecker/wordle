@@ -1,0 +1,8 @@
+insert into words values (default, "Albit", "meist weißes, wichtiges gesteinsbildendes Mineral");
+insert into words values (default, "Algin", "aus Braunalgen gewonnenes chemisches Produkt von vielfacher technischer Verwendbarkeit");
+insert into words values (default, "Alkan", "gesättigter azyklischer Kohlenwasserstoff");
+insert into words values (default, "Alken", "Alkene, chemische Verbindungen aus Gruppe der Kohlenwasserstoffen");
+insert into words values (default, "Alkin", "ungesättigter Kohlenwasserstoff");
+insert into words values (default, "Argon", "sehr träge reagierendes, farb- und geruchloses Edelgas");
+
+

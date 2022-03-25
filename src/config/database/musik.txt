@@ -1,0 +1,5 @@
+insert into words values (default, "Album", "Veröffentlichung mit mehreren, thematisch zusammengehörigen Musikstücken eines Interpreten, einer Band, eines Orchesters o. Ä.");
+insert into words values (default, "Aulos", "antikes griechisches Musikinstrument in der Art einer Schalmei");
+
+
+

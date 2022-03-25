@@ -1,0 +1,7 @@
+insert into words values (default, "Aioli", "kalte Creme (Vorspeise); Knoblauchmayonnaise");
+insert into words values (default, "Apero", "schweizerisch: Aperitif, alkoholisches Getränk");
+insert into words values (default, "Apfel", "Frucht des Apfelbaums");
+insert into words values (default, "Aroma", "(angenehm) würziger Geruch, Geschmack; Würzmittel, Essenz");
+insert into words values (default, "Aspik", "durch Auskochen von Fleisch‍(knochen) oder Fisch gewonnene oder mit Gelatine hergestellte säuerliche Gallerte für die Zubereitung bestimmter Speisen (besonders Sülze)");
+
+

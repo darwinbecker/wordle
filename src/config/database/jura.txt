@@ -1,0 +1,6 @@
+insert into words values (default, "Amtei", "Amtsbezirk, Verwaltungsgemeinschaft");
+insert into words values (default, "amten", "ein Amt innehaben");
+
+
+
+

@@ -1,0 +1,8 @@
+insert into words values (default, "aerob", "Luftsauerstoff (zum Leben) benötigend, auf Sauerstoff aus der Luft angewiesen");
+insert into words values (default, "Alula", "Federn am Daumen des Vogelflügels");
+insert into words values (default, "Ambra", "fettige Ausscheidung aus dem Darm des Pottwals");
+insert into words values (default, "Aorta", "größte Arterie, Hauptschlagader");
+insert into words values (default, "atzen", "die Vogelbrut füttern");
+insert into words values (default, "aural", "das Ohr betreffend, Ohrmuschel");
+
+

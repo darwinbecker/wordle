@@ -1,0 +1,5 @@
+insert into words values (default, "Altan", "(größerer) Balkon, der vom Erdboden aus gestützt ist");
+insert into words values (default, "Annex", "ein Objekt, das in Form eines niedrigeren Anbaus oder Bauteiles an einem Hauptgebäude anliegt");
+insert into words values (default, "Apsis", "über einem halbkreisförmigen, oft auch vieleckigen Grundriss errichteter, mit einer Halbkuppel überwölbter Raum, der einen Hauptraum, meist einen Kirchenraum, abschließt");
+
+
