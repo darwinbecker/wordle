@@ -2,5 +2,15 @@ insert into words values (default, "Abort", "Fehlgeburt, Schwangerschaftsabbruch
 insert into words values (default, "Agens", "treibende Kraft oder medizinisch wirksamer Stoff; krank machender Faktor");
 insert into words values (default, "Apnoe", "(kurzzeitiges) krankhaftes Aussetzen der Atmung");
 insert into words values (default, "aural", "das Ohr betreffend, Ohrmuschel");
+insert into words values (default, "basal", "unten; an der Grundfläche gelegen");
+insert into words values (default, "Belag", "Zahnbelag, Plaque");
+insert into words values (default, "Beule", "etwas Vorgewölbtes, (schmerzhafte) Anschwellung der Haut; Schwellung, Delle, Vertiefung");
+insert into words values (default, "Binde", "einen verletzten Körperteil schützender und haltender bzw. medizinische Präparate fixierender Verband");
+insert into words values (default, "Blase", "häutiges Hohlorgan der Menschen, der Tiere, in dem sich Urin ansammelt, Harnblase");
+insert into words values (default, "Botox", "Nervengift, das in stark verdünnter Form zum Glätten von Falten gespritzt wird; Botulin, Botulinum-Neurotoxin, Botulinumtoxin, Botulinustoxin");
+insert into words values (default, "Bries", "hinter dem Brustbein liegende, paarige Drüse, die das Wachstum steuert, innere Brustdrüse");
+insert into words values (default, "Bruch", "das Brechen, Zerbrechen; sich die Knochen brechen");
+insert into words values (default, "Brust", "Vorderteil des menschlichen, tierischen Körpers zwischen Hals und Magengrube; milchgebendes, paariges Organ des weiblichen Oberkörpers von halbkugeliger Form");
+insert into words values (default, "Bulla", "verschiedene knöcherne, blasenartige Strukturen");
 
 

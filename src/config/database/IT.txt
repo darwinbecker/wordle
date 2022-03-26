@@ -2,4 +2,8 @@ insert into words values (default, "Addon", "Erweiterung, Zusatzprogramm");
 insert into words values (default, "Admin", "Administrator, Systemadministrator, Systemoperator, Systembetreuer");
 insert into words values (default, "Array", "Datentyp in der Informatik, Feld, Reihe, Liste");
 insert into words values (default, "axial", "in Achsenrichtung");
+insert into words values (default, "Cache", "Speicher, in dem Daten vorübergehend gespeichert werden, damit Programme schneller auf sie zugreifen können");
+insert into words values (default, "Board", "Hauptplatine, Mainboard, Motherboard");
+insert into words values (default, "breit", "gibt die Ausdehnung einer Fläche in der Querrichtung an");
+
 

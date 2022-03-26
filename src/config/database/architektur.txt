@@ -1,5 +1,10 @@
 insert into words values (default, "Altan", "(größerer) Balkon, der vom Erdboden aus gestützt ist");
 insert into words values (default, "Annex", "ein Objekt, das in Form eines niedrigeren Anbaus oder Bauteiles an einem Hauptgebäude anliegt");
 insert into words values (default, "Apsis", "über einem halbkreisförmigen, oft auch vieleckigen Grundriss errichteter, mit einer Halbkuppel überwölbter Raum, der einen Hauptraum, meist einen Kirchenraum, abschließt");
+insert into words values (default, "Berge", "große, aus dem Gelände herausragende Bodenerhebung, Gebirge");
+insert into words values (default, "Biwak", "Feldlager, behelfsmäßiges Nachtlager im Freien von Truppen, von Bergsteigern im Hochgebirge");
+insert into words values (default, "Bogen", "gewölbter Bauteil über einer Maueröffnung");
+insert into words values (default, "Bucht", "ins Land hineinragender Teil eines Meeres oder Binnengewässers");
+
 
 

@@ -5,14 +5,22 @@ insert into words values (default, "Albis");
 insert into words values (default, "Almer");
 insert into words values (default, "Alpen", "Berggruppe, Hochgebirge, Gipfel");
 insert into words values (default, "alpin", "Hochgebirgs-; alpin, bergig, gebirgig");
-insert into words values (default, "Amman");
-insert into words values (default, "Amrum");
+insert into words values (default, "Amman", "Hauptstadt von Jordanien");
+insert into words values (default, "Amrum", "eine Nordfriesische Insel in Schleswig-Holstein");
 insert into words values (default, "Arber", "Großer Arber, höchster Berg des Böhmerwaldes / Bayerischen Waldes");
 insert into words values (default, "Areal", "Gebiet, Region, Bereich, Sektor");
 insert into words values (default, "Asien", "Erdteil, Kontinent");
 insert into words values (default, "Athen", "Hauptstadt von Griechenland");
 insert into words values (default, "Atlas", "Sammlung (gleichartig bearbeiteter) geographischer Karten in Buchform");
 insert into words values (default, "Atoll", "ringförmiges, eine Lagune umgebendes Korallenriff, das sich zum Teil über den Meeresspiegel erhebt");
+insert into words values (default, "basal", "unten; an der Grundfläche gelegen");
+insert into words values (default, "Beben", "Erschütterung der Erdoberfläche");
+insert into words values (default, "Berge", "große, aus dem Gelände herausragende Bodenerhebung; Gebirge");
+insert into words values (default, "Birma", "südostasiatischer Staat Myanmar (frühere Burma oder Birma)");
+insert into words values (default, "Boden", "äußere (nutzbare), bis mehrere Meter starke Schicht der festen Erdrinde, Erdoberfläche");
+insert into words values (default, "Bucht", "ins Land hineinragender Teil eines Meeres oder Binnengewässers");
+insert into words values (default, "Buehl", " Hügel, (kleiner) Berg, Erhebung, Erhöhung");
+insert into words values (default, "Burma", "südostasiatischer Staat Myanmar (frühere Burma oder Birma)");
 
 
 

@@ -4,5 +4,8 @@ insert into words values (default, "Alkan", "gesättigter azyklischer Kohlenwass
 insert into words values (default, "Alken", "Alkene, chemische Verbindungen aus Gruppe der Kohlenwasserstoffen");
 insert into words values (default, "Alkin", "ungesättigter Kohlenwasserstoff");
 insert into words values (default, "Argon", "sehr träge reagierendes, farb- und geruchloses Edelgas");
-
+insert into words values (default, "Beize", "Ätzflüssigkeit, Ätzmittel");
+insert into words values (default, "Bixin", "ein in der Natur vorkommender gelb-oranger Farbstoff aus der Gruppe der Carotinoide, welches aus Annatto gewonnen wird und als Lebensmittel- und Kosmetikfarbstoff eingesetzt wird");
+insert into words values (default, "Borax", "in der Natur selten vorkommendes, meist weißes, graues oder farbloses kristallisierendes Mineral; Natriumsalz der Borsäure, Natriumtetraborat");
+insert into words values (default, "Botox", "Nervengift, das in stark verdünnter Form zum Glätten von Falten gespritzt wird; Botulin, Botulinum-Neurotoxin, Botulinumtoxin, Botulinustoxin");
 

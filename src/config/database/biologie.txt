@@ -4,5 +4,10 @@ insert into words values (default, "Ambra", "fettige Ausscheidung aus dem Darm d
 insert into words values (default, "Aorta", "größte Arterie, Hauptschlagader");
 insert into words values (default, "atzen", "die Vogelbrut füttern");
 insert into words values (default, "aural", "das Ohr betreffend, Ohrmuschel");
-
+insert into words values (default, "Bauch", "zwischen Zwerchfell und Becken liegender (vorgewölbter) Teil des Rumpfes");
+insert into words values (default, "Blase", "häutiges Hohlorgan der Menschen, der Tiere, in dem sich Urin ansammelt, Harnblase");
+insert into words values (default, "Braue", "Haarbogen über dem Auge");
+insert into words values (default, "Brust", "Vorderteil des menschlichen, tierischen Körpers zwischen Hals und Magengrube; milchgebendes, paariges Organ des weiblichen Oberkörpers von halbkugeliger Form");
+insert into words values (default, "Bulla", "verschiedene knöcherne, blasenartige Strukturen");
+insert into words values (default, "Busen", "weibliche Brust");
 

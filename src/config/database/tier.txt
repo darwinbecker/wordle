@@ -2,6 +2,14 @@ insert into words values (default, "Adler", "großer, seltener Raubvogel mit hak
 insert into words values (default, "Amsel", "in Europa sehr häufiger Vogel (Turdus merula) aus der Familie der Drosseln, bei dem das Männchen ein charakteristisches schwarzes Gefieder und einen gelben Schnabel besitzt");
 insert into words values (default, "Anura", "Froschlurch");
 insert into words values (default, "Bache", "weibliches Wildschwein");
+insert into words values (default, "Baiji", "Chinesischer Flussdelfin");
+insert into words values (default, "Barbe", "(zur Familie der Karpfen gehörender) großer Fisch mit braun- bis schwarzgrüner Oberseite und weißlichem Bauch, der besonders in rasch fließenden Gewässern lebt");
+insert into words values (default, "Biber", "plumpes Nagetier mit Schwimmfüßen und plattem Schuppenschwanz, das geschickt Wasserburgen errichtet und wegen seines bräunlichen Pelzes geschätzt wird");
+insert into words values (default, "Biene", "emsiges, in Völkern lebendes Insekt, das Blüten bestäubt und Wachs und Honig liefert");
+insert into words values (default, "Biest", "lästiges Tier, Bestie, Kreatur, Monster");
+insert into words values (default, "Bisam", "Bisamratte, Pelz der Bisamratte");
+insert into words values (default, "Bulle", "geschlechtsreifes Männchen des Rinds oder verschiedener weiterer Arten des Großwilds");
+
 
 
 

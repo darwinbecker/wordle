@@ -1,4 +1,7 @@
 insert into words values (default, "Anode", "positive Elektrode");
+insert into words values (default, "Blitz", "elektrische, meist von einem Donner gefolgte Entladung zwischen zwei entgegengesetzt geladenen Wolken oder zwischen einer Wolke und der Erdoberfläche");
+insert into words values (default, "Boson", "Elementarteilchen mit ganzzahligem Spin oder mit Spin null");
+insert into words values (default, "breit", "gibt die Ausdehnung einer Fläche in der Querrichtung an");
 
 
 

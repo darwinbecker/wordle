@@ -4,6 +4,18 @@ insert into words values (default, "Ahorn", "Laubbaum mit handförmigen, gelappt
 insert into words values (default, "Allee", "von (hohen) Bäumen eingefasste Straße");
 insert into words values (default, "Alsem", "Pflanzenart; Bitterer Beifuß, Echt-Wermut, Echter Wermut");
 insert into words values (default, "Anbau", "das Anpflanzen");
+insert into words values (default, "bienn", "zweijährig (von Pflanzen mit zweijähriger Lebensdauer, die erst im zweiten Jahr blühen und Frucht tragen)");
+insert into words values (default, "Binse", "grasartige Pflanze, die an feuchten, moorigen Stellen wächst und deren stängelähnliche Blätter zu Geflechten verwendet werden");
+insert into words values (default, "Birke", "Laubbaum mit weißer, abblätternder Rinde und hellgrünen, doppelt gesägten Blättern, der hochwertiges Nutzholz liefert und dessen Zweige als Symbol des Frühlings ein beliebter Schmuck sind");
+insert into words values (default, "Blatt", "flächiges, meist durch Chlorophyll grün gefärbtes Organ der höheren Pflanzen, das zur Assimilation, Wasserverdunstung und Atmung dient");
+insert into words values (default, "Blume", "niedrig gewachsene, krautige Pflanze, die Blüten hervorbringt");
+insert into words values (default, "Blust", "Blütezeit, das Blühen");
+insert into words values (default, "Bolle", "große Zwiebel");
+insert into words values (default, "Borke", "Baumrinde bzw. periphere Gewebeschicht eines Baumes");
+insert into words values (default, "Buche", "Laubbaum mit hohem, schlankem Stamm und silbergrauer, glatter Rinde, der kerniges Holz und ölhaltige Früchte besitzt");
+insert into words values (default, "Buchs", "Buchsbaum, immergrüner Zierstrauch mit kleinen, fast runden Blättern, der meist zur Einfassung von Beeten dient");
+insert into words values (default, "Buhne", "quer ins Wasser hineingebauter Damm, der als Uferschutz dient");
+insert into words values (default, "Busch", "dicht belaubter oder mit Blüten bedeckter Strauch, Strauß");
 
 
 

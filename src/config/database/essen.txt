@@ -3,5 +3,12 @@ insert into words values (default, "Apero", "schweizerisch: Aperitif, alkoholisc
 insert into words values (default, "Apfel", "Frucht des Apfelbaums");
 insert into words values (default, "Aroma", "(angenehm) würziger Geruch, Geschmack; Würzmittel, Essenz");
 insert into words values (default, "Aspik", "durch Auskochen von Fleisch‍(knochen) oder Fisch gewonnene oder mit Gelatine hergestellte säuerliche Gallerte für die Zubereitung bestimmter Speisen (besonders Sülze)");
-
+insert into words values (default, "Bagel", "ursprünglich aus der jüdischen Küche stammendes, ringförmiges, brötchenartiges Gebäckstück aus Hefeteig, das zunächst kurz in Wasser gekocht und anschließend gebacken wird");
+insert into words values (default, "Beere", "kleine, fleischige und saftige Frucht, deren Gewebe von einer dünnen Haut umschlossen ist und die Samenkerne enthält");
+insert into words values (default, "Bemme", "(sächsisch) gestrichene, belegte Scheibe Brot");
+insert into words values (default, "Birne", "Frucht des Birnbaums");
+insert into words values (default, "Bohne", "artenreiche Gemüsepflanze aus der Familie der Schmetterlingsblütler, die, buschig oder an Stangen sich emporwindend, in unseren Gärten viel angebaut wird, da ihre lang herabhängenden Früchte und ihre nierenförmigen Samen gern gegessen werden");
+insert into words values (default, "Bolle", "große Zwiebel");
+insert into words values (default, "Braet", "Brätmasse, Fleischbrät, sehr feine Masse aus zerkleinertem Fleisch, die besonders zur Herstellung von Wurst, Fleischkäse o. Ä. verwendet wird");
+insert into words values (default, "Buesi", "Hauskatze, Katze");
 

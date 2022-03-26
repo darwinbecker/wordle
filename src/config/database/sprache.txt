@@ -13,5 +13,18 @@ insert into words values (default, "Augur", "Eingeweihter, der künftige Entwick
 insert into words values (default, "Avers", "Vorderseite einer Münze oder einer Medaille");
 insert into words values (default, "Aviso", "österreichisch: Ankündigung, Benachrichtigung");
 insert into words values (default, "Axiom", "als absolut richtig anerkannter Grundsatz, feststehende Wahrheit, die keines Beweises bedarf; Beschluss, Grundsatz");
+insert into words values (default, "balde", "balde (poetisch), bald; nach einer (relativ) kurzen Zeitspanne, in (relativ) kurzer Zeit");
+insert into words values (default, "Barde", "altkeltischer Dichter und Sänger");
+insert into words values (default, "Barke", "kleines, schmales Boot ohne Mast und Antrieb, Kahn");
+insert into words values (default, "Baron", " ein Adelstitel; Freiherr, Freifrau oder Freiin");
+insert into words values (default, "Behuf", "zu dem Zweck, Absicht, Plan, Vorhaben");
+insert into words values (default, "Bemme", "(sächsisch) gestrichene, belegte Scheibe Brot");
+insert into words values (default, "Bitte", "an jemanden gerichteter, höflich ausgedrückter Wunsch");
+insert into words values (default, "Bluff", "durch gewandte Manöver verursachte Irreführung, Täuschung, Vorspiegelung");
+insert into words values (default, "Boche", "Bezeichnung für den Deutschen aus Sicht der Franzosen");
+insert into words values (default, "Bonze", "seiner Aufgabe entfremdeter, engstirniger, schmarotzender Funktionär, Mächtiger");
+insert into words values (default, "Buddy", "Vertrauter, bester Kumpel, eng befreundet, enger Freund");
+insert into words values (default, "Buren", "Nachkommen der niederländischen und deutschen Ansiedler in Südafrika");
+insert into words values (default, "Bussi", "Kuss, Küsschen");
 
 

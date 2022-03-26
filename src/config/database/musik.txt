@@ -1,5 +1,7 @@
 insert into words values (default, "Album", "Veröffentlichung mit mehreren, thematisch zusammengehörigen Musikstücken eines Interpreten, einer Band, eines Orchesters o. Ä.");
 insert into words values (default, "Aulos", "antikes griechisches Musikinstrument in der Art einer Schalmei");
+insert into words values (default, "Blech", "Gesamtheit der Blechblasinstrumente eines Orchesters");
+insert into words values (default, "Blues", "durch den typischen Einsatz sogenannter Blue Notes gekennzeichnete Musikrichtung von zumeist getragenem und melancholischem Charakter, die an der Wende vom 19. zum 20. Jahrhundert durch die Verschmelzung afrikanischer, europäischer und karibischer Elemente als Form afroamerikanischer Folklore in den USA entstanden ist");
 
 
 
