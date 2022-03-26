@@ -45,6 +45,9 @@ insert into words values (default, "detto", "desgleichen, ebenso, detto (österr
 insert into words values (default, "Dimli", "Zaza-Sprache, auch Zazaisch oder Zazaki, ist die Sprache der Zaza in der östlichen Türkei. Die Sprache wird auch Dımlī (Dimli) und Kirmānčkī (Kirmancki) genannt. Die Anzahl ihrer Sprecher wird auf zwei bis drei Millionen geschätzt");
 insert into words values (default, "Dirne", "Prostituierte, Person, die der Prostitution nachgeht");
 insert into words values (default, "Diwan", "orientalische Gedichtsammlung");
-
+insert into words values (default, "Doyen", "Rangältester oder Dienstältester eines diplomatischen Korps");
+insert into words values (default, "drapp", "österreichisch: sandfarben, cremefarben, eierschalenfarben, gelblich weiß");
+insert into words values (default, "Dukat", "Dukat oder Dukaten ist eine Goldmünze, die in ganz Europa einschließlich der Länder rund um das Mittelmeer bis zum Anfang des 20. Jahrhunderts umlief");
+insert into words values (default, "Dusel", "unverdientes Glück");
 
 

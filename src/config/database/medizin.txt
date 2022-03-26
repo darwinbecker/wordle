@@ -17,6 +17,7 @@ insert into words values (default, "debil", "leicht geistig behindert, intellige
 insert into words values (default, "Dekon", "Dekontamination, Dekontaminierung, Dekon (Abkürzung), Deko (Abkürzung, österr.), Entseuchung");
 insert into words values (default, "Delir", "eine akute, aber rückbildungsfähige Bewusstseinsstörung, die unter anderem durch zeitliche und räumliche Desorientiertheit, Verwirrtheit und Halluzinationen gekennzeichnet ist");
 insert into words values (default, "Depot", "Ablagerung von Nährstoffen im Körper");
+insert into words values (default, "Dosis", "genau abgemessene (kleine) Menge");
 
 
 

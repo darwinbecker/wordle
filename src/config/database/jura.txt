@@ -4,6 +4,7 @@ insert into words values (default, "Brief", "schriftliche Mitteilung an einen En
 insert into words values (default, "Busse", "Sühne für geringfügige Rechtsverletzung");
 insert into words values (default, "Causa", "Grund, Ursache (eines Schadens, einer Vermögensänderung usw.)");
 insert into words values (default, "Claim", "Rechtsanspruch");
+insert into words values (default, "dolos", "arglistig, vorsätzlich, aus böser Absicht hervorgehend");
 
 
 

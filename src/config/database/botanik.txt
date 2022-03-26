@@ -20,5 +20,7 @@ insert into words values (default, "Chili", "scharfe Paprika, Peperoni; sorte de
 insert into words values (default, "Copal", "Baumharz; Sammelbezeichnung für Baumharze verschiedener botanischer Herkunft, die als Räucherwerk und für hochwertige Farben und Lacke verwendet werden");
 insert into words values (default, "Cumin", "Kreuzkümmel, Kumin; Pflanze aus der Familie der Doldenblütler, deren getrocknete Früchte als Gewürz genutzt werden");
 insert into words values (default, "Dille", "doldenblütiges Gewürzkraut, das zum Einlegen von Gurken und zum Anrichten von Salaten Verwendung findet");
+insert into words values (default, "duerr", "dürr, sehr trocken, verdorrt oder sehr mager");
+insert into words values (default, "Durum", "Hartweizen, auch Durum, Durumweizen oder Glasweizen genannt, ist nach Weichweizen die wirtschaftlich bedeutendste Weizen-Art");
 
 

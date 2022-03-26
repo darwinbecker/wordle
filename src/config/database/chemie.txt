@@ -14,6 +14,7 @@ insert into words values (default, "Chlor", "gelbgrünes Gas von durchdringendem
 insert into words values (default, "Chrom", "silberweiß glänzendes, zähes Schwermetall, das bei normalen Temperaturen in Luft und Wasser nicht oxydiert");
 insert into words values (default, "Codon", "drei aufeinander folgende Basen einer Nukleinsäure, die den Schlüssel für eine Aminosäure im Protein darstellen; Triplett, Basentriplett");
 insert into words values (default, "Crack", "zum Rauchen bestimmte Droge aus Kokainsalz und Natron");
+insert into words values (default, "Dunst", "durch Wasserdampf oder Verunreinigungen getrübte Atmosphäre; stark riechende, warme Luft, die oft als lästig und erstickend empfunden wird");
 
 
 

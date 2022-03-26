@@ -6,7 +6,9 @@ insert into words values (default, "Cello", "Streichinstrument, das eine Oktave 
 insert into words values (default, "Combo", "kleine Besetzung in der Jazzmusik mit fünf oder sechs Instrumenten; Band, Musikgruppe");
 insert into words values (default, "Corno", "Horn, Blasinstrument");
 insert into words values (default, "dolce", "in der Musik: süß, lieblich, sanft");
-
+insert into words values (default, "Drive", "durch die Spannung zwischen Beat und Off-Beat entstehende, vorantreibende Dynamik des Spiels mit scheinbarer Beschleunigung des Rhythmus");
+insert into words values (default, "Duett", "Komposition für zwei gleichberechtigte Singstimmen mit oder ohne Instrumentalbegleitung");
+insert into words values (default, "dumpf", "gedämpft, hohl, tief (klingend)");
 
 
 

@@ -18,6 +18,11 @@ insert into words values (default, "Creme", "feine, schaumige Süßspeise");
 insert into words values (default, "Curry", "Mischung scharfer indischer Gewürze, meist mit dem Hauptbestandteil Kurkuma, die dem Gewürzpulver die gelbe Farbe gibt; scharfe Würzpaste aus verschiedenen Kräutern und Gewürzen; aus der indischen Küche stammendes Gericht aus Fleisch, Fisch oder Gemüse, das mit Curry gewürzt und meist mit Reis serviert wird");
 insert into words values (default, "Diaet", "richtige Ernährungsweise, besondere Ernährungsweise, oft von Kranken; Schonkost, Krankenkost");
 insert into words values (default, "Dille", "doldenblütiges Gewürzkraut, das zum Einlegen von Gurken und zum Anrichten von Salaten Verwendung findet");
+insert into words values (default, "Donut", "handtellergroßer amerikanischer/kanadischer Krapfen aus Hefeteig oder Rührteig");
+insert into words values (default, "Drink", "alkoholisches Mischgetränk");
+insert into words values (default, "Drohn", "Drohne, fachsprachlich auch der Drohn, ist das männliche Tier bei Wildbienen, Honigbienen und Wespen. Diese staatenbildenden Arten aus der Ordnung der Hautflügler besitzen drei unterschiedliche Morphen: Königin, Arbeiterin und Drohne");
+insert into words values (default, "Durst", "starkes Bedürfnis zu trinken");
+insert into words values (default, "Durum", "Hartweizen, auch Durum, Durumweizen oder Glasweizen genannt, ist nach Weichweizen die wirtschaftlich bedeutendste Weizen-Art");
 
 
 
