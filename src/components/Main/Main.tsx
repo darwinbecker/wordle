@@ -4,7 +4,7 @@ import { MAX_GUESSES } from '../../config/settings';
 import { Grid } from '../grid/root';
 import { checkstatus, StatusType } from '../wordStatus';
 import { isInDictionary, DICTIONARY } from '../../config/dictionary';
-import { WORD_OF_THE_DAY } from '../../config/wordlist';
+import { WORD_OF_THE_DAY, getRandomWord } from '../../config/wordlist';
 
 
 export const Main: React.FC = () => {
@@ -103,6 +103,7 @@ export const Main: React.FC = () => {
         if (youWin || youLose) return;
         const listener = (event: globalThis.KeyboardEvent): any => {
             if (event.code === 'Enter') {
+                getRandomWord();
                 if (guessedWord.length == 5) {
                     handleSubmit()
                 }

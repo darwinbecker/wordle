@@ -26,6 +26,12 @@ export const WORD_OF_THE_DAY = () => {
 //     return getWordOfDay();
 // }
 
+export const getRandomWord = () => {
+    const random = Math.floor(Math.random() * WORDLIST.length);
+    console.log(random);
+    console.log(WORDLIST[random]);
+}
+
 export const WORDLIST = [
     "ABART",
     "ABBAU",
