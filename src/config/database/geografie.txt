@@ -21,6 +21,15 @@ insert into words values (default, "Boden", "äußere (nutzbare), bis mehrere Me
 insert into words values (default, "Bucht", "ins Land hineinragender Teil eines Meeres oder Binnengewässers");
 insert into words values (default, "Buehl", " Hügel, (kleiner) Berg, Erhebung, Erhöhung");
 insert into words values (default, "Burma", "südostasiatischer Staat Myanmar (frühere Burma oder Birma)");
+insert into words values (default, "Chile", "Land in Südamerika (Hauptstadt: Santiago de Chile)");
+insert into words values (default, "China", "Land in Ostasien (Hauptstadt: Peking)");
+insert into words values (default, "Creek", "kleine Bucht an einer Meeresküste, die durch Überflutung einer früheren Flussmündung entstanden ist");
 
 
+
+
+
+
+
+insert into words values (default, "Pelit", "feinkörniges Sedimentgestein");
 

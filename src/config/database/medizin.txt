@@ -12,5 +12,7 @@ insert into words values (default, "Bries", "hinter dem Brustbein liegende, paar
 insert into words values (default, "Bruch", "das Brechen, Zerbrechen; sich die Knochen brechen");
 insert into words values (default, "Brust", "Vorderteil des menschlichen, tierischen Körpers zwischen Hals und Magengrube; milchgebendes, paariges Organ des weiblichen Oberkörpers von halbkugeliger Form");
 insert into words values (default, "Bulla", "verschiedene knöcherne, blasenartige Strukturen");
+insert into words values (default, "Chemo, "Chemotherapie, Behandlung von Infektionskrankheiten mit chemischen Mitteln");
+
 
 

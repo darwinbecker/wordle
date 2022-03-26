@@ -16,6 +16,9 @@ insert into words values (default, "Buche", "Laubbaum mit hohem, schlankem Stamm
 insert into words values (default, "Buchs", "Buchsbaum, immergrüner Zierstrauch mit kleinen, fast runden Blättern, der meist zur Einfassung von Beeten dient");
 insert into words values (default, "Buhne", "quer ins Wasser hineingebauter Damm, der als Uferschutz dient");
 insert into words values (default, "Busch", "dicht belaubter oder mit Blüten bedeckter Strauch, Strauß");
+insert into words values (default, "Chili", "scharfe Paprika, Peperoni; sorte der Beerenfrucht von Pflanzen der Gattung Capsicum");
+insert into words values (default, "Copal", "Baumharz; Sammelbezeichnung für Baumharze verschiedener botanischer Herkunft, die als Räucherwerk und für hochwertige Farben und Lacke verwendet werden");
+insert into words values (default, "Cumin", "Kreuzkümmel, Kumin; Pflanze aus der Familie der Doldenblütler, deren getrocknete Früchte als Gewürz genutzt werden");
 
 
 

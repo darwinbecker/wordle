@@ -2,6 +2,8 @@ insert into words values (default, "Amtei", "Amtsbezirk, Verwaltungsgemeinschaft
 insert into words values (default, "amten", "ein Amt innehaben");
 insert into words values (default, "Brief", "schriftliche Mitteilung an einen Entfernten, die in einem (geschlossenen) Umschlag durch die Post oder einen Boten befördert wird");
 insert into words values (default, "Busse", "Sühne für geringfügige Rechtsverletzung");
+insert into words values (default, "Causa", "Grund, Ursache (eines Schadens, einer Vermögensänderung usw.)");
+insert into words values (default, "Claim", "Rechtsanspruch");
 
 
 

@@ -1,3 +1,4 @@
+insert into words values (default, "Abgas", "bei Verbrennungsvorgängen abströmendes Gas");
 insert into words values (default, "Albit", "meist weißes, wichtiges gesteinsbildendes Mineral");
 insert into words values (default, "Algin", "aus Braunalgen gewonnenes chemisches Produkt von vielfacher technischer Verwendbarkeit");
 insert into words values (default, "Alkan", "gesättigter azyklischer Kohlenwasserstoff");
@@ -8,4 +9,11 @@ insert into words values (default, "Beize", "Ätzflüssigkeit, Ätzmittel");
 insert into words values (default, "Bixin", "ein in der Natur vorkommender gelb-oranger Farbstoff aus der Gruppe der Carotinoide, welches aus Annatto gewonnen wird und als Lebensmittel- und Kosmetikfarbstoff eingesetzt wird");
 insert into words values (default, "Borax", "in der Natur selten vorkommendes, meist weißes, graues oder farbloses kristallisierendes Mineral; Natriumsalz der Borsäure, Natriumtetraborat");
 insert into words values (default, "Botox", "Nervengift, das in stark verdünnter Form zum Glätten von Falten gespritzt wird; Botulin, Botulinum-Neurotoxin, Botulinumtoxin, Botulinustoxin");
+insert into words values (default, "Celit", "eine weißliche, pulverförmige Substanz, die hauptsächlich aus den Schalen fossiler Kieselalgen besteht");
+insert into words values (default, "Chlor", "gelbgrünes Gas von durchdringendem Geruch, das sich (unter starker Wärmeentwicklung) mit fast allen anderen chemischen Elementen verbindet, in der Natur aber nur in chemischen Verbindungen vorkommt");
+insert into words values (default, "Chrom", "silberweiß glänzendes, zähes Schwermetall, das bei normalen Temperaturen in Luft und Wasser nicht oxydiert");
+insert into words values (default, "Codon", "drei aufeinander folgende Basen einer Nukleinsäure, die den Schlüssel für eine Aminosäure im Protein darstellen; Triplett, Basentriplett");
+insert into words values (default, "Crack", "zum Rauchen bestimmte Droge aus Kokainsalz und Natron");
+
+
 

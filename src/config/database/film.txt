@@ -1,5 +1,6 @@
 insert into words values (default, "Anime", "Animationsfilm, Zeichentrickfilm, Cartoon");
 insert into words values (default, "Autor", "Verfasser eines Textes");
-
+insert into words values (default, "Cameo", "das häufig überraschende, zeitlich sehr kurze Auftreten einer bekannten Person in einem Film, einer Serie, als Figur in einem Comic, einem Computerspiel oder in einem fiktionalen literarischen Werk");
+insert into words values (default, "Comic", "Bilderfolgen in Streifen, die oft komische oder abenteuerliche Geschichten darstellen");
 
 

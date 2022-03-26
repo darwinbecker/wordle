@@ -4,6 +4,7 @@ insert into words values (default, "Alkor", "Stern im Sternbild Großer Bär");
 insert into words values (default, "Aphel", "Punkt der größten Entfernung eines Planeten von der Sonne");
 insert into words values (default, "Aries", "das Sternbild Widder");
 insert into words values (default, "Bolid", "großer, besonders heller Meteor, Feuerball, Feuerkugel");
+insert into words values (default, "Ceres", " ein Zwergplanet, welcher im Asteroidengürtel oder Hauptgürtel liegt, bei den vielen kleinen Asteroiden, die zwischen Mars und Jupiter um die Sonne kreisen");
 
 
 

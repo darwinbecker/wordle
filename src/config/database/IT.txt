@@ -5,5 +5,12 @@ insert into words values (default, "axial", "in Achsenrichtung");
 insert into words values (default, "Cache", "Speicher, in dem Daten vorübergehend gespeichert werden, damit Programme schneller auf sie zugreifen können");
 insert into words values (default, "Board", "Hauptplatine, Mainboard, Motherboard");
 insert into words values (default, "breit", "gibt die Ausdehnung einer Fläche in der Querrichtung an");
+insert into words values (default, "Cheat", "die Möglichkeit, in einem Computerspiel selbst oder durch externe Programme das Spiel in einer nicht dem gewöhnlichen Spielverlauf entsprechenden Weise zu beeinflussen; schummeln, betrügen");
+insert into words values (default, "Chips", "kleines, flaches, rechteckiges Plättchen aus einem Halbleiter, meist Silizium, mit einem darauf aufgebrachten, integrierten Schaltkreis");
+insert into words values (default, "Cloud", "Rechnerverbund mit Zugang zum Internet, der anstelle von lokalen Rechnern oder Servern zur Datenspeicherung und Ausführung von Softwareanwendungen genutzt wird und auf den von verschiedenen digitalen Endgeräten aus zugegriffen werden kann");
+insert into words values (default, "coden", "programmieren, entwickeln, implementieren, hacken");
+insert into words values (default, "Coder", "Programmierer; Person, die Programmcode entwickelt oder Software, die Signale oder Daten kodiert");
+insert into words values (default, "Crash", "durch einen Funktionsfehler verursachter, oft mit dem Verlust von Daten verbundener Absturz, Eintritt der Funktionsunfähigkeit eines Computers, eines Computerbauteils oder eines Computerprogramms");
+
 
 

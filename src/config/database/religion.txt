@@ -4,5 +4,7 @@ insert into words values (default, "Baron", "ein Adelstitel; Freiherr, Freifrau 
 insert into words values (default, "beten", "sich in innerer Sammlung (in einem festgesetzten Wortlaut) mit einer Bitte, einem Bekenntnis, Dank an Gott wenden");
 insert into words values (default, "Bibel", "Gesamtheit der Bücher des Alten und Neuen Testaments, Heilige Schrift");
 insert into words values (default, "Busse", "Sühne, Reue mit dem Vorsatz zur Besserung");
+insert into words values (default, "Cetus", "Keto (lateinisch: Cetus) ist in der griechischen Mythologie der Name einer Meeresgöttin");
+insert into words values (default, "Credo", "Glaubensbekenntnis, Leitsatz; apostolisches Glaubensbekenntnis");
 
 

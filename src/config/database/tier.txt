@@ -8,8 +8,11 @@ insert into words values (default, "Biber", "plumpes Nagetier mit Schwimmfüßen
 insert into words values (default, "Biene", "emsiges, in Völkern lebendes Insekt, das Blüten bestäubt und Wachs und Honig liefert");
 insert into words values (default, "Biest", "lästiges Tier, Bestie, Kreatur, Monster");
 insert into words values (default, "Bisam", "Bisamratte, Pelz der Bisamratte");
+insert into words values (default, "Buesi", "Hauskatze, Katze");
 insert into words values (default, "Bulle", "geschlechtsreifes Männchen des Rinds oder verschiedener weiterer Arten des Großwilds");
+insert into words values (default, "Coypu", "Nutria, auch Biberratte oder seltener Sumpfbiber, Schweifbiber, Schweifratte oder Coypu genannt, ist eine aus Südamerika stammende und in Mitteleuropa angesiedelte Nagetierart");
 
+insert into words values (default, "Dachs", "gedrungenes, der Familie der Marder angehörendes Säugetier, das einen spitzen, weißen Kopf mit schwarzen Seitenstreifen, silbergraues Fell und starke, lange Krallen hat und in seinem Bau eine durch kurze Ausflüge unterbrochene Winterruhe hält");
 
 
 

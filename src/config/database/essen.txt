@@ -10,5 +10,11 @@ insert into words values (default, "Birne", "Frucht des Birnbaums");
 insert into words values (default, "Bohne", "artenreiche Gemüsepflanze aus der Familie der Schmetterlingsblütler, die, buschig oder an Stangen sich emporwindend, in unseren Gärten viel angebaut wird, da ihre lang herabhängenden Früchte und ihre nierenförmigen Samen gern gegessen werden");
 insert into words values (default, "Bolle", "große Zwiebel");
 insert into words values (default, "Braet", "Brätmasse, Fleischbrät, sehr feine Masse aus zerkleinertem Fleisch, die besonders zur Herstellung von Wurst, Fleischkäse o. Ä. verwendet wird");
-insert into words values (default, "Buesi", "Hauskatze, Katze");
+insert into words values (default, "Chili", "scharfe Paprika, Peperoni; sorte der Beerenfrucht von Pflanzen der Gattung Capsicum");
+insert into words values (default, "Chips", "Essen: sehr dünne, frittierte Scheibe von Gemüse, insbesondere Kartoffeln, oder aus speziellem Teig, die kalt und meist in größerer Anzahl verzehrt wird");
+insert into words values (default, "Cider", "französischer Apfelwein aus der Normandie oder Bretagne");
+insert into words values (default, "Cover", "Titelseite einer Illustrierten; Deckblatt, Titel, Titelbild");
+insert into words values (default, "Creme", "feine, schaumige Süßspeise");
+insert into words values (default, "Curry", "Mischung scharfer indischer Gewürze, meist mit dem Hauptbestandteil Kurkuma, die dem Gewürzpulver die gelbe Farbe gibt; scharfe Würzpaste aus verschiedenen Kräutern und Gewürzen; aus der indischen Küche stammendes Gericht aus Fleisch, Fisch oder Gemüse, das mit Curry gewürzt und meist mit Reis serviert wird");
+
 
