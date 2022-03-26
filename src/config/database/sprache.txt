@@ -30,5 +30,21 @@ insert into words values (default, "Caput", "Hauptstück, Kapitel eines Buches")
 insert into words values (default, "Chose", "Sache, Angelegenheit");
 insert into words values (default, "circa", "zirka, ungefähr; etwa, rund");
 insert into words values (default, "crazy", "verrückt, durchgeknallt, irre");
+insert into words values (default, "dalli", " schnell, eilig, flink, flott");
+insert into words values (default, "Dandy", "Geck, Stutzer, Snob, Schickimicki, Schnösel");
+insert into words values (default, "danke", "Dankeschön, vielen Dank, danke sehr, Dank; Dank ist die wohlwollende Erwiderung empfangener Hilfe, auch selbstverständlicher Leistungen; sie gilt als eine allgemeine ethische Forderung an den Menschen. Dankbarkeit ist ein Gefühl oder eine Haltung in Anerkennung einer materiellen oder immateriellen Zuwendung, die man erhalten hat oder erhalten wird");
+insert into words values (default, "Dativ", "Kasus, in dem häufig das Objekt eines intransitiven Verbs und bestimmte Umstandsangaben stehen; Wemfall, dritter Fall");
+insert into words values (default, "Deern", " Mädchen, junge Frau, junge Dame");
+insert into words values (default, "deier", "bayerisch: teuer, kostenträchtig, kostspielig");
+insert into words values (default, "Dekan", "Leiter einer Fakultät an Universitäten, Hochschulen");
+insert into words values (default, "Demse", "bezeichnet eine große anhaltende trockene Hitze. Meist wird von einer Demse / Dämmse gesprochen, wenn es mehrere Tage hintereinander über 30 °C sind, wenig Wind weht und kein Regen gefallen ist. Von einer Dämse wird auch geredet, wenn es kurzfristig sehr heiß wird");
+insert into words values (default, "depri", "kurzform für depressiv, deprimierend; jemanden entmutigen, seelisch verstimmen");
+insert into words values (default, "derbe", "grob, kräftig, stark, unfein, plump");
+insert into words values (default, "desto", "⟨vergleiche je + Komparativ + desto⟩ je mehr, desto besser");
+insert into words values (default, "detto", "desgleichen, ebenso, detto (österr.), dito");
+insert into words values (default, "Dimli", "Zaza-Sprache, auch Zazaisch oder Zazaki, ist die Sprache der Zaza in der östlichen Türkei. Die Sprache wird auch Dımlī (Dimli) und Kirmānčkī (Kirmancki) genannt. Die Anzahl ihrer Sprecher wird auf zwei bis drei Millionen geschätzt");
+insert into words values (default, "Dirne", "Prostituierte, Person, die der Prostitution nachgeht");
+insert into words values (default, "Diwan", "orientalische Gedichtsammlung");
+
 
 

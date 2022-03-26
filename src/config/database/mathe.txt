@@ -4,4 +4,6 @@ insert into words values (default, "ANOVA", "Varianzanalyse");
 insert into words values (default, "axial", "in Achsenrichtung");
 insert into words values (default, "breit", "gibt die Ausdehnung einer Fläche in der Querrichtung an");
 insert into words values (default, "Bruch", "durch einen Strich getrennte Zahlen, die den Teil eines Ganzen ausdrücken");
+insert into words values (default, "Ebene", "unbegrenzte, in keinem ihrer Punkte gekrümmte Fläche");
+insert into words values (default, "Delta", "Das Differenzzeichen ∆ ist ein vom griechischen Großbuchstaben Delta abgeleitetes mathematisches Symbol");
 

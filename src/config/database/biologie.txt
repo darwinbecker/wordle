@@ -10,4 +10,5 @@ insert into words values (default, "Braue", "Haarbogen über dem Auge");
 insert into words values (default, "Brust", "Vorderteil des menschlichen, tierischen Körpers zwischen Hals und Magengrube; milchgebendes, paariges Organ des weiblichen Oberkörpers von halbkugeliger Form");
 insert into words values (default, "Bulla", "verschiedene knöcherne, blasenartige Strukturen");
 insert into words values (default, "Busen", "weibliche Brust");
+insert into words values (default, "Denim", "robustes, typischerweise aus Baumwolle gefertigtes Gewebe in Köperbindung, das insbesondere für Jeans benutzt wird");
 

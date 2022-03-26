@@ -24,7 +24,14 @@ insert into words values (default, "Burma", "südostasiatischer Staat Myanmar (f
 insert into words values (default, "Chile", "Land in Südamerika (Hauptstadt: Santiago de Chile)");
 insert into words values (default, "China", "Land in Ostasien (Hauptstadt: Peking)");
 insert into words values (default, "Creek", "kleine Bucht an einer Meeresküste, die durch Überflutung einer früheren Flussmündung entstanden ist");
-
+insert into words values (default, "Dakar", "Hauptstadt von Senegal");
+insert into words values (default, "Decke", "räumlich: oberer Abschluss eines Raumes");
+insert into words values (default, "Deich", "Schutzdamm gegen Hochwasser, Überschwemmungen");
+insert into words values (default, "Delle", "muldenförmige, langgestreckte Hohlform, besonders auf Hochflächen, ohne dauernd fließende Gewässer");
+insert into words values (default, "Delta", "durch ein verzweigtes, dreieckförmiges Netz von Flussarmen zerschnittenes Mündungsgebiet eines Flusses");
+insert into words values (default, "Demse", "bezeichnet eine große anhaltende trockene Hitze. Meist wird von einer Demse / Dämmse gesprochen, wenn es mehrere Tage hintereinander über 30 °C sind, wenig Wind weht und kein Regen gefallen ist. Von einer Dämse wird auch geredet, wenn es kurzfristig sehr heiß wird");
+insert into words values (default, "Dhaka", "Hauptstadt von Bangladesch");
+insert into words values (default, "Dokdo", "Liancourt-Felsen (Dokdo) sind eine Inselgruppe im Japanischen Meer, auf die sowohl Japan als auch Südkorea und Nordkorea Territorialansprüche erheben");
 
 
 

@@ -2,3 +2,7 @@ insert into words values (default, "Abgas", "bei Verbrennungsvorgängen abström
 insert into words values (default, "Aktor", "Bauelement am Ausgangsteil einer Steuer- oder Regelstrecke, der in Energie- oder Massenströme eingreift und darin als veränderlicher Widerstand wirkt");
 insert into words values (default, "Balun", "Bauteil zur Wandlung zwischen einem symmetrischen Leitungssystem und einem unsymmetrischen Leitungssystem");
 insert into words values (default, "Chips", "kleines, flaches, rechteckiges Plättchen aus einem Halbleiter, meist Silizium, mit einem darauf aufgebrachten, integrierten Schaltkreis");
+insert into words values (default, "Diode", "elektronischer Baustein, der den elektrischen Strom nur in einer Richtung (von der Anode zur Kathode) passieren lässt");
+insert into words values (default, "Dolly", "fahrbares Stativ für eine Filmkamera; Wagen mit aufmontierter Kamera");
+
+

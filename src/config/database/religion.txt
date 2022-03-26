@@ -6,5 +6,8 @@ insert into words values (default, "Bibel", "Gesamtheit der Bücher des Alten un
 insert into words values (default, "Busse", "Sühne, Reue mit dem Vorsatz zur Besserung");
 insert into words values (default, "Cetus", "Keto (lateinisch: Cetus) ist in der griechischen Mythologie der Name einer Meeresgöttin");
 insert into words values (default, "Credo", "Glaubensbekenntnis, Leitsatz; apostolisches Glaubensbekenntnis");
+insert into words values (default, "Dalit", "ist die gängige Bezeichnung der untersten Gruppen der hinduistischen Gesellschaft, die nach der religiös-dogmatischen Unterscheidung im Hinduismus zwischen rituell „reinen“ und „unreinen“ Gesellschaftsgruppen innerhalb des indischen Kastensystems als „Unberührbare“ und „Kastenlose“ gelten");
+insert into words values (default, "Demut", "tiefe Bescheidenheit und Anspruchslosigkeit, Bereitschaft zum Dienen, Ergebenheit");
+insert into words values (default, "Dogma", "verbindlich anzunehmender Glaubenssatz");
 
 

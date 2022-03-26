@@ -5,6 +5,7 @@ insert into words values (default, "Blues", "durch den typischen Einsatz sogenan
 insert into words values (default, "Cello", "Streichinstrument, das eine Oktave höher als der Kontrabass gestimmt ist und beim Spiel auf dem Fußboden aufgesetzt wird");
 insert into words values (default, "Combo", "kleine Besetzung in der Jazzmusik mit fünf oder sechs Instrumenten; Band, Musikgruppe");
 insert into words values (default, "Corno", "Horn, Blasinstrument");
+insert into words values (default, "dolce", "in der Musik: süß, lieblich, sanft");
 
 
 

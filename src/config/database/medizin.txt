@@ -13,6 +13,10 @@ insert into words values (default, "Bruch", "das Brechen, Zerbrechen; sich die K
 insert into words values (default, "Brust", "Vorderteil des menschlichen, tierischen Körpers zwischen Hals und Magengrube; milchgebendes, paariges Organ des weiblichen Oberkörpers von halbkugeliger Form");
 insert into words values (default, "Bulla", "verschiedene knöcherne, blasenartige Strukturen");
 insert into words values (default, "Chemo, "Chemotherapie, Behandlung von Infektionskrankheiten mit chemischen Mitteln");
+insert into words values (default, "debil", "leicht geistig behindert, intelligenzgemindert, kognitiv beeinträchtigt, mental retardiert");
+insert into words values (default, "Dekon", "Dekontamination, Dekontaminierung, Dekon (Abkürzung), Deko (Abkürzung, österr.), Entseuchung");
+insert into words values (default, "Delir", "eine akute, aber rückbildungsfähige Bewusstseinsstörung, die unter anderem durch zeitliche und räumliche Desorientiertheit, Verwirrtheit und Halluzinationen gekennzeichnet ist");
+insert into words values (default, "Depot", "Ablagerung von Nährstoffen im Körper");
 
 
 
