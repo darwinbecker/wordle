@@ -5,13 +5,15 @@ import { Grid } from '../grid/root';
 import { checkstatus, StatusType } from '../wordStatus';
 import { isInDictionary, DICTIONARY } from '../../config/dictionary';
 import { WORD_OF_THE_DAY, getRandomWord } from '../../config/wordlist';
-
+import confetti from 'canvas-confetti'
 
 export const Main: React.FC = () => {
     // const happyPress = useKeyDown("h");
     // const sadPress = useKeyDown("s");
     // const robotPress = useKeyDown("r");
     // const foxPress = useKeyDown("f");
+    const [solution, setSolution] = useState<string>("");
+
     const [guessedWord, setGuessedWord] = useState<string>("");
     const [guessedWords, setGuessedWords] = useState<string[]>([]);
 
@@ -67,6 +69,7 @@ export const Main: React.FC = () => {
     const handleSubmit = () => {
         console.log("Submitted:")
         console.log(guessedWord)
+        console.log(solution)
 
         if (guessedWords.length < MAX_GUESSES) {
             // TODO check if guessWord is in dictionary
@@ -79,11 +82,14 @@ export const Main: React.FC = () => {
             setRowIndex(rowIndex + 1);
             setColumnIndex(0);
             setGuessedWord("");
-            const status = checkstatus(guessedWord, "WORDS");
+            const status = checkstatus(guessedWord, solution);
             setWordStatuses([...wordStatuses, status]);
 
             if (!status.includes('semi') && !status.includes('wrong')) {
                 setYouWin(true);
+                // TODO display win screen with button loadNewGame();
+                won();
+                //loadNewGame();
             }
 
             // last guess
@@ -97,13 +103,41 @@ export const Main: React.FC = () => {
         }
     }
 
+    const won = () => {
+        const canvas = document.getElementById('confetti-canvas') as HTMLCanvasElement;
+
+        var myConfetti = confetti.create(canvas, {
+            resize: true,
+            useWorker: true
+        });
+        myConfetti({
+            particleCount: 200,
+            spread: 50
+            // any other options from the global
+            // confetti function
+        });
+    }
+
+    const loadNewGame = () => {
+        setGuessedWords([]);
+        setRowIndex(0);
+        setColumnIndex(0);
+        setGuessedWord("");
+        setWordStatuses([]);
+        setYouWin(false);
+        setYouLose(false);
+        setSolution(getRandomWord());
+    }
+
 
     useEffect(() => {
-        WORD_OF_THE_DAY();
+        // WORD_OF_THE_DAY();
+        if (!solution) {
+            setSolution(getRandomWord());
+        }
         if (youWin || youLose) return;
         const listener = (event: globalThis.KeyboardEvent): any => {
             if (event.code === 'Enter') {
-                getRandomWord();
                 if (guessedWord.length == 5) {
                     handleSubmit()
                 }
@@ -131,6 +165,7 @@ export const Main: React.FC = () => {
     return (
         <>
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
+            <canvas id="confetti-canvas"></canvas>
         </>
     );
 }
