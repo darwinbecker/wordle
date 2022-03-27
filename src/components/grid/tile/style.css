@@ -4,17 +4,17 @@
     margin: 2px;
     font-size: 1.8rem;
     line-height: 4rem;
-    border: 2px solid gray;
+    border: 2px solid black;
     /* border: 2px solid rgb(0, 105, 105); */
     border-radius: 0.2rem;
 }
 
 .correct{
-    background-color: green;
+    background-color: #1a9f1a;
 }
 
 .semi{
-    background-color: orange;
+    background-color: #dba53d;
 }
 
 .wrong{
