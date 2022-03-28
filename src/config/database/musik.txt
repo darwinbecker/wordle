@@ -9,6 +9,7 @@ insert into words values (default, "dolce", "in der Musik: süß, lieblich, sanf
 insert into words values (default, "Drive", "durch die Spannung zwischen Beat und Off-Beat entstehende, vorantreibende Dynamik des Spiels mit scheinbarer Beschleunigung des Rhythmus");
 insert into words values (default, "Duett", "Komposition für zwei gleichberechtigte Singstimmen mit oder ohne Instrumentalbegleitung");
 insert into words values (default, "dumpf", "gedämpft, hohl, tief (klingend)");
+insert into words values (default, "Elvis", "Elvis Presley, (der) King of Rock'n Roll");
 
 
 

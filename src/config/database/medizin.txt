@@ -18,6 +18,9 @@ insert into words values (default, "Dekon", "Dekontamination, Dekontaminierung, 
 insert into words values (default, "Delir", "eine akute, aber rückbildungsfähige Bewusstseinsstörung, die unter anderem durch zeitliche und räumliche Desorientiertheit, Verwirrtheit und Halluzinationen gekennzeichnet ist");
 insert into words values (default, "Depot", "Ablagerung von Nährstoffen im Körper");
 insert into words values (default, "Dosis", "genau abgemessene (kleine) Menge");
+insert into words values (default, "Eisen", "Medizin, die Eisen enthält");
+insert into words values (default, "Eiter", "bei bakterieller Entzündung im Körper entstehendes gelbgrünliches Gemisch aus abgestorbenen Gewebeteilen, weißen Blutkörperchen und Bazillen");
+insert into words values (default, "Ekzem", "juckende, oft nässende Entzündung der Hautoberfläche");
 
 
 

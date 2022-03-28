@@ -15,6 +15,11 @@ insert into words values (default, "Chrom", "silberweiß glänzendes, zähes Sch
 insert into words values (default, "Codon", "drei aufeinander folgende Basen einer Nukleinsäure, die den Schlüssel für eine Aminosäure im Protein darstellen; Triplett, Basentriplett");
 insert into words values (default, "Crack", "zum Rauchen bestimmte Droge aus Kokainsalz und Natron");
 insert into words values (default, "Dunst", "durch Wasserdampf oder Verunreinigungen getrübte Atmosphäre; stark riechende, warme Luft, die oft als lästig und erstickend empfunden wird");
+insert into words values (default, "Edukt", "aus Rohstoffen abgeschiedener Stoff");
+insert into words values (default, "Eisen", "häufigstes und sehr wichtiges, in feuchter Luft rostendes, magnetisches Schwermetall von silberweißer Farbe, das hart und elastisch ist und zu Stahl weiterverarbeitet wird");
+insert into words values (default, "eisig", "kalt wie Eis, sehr kalt oder völlig gefühllos und voll Ablehnung");
+insert into words values (default, "Enzym", "ein Stoff, der aus biologischen Riesenmolekülen besteht und als Katalysator eine chemische Reaktion beschleunigen kann; Ferment, Biokatalysator");
+insert into words values (default, "Ethin", "ein farbloses Gas mit der Summenformel C₂H₂. Es ist der einfachste Vertreter aus der homologen Reihe der Alkine. Ethin ist von großer industrieller Bedeutung. Es dient als Ausgangsverbindung bei der großtechnischen Herstellung wichtiger Grundchemikalien");
 
 
 

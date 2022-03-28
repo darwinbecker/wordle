@@ -9,5 +9,10 @@ insert into words values (default, "Credo", "Glaubensbekenntnis, Leitsatz; apost
 insert into words values (default, "Dalit", "ist die gängige Bezeichnung der untersten Gruppen der hinduistischen Gesellschaft, die nach der religiös-dogmatischen Unterscheidung im Hinduismus zwischen rituell „reinen“ und „unreinen“ Gesellschaftsgruppen innerhalb des indischen Kastensystems als „Unberührbare“ und „Kastenlose“ gelten");
 insert into words values (default, "Demut", "tiefe Bescheidenheit und Anspruchslosigkeit, Bereitschaft zum Dienen, Ergebenheit");
 insert into words values (default, "Dogma", "verbindlich anzunehmender Glaubenssatz");
+insert into words values (default, "Engel", "von Gott erschaffenes Geistwesen, das in Menschengestalt und mit Flügeln versehen als Bote zwischen Gott und den Menschen wirkt");
+insert into words values (default, "Essay", "kürzere, sorgfältig formulierte, gemeinverständliche Abhandlung über eine Frage des geistigen Lebens");
+insert into words values (default, "Ethik", "philosophische Lehre vom sittlichen Wollen und Handeln des Menschen");
+insert into words values (default, "Ethos", "sittliche Gesamthaltung des Menschen, die die Grundlage seines Wollens und Handelns bildet");
+
 
 

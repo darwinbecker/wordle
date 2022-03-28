@@ -5,6 +5,9 @@ insert into words values (default, "Berge", "große, aus dem Gelände herausrage
 insert into words values (default, "Biwak", "Feldlager, behelfsmäßiges Nachtlager im Freien von Truppen, von Bergsteigern im Hochgebirge");
 insert into words values (default, "Bogen", "gewölbter Bauteil über einer Maueröffnung");
 insert into words values (default, "Bucht", "ins Land hineinragender Teil eines Meeres oder Binnengewässers");
+insert into words values (default, "eckig", "mit Ecken, nicht rund, kantig");
+insert into words values (default, "Erker", "geschlossener Vorbau mit Fenstern an der Fassade oder Ecke eines Hauses");
+insert into words values (default, "Etage", "Stockwerk, Geschoss, Flur");
 
 
 

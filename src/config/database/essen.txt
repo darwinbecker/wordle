@@ -23,6 +23,12 @@ insert into words values (default, "Drink", "alkoholisches Mischgetränk");
 insert into words values (default, "Drohn", "Drohne, fachsprachlich auch der Drohn, ist das männliche Tier bei Wildbienen, Honigbienen und Wespen. Diese staatenbildenden Arten aus der Ordnung der Hautflügler besitzen drei unterschiedliche Morphen: Königin, Arbeiterin und Drohne");
 insert into words values (default, "Durst", "starkes Bedürfnis zu trinken");
 insert into words values (default, "Durum", "Hartweizen, auch Durum, Durumweizen oder Glasweizen genannt, ist nach Weichweizen die wirtschaftlich bedeutendste Weizen-Art");
+insert into words values (default, "Eisen", "Eisen zählt zu den Spurenelementen. Es ist an vielen Prozessen im menschlichen Organismus beteiligt, u.a. am Sauerstofftransport als Bestandteil des roten Blutfarbstoffes (Hämoglobin) und an der Speicherung von Sauerstoff in der Muskulatur");
+insert into words values (default, "Erbse", "artenreiche Gemüsepflanze aus der Familie der Schmetterlingsblütler mit paarigen, in Ranken auslaufenden Blättern, deren kugelförmige, in Schoten sitzende Samen als Nahrungsmittel verwendet werden");
+insert into words values (default, "Ernte", "die reifen Früchte der Felder und Gärten, die eingesammelt und eingebracht werden, das Ernten");
+insert into words values (default, "essen", "etwas (meist feste Nahrung) zu sich nehmen, speisen, verkosten");
+insert into words values (default, "Essig", "flüssiges, saures Würzmittel und Frischhaltemittel");
+
 
 
 

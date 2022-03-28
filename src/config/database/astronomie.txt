@@ -6,5 +6,6 @@ insert into words values (default, "Aries", "das Sternbild Widder");
 insert into words values (default, "Bolid", "großer, besonders heller Meteor, Feuerball, Feuerkugel");
 insert into words values (default, "Ceres", " ein Zwergplanet, welcher im Asteroidengürtel oder Hauptgürtel liegt, bei den vielen kleinen Asteroiden, die zwischen Mars und Jupiter um die Sonne kreisen");
 insert into words values (default, "Datum", "dem Kalender entsprechende Angabe des Tages mit Nennung des Monats (und des Jahres), bestimmter Tag oder Zeitpunkt");
+insert into words values (default, "enorm", "von außergewöhnlich großem Ausmaß");
 
 

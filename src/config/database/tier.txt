@@ -13,5 +13,14 @@ insert into words values (default, "Bulle", "geschlechtsreifes Männchen des Rin
 insert into words values (default, "Coypu", "Nutria, auch Biberratte oder seltener Sumpfbiber, Schweifbiber, Schweifratte oder Coypu genannt, ist eine aus Südamerika stammende und in Mitteleuropa angesiedelte Nagetierart");
 insert into words values (default, "Dachs", "gedrungenes, der Familie der Marder angehörendes Säugetier, das einen spitzen, weißen Kopf mit schwarzen Seitenstreifen, silbergraues Fell und starke, lange Krallen hat und in seinem Bau eine durch kurze Ausflüge unterbrochene Winterruhe hält");
 insert into words values (default, "Dohle", "kleiner, schwarzer Rabenvogel mit grauem Nacken, der gern in Türmen, Ruinen, Baumhöhlen brütet und in Deutschland unter Naturschutz steht");
+insert into words values (default, "Echse", "in vielen Arten auftretendes, meist Eier legendes Kriechtier, dessen Haut aus Hornschuppen besteht");
+insert into words values (default, "Erpel", "männliche Ente, Enterich");
+insert into words values (default, "Fabel", "kurze, lehrhafte Tiergeschichte, die sittliche Wahrheiten oder allgemein-menschliche Erfahrungen durch analoge Beispiele aus der Tierwelt veranschaulicht");
+insert into words values (default, "Faehe", "Weibchen des zum Raubwild gehörenden Niederwildes");
+insert into words values (default, "Fahne", "langbehaarter Schwanz des Eichhörnchens und langhaariger Hunde");
+insert into words values (default, "Falke", "weltweit verbreiteter, oft zur Beizjagd abgerichteter Greifvogel mit kleinem Kopf, auffallend großen Augen, einem hakenförmig nach unten gekrümmten Schnabel und langen, spitzen Flügeln");
+
+
+
 
 

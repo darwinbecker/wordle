@@ -13,6 +13,9 @@ insert into words values (default, "Coder", "Programmierer; Person, die Programm
 insert into words values (default, "Crash", "durch einen Funktionsfehler verursachter, oft mit dem Verlust von Daten verbundener Absturz, Eintritt der Funktionsunfähigkeit eines Computers, eines Computerbauteils oder eines Computerprogramms");
 insert into words values (default, "Datei", "Akte, unter einem gemeinsamen Namen auf einem Datenträger gespeicherte und zugreifbare Menge von Daten");
 insert into words values (default, "Daten", "(durch Aufzeichnungen, Beobachtungen, Messungen, statistische Verfahren o. Ä. gewonnene) Informationen");
+insert into words values (default, "Email", "elektronische briefähnliche Nachricht, die über Computernetzwerke verschickt wird");
+insert into words values (default, "Emoji", "Emoticon (Zeichenfolge aus Satzzeichen, Ziffern und Buchstaben, die einen Gesichtsausdruck darstellt und mit der die Gefühlslage des Schreibenden verdeutlicht oder eine Äußerung kommentiert wird) oder andere kleine Grafik, die eine elektronische Nachricht oder Äußerung kommentiert; Smiley ");
+insert into words values (default, "Enter", "Taste auf der Tastatur eines Computers, auf die man drückt, um eine Eingabe abzuschicken oder in einem Editor eine neue Zeile anzufangen");
 
 
 

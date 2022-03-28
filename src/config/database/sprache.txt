@@ -49,5 +49,23 @@ insert into words values (default, "Doyen", "Rangältester oder Dienstältester 
 insert into words values (default, "drapp", "österreichisch: sandfarben, cremefarben, eierschalenfarben, gelblich weiß");
 insert into words values (default, "Dukat", "Dukat oder Dukaten ist eine Goldmünze, die in ganz Europa einschließlich der Länder rund um das Mittelmeer bis zum Anfang des 20. Jahrhunderts umlief");
 insert into words values (default, "Dusel", "unverdientes Glück");
+insert into words values (default, "Edikt", "öffentlicher amtlicher Erlass eines Landesherren");
+insert into words values (default, "Eidam", "veraltete Bezeichnung für: Schwiegersohn");
+insert into words values (default, "Eklat", "(öffentlich ausgetragener) aufsehenerregender Vorfall, spektakulärer Streit, Skandal");
+insert into words values (default, "ekrue", "ungebleicht, naturfarben");
+insert into words values (default, "Eleve", "Lehrling, besonders in der Landwirtschaft und im Forstwesen, Schüler");
+insert into words values (default, "Eloge", "Lobeserhebung, Kompliment, Lobrede");
+insert into words values (default, "empor", "nach oben, in die Höhe, aufwärts");
+insert into words values (default, "emsig", "unausgesetzt fleißig, ununterbrochen tätig");
+insert into words values (default, "Ennui", "Langeweile, Gelangweiltsein; Gefühl des Überdrusses (an einer Sache, einem Zustand oder dem Dasein)");
+insert into words values (default, "Ersti", "Erstsemester, Studierende Person im ersten Semester");
+insert into words values (default, "Essay", "kürzere, sorgfältig formulierte, gemeinverständliche Abhandlung über eine Frage des geistigen Lebens");
+insert into words values (default, "Ethos", "sittliche Gesamthaltung des Menschen, die die Grundlage seines Wollens und Handelns bildet");
+insert into words values (default, "Eumel", "ist umgangssprachlich der Begriff für etwas Sonderbares, eine Person oder eine Sache. Oft wird darunter ein unsympathischer Mensch, ein Idiot oder ein unförmiger Gegenstand verstanden");
+insert into words values (default, "Expat", "Expatriate, kurz Expat, bezeichnet häufig eine Fach- oder Führungskraft, die von einer international tätigen Organisation, bei der sie beschäftigt ist, im Rahmen einer Auslandsentsendung vorübergehend an eine ausländische Zweigstelle entsandt wird");
+insert into words values (default, "faken", "gezielt (vor)täuschen, die Unwahrheit verbreiten, simulieren; fälschen, ein Imitat, Plagiat von etwas anfertigen");
+
+
+
 
 

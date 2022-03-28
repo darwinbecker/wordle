@@ -5,6 +5,7 @@ insert into words values (default, "Busse", "Sühne für geringfügige Rechtsver
 insert into words values (default, "Causa", "Grund, Ursache (eines Schadens, einer Vermögensänderung usw.)");
 insert into words values (default, "Claim", "Rechtsanspruch");
 insert into words values (default, "dolos", "arglistig, vorsätzlich, aus böser Absicht hervorgehend");
+insert into words values (default, "exlex", "recht- und gesetzlos, vogelfrei, geächtet");
 
 
 

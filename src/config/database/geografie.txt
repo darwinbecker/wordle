@@ -35,7 +35,10 @@ insert into words values (default, "Dokdo", "Liancourt-Felsen (Dokdo) sind eine 
 insert into words values (default, "Donau", "Fluss in Europa");
 insert into words values (default, "Duene", "Hügel, der an Küsten und in Trockengebieten vom Wind aus Flugsand zusammengeweht wird");
 insert into words values (default, "ebnen", "etwas eben, gleichmäßig flach und glatt machen");
-
+insert into words values (default, "Edukt", "Ausgangsgestein bei der Metamorphose");
+insert into words values (default, "ehern", "belastbar, bestandskräftig, fest, haltbar, kräftig, robust; aus Erz bestehend, erzen");
+insert into words values (default, "eisig", "kalt wie Eis, sehr kalt oder völlig gefühllos und voll Ablehnung");
+insert into words values (default, "erdig", "aus Erde bestehend, mit Erde beschmutzt, nach Erde riechend, schmeckend");
 
 
 

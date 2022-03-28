@@ -13,6 +13,11 @@ insert into words values (default, "dopen", "aus dem Sport: jemanden (unerlaubt)
 insert into words values (default, "Dress", "Sportkleidung, Sporthemd, Trikot");
 insert into words values (default, "Drive", "weiter Schlag; Treibschlag");
 insert into words values (default, "Duell", "Wettkampf zwischen zwei Sportlern, Mannschaften");
+insert into words values (default, "Effet", "einer (Billard-)‍Kugel oder einem Ball beim Stoßen, Schlagen, Treten o. Ä. durch seitliches Anschneiden verliehener Drall");
+insert into words values (default, "einer", "einsitziges Boot für Wassersportler");
+insert into words values (default, "Eisen", "häufigstes und sehr wichtiges, in feuchter Luft rostendes, magnetisches Schwermetall von silberweißer Farbe, das hart und elastisch ist und zu Stahl weiterverarbeitet wird oder Spurenelementen, welches an vielen Prozessen im menschlichen Organismus beteiligt, u.a. am Sauerstofftransport als Bestandteil des roten Blutfarbstoffes (Hämoglobin) und an der Speicherung von Sauerstoff in der Muskulatur");
+insert into words values (default, "eitel", "darauf bedacht, von anderen (wegen seines Äußeren) beachtet und bewundert zu werden, von seinen (vermeintlichen) Vorzügen allzu überzeugt");
+insert into words values (default, "Elfer", "Strafstoß beim Fußball, der vom Elfmeterpunkt aus ausgeführt wird");
 
 
 
