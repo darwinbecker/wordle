@@ -73,10 +73,10 @@ export const Main: React.FC = () => {
 
         if (guessedWords.length < MAX_GUESSES) {
             // TODO check if guessWord is in dictionary
-            if (!isInDictionary(guessedWord)) {
-                console.log("WORD IS NOT IN DICTIONARY");
-                return;
-            }
+            // if (!isInDictionary(guessedWord)) {
+            //     console.log("WORD IS NOT IN DICTIONARY");
+            //     return;
+            // }
 
             setGuessedWords([...guessedWords, guessedWord]);
             setRowIndex(rowIndex + 1);
@@ -133,7 +133,8 @@ export const Main: React.FC = () => {
     useEffect(() => {
         // WORD_OF_THE_DAY();
         if (!solution) {
-            setSolution(getRandomWord());
+            // setSolution(getRandomWord());
+            setSolution("STAKK");
         }
         if (youWin || youLose) return;
         const listener = (event: globalThis.KeyboardEvent): any => {

@@ -16,5 +16,14 @@ export const checkstatus = (guess: string, solution: string): StatusType[] => {
         }
     });
 
+    guessChars.map((char, index) => {
+        if (status[index] == 'semi') {
+            if (status[solutionChars.indexOf(char)] == 'correct') {
+                status[index] = 'wrong';
+            }
+        }
+    });
+
+
     return status;
 }
