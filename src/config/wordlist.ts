@@ -5,14 +5,14 @@ export const WORD_OF_THE_DAY = () => {
     const msInDay = 86400000;
     const index = Math.floor((now - epochMs) / msInDay);
     const nextday = (index + 1) * msInDay + epochMs;
-    console.log("---------");
-    console.log(epochMs);
-    console.log(index);
-    console.log(WORDLIST.length);
-    console.log(index % WORDLIST.length);
-    console.log(WORDLIST[index % WORDLIST.length].toUpperCase());
-    console.log(nextday);
-    console.log();
+    // console.log("---------");
+    // console.log(epochMs);
+    // console.log(index);
+    // console.log(WORDLIST.length);
+    // console.log(index % WORDLIST.length);
+    // console.log(WORDLIST[index % WORDLIST.length].toUpperCase());
+    // console.log(nextday);
+    // console.log();
 
     return {
         solution: WORDLIST[index % WORDLIST.length].toUpperCase(),

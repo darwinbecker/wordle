@@ -1,14 +1,11 @@
-.table-content{
-    margin: auto;
-    width: 500px;
-    height: 200px;
-    border: 2px solid grey;
-    border-radius: 1rem;
+.mode-select{
+    display: block;
+    margin: 10px auto auto auto;
 }
 
 #confetti-canvas{
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 0;
     right: 0;
     /* bottom: 0; */
@@ -16,5 +13,10 @@
     /* margin-right: auto; */
     margin: auto;
     width: 25rem;
-    height: 80%;
+    height: 27rem;
+}
+
+.next-word{
+    display: block;
+    margin: 10px auto;
 }

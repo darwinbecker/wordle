@@ -19,7 +19,6 @@ export const checkstatus = (guess: string, solution: string): StatusType[] => {
     guessChars.map((char, index) => {
         if (status[index] == 'semi') {
             const charCount = solution.split(char);
-            console.log("----------start----------")
 
             let guessedCorrect = false;
             let guessedCorrect2 = false;
