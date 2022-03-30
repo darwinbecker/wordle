@@ -34,7 +34,15 @@
     height: 27rem;
 }
 
-.next-word{
+.gameover-feedback .next-word{
     display: block;
     margin: 10px auto;
+}
+
+.gameover-feedback h3{
+    margin: 5px 0;
+}
+
+.gameover-feedback .solution-word{
+    font-weight: bold;
 }
