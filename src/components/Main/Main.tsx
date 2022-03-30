@@ -152,10 +152,12 @@ export const Main: React.FC = () => {
             <canvas id="confetti-canvas"></canvas>
 
 
-            {mode === 'TR' && youWin && (
-                <>
-                    <button className="next-word" onClick={getNextWord}>next word</button>
-                </>
+            {mode === 'TR' && (youWin || youLose) && (
+                <div className="gameover-feedback">
+                    <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
+                    <h3>gesuchtes Wort war:</h3>
+                    <div className="solution-word">{solution}</div>
+                </div>
             )}
 
 
