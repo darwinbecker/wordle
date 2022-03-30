@@ -1,5 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { MAX_GUESSES } from "../../../config/settings";
 import { WORD_OF_THE_DAY } from "../../../config/wordlist";
+import { loadGameStateFromLocalStorage } from "../../localStorage";
+import { StatusType } from "../../wordStatus";
 // import Popup from 'reactjs-popup';
 import { Popup } from "../categories/Popup";
 
@@ -14,7 +17,13 @@ type ModeProps = {
     handleMode: (event: ChangeEvent<HTMLSelectElement>) => void;
     currentMode: ModeType;
     resetGame: () => void;
+    solution: string;
     setSolution: (solution: string) => void;
+    guessedWords: string[];
+    setGuessedWords: (guessedWords: string[]) => void;
+    setWordStatuses: (wordStatuses: StatusType[][]) => void;
+    setYouWin: (youWin: boolean) => void;
+    setYouLose: (youLose: boolean) => void;
     getNextWord: () => void;
 }
 
@@ -27,13 +36,42 @@ export const Mode: React.FC<ModeProps> = (props: ModeProps) => {
         if (props.currentMode == 'WOTD') {
             props.resetGame();
             props.setSolution(WORD_OF_THE_DAY().solution);
+
+            let data: string[] = [];
+            let wordStatuses: StatusType[][] = []
+            const loaded = loadGameStateFromLocalStorage();
+            console.log("loaded", loaded);
+            if (loaded) {
+                if (loaded.solution !== WORD_OF_THE_DAY().solution) {
+                    data = [];
+                } else {
+                    const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
+                    if (gameWasWon) {
+                        props.setYouWin(true);
+                    }
+
+                    if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
+                        props.setYouLose(true);
+                        //     showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+                        //     persist: true,
+                        //   })
+                    }
+                    data = loaded.guessedWords;
+                    wordStatuses = loaded.wordStatuses;
+                }
+            }
+
+            props.setGuessedWords(data);
+            props.setWordStatuses(wordStatuses);
         }
         else if (props.currentMode == 'TR') {
             props.getNextWord();
         }
         else if (props.currentMode == 'C') {
+            props.resetGame();
             setShowPopup(true);
         } else if (props.currentMode == 'R') {
+            props.resetGame();
             setShowPopup(true);
             console.log("load Rapid mode");
         }

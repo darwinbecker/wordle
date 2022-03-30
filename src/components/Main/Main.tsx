@@ -4,26 +4,46 @@ import { MAX_GUESSES } from '../../config/settings';
 import { Grid } from '../grid/root';
 import { checkstatus, StatusType } from '../wordStatus';
 import { isInDictionary, DICTIONARY } from '../../config/dictionary';
-import { WORD_OF_THE_DAY, getRandomWord } from '../../config/wordlist';
+import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
 import { Win } from '../gameHandler';
 import { Mode } from "../settings/mode";
 import { ModeType } from "../settings/mode/Mode";
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from "../localStorage";
 
 export const Main: React.FC = () => {
     const [mode, setMode] = useState<ModeType>("WOTD");
 
-    const [solution, setSolution] = useState<string>("");
+    const [youWin, setYouWin] = useState<boolean>(false);
+    const [youLose, setYouLose] = useState<boolean>(false);
+
+    const [solution, setSolution] = useState<string>(() => {
+        return WORD_OF_THE_DAY().solution;
+    });
     const [guessedWord, setGuessedWord] = useState<string>("");
+    // const [guessedWords, setGuessedWords] = useState<string[]>([]);
+
     const [guessedWords, setGuessedWords] = useState<string[]>([]);
+    // const [guessedWords, setGuessedWords] = useState<string[]>(() => {
+    //     const loaded = loadGameStateFromLocalStorage();
+    //     if (loaded?.solution !== WORD_OF_THE_DAY().solution) {
+    //         return [];
+    //     }
+    //     const gameWasWon = loaded.guessedWords.includes(solution);
+    //     if (gameWasWon) {
+    //         setYouWin(true);
+    //     }
+    //     if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
+    //         setYouLose(true);
+    //         //   showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+    //         //     persist: true,
+    //         //   })
+    //     }
+    //     return loaded.guessedWords;
+    // });
 
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
-
-    // const [wordStatus, setWordStatus] = useState<StatusType[]>([]);
     const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
-
-    const [youWin, setYouWin] = useState<boolean>(false);
-    const [youLose, setYouLose] = useState<boolean>(false);
 
     const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon
@@ -106,8 +126,13 @@ export const Main: React.FC = () => {
     }
 
     useEffect(() => {
-        // WORD_OF_THE_DAY();
+        if (mode === "WOTD") {
+            const solution = WORD_OF_THE_DAY().solution;
+            saveGameStateToLocalStorage({ guessedWords, wordStatuses, solution });
+        }
+    }, [guessedWords, wordStatuses])
 
+    useEffect(() => {
         if (youWin || youLose) return;
 
         const listener = (event: globalThis.KeyboardEvent): any => {
@@ -124,9 +149,9 @@ export const Main: React.FC = () => {
                 }
             }
         }
-        window.addEventListener('keyup', listener)
+        window.addEventListener('keyup', listener);
         return () => {
-            window.removeEventListener('keyup', listener)
+            window.removeEventListener('keyup', listener);
         }
 
     }, [handleSubmit, handleRemove, handleChange])
@@ -146,7 +171,7 @@ export const Main: React.FC = () => {
 
     return (
         <>
-            <Mode handleMode={handleMode} currentMode={mode} resetGame={resetGame} setSolution={setSolution} getNextWord={getNextWord}></Mode>
+            <Mode handleMode={handleMode} currentMode={mode} resetGame={resetGame} solution={solution} setSolution={setSolution} guessedWords={guessedWords} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} setYouWin={setYouWin} setYouLose={setYouLose} getNextWord={getNextWord}></Mode>
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
             <canvas id="confetti-canvas"></canvas>
