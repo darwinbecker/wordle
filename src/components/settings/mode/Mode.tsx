@@ -49,10 +49,10 @@ export const Mode: React.FC<ModeProps> = (props: ModeProps) => {
         <div className="Mode">
             <div className="mode-select-wrapper">
                 <select className="mode-select" onChange={props.handleMode}>
-                    <option value="WOTD">Word of the day</option>
+                    <option value="WOTD">Wort des Tages</option>
                     <option value="TR">Training</option>
-                    <option value="C">Category</option>
-                    <option value="R">Rapid</option>
+                    <option value="C">Kategorie</option>
+                    <option value="R">Blitz</option>
                 </select>
             </div>
 
