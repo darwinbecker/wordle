@@ -7,6 +7,7 @@
     border: 2px solid black;
     /* border: 2px solid rgb(0, 105, 105); */
     border-radius: 0.2rem;
+    background: white;
 }
 
 .correct{
