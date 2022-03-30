@@ -958,7 +958,6 @@ export const DICTIONARY = [
     "ILEUM",
     "ILEUS",
     "ILTIS",
-    "IM NU",
     "IMAGE",
     "IMBER",
     "IMBUS",

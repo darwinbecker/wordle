@@ -989,7 +989,6 @@ export const WORDLIST = [
     "ILEUM",
     "ILEUS",
     "ILTIS",
-    "IM NU",
     "IMAGE",
     "IMBER",
     "IMBUS",
