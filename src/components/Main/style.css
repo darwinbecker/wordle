@@ -1,11 +1,29 @@
+.mode-select-wrapper{
+    margin-bottom: 10px;
+    /* max-width: 20%; */
+    /* margin: auto; */
+}
+
 .mode-select{
     display: block;
     margin: 10px auto auto auto;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    border-radius: 0.2rem;
+    text-align: center;
+    padding: 0.2rem;
+    width: 30%;
+    cursor: pointer;
 }
+
+/* .mode-select > option:hover{
+    box-shadow: 0 0 10px 100px #76a818 inset;
+    cursor: pointer;
+} */
 
 #confetti-canvas{
     position: absolute;
-    top: 50px;
+    top: 80px;
     left: 0;
     right: 0;
     /* bottom: 0; */

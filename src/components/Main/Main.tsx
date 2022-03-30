@@ -6,12 +6,8 @@ import { checkstatus, StatusType } from '../wordStatus';
 import { isInDictionary, DICTIONARY } from '../../config/dictionary';
 import { WORD_OF_THE_DAY, getRandomWord } from '../../config/wordlist';
 import { Win } from '../gameHandler';
-import { Mode } from "../mode";
-
-// WOTD = Word Of The Day
-// TR = Training
-// R = Rapid
-export type ModeType = 'WOTD' | 'TR' | 'R';
+import { Mode } from "../settings/mode";
+import { ModeType } from "../settings/mode/Mode";
 
 export const Main: React.FC = () => {
     const [mode, setMode] = useState<ModeType>("WOTD");
@@ -136,19 +132,21 @@ export const Main: React.FC = () => {
     }, [handleSubmit, handleRemove, handleChange])
 
 
-    useEffect(() => {
-        if (mode == 'WOTD') {
-            resetGame();
-            setSolution(WORD_OF_THE_DAY().solution);
-        }
-        else if (mode == 'TR') {
-            getNextWord();
-        }
-    }, [mode])
+    // useEffect(() => {
+    //     if (mode == 'WOTD') {
+    //         resetGame();
+    //         setSolution(WORD_OF_THE_DAY().solution);
+    //     }
+    //     else if (mode == 'TR') {
+    //         getNextWord();
+    //     }
+    //     else if (mode == 'C') {
+    //     }
+    // }, [mode])
 
     return (
         <>
-            <Mode handleMode={handleMode}></Mode>
+            <Mode handleMode={handleMode} currentMode={mode} resetGame={resetGame} setSolution={setSolution} getNextWord={getNextWord}></Mode>
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
             <canvas id="confetti-canvas"></canvas>
