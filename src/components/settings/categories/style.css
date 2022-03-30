@@ -15,11 +15,17 @@
     left: 25%;
     right: 25%;
     top: 10%;
-    bottom: 20%;
     margin: auto;
     background-color: rgba(0,0,0, 0.75);
     border-radius: 0.4rem;
     color: white;
+}
+
+.popup-content h1{
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
 .categories-list{
@@ -30,16 +36,28 @@
     padding: 10px 0;
     width: 80%;
     margin: auto;
+    margin-bottom: 20px;
 }
 
 
 .categories-list button{
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     line-height: 2rem;
     background-color: white;
     border: none;
     border-radius: 0.15rem;
     cursor: pointer;
     padding: 10px;
+    margin: 10px;
 }
 
+.categories-list button img{
+    width: 35px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+.categories-list button:last-child{
+    /* margin-bottom: 20px; */
+}
