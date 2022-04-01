@@ -3,7 +3,7 @@
 @import url("./components/grid/root/style.css");
 @import url("./components/grid/row/style.css");
 @import url("./components/grid/tile/style.css");
-@import url("./components/settings/mode/style.css");
+@import url("./components/GameMode/style.css");
 @import url("./components/settings/categories/style.css");
 
 *{

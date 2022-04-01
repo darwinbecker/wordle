@@ -5,52 +5,58 @@ import { Grid } from '../grid/root';
 import { checkstatus, StatusType } from '../wordStatus';
 import { isInDictionary, DICTIONARY } from '../../config/dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
-import { WinService } from '../gameHandler';
-import { GameMode, GameModeType, GameModeService } from "../GameMode";
-import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, StoredGameState } from "../localStorage";
-import { displayConfetti } from "../gameHandler";
+import { WinService } from '.';
+import { GameMode, GameModeType } from "../GameMode";
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from "../localStorage";
+import { displayConfetti } from ".";
 
-export const Main: React.FC = () => {
-    const loaded: StoredGameState | null = loadGameStateFromLocalStorage();
+import { Subject } from 'rxjs';
 
+const subject = new Subject();
+
+export const InputService = {
+    // sendMessage: message => subject.next({ text: message }),
+    // clearMessages: () => subject.next(),
+    // onMessage: () => subject.asObservable()
+    setGuess: (guess: string) => subject.next(guess),
+    onGuess: () => subject.asObservable()
+};
+
+export const InputHandler = () => {
     const [mode, setMode] = useState<GameModeType>("WOTD");
-    // const [youWin, setYouWin] = useState<boolean>(false);
-    // const [youLose, setYouLose] = useState<boolean>(false);
-    const [youWin, setYouWin] = useState<boolean>(() => {
-        return loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
-    });
-    const [youLose, setYouLose] = useState<boolean>(() => {
-        return loaded?.guessedWords.length === MAX_GUESSES && !loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution)  ? true : false;
-    });
+
+    const [youWin, setYouWin] = useState<boolean>(false);
+    const [youLose, setYouLose] = useState<boolean>(false);
+
     const [solution, setSolution] = useState<string>(() => {
         return WORD_OF_THE_DAY().solution;
     });
+
     const [guessedWord, setGuessedWord] = useState<string>("");
     // const [guessedWords, setGuessedWords] = useState<string[]>([]);
-    const [guessedWords, setGuessedWords] = useState<string[]>(() => {
-        return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.guessedWords;
-    });
-    // const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
-    const [wordStatuses, setWordStatuses] = useState<StatusType[][]>(() => {
-        return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.wordStatuses;
-    });
+
+    const [guessedWords, setGuessedWords] = useState<string[]>([]);
+    // const [guessedWords, setGuessedWords] = useState<string[]>(() => {
+    //     const loaded = loadGameStateFromLocalStorage();
+    //     if (loaded?.solution !== WORD_OF_THE_DAY().solution) {
+    //         return [];
+    //     }
+    //     const gameWasWon = loaded.guessedWords.includes(solution);
+    //     if (gameWasWon) {
+    //         setYouWin(true);
+    //     }
+    //     if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
+    //         setYouLose(true);
+    //         //   showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+    //         //     persist: true,
+    //         //   })
+    //     }
+    //     return loaded.guessedWords;
+    // });
+
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
-
-
-    
-    // const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
-    // if (gameWasWon) {
-    //     WinService.setWin(true);
-    // }
-    // if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
-    //     WinService.setWin(false);
-    //     //   showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
-    //     //     persist: true,
-    //     //   })
-    // }
-
-
+    const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
 
     const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon
@@ -109,10 +115,10 @@ export const Main: React.FC = () => {
         }
     }
 
-    const getNextWord = () => {
-        resetGame();
-        setSolution(getRandomWord());
-    }
+    // const getNextWord = () => {
+    //     resetGame();
+    //     setSolution(getRandomWord());
+    // }
 
     const resetGame = () => {
         setGuessedWords([]);
@@ -133,19 +139,6 @@ export const Main: React.FC = () => {
     }, [guessedWords, wordStatuses]);
 
     useEffect(() => {
-        const subscription = GameModeService.onGameModeChange().subscribe(mode => {
-            console.log("changed mode to: " + mode);
-            setMode(mode as GameModeType);
-            // if(mode == "WOTD") {
-            //     setSolution(WORD_OF_THE_DAY().solution);
-            // }
-        });
-        return () => {
-            subscription.unsubscribe();
-        }
-    }, []);
-
-    useEffect(() => {
         const subscription = WinService.onWin().subscribe(win => {
             if (win) {
                 // win event
@@ -164,7 +157,7 @@ export const Main: React.FC = () => {
             subscription.unsubscribe();
         }
     }, []);
-
+    
     useEffect(() => {
         if (youWin || youLose) return;
 
@@ -186,42 +179,7 @@ export const Main: React.FC = () => {
             window.removeEventListener('keyup', listener);
         }
 
-    }, [handleSubmit, handleRemove, handleChange, youWin, youLose]);
+    }, [handleSubmit, handleRemove, handleChange]);
 
-    return (
-        <>
-            <GameMode resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord}></GameMode>
-
-            <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-            <canvas id="confetti-canvas"></canvas>
-
-
-            {mode === 'TR' && (youWin || youLose) && (
-                <div className="gameover-feedback">
-                    <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
-                    <h3>gesuchtes Wort war:</h3>
-                    <div className="solution-word">{solution}</div>
-                </div>
-            )}
-
-
-
-
-            {/* {mode === 'WOTD' && (
-                <>
-                    <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-                    <canvas id="confetti-canvas"></canvas>
-                </>
-            )}
-
-            {mode === 'TR' && (
-                <>
-                    <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-                    <canvas id="confetti-canvas"></canvas>
-                </>
-            )} */}
-
-
-        </>
-    );
+    
 }

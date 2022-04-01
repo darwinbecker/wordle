@@ -1,6 +1,6 @@
 import confetti from 'canvas-confetti';
 
-const displayConfetti = () => {
+export const displayConfetti = () => {
     // https://www.npmjs.com/package/canvas-confetti
     const canvas = document.getElementById('confetti-canvas') as HTMLCanvasElement;
     var myConfetti = confetti.create(canvas, {
@@ -17,8 +17,4 @@ const displayConfetti = () => {
             y: 0.8
         }
     });
-}
-
-export const Win = () => {
-    displayConfetti();
 }

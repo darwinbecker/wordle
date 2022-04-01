@@ -1,0 +1,29 @@
+.mode-nav-wrapper{
+    display: flex;
+    max-width: 25%;
+    margin: auto;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.mode-nav-wrapper > *{
+    flex: 1 auto;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding: 0.1rem;
+}
+
+.mode-select{
+    /* display: block; */
+    margin: auto;
+    border-radius: 0.2rem;
+    text-align: center;
+    width: 60%;
+    cursor: pointer;
+}
+
+/* .mode-select > option:hover{
+    box-shadow: 0 0 10px 100px #76a818 inset;
+    cursor: pointer;
+} */
+
