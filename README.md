@@ -34,7 +34,7 @@ Amount of words after cleanup: **~2500**
 cleanup means:
 - changing characters like: "ä, ö, ü, ß" to: "ae, oe, ue, ss"
 - removing special character like: ".", "-", "!", "?"
-- remobing words, which contains multiple words like: "zu je"
+- removing words, which contains multiple words like: "zu je"
 - removing abbreviations like: "ADOER" (Anstalt des öffentlichen Rechts), 
 - removing slang & english words that are uncommon: "AFAIK" (as far as i know)
 - removing names like: "Adele", "VW AG"
