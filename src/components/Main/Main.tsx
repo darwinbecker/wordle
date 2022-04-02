@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { MAX_WORD_LENGTH } from '../../config/settings';
-import { MAX_GUESSES } from '../../config/settings';
-import { Grid } from '../grid/root';
-import { checkstatus, StatusType } from '../wordStatus';
-import { isInDictionary, DICTIONARY } from '../../config/dictionary';
-import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
-import { WinService } from '../gameHandler';
+import { MAX_WORD_LENGTH, MAX_GUESSES } from '../../Config/Settings';
+import { Grid } from '../Grid/Root';
+import { checkstatus, WordStatusType } from '../WordStatus';
+import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
+import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
+import { WinService } from '../GameHandler';
 import { GameMode, GameModeType, GameModeService } from "../GameMode";
-import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, StoredGameState } from "../localStorage";
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, StoredGameState } from "../LocalStorage";
 import { Confetti } from "../Animations";
 
 export const Main: React.FC = () => {
@@ -31,7 +30,7 @@ export const Main: React.FC = () => {
         return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.guessedWords;
     });
     // const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
-    const [wordStatuses, setWordStatuses] = useState<StatusType[][]>(() => {
+    const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
         return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.wordStatuses;
     });
     const [rowIndex, setRowIndex] = useState<number>(0);
@@ -76,10 +75,10 @@ export const Main: React.FC = () => {
         if (guessedWord.length == 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                // if (!isInDictionary(guessedWord)) {
-                //     console.log("WORD IS NOT IN DICTIONARY");
-                //     return;
-                // }
+                if (!isInDictionary(guessedWord)) {
+                    console.log("WORD IS NOT IN DICTIONARY");
+                    return;
+                }
 
                 setGuessedWords([...guessedWords, guessedWord]);
                 setRowIndex(rowIndex + 1);

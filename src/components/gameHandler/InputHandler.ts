@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { MAX_WORD_LENGTH } from '../../config/settings';
-import { MAX_GUESSES } from '../../config/settings';
-import { Grid } from '../grid/root';
-import { checkstatus, StatusType } from '../wordStatus';
-import { isInDictionary, DICTIONARY } from '../../config/dictionary';
-import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
+import { MAX_WORD_LENGTH } from '../../Config/Settings';
+import { MAX_GUESSES } from '../../Config/Settings';
+import { Grid } from '../Grid/Root';
+import { checkstatus, WordStatusType } from '../WordStatus';
+import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
+import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
 import { WinService } from '.';
 import { GameMode, GameModeType } from "../GameMode";
-import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from "../localStorage";
+import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from "../LocalStorage";
 import { Confetti } from "../Animations";
 
 import { Subject } from 'rxjs';
@@ -56,7 +56,7 @@ export const InputHandler = () => {
 
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
-    const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
+    const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>([]);
 
     const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon

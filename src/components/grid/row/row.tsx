@@ -1,5 +1,5 @@
-import { Tile } from '../tile';
-import { MAX_WORD_LENGTH } from '../../../config/settings';
+import { Tile } from '../Tile';
+import { MAX_WORD_LENGTH } from '../../../Config/Settings';
 
 type RowProps = {
     // columnIndex: number;

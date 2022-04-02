@@ -1,6 +1,6 @@
-import { Row } from '../row';
-import { MAX_WORD_LENGTH } from '../../../config/settings';
-import { MAX_GUESSES } from '../../../config/settings';
+import { Row } from '../Row';
+import { MAX_WORD_LENGTH } from '../../../Config/Settings';
+import { MAX_GUESSES } from '../../../Config/Settings';
 
 type GridProps = {
     letter: string;
