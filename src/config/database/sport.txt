@@ -18,6 +18,9 @@ insert into words values (default, "einer", "einsitziges Boot für Wassersportle
 insert into words values (default, "Eisen", "häufigstes und sehr wichtiges, in feuchter Luft rostendes, magnetisches Schwermetall von silberweißer Farbe, das hart und elastisch ist und zu Stahl weiterverarbeitet wird oder Spurenelementen, welches an vielen Prozessen im menschlichen Organismus beteiligt, u.a. am Sauerstofftransport als Bestandteil des roten Blutfarbstoffes (Hämoglobin) und an der Speicherung von Sauerstoff in der Muskulatur");
 insert into words values (default, "eitel", "darauf bedacht, von anderen (wegen seines Äußeren) beachtet und bewundert zu werden, von seinen (vermeintlichen) Vorzügen allzu überzeugt");
 insert into words values (default, "Elfer", "Strafstoß beim Fußball, der vom Elfmeterpunkt aus ausgeführt wird");
+insert into words values (default, "Felge", "Teil des Rades, der die Bereifung aufnimmt und hält, Radkranz oder Umschwung am Reck aus dem Stütz, der wieder im Stütz endet");
+insert into words values (default, "Fight", "verbissen geführter Kampf (in einem sportlichen Wettkampf); harte Auseinandersetzung; Boxkampf");
+insert into words values (default, "Finte", "listiger Vorwand, Täuschung; Scheinangriff, der den Gegner über die wahren Absichten im Unklaren lassen soll");
 
 
 

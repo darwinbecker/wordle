@@ -28,6 +28,10 @@ insert into words values (default, "Erika", "Heidekraut, rotlilablühender Zwerg
 insert into words values (default, "Ernte", "die reifen Früchte der Felder und Gärten, die eingesammelt und eingebracht werden, das Ernten");
 insert into words values (default, "Esche", "Laubbaum mit gefiederten Blättern und geflügelten Früchten, der wertvolles Holz für Möbel, Werkzeugstiele und Sportgeräte liefert");
 insert into words values (default, "Esope", "zur Gattung der Pappeln gehörender Laubbaum, dessen Blätter durch die hochkantige Stellung des Blattstiels beim leisesten Luftzug ins Zittern geraten, Zitterpappel");
+insert into words values (default, "Flora", "die Pflanzenwelt innerhalb bestimmter Naturverhältnisse");
+insert into words values (default, "Forke", "große Gabel mit drei oder vier Zinken an einem langen Stiel für die Arbeit im Garten, im Stall o. Ä.");
+insert into words values (default, "Forle", "Die Kiefern, Föhren, Sjüren, Forlen oder Dählen bilden eine Pflanzengattung in der Familie der Kieferngewächse innerhalb der Nadelholzgewächse");
+insert into words values (default, "Forst", "bewirtschaftete Waldfläche");
 
 
 

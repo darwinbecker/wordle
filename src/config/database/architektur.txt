@@ -8,6 +8,10 @@ insert into words values (default, "Bucht", "ins Land hineinragender Teil eines 
 insert into words values (default, "eckig", "mit Ecken, nicht rund, kantig");
 insert into words values (default, "Erker", "geschlossener Vorbau mit Fenstern an der Fassade oder Ecke eines Hauses");
 insert into words values (default, "Etage", "Stockwerk, Geschoss, Flur");
+insert into words values (default, "Feste", "Festung, Burg, Bastion, Bollwerk");
+insert into words values (default, "Fiale", "schlankes, spitzes gotisches Türmchen");
+insert into words values (default, "First", "oberste Kante des Daches");
+insert into words values (default, "flach", "in der Breite ausgedehnt und ohne (größere) Erhebung, eben; niedrig, ohne größere Tiefe");
 
 
 

@@ -39,6 +39,15 @@ insert into words values (default, "Edukt", "Ausgangsgestein bei der Metamorphos
 insert into words values (default, "ehern", "belastbar, bestandskräftig, fest, haltbar, kräftig, robust; aus Erz bestehend, erzen");
 insert into words values (default, "eisig", "kalt wie Eis, sehr kalt oder völlig gefühllos und voll Ablehnung");
 insert into words values (default, "erdig", "aus Erde bestehend, mit Erde beschmutzt, nach Erde riechend, schmeckend");
+insert into words values (default, "Falte", "durch Faltung entstandene Bauform der Erdkruste");
+insert into words values (default, "First", "Gebirgskamm (Berner Oberland) in Kanton Bern, Schweiz");
+insert into words values (default, "Fjord", "langgestreckte, schmale, verästelte Meeresbucht, die tief in Gebirgsküsten einschneidet");
+insert into words values (default, "flach", "in der Breite ausgedehnt und ohne (größere) Erhebung, eben; niedrig, ohne größere Tiefe");
+insert into words values (default, "Floez", "meist annähernd horizontal gelagerte Schicht technisch nutzbarer Gesteine oder Minerale von großer Flächenausdehnung, besonders Kohle, Erze, Salze");
+insert into words values (default, "Fluid", "Flüssigkeit, flüssiges Mittel; zusammenfassende Bezeichnung für Flüssigkeiten, Gase und Plasmen");
+insert into words values (default, "Fluss", "größeres fließendes Gewässer des Festlandes");
+insert into words values (default, "Foehn", "beim Überströmen von Luft über ein Gebirge, Hochgebirge entstehender warmer, trockener Fallwind");
+insert into words values (default, "Foehr", "Insel in Schleswig-Holstein (nordfriesische Insel). Föhr ist die größte und bevölkerungsreichste deutsche Insel ohne Landverbindung");
 
 
 

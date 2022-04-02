@@ -7,4 +7,5 @@ insert into words values (default, "Bruch", "durch einen Strich getrennte Zahlen
 insert into words values (default, "Ebene", "unbegrenzte, in keinem ihrer Punkte gekrümmte Fläche");
 insert into words values (default, "Delta", "Das Differenzzeichen ∆ ist ein vom griechischen Großbuchstaben Delta abgeleitetes mathematisches Symbol");
 insert into words values (default, "eckig", "mit Ecken, nicht rund, kantig");
+insert into words values (default, "flach", "in der Breite ausgedehnt und ohne (größere) Erhebung, eben; niedrig, ohne größere Tiefe");
 

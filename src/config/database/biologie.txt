@@ -18,6 +18,13 @@ insert into words values (default, "Eiter", "bei bakterieller Entzündung im Kö
 insert into words values (default, "Ekzem", "juckende, oft nässende Entzündung der Hautoberfläche");
 insert into words values (default, "Enzym", "ein Stoff, der aus biologischen Riesenmolekülen besteht und als Katalysator eine chemische Reaktion beschleunigen kann; Ferment, Biokatalysator");
 insert into words values (default, "euter", "in der Leistengegend von Einhufern und Wiederkäuern sitzende große Milchdrüse, die gemolken wird");
+insert into words values (default, "Falte", "unregelmäßige, vertiefte Linie in der Haut, Hautfalte");
+insert into words values (default, "Faust", "geballte Hand; Hand mit geballten Fingern");
+insert into words values (default, "Ferse", "hinterster, gewölbter Teil des Fußes, Hacke");
+insert into words values (default, "Figur", "äußere menschliche Gestalt, Erscheinung; (künstlerische) Menschendarstellung, Tierdarstellung");
+insert into words values (default, "Flaum"; "Gesamtheit der Flaumfedern oder feiner, weicher Haarwuchs, besonders der erste sprossende Bart");
+insert into words values (default, "Fluke", "quer stehende Schwanzflosse des Wals");
+
 
 
 

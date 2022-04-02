@@ -64,7 +64,24 @@ insert into words values (default, "Ethos", "sittliche Gesamthaltung des Mensche
 insert into words values (default, "Eumel", "ist umgangssprachlich der Begriff für etwas Sonderbares, eine Person oder eine Sache. Oft wird darunter ein unsympathischer Mensch, ein Idiot oder ein unförmiger Gegenstand verstanden");
 insert into words values (default, "Expat", "Expatriate, kurz Expat, bezeichnet häufig eine Fach- oder Führungskraft, die von einer international tätigen Organisation, bei der sie beschäftigt ist, im Rahmen einer Auslandsentsendung vorübergehend an eine ausländische Zweigstelle entsandt wird");
 insert into words values (default, "faken", "gezielt (vor)täuschen, die Unwahrheit verbreiten, simulieren; fälschen, ein Imitat, Plagiat von etwas anfertigen");
-
+insert into words values (default, "famos", "patent, prächtig, großartig");
+insert into words values (default, "Farce", "etwas Lächerliches, Nichtssagendes; kurzes, derb-komisches, possenhaftes Spiel (in Versen), das allgemein-menschliche Schwächen und Torheiten verspottet");
+insert into words values (default, "Farsi", "persische Amtssprache in Iran, geschrieben im arabischen Alphabet; im zentralen und östlichen Iran beheimatete Varietät des Persischen");
+insert into words values (default, "fatal", "verhängnisvoll, folgenschwer; unangenehm, peinlich, misslich");
+insert into words values (default, "Fatum", "Schicksal, Geschick");
+insert into words values (default, "Feber", "Synonym zu Februar (schweizerisch, österreichisch schwäbisch, tirolerisch)");
+insert into words values (default, "Fehde", "Streit, Auseinandersetzung, Konflikt; rechtlich zugelassene Form der bewaffneten Selbsthilfe zur Durchsetzung von Rechtsansprüchen einzelner Städte oder Feudalherren im Mittelalter");
+insert into words values (default, "fesch", "hübsch und munter, flott");
+insert into words values (default, "fidel", "lustig, vergnügt");
+insert into words values (default, "Filou", "Schelm, Schlaukopf oder Betrüger, Spitzbube");
+insert into words values (default, "final", "das Ende, den Abschluss bildend oder den Zweck, die Absicht bezeichnend");
+insert into words values (default, "Finis", "heute nicht mehr üblicher Schlussvermerk in Büchern; Schluss, Ende");
+insert into words values (default, "Flair", "Atmosphäre, Fluidum; Ambiente");
+insert into words values (default, "flugs", "schnell, eilig, flink, flott");
+insert into words values (default, "Fonem", "Phonem, kleinstmögliche lautliche Einheit, die eine bedeutungsunterscheidende Funktion hat");
+insert into words values (default, "Frass", "Fressen, Essen; schlecht zubereitetes, wenig nahrhaftes Essen, Gemeinschaftsessen, das einem nicht schmeckt");
+insert into words values (default, "Fratz", "niedliches, schelmisches, (eitles) kleines Kind, besonders Mädchen");
+insert into words values (default, "Fraud", "erwachsene Person weiblichen Geschlechts, Ehefrau");
 
 
 

@@ -19,7 +19,13 @@ insert into words values (default, "Fabel", "kurze, lehrhafte Tiergeschichte, di
 insert into words values (default, "Faehe", "Weibchen des zum Raubwild gehörenden Niederwildes");
 insert into words values (default, "Fahne", "langbehaarter Schwanz des Eichhörnchens und langhaariger Hunde");
 insert into words values (default, "Falke", "weltweit verbreiteter, oft zur Beizjagd abgerichteter Greifvogel mit kleinem Kopf, auffallend großen Augen, einem hakenförmig nach unten gekrümmten Schnabel und langen, spitzen Flügeln");
-
+insert into words values (default, "Fauna", "die Tierwelt innerhalb bestimmter Naturverhältnisse");
+insert into words values (default, "Feder", "leichtes Horngebilde, das in großer Anzahl den Vogelkörper bedeckt");
+insert into words values (default, "Femur", "drittes Glied eines Insekten- oder Spinnenbeins");
+insert into words values (default, "Finne", "blasenartige Larve des Bandwurmes, die in einem Wirbeltier lebt");
+insert into words values (default, "Fisch", "schuppiges, wechselwarmes Wirbeltier (mit seitlich abgeflachtem Körper), das im Wasser lebt und dazu mit Schwimmblase, Kiemen und Flossen ausgestattet ist");
+insert into words values (default, "Fluke", "quer stehende Schwanzflosse des Wals");
+insert into words values (default, "Frett", "Frett, Frettchen");
 
 
 

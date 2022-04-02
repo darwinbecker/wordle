@@ -6,6 +6,7 @@ insert into words values (default, "Causa", "Grund, Ursache (eines Schadens, ein
 insert into words values (default, "Claim", "Rechtsanspruch");
 insert into words values (default, "dolos", "arglistig, vorsätzlich, aus böser Absicht hervorgehend");
 insert into words values (default, "exlex", "recht- und gesetzlos, vogelfrei, geächtet");
+insert into words values (default, "Frist", "festgesetzte Zeitspanne, nach deren Ablauf etwas geschehen sein muss");
 
 
 

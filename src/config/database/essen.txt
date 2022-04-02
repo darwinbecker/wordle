@@ -28,6 +28,9 @@ insert into words values (default, "Erbse", "artenreiche Gemüsepflanze aus der 
 insert into words values (default, "Ernte", "die reifen Früchte der Felder und Gärten, die eingesammelt und eingebracht werden, das Ernten");
 insert into words values (default, "essen", "etwas (meist feste Nahrung) zu sich nehmen, speisen, verkosten");
 insert into words values (default, "Essig", "flüssiges, saures Würzmittel und Frischhaltemittel");
+insert into words values (default, "Farin", "feiner, nicht raffinierter, gelblich brauner, leicht feuchter Zucker oder Puderzucker");
+insert into words values (default, "Filet", "zartes Lendenstück vom Schwein oder Rind, das zum Braten geeignet ist; Fischstück ohne Gräten und Haut; Bruststück vom Geflügel");
+insert into words values (default, "Fisch", "schuppiges, wechselwarmes Wirbeltier (mit seitlich abgeflachtem Körper), das im Wasser lebt und dazu mit Schwimmblase, Kiemen und Flossen ausgestattet ist");
 
 
 

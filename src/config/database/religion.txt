@@ -13,6 +13,8 @@ insert into words values (default, "Engel", "von Gott erschaffenes Geistwesen, d
 insert into words values (default, "Essay", "kürzere, sorgfältig formulierte, gemeinverständliche Abhandlung über eine Frage des geistigen Lebens");
 insert into words values (default, "Ethik", "philosophische Lehre vom sittlichen Wollen und Handeln des Menschen");
 insert into words values (default, "Ethos", "sittliche Gesamthaltung des Menschen, die die Grundlage seines Wollens und Handelns bildet");
+insert into words values (default, "Fatum", "Schicksal, Geschick");
+insert into words values (default, "fromm", "Gott ganz ergeben, gottesfürchtig");
 
 
 

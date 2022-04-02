@@ -4,6 +4,7 @@ insert into words values (default, "Boson", "Elementarteilchen mit ganzzahligem 
 insert into words values (default, "breit", "gibt die Ausdehnung einer Fläche in der Querrichtung an");
 insert into words values (default, "Dampf", "dichter Dunst, Rauch, Nebel; Gas nahe der Verflüssigung");
 insert into words values (default, "Druck", "Kraft, die auf eine Fläche wirkt; das Zusammenpressen");
+insert into words values (default, "Foehn", "beim Überströmen von Luft über ein Gebirge, Hochgebirge entstehender warmer, trockener Fallwind");
 
 
 

@@ -16,6 +16,8 @@ insert into words values (default, "Daten", "(durch Aufzeichnungen, Beobachtunge
 insert into words values (default, "Email", "elektronische briefähnliche Nachricht, die über Computernetzwerke verschickt wird");
 insert into words values (default, "Emoji", "Emoticon (Zeichenfolge aus Satzzeichen, Ziffern und Buchstaben, die einen Gesichtsausdruck darstellt und mit der die Gefühlslage des Schreibenden verdeutlicht oder eine Äußerung kommentiert wird) oder andere kleine Grafik, die eine elektronische Nachricht oder Äußerung kommentiert; Smiley ");
 insert into words values (default, "Enter", "Taste auf der Tastatur eines Computers, auf die man drückt, um eine Eingabe abzuschicken oder in einem Editor eine neue Zeile anzufangen");
+insert into words values (default, "Faxen", "mithilfe eines Faxgeräts übertragen");
+insert into words values (default, "fixen", "berichtigen, korrigieren, verbessern; Bug fixen, einen Fehler beheben");
 
 
 

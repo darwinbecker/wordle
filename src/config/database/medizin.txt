@@ -21,6 +21,10 @@ insert into words values (default, "Dosis", "genau abgemessene (kleine) Menge");
 insert into words values (default, "Eisen", "Medizin, die Eisen enthält");
 insert into words values (default, "Eiter", "bei bakterieller Entzündung im Körper entstehendes gelbgrünliches Gemisch aus abgestorbenen Gewebeteilen, weißen Blutkörperchen und Bazillen");
 insert into words values (default, "Ekzem", "juckende, oft nässende Entzündung der Hautoberfläche");
+insert into words values (default, "Falte", "unregelmäßige, vertiefte Linie in der Haut, Hautfalte");
+insert into words values (default, "Femur", "Oberschenkel(knochen)");
+insert into words values (default, "Finne", "kleine knötchenartige Entzündung auf der Haut, Pickel");
+insert into words values (default, "Fotom", "Photom, subjektive Wahrnehmung nicht vorhandener Licht- oder Farberscheinungen in Gestalt von Wolken, Wellen oder Schatten");
 
 
 
