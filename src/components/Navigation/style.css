@@ -1,3 +1,27 @@
+.text-wrapper{
+    width: 90%;
+    margin: auto;
+}
+
 .text{
+    max-width: 80ch;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.rules-list, .modes-list{
+    text-align: left;
+}
+
+.rules-list div{
+    /* margin-left: 15px; */
+}
+
+.modes-list > li{
+    text-decoration: underline;
+}
+
+.modes-list > div{
+    margin-left: 15px;
     margin-bottom: 10px;
 }
