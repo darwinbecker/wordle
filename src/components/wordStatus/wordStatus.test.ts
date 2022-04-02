@@ -1,4 +1,4 @@
-import { checkstatus } from './wordStatus';
+import { checkstatus } from './WordStatus';
 
 describe("check word status of solution word: 'ADMIN'", () => {
     test('check status of GURKE', () => {

@@ -1,10 +1,11 @@
 
-@import url("./components/main/style.css");
-@import url("./components/grid/root/style.css");
-@import url("./components/grid/row/style.css");
-@import url("./components/grid/tile/style.css");
+@import url("./components/Main/style.css");
+@import url("./components/Grid/Root/style.css");
+@import url("./components/Grid/Row/style.css");
+@import url("./components/Grid/Tile/style.css");
 @import url("./components/GameMode/style.css");
-@import url("./components/settings/categories/style.css");
+@import url("./components/Popup/style.css");
+@import url("./components/Navigation/style.css");
 
 *{
   font-family: 'Nunito', sans-serif;

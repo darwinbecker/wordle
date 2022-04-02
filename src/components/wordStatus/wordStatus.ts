@@ -1,10 +1,10 @@
-export type StatusType = 'correct' | 'semi' | 'wrong';
+export type WordStatusType = 'correct' | 'semi' | 'wrong';
 
-export const checkstatus = (guess: string, solution: string): StatusType[] => {
+export const checkstatus = (guess: string, solution: string): WordStatusType[] => {
     const guessChars = guess.split("");
     const solutionChars = solution.split("");
 
-    const status: StatusType[] = [];
+    const status: WordStatusType[] = [];
 
     guessChars.map((char, index) => {
         if (char == solutionChars[index]) {

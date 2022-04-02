@@ -1,11 +1,11 @@
-import { StatusType } from "../wordStatus";
+import { WordStatusType } from "../WordStatus";
 
 // https://github.com/cwackerfuss/react-wordle/blob/main/src/lib/localStorage.ts
 const storageKey = 'wordleGameState';
 
 export type StoredGameState = {
     guessedWords: string[]
-    wordStatuses: StatusType[][];
+    wordStatuses: WordStatusType[][];
     solution: string
 }
 

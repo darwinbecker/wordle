@@ -1,2 +1,2 @@
-export { checkstatus } from './wordStatus';
-export type { StatusType } from './wordStatus';
+export { checkstatus } from './WordStatus';
+export type { WordStatusType } from './WordStatus';
