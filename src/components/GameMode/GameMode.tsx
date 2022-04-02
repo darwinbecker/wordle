@@ -91,20 +91,31 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
     return (
         <div className="Mode">
-            <div className="mode-nav-wrapper">
+            <div className="game-mode-nav-wrapper">
                 {/* <div><i className="fa-regular fa-chart-column"></i></div> */}
                 {/* <div><i className="fa-regular fa-chart-simple"></i></div> */}
 
-                <div><i className="fa-solid fa-chart-simple"></i></div>
                 {/* <div><i className="fa-solid fa-chart-column"></i></div> */}
 
-                <select className="mode-select" onChange={handleMode}>
+                <div className="game-mode-icons-wrapper">
+                    <button><i className="fa-solid fa-circle-info"></i></button>
+                    {/* <div><i className="fa-solid fa-circle-info"></i></div> */}
+                    <button><i className="fa-solid fa-chart-simple"></i></button>
+                    {/* <div><i className="fa-solid fa-chart-simple"></i></div> */}
+                </div>
+
+                <select className="game-mode-select" onChange={handleMode}>
                     <option value="WOTD">Wort des Tages</option>
                     <option value="TR">Training</option>
                     <option value="C">Kategorie</option>
                     <option value="R">Blitz</option>
                 </select>
-                <div><i className="fa-solid fa-circle-info"></i></div>
+                <div className="game-mode-icons-wrapper">
+                    {/* <div><i className="fa-solid fa-moon"></i></div> */}
+                    {/* <div><i className="fa-solid fa-circle-half-stroke"></i></div> */}
+                    <button><i className="fa-solid fa-moon"></i></button>
+                    <button><i className="fa-solid fa-circle-half-stroke"></i></button>
+                </div>
             </div>
 
             {mode === 'C' && showPopup && (

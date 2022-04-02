@@ -8,7 +8,7 @@ import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
 import { WinService } from '.';
 import { GameMode, GameModeType } from "../GameMode";
 import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage } from "../localStorage";
-import { displayConfetti } from ".";
+import { Confetti } from "../Animations";
 
 import { Subject } from 'rxjs';
 
@@ -144,7 +144,7 @@ export const InputHandler = () => {
                 // win event
                 setYouWin(true);
                 setYouLose(false);
-                displayConfetti();
+                Confetti();
             } else {
                 // lose event
                 setYouWin(false);

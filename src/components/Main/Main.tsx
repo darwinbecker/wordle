@@ -8,7 +8,7 @@ import { getRandomWord, WORD_OF_THE_DAY } from '../../config/wordlist';
 import { WinService } from '../gameHandler';
 import { GameMode, GameModeType, GameModeService } from "../GameMode";
 import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, StoredGameState } from "../localStorage";
-import { displayConfetti } from "../gameHandler";
+import { Confetti } from "../Animations";
 
 export const Main: React.FC = () => {
     const loaded: StoredGameState | null = loadGameStateFromLocalStorage();
@@ -20,7 +20,7 @@ export const Main: React.FC = () => {
         return loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [youLose, setYouLose] = useState<boolean>(() => {
-        return loaded?.guessedWords.length === MAX_GUESSES && !loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution)  ? true : false;
+        return loaded?.guessedWords.length === MAX_GUESSES && !loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
         return WORD_OF_THE_DAY().solution;
@@ -38,7 +38,7 @@ export const Main: React.FC = () => {
     const [columnIndex, setColumnIndex] = useState<number>(0);
 
 
-    
+
     // const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
     // if (gameWasWon) {
     //     WinService.setWin(true);
@@ -151,7 +151,7 @@ export const Main: React.FC = () => {
                 // win event
                 setYouWin(true);
                 setYouLose(false);
-                displayConfetti();
+                Confetti();
             } else {
                 // lose event
                 setYouWin(false);

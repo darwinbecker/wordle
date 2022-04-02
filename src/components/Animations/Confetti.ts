@@ -1,7 +1,7 @@
+// https://www.npmjs.com/package/canvas-confetti
 import confetti from 'canvas-confetti';
 
-export const displayConfetti = () => {
-    // https://www.npmjs.com/package/canvas-confetti
+export const Confetti = () => {
     const canvas = document.getElementById('confetti-canvas') as HTMLCanvasElement;
     var myConfetti = confetti.create(canvas, {
         resize: true,

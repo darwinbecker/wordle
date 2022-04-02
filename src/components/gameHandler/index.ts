@@ -1,4 +1,3 @@
 // export { Win }from './Win';
-export { displayConfetti } from './Confetti';
-export { WinService } from './GameHandler';
+export { WinService } from './WinService';
 // export { InputService } from './InputHandler';

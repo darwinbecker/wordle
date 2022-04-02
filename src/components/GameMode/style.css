@@ -1,25 +1,51 @@
-.mode-nav-wrapper{
+.game-mode-nav-wrapper{
     display: flex;
-    max-width: 25%;
+    max-width: 40%;
     margin: auto;
     margin-top: 10px;
     align-items: center;
 }
 
-.mode-nav-wrapper > *{
+.game-mode-nav-wrapper > *{
+    flex: 1 auto;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    /* padding: 0.1rem; */
+    margin: 0 5px;
+}
+
+.game-mode-select{
+    /* display: block; */
+    margin: auto;
+    border: 1px solid #77777780;
+    border-radius: 0.2rem;
+    text-align: center;
+    width: 50%;
+    cursor: pointer;
+}
+
+.game-mode-icons-wrapper{
+    display: flex;
+}
+
+.game-mode-icons-wrapper > *{
     flex: 1 auto;
     font-size: 1.5rem;
     line-height: 2rem;
     padding: 0.1rem;
+    background: white;
+    border: 1px solid #77777780;
+    /* border: none; */
+    border-radius: 0.2rem;
+    margin: 0 5px;
+    cursor: pointer;
+    /* border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133)); */
+    transition: 0.3s;
 }
 
-.mode-select{
-    /* display: block; */
-    margin: auto;
-    border-radius: 0.2rem;
-    text-align: center;
-    width: 60%;
-    cursor: pointer;
+.game-mode-icons-wrapper > button:hover{
+    background: rgb(200, 200, 200);
+    color: rgb(50, 50, 50);
 }
 
 /* .mode-select > option:hover{
