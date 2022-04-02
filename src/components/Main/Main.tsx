@@ -189,7 +189,7 @@ export const Main: React.FC = () => {
 
     return (
         <>
-            <GameMode resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord}></GameMode>
+            <GameMode youWin={youWin} youLose={youLose} resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord}></GameMode>
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
             <canvas id="confetti-canvas"></canvas>

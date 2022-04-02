@@ -3,9 +3,10 @@ export const WORD_OF_THE_DAY = () => {
     const epochMs = new Date(2022, 0).valueOf(); // January 1, 2022 Game Epoch
     const now = Date.now();
     const msInDay = 86400000;
-    const index = Math.floor((now - epochMs) / msInDay);
-    const nextday = (index + 1) * msInDay + epochMs;
-    // console.log("---------");
+    const timezoneOffset = 25200000; // 7 hours => next word is at 8:00am
+    const index = Math.floor(((now - timezoneOffset) - epochMs) / msInDay);
+    const nextday = (index + 1) * msInDay + epochMs + timezoneOffset;
+    // console.log("----WORD_OF_THE_DAY-----");
     // console.log(epochMs);
     // console.log(index);
     // console.log(WORDLIST.length);

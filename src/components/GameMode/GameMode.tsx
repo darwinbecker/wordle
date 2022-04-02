@@ -15,6 +15,8 @@ import { NavType } from "../Navigation";
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 
 type ModeProps = {
+    youWin: boolean;
+    youLose: boolean;
     resetGame: () => void;
     setSolution: (solution: string) => void;
     setGuessedWords: (guessedWords: string[]) => void;
@@ -39,6 +41,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     useEffect(() => {
         const subscription = GameModeService.onGameModeChange().subscribe(mode => {
             if (mode == 'WOTD') {
+                setShowPopup(true);
                 props.resetGame();
                 props.setSolution(WORD_OF_THE_DAY().solution);
                 const loaded = loadGameStateFromLocalStorage();
@@ -90,6 +93,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     const togglePopup = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log(event.currentTarget.value);
         const category = event.currentTarget.value;
+        // TODO: load category dictionary
         setShowPopup(!showPopup);
     }
 
@@ -109,7 +113,6 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log("toggle contrast");
     }
-
 
     return (
         <div className="Mode">
@@ -142,6 +145,12 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
             {mode === 'R' && showPopup && (
                 <>
                     <Popup content={'rapid'} closePopup={togglePopup} forceInput={true}></Popup>
+                </>
+            )}
+
+            {showPopup && (props.youWin || props.youLose) && (
+                <>
+                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'}></Popup>
                 </>
             )}
 
