@@ -28,3 +28,26 @@
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
+
+.animate__animated.animate__fadeInUp{
+    --animate-duration: 0.5s;
+}
+
+.popup-delay{
+    --animation-delay: 1.2s;
+    opacity: 0;
+    /* visibility: hidden; */
+    animation: 1s linear var(--animation-delay) forwards delayedOpacity;
+}
+
+@keyframes delayedOpacity {
+    from { 
+        opacity: 0;
+        /* visibility: hidden; */
+     }
+    to { 
+        opacity: 1;
+        /* visibility: visible;  */
+    }
+}
+  

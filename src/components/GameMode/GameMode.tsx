@@ -150,7 +150,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
             {showPopup && (props.youWin || props.youLose) && (
                 <>
-                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'}></Popup>
+                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'} animationDelay={true}></Popup>
                 </>
             )}
 

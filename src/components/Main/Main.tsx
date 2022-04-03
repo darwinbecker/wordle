@@ -16,6 +16,12 @@ export const Main: React.FC = () => {
     // const [youWin, setYouWin] = useState<boolean>(false);
     // const [youLose, setYouLose] = useState<boolean>(false);
     const [youWin, setYouWin] = useState<boolean>(() => {
+        // if (loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution)) {
+        //     Confetti();
+        //     return true;
+        // } else{
+        //     return false;
+        // }
         return loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [youLose, setYouLose] = useState<boolean>(() => {

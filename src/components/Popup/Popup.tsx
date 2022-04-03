@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { Categories, Rapid } from '../GameMode';
 import { Info, NavType, Stats } from '../Navigation';
 
@@ -8,6 +9,7 @@ type ModeProps = {
     closePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
     forceInput: boolean;
     navType?: NavType;
+    animationDelay?: boolean;
 }
 
 export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
@@ -18,9 +20,15 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
         }
     }
 
+    const popupClasses = classnames(
+        'popup',
+        {
+            'popup-delay': props.animationDelay == true
+        });
+
     return (
-        <div className='popup' onClick={handlePopup}>
-            <div className='popup-content'>
+        <div className={popupClasses} onClick={handlePopup}>
+            <div className='popup-content animate__animated animate__fadeInUp'>
                 {props.content == 'categories' && (
                     <Categories closePopup={props.closePopup} />
                 )}
