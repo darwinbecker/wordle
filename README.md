@@ -48,6 +48,13 @@ word descriptions are mostly taken from here:
 
 [OpenThesaurus](https://www.openthesaurus.de/)
 
+
+## Icons
+
+[App-icon](https://icon-icons.com/de/symbol/grid-x/184932)
+[Button-icons](https://fontawesome.com/icons)
+
+
 #### Bonus information about the game & the creator's story
 Excerpt from [Wikipedia](https://en.wikipedia.org/wiki/Josh_Wardle#Wordle):
 
