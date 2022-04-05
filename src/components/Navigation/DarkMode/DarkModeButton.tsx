@@ -12,7 +12,6 @@ export const DarkModeButton = () => {
 
     const toggleDarkmode = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log("toggle darkmode");
-        console.log(theme);
         if (theme == lightTheme) {
             body.classList.replace(lightTheme, darkTheme);
             saveDarkMode(darkTheme);

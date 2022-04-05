@@ -108,11 +108,17 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
         const navButton = event.currentTarget.value;
         if (navButton) {
+            // if nav button is clicked => set mode
             setNavMode(navButton as NavType);
+            setShowNavPopup(!showNavPopup);
         } else {
-            setNavMode(undefined);
+            // if popup is visible & user clicks outside of popup window => hide popup
+            const popup = event.target as HTMLDivElement;
+            if(popup.classList.contains('popup')){
+                setNavMode(undefined);
+                setShowNavPopup(!showNavPopup);
+            }
         }
-        setShowNavPopup(!showNavPopup);
     }
     
     const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {

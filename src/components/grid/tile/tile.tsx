@@ -12,7 +12,7 @@ export const Tile: React.FC<TileProps> = (props: TileProps) => {
         {
             'correct': props.status == 'correct',
             'semi': props.status == 'semi',
-            'wrong': props.status == 'wrong',
+            'wrong': props.status == 'wrong'
         });
 
     return (
