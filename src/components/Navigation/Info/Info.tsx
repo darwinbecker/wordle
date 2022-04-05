@@ -3,6 +3,29 @@ export const Info = () => {
         <>
             <h1>Spielanleitung</h1>
             <div className="text">
+                <h3>Input:</h3>
+                <ul className="input-list">
+                    <li>
+                        Eingabe von Buchstaben erfolgt über die Tastatur
+                    </li>
+                    <li>
+                        Gültig: Buchstaben von A-Z
+                    </li>
+                    <li>
+                        Ungültig:
+                        <ul>
+                            <li>
+                                Umlaute wie ä, ö, ü, ß
+                            </li>
+                            <li>
+                                Sonderzeichen, Leerzeichen
+                            </li>
+                            <li>
+                                Zahlen von 0-9
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
                 <h3>Regeln:</h3>
                 <ul className="rules-list">
                     <li>
