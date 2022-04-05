@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
-import { WinService } from "../GameHandler";
-import { loadGameStateFromLocalStorage } from "../LocalStorage";
+// import { WinService } from "../GameHandler";
+import { loadGameStateFromLocalStorage, StoredPlayerStats } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeService } from "./GameModeService";
 import { NavType } from "../Navigation";
+import { Confetti } from "../Animations";
 
 // WOTD = Word Of The Day
 // TR = Training
@@ -17,11 +18,13 @@ export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 type ModeProps = {
     youWin: boolean;
     youLose: boolean;
+    setYouWin: (win: boolean) => void;
     resetGame: () => void;
     setSolution: (solution: string) => void;
     setGuessedWords: (guessedWords: string[]) => void;
     setWordStatuses: (wordStatuses: WordStatusType[][]) => void;
     getNextWord: () => void;
+    stats: StoredPlayerStats;
 }
 
 export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
@@ -55,11 +58,14 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                     } else {
                         const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
                         if (gameWasWon) {
-                            WinService.setWin(true);
+                            // WinService.setWin(true);
+                            props.setYouWin(true);
+                            Confetti();
                         }
 
                         if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
-                            WinService.setWin(false);
+                            // WinService.setWin(false);
+                            props.setYouWin(false);
                             //     showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
                             //     persist: true,
                             //   })
@@ -138,25 +144,25 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
             {mode === 'C' && showPopup && (
                 <>
-                    <Popup content={'categories'} closePopup={togglePopup} forceInput={true}></Popup>
+                    <Popup content={'categories'} closePopup={togglePopup} forceInput={true} stats={props.stats}></Popup>
                 </>
             )}
 
             {mode === 'R' && showPopup && (
                 <>
-                    <Popup content={'rapid'} closePopup={togglePopup} forceInput={true}></Popup>
+                    <Popup content={'rapid'} closePopup={togglePopup} forceInput={true} stats={props.stats}></Popup>
                 </>
             )}
 
             {showPopup && (props.youWin || props.youLose) && (
                 <>
-                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'} animationDelay={true}></Popup>
+                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'} animationDelay={true} stats={props.stats}></Popup>
                 </>
             )}
 
             {showNavPopup && (
                 <>
-                    <Popup content={'nav'} closePopup={toggleNavButton} forceInput={false} navType={navMode}></Popup>
+                    <Popup content={'nav'} closePopup={toggleNavButton} forceInput={false} navType={navMode} stats={props.stats}></Popup>
                 </>
             )}
         </div>

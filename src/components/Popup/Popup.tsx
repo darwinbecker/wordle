@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { Categories, Rapid } from '../GameMode';
+import { StoredPlayerStats } from '../LocalStorage';
 import { Info, NavType, Stats } from '../Navigation';
 
 type PopupType = 'categories' | 'rapid' | 'nav';
@@ -10,6 +11,7 @@ type ModeProps = {
     forceInput: boolean;
     navType?: NavType;
     animationDelay?: boolean;
+    stats: StoredPlayerStats
 }
 
 export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
@@ -44,7 +46,7 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
                         )}
 
                         {props.navType == 'stats' && (
-                            <Stats />
+                            <Stats stats={props.stats}/>
                         )}
                     </>
                 )}

@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from '../../Config/Settings';
 import { Grid } from '../Grid/Root';
 import { checkstatus, WordStatusType } from '../WordStatus';
 import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
-import { WinService } from '../GameHandler';
 import { GameMode, GameModeType, GameModeService } from "../GameMode";
-import { loadGameStateFromLocalStorage, saveGameStateToLocalStorage, StoredGameState } from "../LocalStorage";
+import { loadGameStateFromLocalStorage, loadPlayerStatsFromLocalStorage, saveGameStateToLocalStorage, StoredGameState, StoredPlayerStats, emptyPlayerStats, savePlayerStatsToLocalStorage } from "../LocalStorage";
 import { Confetti } from "../Animations";
+// import { WinService } from '../GameHandler';
 
 export const Main: React.FC = () => {
-    const loaded: StoredGameState | null = loadGameStateFromLocalStorage();
+    const loadedGameState: StoredGameState | null = loadGameStateFromLocalStorage();
+    const loadedPlayerStats: StoredPlayerStats | null = loadPlayerStatsFromLocalStorage();
 
     const [mode, setMode] = useState<GameModeType>("WOTD");
     // const [youWin, setYouWin] = useState<boolean>(false);
@@ -22,10 +23,10 @@ export const Main: React.FC = () => {
         // } else{
         //     return false;
         // }
-        return loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
+        return loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [youLose, setYouLose] = useState<boolean>(() => {
-        return loaded?.guessedWords.length === MAX_GUESSES && !loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
+        return loadedGameState?.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
         return WORD_OF_THE_DAY().solution;
@@ -33,15 +34,19 @@ export const Main: React.FC = () => {
     const [guessedWord, setGuessedWord] = useState<string>("");
     // const [guessedWords, setGuessedWords] = useState<string[]>([]);
     const [guessedWords, setGuessedWords] = useState<string[]>(() => {
-        return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.guessedWords;
+        return loadedGameState?.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.guessedWords;
     });
     // const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
     const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
-        return loaded?.solution !== WORD_OF_THE_DAY().solution ? [] : loaded.wordStatuses;
+        return loadedGameState?.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.wordStatuses;
     });
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
 
+
+    const [stats, setStats] = useState<StoredPlayerStats>(() => {
+        return loadedPlayerStats ? loadedPlayerStats : emptyPlayerStats;
+    })
 
 
     // const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
@@ -55,7 +60,22 @@ export const Main: React.FC = () => {
     //     //   })
     // }
 
+    const updatePlayerStats = (win: boolean) => {
 
+        const gameStats: StoredPlayerStats = { ...stats }
+        gameStats.gamesPlayed += 1;
+        if (win) {
+            gameStats.wins += 1;
+            gameStats.trysPerWin[guessedWords.length] += 1;
+            gameStats.winStreak += 1;
+            gameStats.bestWinStreak = (gameStats.winStreak >= gameStats.bestWinStreak) ? gameStats.winStreak : gameStats.bestWinStreak;
+        } else {
+            gameStats.losses += 1;
+            gameStats.winStreak = 0;
+        }
+
+        return gameStats;
+    }
 
     const handleChange = (value: string) => {
         // && guesses.length < MAX_CHALLENGES && !isGameWon
@@ -94,15 +114,26 @@ export const Main: React.FC = () => {
                 setWordStatuses([...wordStatuses, status]);
 
                 if (!status.includes('semi') && !status.includes('wrong')) {
-                    WinService.setWin(true);
+                    // WinService.setWin(true);
+                    setYouWin(true);
+                    Confetti();
+                    setStats(updatePlayerStats(true));
+                    savePlayerStatsToLocalStorage(stats);
+                    //TODO: setStats(updateStats);
                     // TODO display win screen with button resetGame();
+                    return;
                 }
 
                 // last guess
                 if (guessedWords.length == MAX_GUESSES - 1) {
                     if (status.includes('semi') || status.includes('wrong')) {
-                        WinService.setWin(false);
                         console.log("YOU LOSE!");
+                        // WinService.setWin(false);
+                        setYouLose(true);
+                        setStats(updatePlayerStats(false));
+                        savePlayerStatsToLocalStorage(stats);
+                        //TODO: setStats(updateStats);
+                        return;
                     }
                 }
 
@@ -150,25 +181,25 @@ export const Main: React.FC = () => {
         }
     }, []);
 
-    useEffect(() => {
-        const subscription = WinService.onWin().subscribe(win => {
-            if (win) {
-                // win event
-                setYouWin(true);
-                setYouLose(false);
-                Confetti();
-            } else {
-                // lose event
-                setYouWin(false);
-                setYouLose(true);
-            }
-        });
+    // useEffect(() => {
+    //     const subscription = WinService.onWin().subscribe(win => {
+    //         if (win) {
+    //             // win event
+    //             setYouWin(true);
+    //             setYouLose(false);
+    //             Confetti();
+    //         } else {
+    //             // lose event
+    //             setYouWin(false);
+    //             setYouLose(true);
+    //         }
+    //     });
 
-        // return unsubscribe method to execute when component unmounts
-        return () => {
-            subscription.unsubscribe();
-        }
-    }, []);
+    //     // return unsubscribe method to execute when component unmounts
+    //     return () => {
+    //         subscription.unsubscribe();
+    //     }
+    // }, []);
 
     useEffect(() => {
         if (youWin || youLose) return;
@@ -195,7 +226,7 @@ export const Main: React.FC = () => {
 
     return (
         <>
-            <GameMode youWin={youWin} youLose={youLose} resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord}></GameMode>
+            <GameMode youWin={youWin} youLose={youLose} setYouWin={setYouWin} resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord} stats={stats}></GameMode>
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
             <canvas id="confetti-canvas"></canvas>
