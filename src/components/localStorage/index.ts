@@ -1,2 +1,2 @@
-export { saveGameStateToLocalStorage, loadGameStateFromLocalStorage, savePlayerStatsToLocalStorage, loadPlayerStatsFromLocalStorage, emptyPlayerStats } from './localStorage';
+export { saveGameStateToLocalStorage, loadGameStateFromLocalStorage, savePlayerStatsToLocalStorage, loadPlayerStatsFromLocalStorage } from './localStorage';
 export type { StoredGameState, StoredPlayerStats } from './localStorage';

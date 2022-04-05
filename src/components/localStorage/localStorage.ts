@@ -34,16 +34,30 @@ export const savePlayerStatsToLocalStorage = (gameState: StoredPlayerStats): voi
     localStorage.setItem(playerStatsKey, JSON.stringify(gameState));
 }
 
-export const loadPlayerStatsFromLocalStorage = (): StoredPlayerStats | null => {
+export const loadPlayerStatsFromLocalStorage = (): StoredPlayerStats => {
     const state = localStorage.getItem(playerStatsKey);
-    return state ? (JSON.parse(state) as StoredPlayerStats) : null;
+    return state ? (JSON.parse(state) as StoredPlayerStats) : emptyPlayerStats;
 }
 
-export const emptyPlayerStats: StoredPlayerStats = {
+const emptyPlayerStats: StoredPlayerStats = {
     gamesPlayed: 0,
     wins: 0,
     losses: 0,
     trysPerWin: [0,0,0,0,0,0],
     winStreak: 0,
     bestWinStreak: 0
+}
+
+
+const darkModeKey = 'DarkMode';
+
+type Theme = "light" | "dark";
+
+export const saveDarkMode = (theme: Theme): void => {
+    localStorage.setItem(darkModeKey, JSON.stringify(theme));
+}
+
+export const loadDarkMode = (): Theme => {
+    const theme: Theme = localStorage.getItem("DarkMode") as Theme;
+    return theme ? (JSON.parse(theme) as Theme) : "light"; // set default theme to light
 }

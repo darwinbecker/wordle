@@ -5,13 +5,13 @@ import { checkstatus, WordStatusType } from '../WordStatus';
 import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
 import { GameMode, GameModeType, GameModeService } from "../GameMode";
-import { loadGameStateFromLocalStorage, loadPlayerStatsFromLocalStorage, saveGameStateToLocalStorage, StoredGameState, StoredPlayerStats, emptyPlayerStats, savePlayerStatsToLocalStorage } from "../LocalStorage";
+import { loadGameStateFromLocalStorage, loadPlayerStatsFromLocalStorage, saveGameStateToLocalStorage, StoredGameState, StoredPlayerStats, savePlayerStatsToLocalStorage } from "../LocalStorage";
 import { Confetti } from "../Animations";
 // import { WinService } from '../GameHandler';
 
 export const Main: React.FC = () => {
     const loadedGameState: StoredGameState | null = loadGameStateFromLocalStorage();
-    const loadedPlayerStats: StoredPlayerStats | null = loadPlayerStatsFromLocalStorage();
+    const loadedPlayerStats: StoredPlayerStats = loadPlayerStatsFromLocalStorage();
 
     const [mode, setMode] = useState<GameModeType>("WOTD");
     // const [youWin, setYouWin] = useState<boolean>(false);
@@ -44,9 +44,7 @@ export const Main: React.FC = () => {
     const [columnIndex, setColumnIndex] = useState<number>(0);
 
 
-    const [stats, setStats] = useState<StoredPlayerStats>(() => {
-        return loadedPlayerStats ? loadedPlayerStats : emptyPlayerStats;
-    })
+    const [stats, setStats] = useState<StoredPlayerStats>(loadedPlayerStats);
 
 
     // const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
@@ -60,10 +58,11 @@ export const Main: React.FC = () => {
     //     //   })
     // }
 
-    const updatePlayerStats = (win: boolean) => {
+    const updatePlayerStats = (win: boolean): StoredPlayerStats => {
 
         const gameStats: StoredPlayerStats = { ...stats }
         gameStats.gamesPlayed += 1;
+        console.log(win);
         if (win) {
             gameStats.wins += 1;
             gameStats.trysPerWin[guessedWords.length] += 1;
@@ -115,10 +114,11 @@ export const Main: React.FC = () => {
 
                 if (!status.includes('semi') && !status.includes('wrong')) {
                     // WinService.setWin(true);
+                    const newStats = updatePlayerStats(true);
+                    setStats(newStats);
+                    savePlayerStatsToLocalStorage(newStats);
                     setYouWin(true);
                     Confetti();
-                    setStats(updatePlayerStats(true));
-                    savePlayerStatsToLocalStorage(stats);
                     //TODO: setStats(updateStats);
                     // TODO display win screen with button resetGame();
                     return;
@@ -129,9 +129,10 @@ export const Main: React.FC = () => {
                     if (status.includes('semi') || status.includes('wrong')) {
                         console.log("YOU LOSE!");
                         // WinService.setWin(false);
+                        const newStats = updatePlayerStats(false);
+                        setStats(newStats);
+                        savePlayerStatsToLocalStorage(newStats);
                         setYouLose(true);
-                        setStats(updatePlayerStats(false));
-                        savePlayerStatsToLocalStorage(stats);
                         //TODO: setStats(updateStats);
                         return;
                     }

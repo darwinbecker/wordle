@@ -8,6 +8,7 @@ import { Popup } from "../Popup";
 import { GameModeService } from "./GameModeService";
 import { NavType } from "../Navigation";
 import { Confetti } from "../Animations";
+import { DarkModeButton } from "../Navigation/DarkMode";
 
 // WOTD = Word Of The Day
 // TR = Training
@@ -97,6 +98,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     }, []);
 
     const togglePopup = (event: React.MouseEvent<HTMLButtonElement>) => {
+        console.log("load category dictionary");
         console.log(event.currentTarget.value);
         const category = event.currentTarget.value;
         // TODO: load category dictionary
@@ -112,10 +114,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         }
         setShowNavPopup(!showNavPopup);
     }
-
-    const toggleDarkmode = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("toggle darkmode");
-    }
+    
     const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log("toggle contrast");
     }
@@ -137,7 +136,8 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                 </select>
 
                 <div className="game-mode-icons-wrapper">
-                    <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button>
+                    {/* <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button> */}
+                    <DarkModeButton/>
                     <button onClick={toggleContrast}><i className="fa-solid fa-circle-half-stroke"></i></button>
                 </div>
             </div>
