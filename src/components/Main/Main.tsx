@@ -114,9 +114,11 @@ export const Main: React.FC = () => {
 
                 if (!status.includes('semi') && !status.includes('wrong')) {
                     // WinService.setWin(true);
-                    const newStats = updatePlayerStats(true);
-                    setStats(newStats);
-                    savePlayerStatsToLocalStorage(newStats);
+                    if (mode === "WOTD") {
+                        const newStats = updatePlayerStats(true);
+                        setStats(newStats);
+                        savePlayerStatsToLocalStorage(newStats);
+                    }
                     setYouWin(true);
                     Confetti();
                     //TODO: setStats(updateStats);
@@ -129,10 +131,12 @@ export const Main: React.FC = () => {
                     if (status.includes('semi') || status.includes('wrong')) {
                         console.log("YOU LOSE!");
                         // WinService.setWin(false);
-                        const newStats = updatePlayerStats(false);
-                        setStats(newStats);
-                        savePlayerStatsToLocalStorage(newStats);
-                        setYouLose(true);
+                        if (mode === "WOTD") {
+                            const newStats = updatePlayerStats(false);
+                            setStats(newStats);
+                            savePlayerStatsToLocalStorage(newStats);
+                            setYouLose(true);
+                        }
                         //TODO: setStats(updateStats);
                         return;
                     }
@@ -168,6 +172,16 @@ export const Main: React.FC = () => {
             saveGameStateToLocalStorage({ guessedWords, wordStatuses, solution });
         }
     }, [guessedWords, wordStatuses]);
+
+    // useEffect(() => {
+    //     if (mode === "WOTD") {
+    //         console.log("YOU WIN ODER SO!");
+
+    //         const newStats = updatePlayerStats(true);
+    //         setStats(newStats);
+    //         savePlayerStatsToLocalStorage(newStats);
+    //     }
+    // }, [youLose, youWin]);
 
     useEffect(() => {
         const subscription = GameModeService.onGameModeChange().subscribe(mode => {
