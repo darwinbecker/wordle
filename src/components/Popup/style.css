@@ -8,18 +8,54 @@
     bottom: 0;
     background-color: rgba(0,0,0, 0.5);
     z-index: 1;
-    overflow-y: scroll;
+    overflow: hidden
 }
 
 .popup-content{
+    /* background-color: rgba(0,0,0, 0.85); */
+    /* --primary-color: rgba(0,0,0, 0.85); */
     position: absolute;
     left: 25%;
     right: 25%;
     top: 10%;
+    max-height: 80%;
+    overflow: overlay;
     margin: auto;
-    background-color: rgba(0,0,0, 0.75);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
     border-radius: 0.4rem;
-    color: white;
+}
+
+/* styling for popup scrollbar */
+.popup-content::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: var(--primary-color);
+	/* background-color: red; */
+    border-top-right-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+}
+
+.popup-content::-webkit-scrollbar
+{
+	width: 15px;
+	background-color: var(--primary-color);
+    border-top-right-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+}
+
+.popup-content::-webkit-scrollbar-thumb
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: var(--secondary-color);
+    /* border: 1px solid var(--secondary-color); */
+    /* border-left: 1px solid var(--secondary-color); */
+    border-left: 1px solid var(--primary-color);
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
 }
 
 .popup-content h1{
