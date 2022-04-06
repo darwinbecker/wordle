@@ -236,7 +236,7 @@ export const Main: React.FC = () => {
             {mode === 'TR' && (youWin || youLose) && (
                 <div className="gameover-feedback">
                     <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
-                    <h3>gesuchtes Wort war:</h3>
+                    <h4>gesuchtes Wort war:</h4>
                     <div className="solution-word">{solution}</div>
                 </div>
             )}
