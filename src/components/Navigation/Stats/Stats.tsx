@@ -13,7 +13,7 @@ export const Stats = (props: StatsProps) => {
     return (
         <div className='stats'>
             <h1>Statistiken</h1>
-            <div className="text">
+            <div className="main">
                 <div className='game-stats'>
                     <div className='games'>
                         Spiele: {props.stats.gamesPlayed}
@@ -23,9 +23,16 @@ export const Stats = (props: StatsProps) => {
                     </div>
 
                     <div className='streak'>
-                        Siegesserie: {props.stats.winStreak}/{props.stats.bestWinStreak} <i className="fa-solid fa-crown"></i>
+                        <div>
+                            aktuelle Siegesserie: {props.stats.winStreak}
+                        </div>
+                        <div>
+                            höchste Siegesserie: {props.stats.bestWinStreak} <i className="fa-solid fa-crown"></i>
+                        </div>
                     </div>
                 </div>
+
+                <div className='divider'></div>
 
                 <div className='histogram'>
                     {/* Histogram: {props.stats.trysPerWin} */}
@@ -48,11 +55,11 @@ export const Stats = (props: StatsProps) => {
                     })}
 
                 </div>
+            </div>
 
-                <div>
-                    <div>nächstes Wort in:</div>
-                    <Countdown date={WORD_OF_THE_DAY().tomorrow} daysInHours={true} />
-                </div>
+            <div className='next-word-timer'>
+                <div>nächstes Wort in:</div>
+                <Countdown date={WORD_OF_THE_DAY().tomorrow} daysInHours={true} />
             </div>
         </div>
     );
