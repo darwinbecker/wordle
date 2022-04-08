@@ -20,6 +20,7 @@ type ModeProps = {
     youWin: boolean;
     youLose: boolean;
     setYouWin: (win: boolean) => void;
+    setYouLose: (lose: boolean) => void;
     resetGame: () => void;
     setSolution: (solution: string) => void;
     setGuessedWords: (guessedWords: string[]) => void;
@@ -58,23 +59,25 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                         props.setWordStatuses(wordStatuses);
                     } else {
                         const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
-                        if (gameWasWon) {
-                            // WinService.setWin(true);
-                            props.setYouWin(true);
-                            Confetti();
-                        }
-
-                        if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
-                            // WinService.setWin(false);
-                            props.setYouWin(false);
-                            //     showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
-                            //     persist: true,
-                            //   })
-                        }
                         const data: string[] = loaded.guessedWords;
                         props.setGuessedWords(data);
                         const wordStatuses: WordStatusType[][] = loaded.wordStatuses;
                         props.setWordStatuses(wordStatuses);
+                        if (gameWasWon) {
+                            // WinService.setWin(true);
+                            props.setYouWin(true);
+                            props.setYouLose(false);
+                            Confetti();
+                            return;
+                        } else if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
+                            // WinService.setWin(false);
+                            props.setYouWin(false);
+                            props.setYouLose(true);
+                            return;
+                            //     showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
+                            //     persist: true,
+                            //   })
+                        }
                     }
                 }
             }
@@ -114,13 +117,13 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         } else {
             // if popup is visible & user clicks outside of popup window => hide popup
             const popup = event.target as HTMLDivElement;
-            if(popup.classList.contains('popup')){
+            if (popup.classList.contains('popup')) {
                 setNavMode(undefined);
                 setShowNavPopup(!showNavPopup);
             }
         }
     }
-    
+
     const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log("toggle contrast");
     }
@@ -143,7 +146,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
                 <div className="game-mode-icons-wrapper">
                     {/* <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button> */}
-                    <DarkModeButton/>
+                    <DarkModeButton />
                     <button onClick={toggleContrast}><i className="fa-solid fa-circle-half-stroke"></i></button>
                 </div>
             </div>
