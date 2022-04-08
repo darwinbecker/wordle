@@ -246,6 +246,12 @@ export const Main: React.FC = () => {
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
             <canvas id="confetti-canvas"></canvas>
 
+            {mode === 'WOTD' && (youLose) && (
+                <div className="gameover-feedback">
+                    <h4>gesuchtes Wort war:</h4>
+                    <div className="solution-word">{WORD_OF_THE_DAY().solution}</div>
+                </div>
+            )}
 
             {mode === 'TR' && (youWin || youLose) && (
                 <div className="gameover-feedback">
