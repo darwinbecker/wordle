@@ -7,6 +7,12 @@
     max-width: 80ch;
     margin: auto;
     margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.text h3{
+    text-decoration: underline;
 }
 
 .input-list, .rules-list, .modes-list{
@@ -24,4 +30,48 @@
 .modes-list > div{
     margin-left: 15px;
     margin-bottom: 10px;
+}
+
+
+
+/* Stats */
+.game-stats{
+    margin-bottom: 1rem;
+}
+
+.wins-and-losses{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.wins-and-losses .wins{
+    color: green;
+}
+
+.wins-and-losses .losses{
+    color: red;
+}
+
+
+
+/* Histogram */
+.histogram-bar-item{
+    margin: 5px 0;
+    margin-right: 5%;
+}
+
+.histogram-bar-item > *{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.histogram-bar-wrapper{
+    width: 60%;
+}
+
+.histogram-bar{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
