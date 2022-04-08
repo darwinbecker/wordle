@@ -1,7 +1,7 @@
-import { StoredPlayerStats } from "../../LocalStorage";
+import { PlayerStats } from "../../LocalStorage";
 
 type HistogramProps = {
-    stats: StoredPlayerStats;
+    stats: PlayerStats;
 }
 
 export const Histogram = (props: HistogramProps) => {

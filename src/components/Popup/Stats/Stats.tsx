@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Countdown from 'react-countdown'
 import { WORD_OF_THE_DAY } from '../../../Config/Wordlist';
-import { StoredPlayerStats } from '../../LocalStorage';
+import { PlayerStats } from '../../LocalStorage';
 import { Histogram } from './Histogram';
 
 type StatsProps = {
-    stats: StoredPlayerStats
+    stats: PlayerStats
 }
 
 export const Stats = (props: StatsProps) => {
