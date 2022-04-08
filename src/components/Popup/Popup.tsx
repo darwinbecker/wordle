@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Categories, Rapid } from '../GameMode';
+import { Categories, Rapid } from '.';
 import { StoredPlayerStats } from '../LocalStorage';
 import { Info, NavType, Stats } from '../Navigation';
 
