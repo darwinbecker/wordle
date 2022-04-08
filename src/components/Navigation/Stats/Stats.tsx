@@ -2,18 +2,21 @@ import { useState } from 'react';
 import Countdown from 'react-countdown'
 import { WORD_OF_THE_DAY } from '../../../Config/Wordlist';
 import { StoredPlayerStats } from '../../LocalStorage';
+import { Histogram } from './Histogram';
 
 type StatsProps = {
     stats: StoredPlayerStats
 }
 
 export const Stats = (props: StatsProps) => {
-    const maxValue = Math.max(...props.stats.trysPerWin);
-
     return (
         <div className='stats'>
             <h1>Statistiken</h1>
             <div className="main">
+                <Histogram stats={props.stats} />
+
+                <div className='divider'></div>
+
                 <div className='game-stats'>
                     <div className='games'>
                         Spiele: {props.stats.gamesPlayed}
@@ -32,29 +35,7 @@ export const Stats = (props: StatsProps) => {
                     </div>
                 </div>
 
-                <div className='divider'></div>
 
-                <div className='histogram'>
-                    {/* Histogram: {props.stats.trysPerWin} */}
-                    <div>
-                        Siege pro Versuch:
-                    </div>
-                    {props.stats.trysPerWin.map((item, index) => {
-                        return (
-                            <div className="histogram-bar-item" key={index}>
-                                <div className="histogram-bar-index">
-                                    {index + 1}.
-                                </div>
-                                <div className='histogram-bar-wrapper'>
-                                    <div className="histogram-bar" style={{ width: `${5 + Math.round((item / maxValue) * 100)}%` }}>
-                                        {item}
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-
-                </div>
             </div>
 
             <div className='next-word-timer'>

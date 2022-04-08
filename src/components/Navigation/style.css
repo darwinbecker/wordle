@@ -1,8 +1,11 @@
 .main, .next-word-timer{
-    max-width: 80ch;
     margin: auto;
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+.info .main{
+    max-width: 80ch;
 }
 
 /* Info */
@@ -29,7 +32,7 @@
 
 .stats .main{
     display: flex;
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
     align-items: stretch;
     margin: 20px auto;
 }
