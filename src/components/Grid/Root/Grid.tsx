@@ -1,6 +1,7 @@
 import { Row } from '../Row';
 import { MAX_WORD_LENGTH } from '../../../Config/Settings';
 import { MAX_GUESSES } from '../../../Config/Settings';
+import { WordStatusType } from '../../WordStatus';
 
 type GridProps = {
     letter: string;
@@ -15,7 +16,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                 // set already guessed words in row
                 props.guessedWords.map((element, index) => {
                     if (props.wordStatuses) {
-                        return <Row key={index} letter={element} wordStatus={props.wordStatuses[index]}></Row>
+                        return <Row key={index} letter={element} wordStatus={props.wordStatuses[index] as WordStatusType[]}></Row>
                     }
                 })
             }

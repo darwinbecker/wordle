@@ -2,10 +2,11 @@ import classnames from 'classnames';
 import { useEffect, useState } from 'react';
 import { loadHighContrast } from '../../LocalStorage';
 import { HighContrastService } from '../../Navigation';
+import { WordStatusType } from '../../WordStatus';
 
 type TileProps = {
     letter: string;
-    status?: string;
+    status?: WordStatusType;
 }
 
 export const Tile: React.FC<TileProps> = (props: TileProps) => {

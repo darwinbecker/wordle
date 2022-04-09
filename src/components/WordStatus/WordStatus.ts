@@ -1,4 +1,4 @@
-export type WordStatusType = 'correct' | 'semi' | 'wrong';
+export type WordStatusType = 'correct' | 'semi' | 'wrong' | 'correct-high-contrast' | 'semi-high-contrast';
 
 export const checkstatus = (guess: string, solution: string): WordStatusType[] => {
     const guessChars = guess.split("");

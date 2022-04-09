@@ -1,10 +1,11 @@
 import { Tile } from '../Tile';
 import { MAX_WORD_LENGTH } from '../../../Config/Settings';
+import { WordStatusType } from '../../WordStatus';
 
 type RowProps = {
     // columnIndex: number;
     letter: string;
-    wordStatus?: string[];
+    wordStatus?: WordStatusType[];
 }
 
 const Tiles: React.FC<RowProps> = (props: RowProps) => {
