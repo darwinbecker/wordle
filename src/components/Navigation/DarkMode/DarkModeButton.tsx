@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loadDarkMode, saveDarkMode } from "../../LocalStorage/localStorage";
+import { loadDarkMode, saveDarkMode } from "../../LocalStorage";
 
 type Theme = "light" | "dark";
 
@@ -21,13 +21,10 @@ export const DarkModeButton = () => {
             saveDarkMode(lightTheme);
             setTheme(lightTheme);
         }
-
     }
     body.classList.add(theme);
 
     return (
-
         <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button>
     );
-
 }

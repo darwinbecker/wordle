@@ -5,62 +5,38 @@ import { checkstatus, WordStatusType } from '../WordStatus';
 import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
 import { GameMode, GameModeType, GameModeService } from "../GameMode";
-import { loadGameStateFromLocalStorage, loadPlayerStatsFromLocalStorage, saveGameStateToLocalStorage, StoredGameState, StoredPlayerStats, savePlayerStatsToLocalStorage } from "../LocalStorage";
+import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats } from "../LocalStorage";
 import { Confetti } from "../Animations";
 // import { WinService } from '../GameHandler';
 
 export const Main: React.FC = () => {
-    const loadedGameState: StoredGameState | null = loadGameStateFromLocalStorage();
-    const loadedPlayerStats: StoredPlayerStats = loadPlayerStatsFromLocalStorage();
+    const loadedGameState: GameState = loadGameState();
+    const loadedPlayerStats: PlayerStats = loadPlayerStats();
 
     const [mode, setMode] = useState<GameModeType>("WOTD");
-    // const [youWin, setYouWin] = useState<boolean>(false);
-    // const [youLose, setYouLose] = useState<boolean>(false);
     const [youWin, setYouWin] = useState<boolean>(() => {
-        // if (loaded?.guessedWords.includes(WORD_OF_THE_DAY().solution)) {
-        //     Confetti();
-        //     return true;
-        // } else{
-        //     return false;
-        // }
-        return loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
+        return loadedGameState.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [youLose, setYouLose] = useState<boolean>(() => {
-        return loadedGameState?.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
+        return loadedGameState.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
         return WORD_OF_THE_DAY().solution;
     });
     const [guessedWord, setGuessedWord] = useState<string>("");
-    // const [guessedWords, setGuessedWords] = useState<string[]>([]);
     const [guessedWords, setGuessedWords] = useState<string[]>(() => {
-        return loadedGameState?.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.guessedWords;
+        return loadedGameState.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.guessedWords;
     });
-    // const [wordStatuses, setWordStatuses] = useState<StatusType[][]>([]);
     const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
-        return loadedGameState?.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.wordStatuses;
+        return loadedGameState.solution !== WORD_OF_THE_DAY().solution ? [] : loadedGameState.wordStatuses;
     });
     const [rowIndex, setRowIndex] = useState<number>(0);
     const [columnIndex, setColumnIndex] = useState<number>(0);
+    const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
 
-    const [stats, setStats] = useState<StoredPlayerStats>(loadedPlayerStats);
-
-
-    // const gameWasWon = loaded.guessedWords.includes(WORD_OF_THE_DAY().solution);
-    // if (gameWasWon) {
-    //     WinService.setWin(true);
-    // }
-    // if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
-    //     WinService.setWin(false);
-    //     //   showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
-    //     //     persist: true,
-    //     //   })
-    // }
-
-    const updatePlayerStats = (win: boolean): StoredPlayerStats => {
-
-        const gameStats: StoredPlayerStats = { ...stats }
+    const updatePlayerStats = (win: boolean): PlayerStats => {
+        const gameStats: PlayerStats = { ...stats }
         gameStats.gamesPlayed += 1;
         console.log(win);
         if (win) {
@@ -117,7 +93,7 @@ export const Main: React.FC = () => {
                     if (mode === "WOTD") {
                         const newStats = updatePlayerStats(true);
                         setStats(newStats);
-                        savePlayerStatsToLocalStorage(newStats);
+                        savePlayerStats(newStats);
                     }
                     setYouWin(true);
                     Confetti();
@@ -134,7 +110,7 @@ export const Main: React.FC = () => {
                         if (mode === "WOTD") {
                             const newStats = updatePlayerStats(false);
                             setStats(newStats);
-                            savePlayerStatsToLocalStorage(newStats);
+                            savePlayerStats(newStats);
                             setYouLose(true);
                         }
                         //TODO: setStats(updateStats);
@@ -169,7 +145,7 @@ export const Main: React.FC = () => {
     useEffect(() => {
         if (mode === "WOTD") {
             const solution = WORD_OF_THE_DAY().solution;
-            saveGameStateToLocalStorage({ guessedWords, wordStatuses, solution });
+            saveGameState({ guessedWords, wordStatuses, solution });
         }
     }, [guessedWords, wordStatuses]);
 

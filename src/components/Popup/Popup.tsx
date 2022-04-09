@@ -1,17 +1,17 @@
 import classnames from 'classnames';
-import { Categories, Rapid } from '.';
-import { StoredPlayerStats } from '../LocalStorage';
-import { Info, NavType, Stats } from '../Navigation';
+import { Categories, Rapid, Info, Stats } from '.';
+import { PlayerStats } from '../LocalStorage';
+// import { Info, NavType, Stats } from '../Navigation';
 
-type PopupType = 'categories' | 'rapid' | 'nav';
+export type PopupType = 'categories' | 'rapid' | 'nav' | 'info' | 'stats';;
 
 type ModeProps = {
-    content: PopupType;
+    content: PopupType | undefined;
     closePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
     forceInput: boolean;
-    navType?: NavType;
+    popupMode?: PopupType;
     animationDelay?: boolean;
-    stats: StoredPlayerStats
+    stats: PlayerStats
 }
 
 export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
@@ -39,16 +39,12 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
                     <Rapid closePopup={props.closePopup} />
                 )}
 
-                {props.content == 'nav' && (
-                    <>
-                        {props.navType == 'info' && (
-                            <Info />
-                        )}
+                {props.content == 'info' && (
+                    <Info />
+                )}
 
-                        {props.navType == 'stats' && (
-                            <Stats stats={props.stats}/>
-                        )}
-                    </>
+                {props.content == 'stats' && (
+                    <Stats stats={props.stats} />
                 )}
             </div>
         </div>

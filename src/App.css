@@ -13,6 +13,9 @@
 
   --light-detail: rgb(250, 250, 250);
   --dark-detail: rgb(20, 20, 20);
+
+  --high-contrast-correct: rgb(245, 121, 58);
+  --high-contrast-semi: rgb(133 192 249);
 }
 
 *{

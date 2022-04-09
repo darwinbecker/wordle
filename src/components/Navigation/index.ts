@@ -1,3 +1,3 @@
-export { Info } from './Info';
-export { Stats } from './Stats';
-export type { NavType } from './NavType';
+export { DarkModeButton } from './DarkMode/darkModeButton';
+export { HighContrastButton } from './HighContrast/highContrastButton';
+export { HighContrastService } from './HighContrast/highContrastService';

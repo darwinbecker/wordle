@@ -1,8 +1,8 @@
 export const Info = () => {
     return (
-        <>
+        <div className="info">
             <h1>Spielanleitung</h1>
-            <div className="text">
+            <div className="main">
                 <h3>Input:</h3>
                 <ul className="input-list">
                     <li>
@@ -63,6 +63,6 @@ export const Info = () => {
                         Wird ein Wort richtig erraten, bekommt der Spieler nochmal 10 Sekunden extra Zeit draufgerechnet.</div>
                 </ul>
             </div>
-        </>
+        </div>
     );
 }

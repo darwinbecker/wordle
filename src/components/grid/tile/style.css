@@ -27,3 +27,10 @@
     background-color: darkgrey;
 }
 
+.correct-high-contrast{
+    background-color: var(--high-contrast-correct);
+}
+
+.semi-high-contrast{
+    background-color: var(--high-contrast-semi);
+}

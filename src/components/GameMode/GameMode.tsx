@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 // import { WinService } from "../GameHandler";
-import { loadGameStateFromLocalStorage, StoredPlayerStats } from "../LocalStorage";
+import { loadGameState, PlayerStats } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeService } from "./GameModeService";
-import { NavType } from "../Navigation";
+import { PopupType } from "../Popup";
 import { Confetti } from "../Animations";
-import { DarkModeButton } from "../Navigation/DarkMode";
+import { DarkModeButton, HighContrastButton } from "../Navigation/";
 
 // WOTD = Word Of The Day
 // TR = Training
@@ -26,7 +26,7 @@ type ModeProps = {
     setGuessedWords: (guessedWords: string[]) => void;
     setWordStatuses: (wordStatuses: WordStatusType[][]) => void;
     getNextWord: () => void;
-    stats: StoredPlayerStats;
+    stats: PlayerStats;
 }
 
 export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
@@ -34,7 +34,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     const [mode, setMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
     const [showNavPopup, setShowNavPopup] = useState(false);
-    const [navMode, setNavMode] = useState<NavType>();
+    const [popupMode, setPopupMode] = useState<PopupType>();
 
     const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         event.target.blur();
@@ -49,7 +49,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                 setShowPopup(true);
                 props.resetGame();
                 props.setSolution(WORD_OF_THE_DAY().solution);
-                const loaded = loadGameStateFromLocalStorage();
+                const loaded = loadGameState();
                 console.log("loaded", loaded);
                 if (loaded) {
                     if (loaded.solution !== WORD_OF_THE_DAY().solution) {
@@ -112,20 +112,16 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         const navButton = event.currentTarget.value;
         if (navButton) {
             // if nav button is clicked => set mode
-            setNavMode(navButton as NavType);
+            setPopupMode(navButton as PopupType);
             setShowNavPopup(!showNavPopup);
         } else {
             // if popup is visible & user clicks outside of popup window => hide popup
             const popup = event.target as HTMLDivElement;
             if (popup.classList.contains('popup')) {
-                setNavMode(undefined);
+                setPopupMode(undefined);
                 setShowNavPopup(!showNavPopup);
             }
         }
-    }
-
-    const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("toggle contrast");
     }
 
     return (
@@ -147,7 +143,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                 <div className="game-mode-icons-wrapper">
                     {/* <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button> */}
                     <DarkModeButton />
-                    <button onClick={toggleContrast}><i className="fa-solid fa-circle-half-stroke"></i></button>
+                    <HighContrastButton/>
                 </div>
             </div>
 
@@ -165,13 +161,13 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
             {showPopup && (props.youWin || props.youLose) && (
                 <>
-                    <Popup content={'nav'} closePopup={togglePopup} forceInput={false} navType={'stats'} animationDelay={true} stats={props.stats}></Popup>
+                    <Popup content={'stats'} closePopup={togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
                 </>
             )}
 
             {showNavPopup && (
                 <>
-                    <Popup content={'nav'} closePopup={toggleNavButton} forceInput={false} navType={navMode} stats={props.stats}></Popup>
+                    <Popup content={popupMode} closePopup={toggleNavButton} forceInput={false} stats={props.stats}></Popup>
                 </>
             )}
         </div>
