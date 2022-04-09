@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loadHighContrast, saveHighContrast } from "../../LocalStorage";
-import { HighContrastService } from "../";
+import { HighContrastService } from "..";
 
 export const HighContrastButton = () => {
 
