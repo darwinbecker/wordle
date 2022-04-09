@@ -111,8 +111,8 @@ export const Main: React.FC = () => {
                             const newStats = updatePlayerStats(false);
                             setStats(newStats);
                             savePlayerStats(newStats);
-                            setYouLose(true);
                         }
+                        setYouLose(true);
                         //TODO: setStats(updateStats);
                         return;
                     }
