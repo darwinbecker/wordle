@@ -1,8 +1,11 @@
+import { WordStatusClassNames } from "../../WordStatus";
+
 export const Info = () => {
     return (
         <div className="info">
             <h1>Spielanleitung</h1>
             <div className="main">
+
                 <h3>Input:</h3>
                 <ul className="input-list">
                     <li>
@@ -26,6 +29,7 @@ export const Info = () => {
                         </ul>
                     </li>
                 </ul>
+
                 <h3>Regeln:</h3>
                 <ul className="rules-list">
                     <li>
@@ -46,6 +50,29 @@ export const Info = () => {
                         <div>Beispiel: Löwe (4 Buchstaben) wird zu Loewe (5 Buchstaben)</div>
                     </li>
                 </ul>
+
+                <h3>Buchstaben-Feedback:</h3>
+
+                <div className="text">
+                    <div>Nach der Eingabe eines Wortes, gibt es Feedback zu den einzelnen Buchstaben.<br />
+                        Jeder Buchstabe wird farblich dargestellt, wobei jede Farbe ihre eigene Bedeutung hat:</div>
+                </div>
+
+                <ul className="letter-info-list">
+                    <li>
+                        <div className={WordStatusClassNames('letter-info', 'correct')}>A</div>
+                        - Der Buchstabe ist im gesuchten Wort enthalten und befindet sich an der richtigen Stelle
+                    </li>
+                    <li>
+                        <div className={WordStatusClassNames('letter-info', 'semi')}>A</div>
+                        - Der Buchstabe ist im gesuchten Wort enthalten, befindet sich aber an der falschen Stelle
+                    </li>
+                    <li>
+                        <div className={WordStatusClassNames('letter-info', 'wrong')}>A</div>
+                        - Der Buchstabe ist nicht im gesuchten Wort enthalten
+                    </li>
+                </ul>
+
                 <h3>Modi:</h3>
                 <ul className="modes-list">
                     <li>Wort des Tages</li>
