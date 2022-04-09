@@ -21,12 +21,10 @@ export const DarkModeButton = () => {
             saveDarkMode(lightTheme);
             setTheme(lightTheme);
         }
-
     }
     body.classList.add(theme);
 
     return (
-
         <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button>
     );
 }

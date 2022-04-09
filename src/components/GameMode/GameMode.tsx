@@ -8,7 +8,7 @@ import { Popup } from "../Popup";
 import { GameModeService } from "./GameModeService";
 import { PopupType } from "../Popup";
 import { Confetti } from "../Animations";
-import { DarkModeButton } from "../Navigation/";
+import { DarkModeButton, HighContrastButton } from "../Navigation/";
 
 // WOTD = Word Of The Day
 // TR = Training
@@ -124,10 +124,6 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         }
     }
 
-    const toggleContrast = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("toggle contrast");
-    }
-
     return (
         <div className="Mode">
             <div className="game-mode-nav-wrapper">
@@ -147,7 +143,7 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
                 <div className="game-mode-icons-wrapper">
                     {/* <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button> */}
                     <DarkModeButton />
-                    <button onClick={toggleContrast}><i className="fa-solid fa-circle-half-stroke"></i></button>
+                    <HighContrastButton/>
                 </div>
             </div>
 
