@@ -1,3 +1,3 @@
-export { DarkModeButton } from './DarkMode/darkModeButton';
-export { HighContrastButton } from './HighContrast/highContrastButton';
-export { HighContrastService } from './HighContrast/highContrastService';
+export { DarkModeButton } from './DarkMode/DarkModeButton';
+export { HighContrastButton } from './HighContrast/HighContrastButton';
+export { HighContrastService } from './HighContrast/HighContrastService';
