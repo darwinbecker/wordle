@@ -5,6 +5,8 @@
 @import url("./components/Grid/Tile/style.css");
 @import url("./components/GameMode/style.css");
 @import url("./components/Popup/style.css");
+@import url("./components/Popup/Info/style.css");
+@import url("./components/Popup/Stats/style.css");
 @import url("./components/Navigation/style.css");
 
 :root{
@@ -29,6 +31,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6{
+  /* margin: 0; */
+  padding: 0;
+}
+ul{
   margin: 0;
   padding: 0;
 }

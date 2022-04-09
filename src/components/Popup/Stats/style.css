@@ -1,0 +1,72 @@
+/* Stats */
+.stats .main{
+    display: flex;
+    align-items: stretch;
+    margin: 20px auto;
+}
+
+.stats .main .game-stats{
+    flex: 1;
+    margin: auto;
+}
+
+
+/* game-stats */
+.wins-and-losses{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.wins-and-losses .wins{
+    color: green;
+}
+
+.wins-and-losses .losses{
+    color: red;
+}
+
+
+/* divider */
+.stats .main .divider{
+    width: 2px;
+    background: var(--secondary-color);
+}
+
+
+/* Histogram */
+.stats .main .histogram{
+    flex: 1;
+    margin: auto;
+}
+
+.histogram-bar-item{
+    margin: 5px 0;
+}
+
+.histogram-bar-item > *{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.histogram-bar-wrapper{
+    width: 70%;
+}
+
+.histogram-bar{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+/* Timer */
+.next-word-timer{
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.next-word-timer h3{
+    text-decoration: underline;
+}

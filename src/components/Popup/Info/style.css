@@ -1,0 +1,63 @@
+/* This is for Info & Stats popup */
+.main{
+    margin: auto;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.popup-content h1{
+    margin-block-start: 0.6em;
+    margin-block-end: 0.2em;
+    display: inline-block;
+    padding: 0 10px;
+    border-bottom: 3px solid black;
+    border-color: var(--secondary-color);
+}
+
+/* Info */
+.info .main{
+    max-width: 80ch;
+}
+
+.info .main h3{
+    margin-block-start: 1.2em;
+    margin-block-end: 1em;
+    text-decoration: underline;
+}
+
+.info .main ul{
+    padding-inline-start: 40px;
+}
+
+.input-list, .rules-list, .modes-list, .letter-info-list{
+    text-align: left;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.modes-list > li{
+    text-decoration: underline;
+}
+
+.modes-list > div{
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.letter-info-list > li{
+    list-style: none;
+    margin: 5px 0;
+}
+
+.letter-info{
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.2rem;
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 800;
+}
