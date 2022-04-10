@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
-// import { WinService } from "../GameHandler";
 import { loadGameState, PlayerStats } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeHandlerService } from "./GameModeHandlerService";
-import { PopupType } from "../Popup";
 import { Confetti } from "../Animations";
-import { DarkModeButton, HighContrastButton } from "../Navigation/";
-import { SelectGameMode } from "./SelectGameMode";
-import { InfoButton } from "../Navigation/Info/InfoButton";
+import { NavigationBar } from "../Navigation/";
 
-// WOTD = Word Of The Day
-// TR = Training
-// C = Category
-// R = Rapid
+// WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 
 type ModeProps = {
@@ -35,15 +28,6 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
     const [mode, setMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
-    // const [showNavPopup, setShowNavPopup] = useState(false);
-    const [popupMode, setPopupMode] = useState<PopupType>();
-
-    // const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    //     event.target.blur();
-    //     const selectedMode = event.target.value as GameModeType;
-    //     setMode(selectedMode);
-    //     GameModeService.setGameMode(selectedMode);
-    // }
 
     useEffect(() => {
         const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
@@ -110,40 +94,10 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         setShowPopup(!showPopup);
     }
 
-    // const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //     const navButton = event.currentTarget.value;
-    //     if (navButton) {
-    //         // if nav button is clicked => set mode
-    //         setPopupMode(navButton as PopupType);
-    //         setShowNavPopup(!showNavPopup);
-    //     } else {
-    //         // if popup is visible & user clicks outside of popup window => hide popup
-    //         const popup = event.target as HTMLDivElement;
-    //         if (popup.classList.contains('popup')) {
-    //             setPopupMode(undefined);
-    //             setShowNavPopup(!showNavPopup);
-    //         }
-    //     }
-    // }
-
     return (
         <div className="Mode">
-            <div className="game-mode-nav-wrapper">
 
-                <div className="game-mode-icons-wrapper">
-                    <InfoButton />
-                    {/* <button value="info" onClick={toggleNavButton}><i className="fa-solid fa-circle-info"></i></button> */}
-                    {/* <button value="stats" onClick={toggleNavButton}><i className="fa-solid fa-chart-simple"></i></button> */}
-                </div>
-
-                
-                <SelectGameMode setMode={setMode} />
-
-                <div className="game-mode-icons-wrapper">
-                    <DarkModeButton />
-                    <HighContrastButton/>
-                </div>
-            </div>
+            <NavigationBar mode={mode} setMode={setMode} stats={props.stats} />
 
             {mode === 'C' && showPopup && (
                 <>

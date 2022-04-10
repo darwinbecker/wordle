@@ -1,4 +1,4 @@
-.game-mode-nav-wrapper{
+.nav-wrapper{
     display: flex;
     max-width: 40%;
     margin: auto;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.game-mode-nav-wrapper > *{
+.nav-wrapper > *{
     flex: 1 auto;
     font-size: 1.5rem;
     /* line-height: 2rem; */
@@ -14,7 +14,7 @@
     margin: 0 5px;
 }
 
-.game-mode-select{
+.nav-select{
     /* display: block; */
     margin: auto;
     /* border: 1px solid #77777780; */
@@ -27,16 +27,16 @@
     color: var(--secondary-color);
 }
 
-.game-mode-select:active{
+.nav-select:active{
     border-color: black;
 }
 
 
-.game-mode-icons-wrapper{
+.nav-icons-wrapper{
     display: flex;
 }
 
-.game-mode-icons-wrapper > button{
+.nav-icons-wrapper > button{
     flex: 1 auto;
     font-size: 1.5rem;
     line-height: 2rem;
@@ -52,7 +52,7 @@
     transition: 0.2s ease-out;
 }
 
-.game-mode-icons-wrapper > button:hover{
+.nav-icons-wrapper > button:hover{
     /* background: rgb(240, 240, 240);
     color: rgb(25, 25, 25); */
     
@@ -60,7 +60,7 @@
     color: var(--primary-color);
 }
 
-.game-mode-icons-wrapper > button:active{
+.nav-icons-wrapper > button:active{
     /* border-color: var(--primary-color); */
     /* background: var(--primary-color);
     color: var(--secondary-color); */

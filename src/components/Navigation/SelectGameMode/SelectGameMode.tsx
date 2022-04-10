@@ -1,4 +1,4 @@
-import { GameModeType, GameModeHandlerService } from ".";
+import { GameModeType, GameModeHandlerService } from "../../GameMode";
 
 type GameModeProps = {
     setMode : (mode: GameModeType) => void;
@@ -14,7 +14,7 @@ export const SelectGameMode = (props: GameModeProps) => {
     }
 
     return (
-        <select className="game-mode-select" onChange={handleMode}>
+        <select className="nav-select" onChange={handleMode}>
             <option value="WOTD">Wort des Tages</option>
             <option value="TR">Training</option>
             <option value="C">Kategorie</option>
