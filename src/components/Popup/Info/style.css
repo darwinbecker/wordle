@@ -51,13 +51,15 @@
 
 .letter-info{
     display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
     margin-right: 10px;
     vertical-align: middle;
     border: 1px solid var(--secondary-color);
     border-radius: 0.2rem;
     text-align: center;
-    color: var(--primary-color);
-    font-weight: 800;
+    /* color: var(--primary-color); */
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    line-height: 1.7rem;
 }

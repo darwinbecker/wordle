@@ -1,41 +1,40 @@
 import { useState } from 'react';
 import Countdown from 'react-countdown'
 import { WORD_OF_THE_DAY } from '../../../Config/Wordlist';
-import { PlayerStats } from '../../LocalStorage';
+import { loadPlayerStats, PlayerStats } from '../../LocalStorage';
 import { Histogram } from './Histogram';
 
 type StatsProps = {
-    stats: PlayerStats
+    stats?: PlayerStats
 }
 
 export const Stats = (props: StatsProps) => {
+    const stats = props.stats ? props.stats : loadPlayerStats();
     return (
         <div className='stats'>
             <h1>Statistiken</h1>
             <div className="main">
-                <Histogram stats={props.stats} />
+                <Histogram stats={stats} />
 
                 <div className='divider'></div>
 
                 <div className='game-stats'>
                     <div className='games'>
-                        Spiele: {props.stats.gamesPlayed}
+                        Spiele: {stats.gamesPlayed}
                         <div className='wins-and-losses'>
-                            (<span className='wins'>{props.stats.wins}</span>/<span className='losses'>{props.stats.losses}</span>)
+                            (<span className='wins'>{stats.wins}</span>/<span className='losses'>{stats.losses}</span>)
                         </div>
                     </div>
 
                     <div className='streak'>
                         <div>
-                            aktuelle Siegesserie: {props.stats.winStreak}
+                            aktuelle Siegesserie: {stats.winStreak}
                         </div>
                         <div>
-                            höchste Siegesserie: {props.stats.bestWinStreak} <i className="fa-solid fa-crown"></i>
+                            höchste Siegesserie: {stats.bestWinStreak} <i className="fa-solid fa-crown"></i>
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div className='next-word-timer'>

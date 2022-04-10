@@ -4,7 +4,7 @@ import { Grid } from '../Grid/Root';
 import { checkstatus, WordStatusType } from '../WordStatus';
 import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
-import { GameMode, GameModeType, GameModeService } from "../GameMode";
+import { GameMode, GameModeType, GameModeHandlerService } from "../GameMode";
 import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats } from "../LocalStorage";
 import { Confetti } from "../Animations";
 // import { WinService } from '../GameHandler';
@@ -160,7 +160,7 @@ export const Main: React.FC = () => {
     // }, [youLose, youWin]);
 
     useEffect(() => {
-        const subscription = GameModeService.onGameModeChange().subscribe(mode => {
+        const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
             console.log("changed mode to: " + mode);
             setMode(mode as GameModeType);
             // if(mode == "WOTD") {

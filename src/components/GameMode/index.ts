@@ -1,3 +1,4 @@
 export { GameMode } from './GameMode';
-export { GameModeService } from './GameModeService';
+export { SelectGameMode } from './SelectGameMode';
+export { GameModeHandlerService } from './GameModeHandlerService';
 export type { GameModeType } from './GameMode';

@@ -5,10 +5,12 @@ import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { loadGameState, PlayerStats } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
-import { GameModeService } from "./GameModeService";
+import { GameModeHandlerService } from "./GameModeHandlerService";
 import { PopupType } from "../Popup";
 import { Confetti } from "../Animations";
 import { DarkModeButton, HighContrastButton } from "../Navigation/";
+import { SelectGameMode } from "./SelectGameMode";
+import { InfoButton } from "../Navigation/Info/InfoButton";
 
 // WOTD = Word Of The Day
 // TR = Training
@@ -33,18 +35,18 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
 
     const [mode, setMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
-    const [showNavPopup, setShowNavPopup] = useState(false);
+    // const [showNavPopup, setShowNavPopup] = useState(false);
     const [popupMode, setPopupMode] = useState<PopupType>();
 
-    const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-        event.target.blur();
-        const selectedMode = event.target.value as GameModeType;
-        setMode(selectedMode);
-        GameModeService.setGameMode(selectedMode);
-    }
+    // const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    //     event.target.blur();
+    //     const selectedMode = event.target.value as GameModeType;
+    //     setMode(selectedMode);
+    //     GameModeService.setGameMode(selectedMode);
+    // }
 
     useEffect(() => {
-        const subscription = GameModeService.onGameModeChange().subscribe(mode => {
+        const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
             if (mode == 'WOTD') {
                 setShowPopup(true);
                 props.resetGame();
@@ -108,40 +110,36 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
         setShowPopup(!showPopup);
     }
 
-    const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-        const navButton = event.currentTarget.value;
-        if (navButton) {
-            // if nav button is clicked => set mode
-            setPopupMode(navButton as PopupType);
-            setShowNavPopup(!showNavPopup);
-        } else {
-            // if popup is visible & user clicks outside of popup window => hide popup
-            const popup = event.target as HTMLDivElement;
-            if (popup.classList.contains('popup')) {
-                setPopupMode(undefined);
-                setShowNavPopup(!showNavPopup);
-            }
-        }
-    }
+    // const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //     const navButton = event.currentTarget.value;
+    //     if (navButton) {
+    //         // if nav button is clicked => set mode
+    //         setPopupMode(navButton as PopupType);
+    //         setShowNavPopup(!showNavPopup);
+    //     } else {
+    //         // if popup is visible & user clicks outside of popup window => hide popup
+    //         const popup = event.target as HTMLDivElement;
+    //         if (popup.classList.contains('popup')) {
+    //             setPopupMode(undefined);
+    //             setShowNavPopup(!showNavPopup);
+    //         }
+    //     }
+    // }
 
     return (
         <div className="Mode">
             <div className="game-mode-nav-wrapper">
 
                 <div className="game-mode-icons-wrapper">
-                    <button value="info" onClick={toggleNavButton}><i className="fa-solid fa-circle-info"></i></button>
-                    <button value="stats" onClick={toggleNavButton}><i className="fa-solid fa-chart-simple"></i></button>
+                    <InfoButton />
+                    {/* <button value="info" onClick={toggleNavButton}><i className="fa-solid fa-circle-info"></i></button> */}
+                    {/* <button value="stats" onClick={toggleNavButton}><i className="fa-solid fa-chart-simple"></i></button> */}
                 </div>
 
-                <select className="game-mode-select" onChange={handleMode}>
-                    <option value="WOTD">Wort des Tages</option>
-                    <option value="TR">Training</option>
-                    <option value="C">Kategorie</option>
-                    <option value="R">Blitz</option>
-                </select>
+                
+                <SelectGameMode setMode={setMode} />
 
                 <div className="game-mode-icons-wrapper">
-                    {/* <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button> */}
                     <DarkModeButton />
                     <HighContrastButton/>
                 </div>
@@ -162,12 +160,6 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
             {showPopup && (props.youWin || props.youLose) && (
                 <>
                     <Popup content={'stats'} closePopup={togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
-                </>
-            )}
-
-            {showNavPopup && (
-                <>
-                    <Popup content={popupMode} closePopup={toggleNavButton} forceInput={false} stats={props.stats}></Popup>
                 </>
             )}
         </div>
