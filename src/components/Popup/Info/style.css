@@ -12,6 +12,7 @@
     padding: 0 10px;
     border-bottom: 3px solid black;
     border-color: var(--secondary-color);
+    font-size: 2rem;
 }
 
 /* Info */

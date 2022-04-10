@@ -9,7 +9,7 @@
 .game-mode-nav-wrapper > *{
     flex: 1 auto;
     font-size: 1.5rem;
-    line-height: 2rem;
+    /* line-height: 2rem; */
     /* padding: 0.1rem; */
     margin: 0 5px;
 }
