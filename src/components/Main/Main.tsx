@@ -4,9 +4,10 @@ import { Grid } from '../Grid/Root';
 import { checkstatus, WordStatusType } from '../WordStatus';
 import { isInDictionary, DICTIONARY } from '../../Config/Dictionary';
 import { getRandomWord, WORD_OF_THE_DAY } from '../../Config/Wordlist';
-import { GameMode, GameModeType, GameModeHandlerService } from "../GameMode";
+import { GameHandler, GameModeType, GameModeHandlerService } from "../GameHandler";
 import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats } from "../LocalStorage";
 import { Confetti } from "../Animations";
+import { Keyboard } from "../Keyboard";
 // import { WinService } from '../GameHandler';
 
 export const Main: React.FC = () => {
@@ -76,10 +77,10 @@ export const Main: React.FC = () => {
         if (guessedWord.length == 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                if (!isInDictionary(guessedWord)) {
-                    console.log("WORD IS NOT IN DICTIONARY");
-                    return;
-                }
+                // if (!isInDictionary(guessedWord)) {
+                //     console.log("WORD IS NOT IN DICTIONARY");
+                //     return;
+                // }
 
                 setGuessedWords([...guessedWords, guessedWord]);
                 setRowIndex(rowIndex + 1);
@@ -217,11 +218,12 @@ export const Main: React.FC = () => {
 
     return (
         <>
-            <GameMode youWin={youWin} youLose={youLose} setYouWin={setYouWin}  setYouLose={setYouLose}resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord} stats={stats}></GameMode>
+            <GameHandler youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose} resetGame={resetGame} setSolution={setSolution} setGuessedWords={setGuessedWords} setWordStatuses={setWordStatuses} getNextWord={getNextWord} stats={stats}></GameHandler>
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-            <canvas id="confetti-canvas"></canvas>
 
+            <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution}/>
+                
             {mode === 'WOTD' && (youLose) && (
                 <div className="gameover-feedback">
                     <h4>gesuchtes Wort war:</h4>
