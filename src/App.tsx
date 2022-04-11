@@ -21,6 +21,8 @@ function App() {
       </header> */}
 
       <Main></Main>
+      <canvas id="confetti-canvas"></canvas>
+
 
     </div>
   );

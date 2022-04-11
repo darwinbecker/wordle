@@ -58,10 +58,6 @@
     border-bottom-right-radius: 0.3rem;
 }
 
-.animate__animated.animate__fadeInUp{
-    --animate-duration: 0.5s;
-}
-
 .popup-delay{
     --animation-delay: 1.2s;
     opacity: 0;

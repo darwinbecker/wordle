@@ -1,4 +1,4 @@
-import { GameModeType, GameModeHandlerService } from "../../GameMode";
+import { GameModeType, GameModeHandlerService } from "../../GameHandler";
 
 type GameModeProps = {
     setMode : (mode: GameModeType) => void;

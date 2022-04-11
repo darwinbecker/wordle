@@ -6,12 +6,12 @@ import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeHandlerService } from "./GameModeHandlerService";
 import { Confetti } from "../Animations";
-import { NavigationBar } from "../Navigation/";
+import { NavigationBar } from "../Navigation";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 
-type ModeProps = {
+type GameHandlerProps = {
     youWin: boolean;
     youLose: boolean;
     setYouWin: (win: boolean) => void;
@@ -24,9 +24,9 @@ type ModeProps = {
     stats: PlayerStats;
 }
 
-export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
+export const GameHandler: React.FC<GameHandlerProps> = (props: GameHandlerProps) => {
 
-    const [mode, setMode] = useState<GameModeType>("WOTD");
+    const [gameMode, setGameMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
 
     useEffect(() => {
@@ -97,21 +97,21 @@ export const GameMode: React.FC<ModeProps> = (props: ModeProps) => {
     return (
         <div className="Mode">
 
-            <NavigationBar mode={mode} setMode={setMode} stats={props.stats} />
+            <NavigationBar setMode={setGameMode} stats={props.stats} />
 
-            {mode === 'C' && showPopup && (
+            {gameMode === 'C' && showPopup && (
                 <>
                     <Popup content={'categories'} closePopup={togglePopup} forceInput={true} stats={props.stats}></Popup>
                 </>
             )}
 
-            {mode === 'R' && showPopup && (
+            {gameMode === 'R' && showPopup && (
                 <>
                     <Popup content={'rapid'} closePopup={togglePopup} forceInput={true} stats={props.stats}></Popup>
                 </>
             )}
 
-            {showPopup && (props.youWin || props.youLose) && (
+            {gameMode === 'WOTD' && showPopup && (props.youWin || props.youLose) && (
                 <>
                     <Popup content={'stats'} closePopup={togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
                 </>

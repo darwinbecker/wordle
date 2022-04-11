@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { GameModeType } from './GameMode';
+import { GameModeType } from './GameHandler';
 
 const subject = new Subject();
 export const GameModeHandlerService = {

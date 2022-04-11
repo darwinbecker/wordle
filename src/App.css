@@ -1,13 +1,15 @@
 
 @import url("./components/Main/style.css");
+@import url("./components/Animations/style.css");
 @import url("./components/Grid/Root/style.css");
 @import url("./components/Grid/Row/style.css");
 @import url("./components/Grid/Tile/style.css");
-@import url("./components/GameMode/style.css");
+@import url("./components/GameHandler/style.css");
 @import url("./components/Popup/style.css");
 @import url("./components/Popup/Info/style.css");
 @import url("./components/Popup/Stats/style.css");
 @import url("./components/Navigation/style.css");
+@import url("./components/Keyboard/style.css"); 
 
 :root{
   --light: rgb(230, 230, 230);

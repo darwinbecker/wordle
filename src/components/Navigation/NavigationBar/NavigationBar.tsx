@@ -1,9 +1,8 @@
 import { InfoButton, StatsButton, SelectGameMode, DarkModeButton, HighContrastButton } from "..";
-import { GameModeType } from "../../GameMode";
+import { GameModeType } from "../../GameHandler";
 import { PlayerStats } from "../../LocalStorage";
 
 type NavigationBarProps = {
-    mode: GameModeType;
     setMode: (mode: GameModeType) => void;
     stats: PlayerStats;
 }
