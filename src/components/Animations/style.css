@@ -1,0 +1,16 @@
+#confetti-canvas{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    /* bottom: 0; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: auto;
+    width: 25rem;
+    height: 27rem;
+}
+
+.animate__animated.animate__fadeInUp{
+    --animate-duration: 0.5s;
+}

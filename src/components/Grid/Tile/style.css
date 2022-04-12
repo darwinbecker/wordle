@@ -16,21 +16,21 @@
 }
 
 .correct{
-    background-color: #1a9f1a;
+    background-color: #1a9f1a !important;
 }
 
 .semi{
-    background-color: #dba53d;
+    background-color: #dba53d !important;
 }
 
 .wrong{
-    background-color: darkgrey;
+    background-color: darkgrey !important;
 }
 
 .correct-high-contrast{
-    background-color: var(--high-contrast-correct);
+    background-color: var(--high-contrast-correct) !important;
 }
 
 .semi-high-contrast{
-    background-color: var(--high-contrast-semi);
+    background-color: var(--high-contrast-semi) !important;
 }

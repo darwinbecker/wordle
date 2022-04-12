@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { GameHandler } from './components/GameHandler';
 import { Main } from './components/Main/Main';
 
 function App() {
@@ -20,7 +21,10 @@ function App() {
         </a>
       </header> */}
 
-      <Main></Main>
+      {/* <Main></Main> */}
+      <GameHandler/>
+      <canvas id="confetti-canvas"></canvas>
+
 
     </div>
   );

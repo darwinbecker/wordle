@@ -54,3 +54,31 @@ export const checkstatus = (guess: string, solution: string): WordStatusType[] =
 
     return status;
 }
+
+
+
+
+
+export const getStatuses = (guesses: string[], solution: string): { [key: string]: WordStatusType } => {
+    const charObj: { [key: string]: WordStatusType } = {}
+    const solutionChars = solution.split("");
+
+    guesses.forEach((word) => {
+        word.split("").forEach((letter, i) => {
+            if (!solutionChars.includes(letter)) {
+                return (charObj[letter] = 'wrong')
+            }
+
+            if (letter === solutionChars[i]) {
+                return (charObj[letter] = 'correct')
+            }
+
+            if (charObj[letter] !== 'correct') {
+                return (charObj[letter] = 'semi')
+            }
+        })
+    })
+
+    return charObj
+}
+

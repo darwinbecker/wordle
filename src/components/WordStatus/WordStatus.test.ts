@@ -28,4 +28,12 @@ describe("check word status of solution word: 'ADMIN'", () => {
         expect(status).toContain("correct");
         expect(status).toEqual(["correct", "correct", "correct", "correct", "correct"]);
     });
+
+    
+    test('check status of random word DDMMI', () => {
+        const status = checkstatus("DDMMI", "ADMIN");
+        expect(status.length).toEqual(5);
+        expect(status).toContain("wrong" && "correct" && "semi");
+        expect(status).toEqual(["wrong", "correct", "correct", "wrong", "semi"]);
+    });
 })
