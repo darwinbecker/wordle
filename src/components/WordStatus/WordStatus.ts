@@ -59,7 +59,7 @@ export const checkstatus = (guess: string, solution: string): WordStatusType[] =
 
 
 
-export const getStatuses = (guesses: string[], solution: string): { [key: string]: WordStatusType } => { // : { [key: string]: WordStatusType }
+export const getStatuses = (guesses: string[], solution: string): { [key: string]: WordStatusType } => {
     const charObj: { [key: string]: WordStatusType } = {}
     const solutionChars = solution.split("");
 

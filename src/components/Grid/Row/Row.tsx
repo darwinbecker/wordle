@@ -14,20 +14,20 @@ const Tiles: React.FC<RowProps> = (props: RowProps) => {
         <>
 
             {
-                letterArray.map((element, index) => {
+                letterArray.map((char, index) => {
                     if (props.wordStatus) {
                         // set already guessed letter in tile
-                        return <Tile key={index} letter={element} status={props.wordStatus[index]}></Tile>
+                        return <Tile key={index} letter={char} status={props.wordStatus[index]}></Tile>
                     } else {
                         // set current letter in tile
-                        return <Tile key={index} letter={element}></Tile>
+                        return <Tile key={index} letter={char}></Tile>
                     }
                 })
             }
             {
                 // set empty tiles
-                [...Array(MAX_WORD_LENGTH - letterArray.length)].map((element, index) => {
-                    return <Tile key={index} letter={element}></Tile>
+                [...Array(MAX_WORD_LENGTH - letterArray.length)].map((char, index) => {
+                    return <Tile key={index} letter={char}></Tile>
                 })
             }
         </>
