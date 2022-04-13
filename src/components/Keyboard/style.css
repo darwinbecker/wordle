@@ -32,6 +32,6 @@
 }
 
 .Enter-Key, .Delete-Key{
-    flex: auto;
+    flex: 2;
 }
 

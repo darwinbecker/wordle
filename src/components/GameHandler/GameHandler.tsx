@@ -134,16 +134,16 @@ export const GameHandler: React.FC = () => {
     return (
         <div className="Game">
 
+            <NavigationBar setMode={setGameMode} stats={stats} />
+
+            <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
+
             <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
                 solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
                 guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
                 rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex} />
 
-            <NavigationBar setMode={setGameMode} stats={stats} />
-
-            <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-
-            <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} />
+            {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
 
             {gameMode === 'C' && showPopup && (
                 <>
