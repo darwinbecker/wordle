@@ -7,6 +7,9 @@ type KeyboardProps = {
     wordStatuses: WordStatusType[][];
     guessedWords: string[];
     solution: string;
+    handleChange: (value: string) => void;
+    handeSubmit: () => void;
+    handleRemove: () => void;
 }
 
 export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
@@ -19,20 +22,20 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
         const buttonValue = event.currentTarget.value;
         console.log(buttonValue);
     }
-    
+
     return (
         <div className="Keyboard">
             <div className="firstRow">
                 {firstRow.map((letter, index) => {
                     return (
-                        <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={handleClick} value={letter} key={index}>{letter}</button>
+                        <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={(e) => props.handleChange(e.currentTarget.value)} value={letter} key={index}>{letter}</button>
                     )
                 })}
             </div>
             <div className="secondRow">
                 {secondRow.map((letter, index) => {
                     return (
-                        <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={handleClick} value={letter} key={index}>{letter}</button>
+                        <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={(e) => props.handleChange(e.currentTarget.value)} value={letter} key={index}>{letter}</button>
                     )
                 })}
             </div>
@@ -40,15 +43,15 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
                 {thirdRow.map((letter, index) => {
                     if (index == 0) {
                         return (
-                            <button  className={WordStatusClassNames('Key Enter-Key', charStatuses[letter])} onClick={handleClick} value={letter} key={index}><i className="fa-regular fa-circle-check"></i></button>
+                            <button className={WordStatusClassNames('Key Enter-Key', charStatuses[letter])} onClick={props.handeSubmit} value={letter} key={index}><i className="fa-regular fa-circle-check"></i></button>
                         )
-                    } else if(index == 8) {
+                    } else if (index == 8) {
                         return (
-                            <button className={WordStatusClassNames('Key Delete-Key', charStatuses[letter])} onClick={handleClick} value={letter} key={index}><i className="fa-solid fa-delete-left"></i></button>
+                            <button className={WordStatusClassNames('Key Delete-Key', charStatuses[letter])} onClick={props.handleRemove} value={letter} key={index}><i className="fa-solid fa-delete-left"></i></button>
                         )
-                    } else{
+                    } else {
                         return (
-                            <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={handleClick} value={letter} key={index}>{letter}</button>
+                            <button className={WordStatusClassNames('Key', charStatuses[letter])} onClick={(e) => props.handleChange(e.currentTarget.value)} value={letter} key={index}>{letter}</button>
                         )
                     }
                 })}

@@ -3,6 +3,7 @@ import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { Confetti } from "../Animations";
 import { GameModeHandlerService, GameModeType } from "../GameHandler";
+import { Keyboard } from "../Keyboard";
 import { GameState, loadGameState, PlayerStats, loadPlayerStats, savePlayerStats, saveGameState } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
 
@@ -141,6 +142,8 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
 
     return (
         <>
+            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
+                handleChange={handleChange} handeSubmit={handleSubmit} handleRemove={handleRemove} />
         </>
     );
 }
