@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Countdown from 'react-countdown'
+import Countdown from 'react-countdown';
 import { WORD_OF_THE_DAY } from '../../../Config/Wordlist';
 import { loadPlayerStats, PlayerStats } from '../../LocalStorage';
 import { Histogram } from './Histogram';

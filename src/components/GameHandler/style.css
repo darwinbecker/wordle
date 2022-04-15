@@ -111,3 +111,13 @@
     transition: 0.2s ease-out;
 }
 
+
+.timer{
+    margin-top: 40px;
+    color: var(--secondary-color);
+    /* color: var(--primary-color); */
+    /* text-shadow: -1px -1px 0 var(--secondary-color),1px -1px 0 var(--secondary-color),-1px 1px 0 var(--secondary-color),1px 1px 0 var(--secondary-color); */
+    font-size: 2rem;
+    font-weight: 600;
+}
+

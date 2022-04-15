@@ -8,8 +8,9 @@ import { GameModeHandlerService } from "./GameModeHandlerService";
 import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
 import { Grid } from "../Grid";
-import { InputHandler } from ".";
-import { Keyboard } from "../Keyboard";
+import { CategoryMode, InputHandler, RapidMode, TRMode, WOTDMode } from ".";
+import { useTimer } from "../Timer";
+import { CountdownTimer } from "../Timer";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -43,6 +44,9 @@ export const GameHandler: React.FC = () => {
     const [columnIndex, setColumnIndex] = useState<number>(0);
     const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
+    const [timer, setTimer] = useState<number>(0);
+    const [timerStarted, setTimerStarted] = useState<boolean>(false);
+
     const resetGame = () => {
         setGuessedWords([]);
         setRowIndex(0);
@@ -52,6 +56,7 @@ export const GameHandler: React.FC = () => {
         setYouWin(false);
         setYouLose(false);
         setSolution("");
+        setTimerStarted(false);
     }
 
     const getNextWord = () => {
@@ -125,9 +130,18 @@ export const GameHandler: React.FC = () => {
 
     const togglePopup = (event: React.MouseEvent<HTMLButtonElement>) => {
         console.log("load category dictionary");
+        console.log(gameMode)
         console.log(event.currentTarget.value);
-        const category = event.currentTarget.value;
+
         // TODO: load category dictionary if mode is C, or timer if mode is R
+        if (gameMode === "C") {
+            const category = event.currentTarget.value;
+        } else if (gameMode === "R") {
+            const timerValue = parseInt(event.currentTarget.value);
+            setTimer(timerValue);
+        }
+
+
         setShowPopup(!showPopup);
     }
 
@@ -139,9 +153,10 @@ export const GameHandler: React.FC = () => {
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
 
             <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
-                solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
-                guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
-                rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex} />
+            solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
+            guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
+            rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex} 
+            timer={timer} setTimer={setTimer} timerStarted={timerStarted} setTimerStarted={setTimerStarted}/>
 
             {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
 
@@ -179,6 +194,24 @@ export const GameHandler: React.FC = () => {
                 </div>
             )}
 
+            {gameMode === 'R' && (
+                <>
+                    <div className="timer">
+                        {timerStarted && (
+                            <CountdownTimer targetDate={timer} setYouLose={setYouLose} />
+                        )}
+                    </div>
+                </>
+            )}
+            
+            {gameMode === 'R' && (youLose) && (
+                <div className="gameover-feedback">
+                    <h4>gesuchtes Wort war:</h4>
+                    <div className="solution-word">{solution}</div>
+                </div>
+            )}
+
         </div>
     );
 }
+

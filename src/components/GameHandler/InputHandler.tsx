@@ -26,11 +26,16 @@ type InputHandlerProps = {
     setRowIndex: (value: number) => void;
     columnIndex: number;
     setColumnIndex: (value: number) => void;
+    timerStarted: boolean;
+    setTimerStarted: (value: boolean) => void;
+    timer: number;
+    setTimer: (value: number) => void;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
 
     const handleChange = (value: string) => {
+        if (props.youWin || props.youLose) return;
         // && guesses.length < MAX_CHALLENGES && !isGameWon
         if (props.guessedWord.length < MAX_WORD_LENGTH) {
             props.setGuessedWord(`${props.guessedWord}${value}`);
@@ -123,14 +128,30 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
         const listener = (event: globalThis.KeyboardEvent): any => {
             if (event.code === 'Enter') {
                 handleSubmit();
+                return;
             } else if (event.code === 'Backspace') {
                 handleRemove();
+                return;
+            } else if (event.code === 'Space') {
+                if (!props.timerStarted) {
+                    // TODO: TIMER
+                    // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+                    const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                    props.setTimer(newTimerValue);
+                    props.setTimerStarted(true);
+                    return;
+                }
             } else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
-                    handleChange(key);
+                    if (props.mode == 'R' && !props.timerStarted) {
+                        // TODO: Info text: "PRESS SPACE TO START"
+                    } else {
+                        handleChange(key);
+                    }
                 }
+                return;
             }
         }
         window.addEventListener('keyup', listener);
