@@ -1,5 +1,6 @@
 // Source: https://blog.greenroots.info/how-to-create-a-countdown-timer-using-react-hooks
-import { useTimer } from ".";
+import { useState } from "react";
+import { useTimer, useTimerFreeze } from ".";
 import TimeDisplay from "./TimeDisplay";
 
 const ExpiredCountdownNotice = () => {
@@ -28,24 +29,27 @@ const DisplayTimer = (props: DisplayTimerProps) => {
 
 type CountdownTimerProps = {
   targetDate: number,
-  setYouLose: (value: boolean) => void,
 }
 
 export const CountdownTimer = (props: CountdownTimerProps) => {
   const [minutes, seconds] = useTimer(props.targetDate);
 
-  // if (minutes + seconds <= 0) {
-  //   props.setYouLose(true);
-  //   return <ExpiredNotice />;
-  // } else {
-  //   return (
-  //     <DisplayTimer minutes={minutes} seconds={seconds}
-  //     />
-  //   );
-  // }
-  if (minutes + seconds > 0) {
-    return <DisplayTimer minutes={minutes} seconds={seconds} />;
+  if (minutes + seconds <= 0) {
+    return <ExpiredCountdownNotice />;
   } else {
-    return <ExpiredCountdownNotice/>;
+    return <DisplayTimer minutes={minutes} seconds={seconds} />;
+  }
+};
+
+export const FreezeTimer = (props: CountdownTimerProps) => {
+  const [minutes, seconds] = useTimerFreeze(props.targetDate);
+
+  console.log("TESIBTSTTST")
+  console.log(minutes)
+  console.log(seconds)
+  if (minutes + seconds <= 0) {
+    return <ExpiredCountdownNotice />;
+  } else {
+    return <DisplayTimer minutes={minutes} seconds={seconds} />;
   }
 };

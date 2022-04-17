@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isInDictionary } from "../../Config/Dictionary";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { Confetti } from "../Animations";
@@ -30,9 +31,14 @@ type InputHandlerProps = {
     setTimerStarted: (value: boolean) => void;
     timer: number;
     setTimer: (value: number) => void;
+    getNextWord: () => void;
+    rapidModeScore: number;
+    setRapidModeScore: (value: number) => void;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
+
+    const trainingModeAddTimerInSeconds: number = 5;
 
     const handleChange = (value: string) => {
         if (props.youWin || props.youLose) return;
@@ -59,7 +65,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
         if (props.guessedWord.length == 5) {
             if (props.guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                // if (!isInDictionary(guessedWord)) {
+                // if (!isInDictionary(props.guessedWord)) {
                 //     console.log("WORD IS NOT IN DICTIONARY");
                 //     return;
                 // }
@@ -78,8 +84,18 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         props.setStats(newStats);
                         savePlayerStats(newStats);
                     }
-                    props.setYouWin(true);
-                    Confetti();
+
+                    if(props.mode !== "TR"){
+                        const newTimerValue = props.timer + (trainingModeAddTimerInSeconds * 1000);
+                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                        props.setTimer(newTimerValue);
+                        props.setRapidModeScore(props.rapidModeScore + 1);
+                        props.getNextWord();
+                    } else {
+                        props.setYouWin(true);
+                        Confetti();
+                    }
+                    
                     return;
                 }
 
@@ -92,6 +108,11 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                             props.setStats(newStats);
                             savePlayerStats(newStats);
                         }
+
+                        if(props.mode !== "TR"){
+                            props.setTimerStarted(false);
+                        }
+
                         props.setYouLose(true);
                         return;
                     }
@@ -132,24 +153,30 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
             } else if (event.code === 'Backspace') {
                 handleRemove();
                 return;
-            } else if (event.code === 'Space') {
-                if (!props.timerStarted) {
-                    // TODO: TIMER
-                    // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
-                    const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
-                    props.setTimer(newTimerValue);
-                    props.setTimerStarted(true);
-                    return;
-                }
-            } else {
+            } 
+            // else if (event.code === 'Space') {
+            //     if (!props.timerStarted) {
+            //         // TODO: TIMER
+            //         const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+            //         // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+            //         props.setTimer(newTimerValue);
+            //         props.setTimerStarted(true);
+            //         return;
+            //     }
+            // } 
+            else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
                     if (props.mode == 'R' && !props.timerStarted) {
-                        // TODO: Info text: "PRESS SPACE TO START"
-                    } else {
-                        handleChange(key);
+                        // TODO: TIMER
+                        const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+                        console.log("new timer value: " + newTimerValue);
+                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                        props.setTimer(newTimerValue);
+                        props.setTimerStarted(true);
                     }
+                    handleChange(key);
                 }
                 return;
             }

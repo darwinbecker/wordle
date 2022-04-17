@@ -1,15 +1,10 @@
 import { GameModeType, GameModeHandlerService } from "../../GameHandler";
 
-type GameModeProps = {
-    setMode : (mode: GameModeType) => void;
-}
-
-export const SelectGameMode = (props: GameModeProps) => {
+export const SelectGameMode = () => {
 
     const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         event.target.blur();
         const selectedMode = event.target.value as GameModeType;
-        props.setMode(selectedMode);
         GameModeHandlerService.setGameMode(selectedMode);
     }
 

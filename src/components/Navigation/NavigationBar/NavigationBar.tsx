@@ -3,11 +3,11 @@ import { GameModeType } from "../../GameHandler";
 import { PlayerStats } from "../../LocalStorage";
 
 type NavigationBarProps = {
-    setMode: (mode: GameModeType) => void;
     stats: PlayerStats;
 }
 
 export const NavigationBar = (props: NavigationBarProps) => {
+
     return (
 
         <div className="nav-wrapper">
@@ -17,7 +17,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
                 <StatsButton stats={props.stats} />
             </div>
 
-            <SelectGameMode setMode={props.setMode} />
+            <SelectGameMode />
 
             <div className="nav-icons-wrapper">
                 <DarkModeButton />
