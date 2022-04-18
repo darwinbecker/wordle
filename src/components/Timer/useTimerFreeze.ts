@@ -8,7 +8,6 @@ const useTimerFreeze = (targetDate: number) => {
     );
 
     useEffect(() => {
-        console.log("TEST")
         setCountDown(countDownDate - new Date().getTime());
     }, [countDownDate]);
 

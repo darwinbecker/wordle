@@ -9,7 +9,7 @@ type TimeDisplayProps = {
 const TimeDisplay = (props: TimeDisplayProps) => {
     return (
         <div className={props.isDanger ? 'countdown danger' : 'countdown'}>
-            <p>{props.value}</p>
+            <p>{props.value < 10 ? "0" + props.value : props.value}</p>
             <span>{props.type}</span>
         </div>
     );

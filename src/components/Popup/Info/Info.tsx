@@ -87,7 +87,7 @@ export const Info = () => {
 
                     <li>Blitz</li>
                     <div>Im Blitzmodus hat der Spieler nur begrenzt Zeit, um soviele Wörter wie möglich zu erraten.
-                        Wird ein Wort richtig erraten, bekommt der Spieler nochmal 10 Sekunden extra Zeit draufgerechnet.</div>
+                        Wird ein Wort richtig erraten, bekommt der Spieler nochmal 5 Sekunden extra Zeit draufgerechnet.</div>
                 </ul>
             </div>
         </div>

@@ -1,5 +1,5 @@
 // Source: https://blog.greenroots.info/how-to-create-a-countdown-timer-using-react-hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTimer, useTimerFreeze } from ".";
 import TimeDisplay from "./TimeDisplay";
 
@@ -27,28 +27,62 @@ const DisplayTimer = (props: DisplayTimerProps) => {
   );
 };
 
+
+const getReturnValues = (countDown: number) => {
+  // calculate time left
+  const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
+
+  return [minutes, seconds];
+};
+
 type CountdownTimerProps = {
   targetDate: number,
+  setYouLose: (value: boolean) => void,
 }
 
 export const CountdownTimer = (props: CountdownTimerProps) => {
-  const [minutes, seconds] = useTimer(props.targetDate);
+  // const [minutes, seconds] = useTimer(props.targetDate);
+  const countDownDate = new Date(props.targetDate).getTime();
+
+  const [countDown, setCountDown] = useState(
+      countDownDate - new Date().getTime()
+  );
+
+  useEffect(() => {
+      if (new Date().getTime() <= countDownDate) {
+          const interval = setInterval(() => {
+              setCountDown(countDownDate - new Date().getTime());
+          }, 1000);
+          return () => {
+              clearInterval(interval);
+          }
+      } else{
+          props.setYouLose(true);
+          return () => [0, 0];
+      }
+
+  }, [countDown]);
+
+  const [minutes, seconds] = getReturnValues(countDown);
 
   if (minutes + seconds <= 0) {
-    return <ExpiredCountdownNotice />;
+    return <></>;
+    // return <ExpiredCountdownNotice />;
   } else {
     return <DisplayTimer minutes={minutes} seconds={seconds} />;
   }
 };
 
-export const FreezeTimer = (props: CountdownTimerProps) => {
+type FreezeTimerProps = {
+  targetDate: number,
+}
+
+export const FreezeTimer = (props: FreezeTimerProps) => {
   const [minutes, seconds] = useTimerFreeze(props.targetDate);
 
-  console.log("TESIBTSTTST")
-  console.log(minutes)
-  console.log(seconds)
   if (minutes + seconds <= 0) {
-    return <ExpiredCountdownNotice />;
+    return <DisplayTimer minutes={0} seconds={0} />;
   } else {
     return <DisplayTimer minutes={minutes} seconds={seconds} />;
   }

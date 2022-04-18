@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { isInDictionary } from "../../Config/Dictionary";
+import { useEffect } from "react";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
-import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { Confetti } from "../Animations";
-import { GameModeHandlerService, GameModeType } from "../GameHandler";
+import { GameModeType } from "../GameHandler";
 import { Keyboard } from "../Keyboard";
-import { GameState, loadGameState, PlayerStats, loadPlayerStats, savePlayerStats, saveGameState } from "../LocalStorage";
+import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, saveRapidScore3Min, saveRapidScore5Min  } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
 
 type InputHandlerProps = {
@@ -27,13 +25,16 @@ type InputHandlerProps = {
     setRowIndex: (value: number) => void;
     columnIndex: number;
     setColumnIndex: (value: number) => void;
-    timerStarted: boolean;
-    setTimerStarted: (value: boolean) => void;
+    // timerStarted: boolean;
+    // setTimerStarted: (value: boolean) => void;
     timer: number;
     setTimer: (value: number) => void;
+    freezeTimer: boolean;
+    setFreezeTimer: (value: boolean) => void;
     getNextWord: () => void;
     rapidModeScore: number;
     setRapidModeScore: (value: number) => void;
+    rapidModeMinutes: number;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
@@ -85,7 +86,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         savePlayerStats(newStats);
                     }
 
-                    if(props.mode !== "TR"){
+                    if(props.mode == "R"){
                         const newTimerValue = props.timer + (trainingModeAddTimerInSeconds * 1000);
                         // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
                         props.setTimer(newTimerValue);
@@ -109,8 +110,22 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                             savePlayerStats(newStats);
                         }
 
-                        if(props.mode !== "TR"){
-                            props.setTimerStarted(false);
+                        if(props.mode == "R"){
+                            props.setFreezeTimer(true);
+                            console.log("rapidModeTimerMinutes")
+                            console.log(props.rapidModeMinutes)
+                            if(props.rapidModeMinutes == 1){
+                                const loadedRapidScore = loadRapidScore1Min();
+                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore1Min(props.rapidModeScore);
+                            } else if(props.rapidModeMinutes == 3){
+                                const loadedRapidScore = loadRapidScore3Min();
+                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore3Min(props.rapidModeScore);
+                            }else if(props.rapidModeMinutes == 5){
+                                const loadedRapidScore = loadRapidScore5Min();
+                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore5Min(props.rapidModeScore);
+                            }
+                            // loadedRapidScore.
+                            // saveRapidScore(props.rapidModeScore);
                         }
 
                         props.setYouLose(true);
@@ -168,13 +183,13 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
-                    if (props.mode == 'R' && !props.timerStarted) {
+                    if (props.mode == 'R' && props.freezeTimer) {
                         // TODO: TIMER
-                        const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+                        // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+                        const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
                         console.log("new timer value: " + newTimerValue);
-                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
                         props.setTimer(newTimerValue);
-                        props.setTimerStarted(true);
+                        props.setFreezeTimer(false);
                     }
                     handleChange(key);
                 }
