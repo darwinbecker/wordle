@@ -168,12 +168,18 @@
     align-items: center;
     margin-top: 20px;
     width: 30%;
-    margin: 10px auto;
+    margin: 10px auto 40px auto;
 }
 
 .rapid > *{
-    /* margin: 0 20px; */
     flex: 1 1;
+}
+
+.rapid > * > h4{
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--secondary-color);
 }
 
 .rapid > *:nth-child(2){
@@ -181,7 +187,7 @@
 }
 
 .timer{
-    color: var(--secondary-color);
+    /* color: var(--secondary-color); */
     /* color: var(--primary-color); */
     /* text-shadow: -1px -1px 0 var(--secondary-color),1px -1px 0 var(--secondary-color),-1px 1px 0 var(--secondary-color),1px 1px 0 var(--secondary-color); */
     font-size: 1.8rem;

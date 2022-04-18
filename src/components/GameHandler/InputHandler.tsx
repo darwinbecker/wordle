@@ -27,19 +27,18 @@ type InputHandlerProps = {
     setColumnIndex: (value: number) => void;
     // timerStarted: boolean;
     // setTimerStarted: (value: boolean) => void;
-    timer: number;
-    setTimer: (value: number) => void;
-    freezeTimer: boolean;
-    setFreezeTimer: (value: boolean) => void;
+    pauseTimer: boolean;
+    setPauseTimer: (value: boolean) => void;
+    // addTimervalue: number;
     getNextWord: () => void;
     rapidModeScore: number;
     setRapidModeScore: (value: number) => void;
-    rapidModeMinutes: number;
+    rapidMode: number;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
 
-    const trainingModeAddTimerInSeconds: number = 5;
+    const rapidModeAddSeconds: number = 5;
 
     const handleChange = (value: string) => {
         if (props.youWin || props.youLose) return;
@@ -87,9 +86,10 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                     }
 
                     if(props.mode == "R"){
-                        const newTimerValue = props.timer + (trainingModeAddTimerInSeconds * 1000);
+                        // TODO: ADD 5 SECS TO TIMER
+                        // const newTimerValue = props.timer + (rapidModeAddSeconds * 1000);
                         // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
-                        props.setTimer(newTimerValue);
+                        // props.setTimer(newTimerValue);
                         props.setRapidModeScore(props.rapidModeScore + 1);
                         props.getNextWord();
                     } else {
@@ -111,16 +111,16 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         }
 
                         if(props.mode == "R"){
-                            props.setFreezeTimer(true);
+                            props.setPauseTimer(true);
                             console.log("rapidModeTimerMinutes")
-                            console.log(props.rapidModeMinutes)
-                            if(props.rapidModeMinutes == 1){
+                            console.log(props.rapidMode)
+                            if(props.rapidMode == 1){
                                 const loadedRapidScore = loadRapidScore1Min();
                                 if(loadedRapidScore <= props.rapidModeScore) saveRapidScore1Min(props.rapidModeScore);
-                            } else if(props.rapidModeMinutes == 3){
+                            } else if(props.rapidMode == 3){
                                 const loadedRapidScore = loadRapidScore3Min();
                                 if(loadedRapidScore <= props.rapidModeScore) saveRapidScore3Min(props.rapidModeScore);
-                            }else if(props.rapidModeMinutes == 5){
+                            }else if(props.rapidMode == 5){
                                 const loadedRapidScore = loadRapidScore5Min();
                                 if(loadedRapidScore <= props.rapidModeScore) saveRapidScore5Min(props.rapidModeScore);
                             }
@@ -183,13 +183,13 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
-                    if (props.mode == 'R' && props.freezeTimer) {
-                        // TODO: TIMER
+                    if (props.mode == 'R' && props.pauseTimer) {
+                        // TODO: SET TIMER
                         // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
-                        const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
-                        console.log("new timer value: " + newTimerValue);
-                        props.setTimer(newTimerValue);
-                        props.setFreezeTimer(false);
+                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                        // console.log("new timer value: " + newTimerValue);
+                        // props.setTimer(newTimerValue);
+                        props.setPauseTimer(false);
                     }
                     handleChange(key);
                 }

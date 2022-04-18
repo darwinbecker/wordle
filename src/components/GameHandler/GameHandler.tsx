@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
-import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats, loadRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min } from "../LocalStorage";
+import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, loadRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeHandlerService } from "./GameModeHandlerService";
@@ -9,10 +9,7 @@ import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
 import { Grid } from "../Grid";
 import { CategoryMode, InputHandler, RapidMode, TRMode, WOTDMode } from ".";
-import { useTimer } from "../Timer";
-import { CountdownTimer } from "../Timer";
-import { isTemplateLiteral } from "typescript";
-import { FreezeTimer } from "../Timer/CountdownTimer";
+import { Timer } from "../Timer";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -46,13 +43,14 @@ export const GameHandler: React.FC = () => {
     const [columnIndex, setColumnIndex] = useState<number>(0);
     const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
-    const [displayTimerFreezeValue, setDisplayTimerFreezeValue] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(0);
-    const [freezeTimer, setFreezeTimer] = useState<boolean>(true);
+    const [timer, setTimer] = useState<number>();
+    const [pauseTimer, setPauseTimer] = useState<boolean>(true);
 
+    const [rapidMode, setRapidMode] = useState<number>(0);
     const [rapidModeScore, setRapidModeScore] = useState<number>(0);
-    const [rapidModeMinutes, setRapidModeMinutes] = useState<number>(0);
-    
+
+    console.log("pauseTimer")
+    console.log(pauseTimer)
 
     const resetGame = () => {
         setGuessedWords([]);
@@ -129,8 +127,7 @@ export const GameHandler: React.FC = () => {
                 setSolution("TIMER");
                 setShowPopup(true);
                 setTimer(0);
-                setDisplayTimerFreezeValue(0);
-                setFreezeTimer(true);
+                setPauseTimer(true);
             }
         });
 
@@ -150,10 +147,10 @@ export const GameHandler: React.FC = () => {
             const category = event.currentTarget.value;
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
-            setRapidModeMinutes(rapidModeTimerValue);
-            setTimer(rapidModeTimerValue);
-            const t = new Date().getTime() + rapidModeTimerValue * 60 * 1001;
-            setDisplayTimerFreezeValue(t);
+            setRapidMode(rapidModeTimerValue);
+            // setTimer(rapidModeTimerValue);
+            const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
+            setTimer(t);
         }
 
 
@@ -172,9 +169,9 @@ export const GameHandler: React.FC = () => {
                 solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
                 guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
                 rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex}
-                timer={timer} setTimer={setTimer} freezeTimer={freezeTimer} setFreezeTimer={setFreezeTimer} 
-                getNextWord={getNextWord} rapidModeScore={rapidModeScore} setRapidModeScore={setRapidModeScore} 
-                rapidModeMinutes={rapidModeMinutes} />
+                pauseTimer={pauseTimer} setPauseTimer={setPauseTimer}
+                getNextWord={getNextWord} rapidModeScore={rapidModeScore} setRapidModeScore={setRapidModeScore}
+                rapidMode={rapidMode} />
 
             {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
 
@@ -198,7 +195,70 @@ export const GameHandler: React.FC = () => {
 
 
 
+
             {gameMode === 'R' && (
+                <div className="rapid">
+
+                    {youLose && (
+                        <>
+                            <div className="rapid-score">
+                                <h4>Score:</h4>
+                                <div className="score-value">{rapidModeScore}</div>
+
+                                {/* TODO: DISPLAY HIGHEST STREAK IN A GOOD WAY */}
+                                {/* {rapidMode == 1 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore1Min()}</div>
+                                    </>
+                                )}
+                                {rapidMode == 3 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore3Min()}</div>
+                                    </>
+                                )}
+                                {rapidMode == 5 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore5Min()}</div>
+                                    </>
+                                )} */}
+
+                            </div>
+
+                            {/* <div className="timer"> */}
+                            <Timer expiryTimestamp={timer ? timer : 0} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
+                            {/* </div> */}
+
+                            <div className="gameover-feedback">
+                                <h4>gesuchtes Wort war:</h4>
+                                <div className="solution-word">{solution}</div>
+                            </div>
+                        </>
+                    )}
+
+
+                    {timer && !youLose && (
+                        <Timer expiryTimestamp={timer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
+                    )}
+
+                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 60 * 1000} /> */}
+                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 15 * 1000} /> */}
+
+
+                </div>
+            )}
+
+
+
+
+
+
+
+
+
+            {/* {gameMode === 'R' && (
                 <div className="rapid">
                     {youLose && (
                         <>
@@ -250,7 +310,7 @@ export const GameHandler: React.FC = () => {
                         </div>
                     )}
                 </div>
-            )}
+            )} */}
 
             {gameMode === 'WOTD' && (youLose) && (
                 <div className="gameover-feedback">
