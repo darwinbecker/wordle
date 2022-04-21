@@ -62,8 +62,8 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
     }
 
     const handleSubmit = () => {
-        console.log("Solution:");
-        console.log(props.solution);
+        // console.log("Solution:");
+        // console.log(props.solution);
 
         if (props.guessedWord.length == 5) {
             if (props.guessedWords.length < MAX_GUESSES) {

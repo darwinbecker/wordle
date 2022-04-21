@@ -42,6 +42,8 @@
 
 .rapidStreakList{
     display: flex;
+    max-width: 80%;
+    margin: auto;
 }
 
 .rapidStreakList > *{

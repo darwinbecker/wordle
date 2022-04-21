@@ -42,7 +42,7 @@ export const Stats = (props: StatsProps) => {
                     </div>
 
                     <div className='rapidStreak'>
-                        <div>höchste Blitz-Modus Siegesserien:</div>
+                        <div>höchster Blitz-Modus Score:</div>
                         <div className='rapidStreakList'>
                             <div>
                                 1 Minute:
