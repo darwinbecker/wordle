@@ -1,3 +1,7 @@
+:root{
+    --blue: rgb(0, 146, 214);
+}
+
 /* Stats */
 .stats .main{
     display: flex;
@@ -19,11 +23,35 @@
 
 .wins-and-losses .wins{
     color: green;
+    text-shadow: 0 0 1px green;
 }
 
 .wins-and-losses .losses{
     color: red;
+    text-shadow: 0 0 1px red;
 }
+
+.streakNumber{
+    color: var(--blue);
+    text-shadow: 0 0 1px var(--blue);
+}
+
+.rapidStreak{
+    margin-top: 20px;
+}
+
+.rapidStreakList{
+    display: flex;
+}
+
+.rapidStreakList > *{
+    flex: 1;
+    /* border: 2px solid var(--secondary-color); */
+    /* box-shadow: 0 0 5px var(--secondary-color); */
+    border-radius: 0.2rem;
+    margin: 0 15px;
+}
+
 
 
 /* divider */
