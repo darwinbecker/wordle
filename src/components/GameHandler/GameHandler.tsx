@@ -29,6 +29,7 @@ export const GameHandler: React.FC = () => {
         return loadedGameState.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
+        console.log(WORD_OF_THE_DAY().solution);
         return WORD_OF_THE_DAY().solution;
     });
     const [guessedWord, setGuessedWord] = useState<string>("");
@@ -52,6 +53,7 @@ export const GameHandler: React.FC = () => {
     const resetRapidMode = () => {
         resetGame();
         setSolution("TIMER");
+        setRapidModeScore(0);
         setPauseTimer(true);
         const t = new Date().getTime() + rapidMode * 60 * 1000;
         setTimer(t);
@@ -130,6 +132,7 @@ export const GameHandler: React.FC = () => {
                 console.log("load Rapid mode");
                 resetGame();
                 setSolution("TIMER");
+                setRapidModeScore(0);
                 setShowPopup(true);
                 setTimer(0);
                 setPauseTimer(true);
