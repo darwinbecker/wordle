@@ -1,13 +1,20 @@
-.timer {
+.timer{
+  color: var(--secondary-color);
+  /* font-size: 1.8rem; */
+  font-weight: 600;
 }
 
 .timer p {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--secondary-color);
+  font-size: 1rem;
 }
 
 .countdown{
+  font-size: 1.8rem;
+}
+
+.rapid > .timer > .countdown{
+  margin-top: 20px;
+  font-size: 1.8rem;
 }
 
 .countdown.danger {

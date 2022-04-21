@@ -1,3 +1,7 @@
+.Game > :last-child{
+    margin-bottom: 40px;
+}
+
 .nav-wrapper{
     display: flex;
     max-width: 40%;
@@ -143,15 +147,41 @@
     margin: 5px 0;
 }
 
-.rapid-score h4{
-    margin: 0;
-    font-size: 1.2rem;
-}
-
 .gameover-feedback > .solution-word{
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+
+
+/* Rapid Mode Styling */
+
+.game-summary{    
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 30%;
+    margin: 10px auto;
+}
+
+.game-summary > *{
+    flex: 1 1;
+}
+
+.game-summary > * > h4{
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.game-summary > *:nth-child(2){
+    color: red;
+}
+
+
 
 .rapid-score > .score-value{
     font-size: 1.6rem;
@@ -159,42 +189,34 @@
 
 }
 
-
-
-.rapid{    
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    margin-top: 20px;
-    width: 30%;
-    margin: 10px auto 40px auto;
-}
-
-.rapid > *{
-    flex: 1 1;
-}
-
-.rapid > * > h4{
+.rapid-score h4{
     margin: 0;
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--secondary-color);
-}
-
-.rapid > *:nth-child(2){
-    color: red;
-}
-
-.timer{
-    /* color: var(--secondary-color); */
-    /* color: var(--primary-color); */
-    /* text-shadow: -1px -1px 0 var(--secondary-color),1px -1px 0 var(--secondary-color),-1px 1px 0 var(--secondary-color),1px 1px 0 var(--secondary-color); */
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .rapid-score{
     color: var(--secondary-color);
+}
+
+.new-game-button{
+    color: var(--secondary-color);
+    background: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.2rem;
+    margin: 2px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.new-game-button:hover{
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.new-game-button:active{
+    transform: scale(1.025);
 }
 

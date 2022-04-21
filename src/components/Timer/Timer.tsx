@@ -1,13 +1,16 @@
 // https://www.npmjs.com/package/react-timer-hook
 import { useEffect, useState } from 'react';
 import { useTimer } from 'react-timer-hook';
+import { WinService } from '../GameHandler';
 
 type TimerProps = {
     expiryTimestamp: number,
+    setExpiryTimestamp: (value: number) => void,
     pauseTimer: boolean
     setPauseTimer: (value: boolean) => void
     youLose: boolean
     setYoulose: (value: boolean) => void
+    addExtraTimeAlert?: boolean;
 }
 
 export const Timer = (props: TimerProps) => {
@@ -26,11 +29,24 @@ export const Timer = (props: TimerProps) => {
         restart,
     } = useTimer({ autoStart: false, expiryTimestamp: expiryDate, onExpire: () => onExpire() });
 
-    const [expired, setExpired] = useState<boolean>(false);
+    // const [expired, setExpired] = useState<boolean>(false);
+    const extraTimeInSeconds = 5;
+
 
     useEffect(() => {
-        console.log("props.pauseTimer")
-        console.log(props.pauseTimer)
+        const subscription = WinService.onWinChange().subscribe(win => {
+            AddExtraTime();
+        });
+
+        // return unsubscribe method to execute when component unmounts
+        return () => {
+            subscription.unsubscribe();
+        }
+    }, [seconds]);
+
+    useEffect(() => {
+        // console.log("props.pauseTimer")
+        // console.log(props.pauseTimer)
         if (props.pauseTimer) {
             pause();
         } else {
@@ -40,9 +56,17 @@ export const Timer = (props: TimerProps) => {
 
     const onExpire = () => {
         console.warn('onExpire called')
-        setExpired(true);
         props.setPauseTimer(true);
         props.setYoulose(true);
+    }
+
+    const AddExtraTime = () => {
+        const extraTime = Date.now() + (minutes * 60000) + ((seconds + extraTimeInSeconds) * 1000);
+        const newExpiryDate = new Date(extraTime);
+        
+        props.setExpiryTimestamp(extraTime);
+        setExpiryDate(newExpiryDate);
+        restart(newExpiryDate);
     }
 
     const isDanger = minutes == 0 && seconds < 10;
@@ -67,19 +91,13 @@ export const Timer = (props: TimerProps) => {
 
             </div>
 
-            {!props.youLose && (
-                <p>{isRunning ? 'Running' : 'Not running'}</p>
+            {!props.youLose && !isRunning && (
+                // <p>{isRunning ? 'Running' : 'Not running'}</p>
+                <p>- Drücke einen Buchstaben, um den Timer zu starten -</p>
             )}
 
 
-            <button onClick={() => {
-                // Restarts to 5 minutes timer
-                const newExpiryDate = new Date (expiryDate);
-                newExpiryDate.setSeconds(expiryDate.getSeconds() + 5);
-                setExpiryDate(newExpiryDate);
-                setExpired(false);
-                restart(newExpiryDate)
-            }}>Add 5 secs</button>
+            {/* <button onClick={AddExtraTime}>Add 5 secs</button> */}
 
             {/* <button onClick={start}>Start</button>
             <button onClick={pause}>Pause</button>

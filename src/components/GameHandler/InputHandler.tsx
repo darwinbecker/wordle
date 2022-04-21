@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { RefObject, useEffect } from "react";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
 import { Confetti } from "../Animations";
 import { GameModeType } from "../GameHandler";
 import { Keyboard } from "../Keyboard";
-import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, saveRapidScore3Min, saveRapidScore5Min  } from "../LocalStorage";
+import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, saveRapidScore3Min, saveRapidScore5Min } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
+import { WinService } from "./WinService";
 
 type InputHandlerProps = {
     mode: GameModeType;
@@ -39,6 +40,8 @@ type InputHandlerProps = {
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
 
     const rapidModeAddSeconds: number = 5;
+
+
 
     const handleChange = (value: string) => {
         if (props.youWin || props.youLose) return;
@@ -85,7 +88,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         savePlayerStats(newStats);
                     }
 
-                    if(props.mode == "R"){
+                    if (props.mode == "R") {
                         // TODO: ADD 5 SECS TO TIMER
                         // const newTimerValue = props.timer + (rapidModeAddSeconds * 1000);
                         // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
@@ -96,7 +99,8 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         props.setYouWin(true);
                         Confetti();
                     }
-                    
+                    WinService.setWin(true);
+
                     return;
                 }
 
@@ -110,19 +114,19 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                             savePlayerStats(newStats);
                         }
 
-                        if(props.mode == "R"){
+                        if (props.mode == "R") {
                             props.setPauseTimer(true);
                             console.log("rapidModeTimerMinutes")
                             console.log(props.rapidMode)
-                            if(props.rapidMode == 1){
+                            if (props.rapidMode == 1) {
                                 const loadedRapidScore = loadRapidScore1Min();
-                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore1Min(props.rapidModeScore);
-                            } else if(props.rapidMode == 3){
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore1Min(props.rapidModeScore);
+                            } else if (props.rapidMode == 3) {
                                 const loadedRapidScore = loadRapidScore3Min();
-                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore3Min(props.rapidModeScore);
-                            }else if(props.rapidMode == 5){
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore3Min(props.rapidModeScore);
+                            } else if (props.rapidMode == 5) {
                                 const loadedRapidScore = loadRapidScore5Min();
-                                if(loadedRapidScore <= props.rapidModeScore) saveRapidScore5Min(props.rapidModeScore);
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore5Min(props.rapidModeScore);
                             }
                             // loadedRapidScore.
                             // saveRapidScore(props.rapidModeScore);
@@ -168,7 +172,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
             } else if (event.code === 'Backspace') {
                 handleRemove();
                 return;
-            } 
+            }
             // else if (event.code === 'Space') {
             //     if (!props.timerStarted) {
             //         // TODO: TIMER
