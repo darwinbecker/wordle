@@ -31,11 +31,17 @@ export const Timer = (props: TimerProps) => {
 
     // const [expired, setExpired] = useState<boolean>(false);
     const extraTimeInSeconds = 5;
+    const [displayAddedExtraTime, setDisplayAddedExtraTime] = useState<boolean>(false);
 
 
     useEffect(() => {
+        if (displayAddedExtraTime) {
+            setDisplayAddedExtraTime(false);
+        }
         const subscription = WinService.onWinChange().subscribe(win => {
+            console.log("YOU WON ODER SO WASDASDASASD")
             AddExtraTime();
+            setDisplayAddedExtraTime(true);
         });
 
         // return unsubscribe method to execute when component unmounts
@@ -63,7 +69,7 @@ export const Timer = (props: TimerProps) => {
     const AddExtraTime = () => {
         const extraTime = Date.now() + (minutes * 60000) + ((seconds + extraTimeInSeconds) * 1000);
         const newExpiryDate = new Date(extraTime);
-        
+
         props.setExpiryTimestamp(extraTime);
         setExpiryDate(newExpiryDate);
         restart(newExpiryDate);
@@ -96,6 +102,14 @@ export const Timer = (props: TimerProps) => {
                 <p>- Drücke einen Buchstaben, um den Timer zu starten -</p>
             )}
 
+            {displayAddedExtraTime && (
+                <div className='added-extra-time animate__animated animate__fadeOutUp animate__delay-2s'>+5 Sekunden</div>
+                // <div className='added-extra-time'>+5 Sekunden</div>
+            )}
+            
+            {/* {!displayAddedExtraTime && (
+                <div className='added-extra-time animate__animated animate__fadeInUp animate__fadeOutUp'>+5 Sekunden</div>
+            )} */}
 
             {/* <button onClick={AddExtraTime}>Add 5 secs</button> */}
 

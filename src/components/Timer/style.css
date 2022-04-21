@@ -2,6 +2,7 @@
   color: var(--secondary-color);
   /* font-size: 1.8rem; */
   font-weight: 600;
+  position: relative;
 }
 
 .timer p {
@@ -9,6 +10,7 @@
 }
 
 .countdown{
+  display: inline-block;
   font-size: 1.8rem;
 }
 
@@ -23,4 +25,14 @@
 
 .countdown.expired {
   color: #ff0000 !important;
+}
+
+.added-extra-time{
+  color: rgb(0, 160, 0);
+  display: inline-block;
+  line-height: 1.8rem;
+  position: absolute;
+  top: 40%;
+  margin-left: 10px;
+  font-weight: 700;
 }
