@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
-import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats } from "../LocalStorage";
+import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats } from "../LocalStorage";
 import { WordStatusType } from "../WordStatus";
 import { Popup } from "../Popup";
 import { GameModeHandlerService } from "./GameModeHandlerService";
@@ -9,8 +9,7 @@ import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
 import { Grid } from "../Grid";
 import { CategoryMode, InputHandler, RapidMode, TRMode, WOTDMode } from ".";
-import { useTimer } from "../Timer";
-import { CountdownTimer } from "../Timer";
+import { Timer } from "../Timer";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -30,6 +29,7 @@ export const GameHandler: React.FC = () => {
         return loadedGameState.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
+        console.log(WORD_OF_THE_DAY().solution);
         return WORD_OF_THE_DAY().solution;
     });
     const [guessedWord, setGuessedWord] = useState<string>("");
@@ -44,8 +44,20 @@ export const GameHandler: React.FC = () => {
     const [columnIndex, setColumnIndex] = useState<number>(0);
     const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
-    const [timer, setTimer] = useState<number>(0);
-    const [timerStarted, setTimerStarted] = useState<boolean>(false);
+    const [timer, setTimer] = useState<number>();
+    const [pauseTimer, setPauseTimer] = useState<boolean>(true);
+
+    const [rapidMode, setRapidMode] = useState<number>(0);
+    const [rapidModeScore, setRapidModeScore] = useState<number>(0);
+
+    const resetRapidMode = () => {
+        resetGame();
+        setSolution("TIMER");
+        setRapidModeScore(0);
+        setPauseTimer(true);
+        const t = new Date().getTime() + rapidMode * 60 * 1000;
+        setTimer(t);
+    }
 
     const resetGame = () => {
         setGuessedWords([]);
@@ -56,12 +68,12 @@ export const GameHandler: React.FC = () => {
         setYouWin(false);
         setYouLose(false);
         setSolution("");
-        setTimerStarted(false);
     }
 
     const getNextWord = () => {
         resetGame();
-        setSolution(getRandomWord());
+        // setSolution(getRandomWord());
+        setSolution("TIMER");
     }
 
     useEffect(() => {
@@ -73,6 +85,7 @@ export const GameHandler: React.FC = () => {
 
     useEffect(() => {
         const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
+            setGameMode(mode as GameModeType);
             if (mode == 'WOTD') {
                 setShowPopup(true);
                 resetGame();
@@ -116,9 +129,13 @@ export const GameHandler: React.FC = () => {
                 resetGame();
                 setShowPopup(true);
             } else if (mode == 'R') {
-                resetGame();
-                setShowPopup(true);
                 console.log("load Rapid mode");
+                resetGame();
+                setSolution("TIMER");
+                setRapidModeScore(0);
+                setShowPopup(true);
+                setTimer(0);
+                setPauseTimer(true);
             }
         });
 
@@ -137,8 +154,10 @@ export const GameHandler: React.FC = () => {
         if (gameMode === "C") {
             const category = event.currentTarget.value;
         } else if (gameMode === "R") {
-            const timerValue = parseInt(event.currentTarget.value);
-            setTimer(timerValue);
+            const rapidModeTimerValue = parseInt(event.currentTarget.value);
+            setRapidMode(rapidModeTimerValue);
+            const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
+            setTimer(t);
         }
 
 
@@ -148,15 +167,9 @@ export const GameHandler: React.FC = () => {
     return (
         <div className="Game">
 
-            <NavigationBar setMode={setGameMode} stats={stats} />
+            <NavigationBar stats={stats} />
 
             <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses}></Grid>
-
-            <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
-            solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
-            guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
-            rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex} 
-            timer={timer} setTimer={setTimer} timerStarted={timerStarted} setTimerStarted={setTimerStarted}/>
 
             {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
 
@@ -179,33 +192,157 @@ export const GameHandler: React.FC = () => {
             )}
 
 
+            <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
+                solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
+                guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
+                rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex}
+                pauseTimer={pauseTimer} setPauseTimer={setPauseTimer}
+                getNextWord={getNextWord} rapidModeScore={rapidModeScore} setRapidModeScore={setRapidModeScore}
+                rapidMode={rapidMode} />
+
+
+            {gameMode === 'R' && (
+                <div className="rapid">
+
+                    {youLose && (
+                        <>
+                            <div className="game-summary">
+
+                                <div className="rapid-score">
+                                    <h4>Score:</h4>
+                                    <div className="score-value">{rapidModeScore}</div>
+
+                                    {/* TODO: DISPLAY HIGHEST STREAK IN A GOOD WAY */}
+                                    {/* {rapidMode == 1 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore1Min()}</div>
+                                    </>
+                                )}
+                                {rapidMode == 3 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore3Min()}</div>
+                                    </>
+                                )}
+                                {rapidMode == 5 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore5Min()}</div>
+                                    </>
+                                )} */}
+
+                                </div>
+
+                                {/* <div className="timer"> */}
+                                <Timer expiryTimestamp={timer ? timer : 0} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
+                                {/* </div> */}
+
+                                <div className="gameover-feedback">
+                                    <h4>gesuchtes Wort war:</h4>
+                                    <div className="solution-word">{solution}</div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <button className="new-game-button" onClick={resetRapidMode}>Neues Spiel</button>
+                            </div>
+                        </>
+                    )}
+
+
+
+                    {timer && !youLose && (
+                        <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
+                    )}
+
+                    {rapidModeScore && !youLose && (
+                        <div className="rapid-score">
+                            <h4>Score:</h4>
+                            <div className="score-value">{rapidModeScore}</div>
+                        </div>
+
+                    )}
+
+                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 60 * 1000} /> */}
+                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 15 * 1000} /> */}
+
+
+                </div>
+            )}
+
+
+
+
+
+
+
+
+
+            {/* {gameMode === 'R' && (
+                <div className="rapid">
+                    {youLose && (
+                        <>
+                            <div className="rapid-score">
+                                <h4>Score:</h4>
+                                <div className="score-value">{rapidModeScore}</div>
+                                {rapidModeMinutes == 1 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore1Min()}</div>
+                                    </>
+                                )}
+                                {rapidModeMinutes == 3 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore3Min()}</div>
+                                    </>
+                                )}
+                                {rapidModeMinutes == 5 && (
+                                    <>
+                                        <h4>höchste Serie:</h4>
+                                        <div className="score-value">{loadRapidScore5Min()}</div>
+                                    </>
+                                )}
+
+                            </div>
+
+                            <div className="timer">
+                                {console.log(timer)}
+                                <FreezeTimer targetDate={timer} />
+                            </div>
+
+                            <div className="gameover-feedback">
+                                <h4>gesuchtes Wort war:</h4>
+                                <div className="solution-word">{solution}</div>
+                            </div>
+                        </>
+                    )}
+
+                    {freezeTimer && !youLose && (
+                        <div className="timer">
+                            <FreezeTimer targetDate={displayTimerFreezeValue} />
+                        </div>
+                    )}
+
+                    {!youLose && !freezeTimer && (
+                        <div className="timer">
+                            <CountdownTimer targetDate={timer} setYouLose={setYouLose} />
+                        </div>
+                    )}
+                </div>
+            )} */}
+
             {gameMode === 'WOTD' && (youLose) && (
                 <div className="gameover-feedback">
                     <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{WORD_OF_THE_DAY().solution}</div>
+                    <div className="solution-word">{solution}</div>
                 </div>
             )}
 
             {gameMode === 'TR' && (youWin || youLose) && (
                 <div className="gameover-feedback">
                     <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{solution}</div>
-                </div>
-            )}
-
-            {gameMode === 'R' && (
-                <>
-                    <div className="timer">
-                        {timerStarted && (
-                            <CountdownTimer targetDate={timer} setYouLose={setYouLose} />
-                        )}
-                    </div>
-                </>
-            )}
-            
-            {gameMode === 'R' && (youLose) && (
-                <div className="gameover-feedback">
                     <h4>gesuchtes Wort war:</h4>
                     <div className="solution-word">{solution}</div>
                 </div>

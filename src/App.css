@@ -12,7 +12,7 @@
 @import url("./components/Keyboard/style.css"); 
 @import url("./components/Timer/style.css");
 
-:root{
+:root {
   --light: rgb(230, 230, 230);
   --dark: rgb(45, 45, 45);
 
@@ -33,16 +33,20 @@ body {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
   /* margin: 0; */
   padding: 0;
 }
-ul{
+ul {
+  margin: 0;
+  padding: 0;
+}
+p {
   margin: 0;
   padding: 0;
 }
 
-body{
+body {
   /* background-color: rgb(27, 27, 27); */
   /* color: var(--text-color); */
   background-color: var(--background-color);
@@ -50,7 +54,7 @@ body{
   transition: background-color 0.3s ease-in-out;
 }
 
-body.light{
+body.light {
   --background-color: var(--light);
   
   --primary-color: var(--light-detail);
@@ -58,7 +62,7 @@ body.light{
   /* --text-color: var(--dark); */
 }
 
-body.dark{
+body.dark {
   --background-color: var(--dark);
   
   --primary-color: var(--dark-detail);

@@ -14,3 +14,8 @@
 .animate__animated.animate__fadeInUp{
     --animate-duration: 0.5s;
 }
+
+.added-extra-time.animate__animated.animate__fadeOutUp{
+    --animate-delay: 0.1s;
+    --animate-duration: 0.75s;
+}

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect } from "react";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
-import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { Confetti } from "../Animations";
-import { GameModeHandlerService, GameModeType } from "../GameHandler";
+import { GameModeType } from "../GameHandler";
 import { Keyboard } from "../Keyboard";
-import { GameState, loadGameState, PlayerStats, loadPlayerStats, savePlayerStats, saveGameState } from "../LocalStorage";
+import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, saveRapidScore3Min, saveRapidScore5Min } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
+import { WinService } from "./WinService";
 
 type InputHandlerProps = {
     mode: GameModeType;
@@ -26,13 +26,22 @@ type InputHandlerProps = {
     setRowIndex: (value: number) => void;
     columnIndex: number;
     setColumnIndex: (value: number) => void;
-    timerStarted: boolean;
-    setTimerStarted: (value: boolean) => void;
-    timer: number;
-    setTimer: (value: number) => void;
+    // timerStarted: boolean;
+    // setTimerStarted: (value: boolean) => void;
+    pauseTimer: boolean;
+    setPauseTimer: (value: boolean) => void;
+    // addTimervalue: number;
+    getNextWord: () => void;
+    rapidModeScore: number;
+    setRapidModeScore: (value: number) => void;
+    rapidMode: number;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
+
+    const rapidModeAddSeconds: number = 5;
+
+
 
     const handleChange = (value: string) => {
         if (props.youWin || props.youLose) return;
@@ -53,13 +62,13 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
     }
 
     const handleSubmit = () => {
-        console.log("Solution:");
-        console.log(props.solution);
+        // console.log("Solution:");
+        // console.log(props.solution);
 
         if (props.guessedWord.length == 5) {
             if (props.guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                // if (!isInDictionary(guessedWord)) {
+                // if (!isInDictionary(props.guessedWord)) {
                 //     console.log("WORD IS NOT IN DICTIONARY");
                 //     return;
                 // }
@@ -78,8 +87,20 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         props.setStats(newStats);
                         savePlayerStats(newStats);
                     }
-                    props.setYouWin(true);
-                    Confetti();
+
+                    if (props.mode == "R") {
+                        // TODO: ADD 5 SECS TO TIMER
+                        // const newTimerValue = props.timer + (rapidModeAddSeconds * 1000);
+                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                        // props.setTimer(newTimerValue);
+                        props.setRapidModeScore(props.rapidModeScore + 1);
+                        props.getNextWord();
+                    } else {
+                        props.setYouWin(true);
+                        Confetti();
+                    }
+                    WinService.setWin(true);
+
                     return;
                 }
 
@@ -92,6 +113,25 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                             props.setStats(newStats);
                             savePlayerStats(newStats);
                         }
+
+                        if (props.mode == "R") {
+                            props.setPauseTimer(true);
+                            console.log("rapidModeTimerMinutes")
+                            console.log(props.rapidMode)
+                            if (props.rapidMode == 1) {
+                                const loadedRapidScore = loadRapidScore1Min();
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore1Min(props.rapidModeScore);
+                            } else if (props.rapidMode == 3) {
+                                const loadedRapidScore = loadRapidScore3Min();
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore3Min(props.rapidModeScore);
+                            } else if (props.rapidMode == 5) {
+                                const loadedRapidScore = loadRapidScore5Min();
+                                if (loadedRapidScore <= props.rapidModeScore) saveRapidScore5Min(props.rapidModeScore);
+                            }
+                            // loadedRapidScore.
+                            // saveRapidScore(props.rapidModeScore);
+                        }
+
                         props.setYouLose(true);
                         return;
                     }
@@ -132,24 +172,30 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
             } else if (event.code === 'Backspace') {
                 handleRemove();
                 return;
-            } else if (event.code === 'Space') {
-                if (!props.timerStarted) {
-                    // TODO: TIMER
-                    // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
-                    const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
-                    props.setTimer(newTimerValue);
-                    props.setTimerStarted(true);
-                    return;
-                }
-            } else {
+            }
+            // else if (event.code === 'Space') {
+            //     if (!props.timerStarted) {
+            //         // TODO: TIMER
+            //         const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+            //         // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+            //         props.setTimer(newTimerValue);
+            //         props.setTimerStarted(true);
+            //         return;
+            //     }
+            // } 
+            else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
                 if (key.length == 1 && key >= 'A' && key <= 'Z') {
-                    if (props.mode == 'R' && !props.timerStarted) {
-                        // TODO: Info text: "PRESS SPACE TO START"
-                    } else {
-                        handleChange(key);
+                    if (props.mode == 'R' && props.pauseTimer) {
+                        // TODO: SET TIMER
+                        // const newTimerValue = new Date().getTime() + props.timer * 60 * 1000;
+                        // const newTimerValue = new Date().getTime() + props.timer * 15 * 1000;
+                        // console.log("new timer value: " + newTimerValue);
+                        // props.setTimer(newTimerValue);
+                        props.setPauseTimer(false);
                     }
+                    handleChange(key);
                 }
                 return;
             }
