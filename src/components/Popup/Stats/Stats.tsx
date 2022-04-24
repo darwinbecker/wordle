@@ -32,7 +32,7 @@ export const Stats = (props: StatsProps) => {
                     <div className='streak'>
                         <div>
                             aktuelle Siegesserie:
-                            <span className='streakNumber'> {stats.winStreak}</span>
+                            <span className={stats.winStreak == stats.bestWinStreak ? 'streakNumber' : ''}> {stats.winStreak}</span>
                             {/*  / {stats.bestWinStreak} <i className="fa-solid fa-crown"></i> */}
                         </div>
                         <div>

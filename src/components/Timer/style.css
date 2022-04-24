@@ -36,3 +36,11 @@
   margin-left: 10px;
   font-weight: 700;
 }
+
+
+.added-extra-time{
+  /* --animation-delay: 1.2s; */
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  /* animation: 0.1s ease-out var(--animation-delay) forwards delayedOpacity; */
+}
