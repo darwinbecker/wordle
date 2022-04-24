@@ -251,8 +251,17 @@ export const GameHandler: React.FC = () => {
                     )}
 
 
+
                     {timer && !youLose && (
                         <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
+                    )}
+
+                    {rapidModeScore && !youLose && (
+                        <div className="rapid-score">
+                            <h4>Score:</h4>
+                            <div className="score-value">{rapidModeScore}</div>
+                        </div>
+
                     )}
 
                     {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 60 * 1000} /> */}
