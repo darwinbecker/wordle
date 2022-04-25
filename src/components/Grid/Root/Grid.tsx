@@ -7,6 +7,7 @@ type GridProps = {
     letter: string;
     guessedWords: string[];
     wordStatuses?: string[][];
+    isInputError: boolean;
 }
 
 const Rows: React.FC<GridProps> = (props: GridProps) => {
@@ -16,7 +17,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                 // set already guessed words in row
                 props.guessedWords.map((char, index) => {
                     if (props.wordStatuses) {
-                        return <Row key={index} letter={char} wordStatus={props.wordStatuses[index] as WordStatusType[]}></Row>
+                        return <Row key={index} letter={char} wordStatus={props.wordStatuses[index] as WordStatusType[]} isInputError={false} ></Row>
                     }
                 })
             }
@@ -24,7 +25,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                 // set current guess word in row
                 props.guessedWords.length < MAX_GUESSES ?
                     [...Array(1)].map((char, index) => {
-                        return <Row key={index} letter={props.letter}></Row>
+                        return <Row key={index} letter={props.letter} isInputError={props.isInputError} ></Row>
                     })
                     :
                     <></>
@@ -33,7 +34,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
                 // set empty rows
                 props.guessedWords.length < MAX_GUESSES ?
                     [...Array((MAX_GUESSES - 1) - props.guessedWords.length)].map((char, index) => {
-                        return <Row key={index} letter={char}></Row>
+                        return <Row key={index} letter={char} isInputError={false} ></Row>
                     })
                     :
                     <></>
@@ -46,7 +47,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
 export const Grid: React.FC<GridProps> = (props: GridProps) => {
     return (
         <div className="Grid">
-            <Rows letter={props.letter} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} />
+            <Rows letter={props.letter} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError} />
         </div>
     );
 }

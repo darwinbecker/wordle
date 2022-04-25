@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import { useEffect } from "react";
 import { MAX_WORD_LENGTH, MAX_GUESSES } from "../../Config/Settings";
 import { Confetti } from "../Animations";
 import { GameModeType } from "../GameHandler";
@@ -6,6 +6,7 @@ import { Keyboard } from "../Keyboard";
 import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, saveRapidScore3Min, saveRapidScore5Min } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
 import { WinService } from "./WinService";
+import { useSnackbar } from "notistack";
 
 type InputHandlerProps = {
     mode: GameModeType;
@@ -35,18 +36,20 @@ type InputHandlerProps = {
     rapidModeScore: number;
     setRapidModeScore: (value: number) => void;
     rapidMode: number;
+    setIsInputError: (value: boolean) => void;
 }
 
 export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerProps) => {
 
     const rapidModeAddSeconds: number = 5;
-
-
+    
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     const handleChange = (value: string) => {
         if (props.youWin || props.youLose) return;
         // && guesses.length < MAX_CHALLENGES && !isGameWon
         if (props.guessedWord.length < MAX_WORD_LENGTH) {
+            // props.setIsInputError(false);
             props.setGuessedWord(`${props.guessedWord}${value}`);
             props.setColumnIndex(props.columnIndex + 1);
         } else {
@@ -56,6 +59,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
 
     const handleRemove = () => {
         if (props.guessedWord.length > 0) {
+            // props.setIsInputError(false);
             props.setGuessedWord(props.guessedWord.slice(0, -1));
             props.setColumnIndex(props.columnIndex - 1);
         }
@@ -73,6 +77,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                 //     return;
                 // }
 
+                props.setIsInputError(false);
                 props.setRowIndex(props.rowIndex + 1);
                 props.setColumnIndex(0);
                 props.setGuessedWord("");
@@ -86,6 +91,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
                         const newStats = updatePlayerStats(true);
                         props.setStats(newStats);
                         savePlayerStats(newStats);
+                        enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
                     }
 
                     if (props.mode == "R") {
@@ -142,6 +148,9 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
         else {
             // TODO enter 5 characters => shake animation
             console.log("enter 5 characters");
+            props.setIsInputError(false);
+            props.setIsInputError(true);
+            enqueueSnackbar('Bitte 5 Buchstaben eingeben.', { variant: 'error', preventDuplicate: true, });
         }
     }
 

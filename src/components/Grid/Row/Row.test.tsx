@@ -3,12 +3,12 @@ import { Row } from './Row';
 
 describe("check row element", () => {
     test('row has className "Row"', () => {
-        const { container } = render(<Row letter={''} />);
+        const { container } = render(<Row letter={''} isInputError={false} />);
         expect(container.firstChild).toHaveClass("Row");
     });
 
     test('each row contains 5 tiles', () => {
-        const { container } = render(<Row letter={''} />);
+        const { container } = render(<Row letter={''} isInputError={false} />);
         expect(container.getElementsByClassName('Tile').length).toEqual(5);
     });
 

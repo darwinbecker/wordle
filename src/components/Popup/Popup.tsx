@@ -31,8 +31,8 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
     return (
         <div className={popupClasses} onClick={handlePopup}>
             <div className='popup-content animate__animated animate__fadeInUp'>
-                {/* TODO: 
-                <button onClick={props.closePopup}>X</button> */}
+                {/* TODO:  */}
+                {/* <button onClick={props.closePopup}>X</button> */}
                 {props.content == 'categories' && (
                     <Categories closePopup={props.closePopup} />
                 )}
