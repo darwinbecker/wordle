@@ -39,7 +39,6 @@ export const Timer = (props: TimerProps) => {
             setDisplayAddedExtraTime(false);
         }
         const subscription = WinService.onWinChange().subscribe(win => {
-            console.log("YOU WON ODER SO WASDASDASASD")
             AddExtraTime();
             setDisplayAddedExtraTime(true);
         });

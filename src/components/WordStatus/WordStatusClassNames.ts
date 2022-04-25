@@ -23,11 +23,11 @@ export const WordStatusClassNames = (className: string, status?: WordStatusType)
         return classnames(
             className,
             {
-                'correct': status == 'correct' && !contrastMode,
-                'correct-high-contrast': status == 'correct' && contrastMode,
-                'semi': status == 'semi' && !contrastMode,
-                'semi-high-contrast': status == 'semi' && contrastMode,
-                'wrong': status == 'wrong'
+                'correct': status === 'correct' && !contrastMode,
+                'correct-high-contrast': status === 'correct' && contrastMode,
+                'semi': status === 'semi' && !contrastMode,
+                'semi-high-contrast': status === 'semi' && contrastMode,
+                'wrong': status === 'wrong'
             });
     } else{
         return className;

@@ -36,7 +36,7 @@ export const Stats = (props: StatsProps) => {
                             {/*  / {stats.bestWinStreak} <i className="fa-solid fa-crown"></i> */}
                         </div>
                         <div>
-                            höchste Siegesserie:
+                            längste Siegesserie:
                             <span className='streakNumber'> {stats.bestWinStreak}</span> <i className="fa-solid fa-crown"></i>
                         </div>
                     </div>
