@@ -30,7 +30,7 @@ export const GameHandler: React.FC = () => {
         return loadedGameState.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [youLose, setYouLose] = useState<boolean>(() => {
-        return loadedGameState.guessedWords.length === MAX_GUESSES && !loadedGameState?.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
+        return loadedGameState.guessedWords.length === MAX_GUESSES && !loadedGameState.guessedWords.includes(WORD_OF_THE_DAY().solution) ? true : false;
     });
     const [solution, setSolution] = useState<string>(() => {
         console.log(WORD_OF_THE_DAY().solution);
@@ -53,8 +53,7 @@ export const GameHandler: React.FC = () => {
 
     const [rapidMode, setRapidMode] = useState<number>(0);
     const [rapidModeScore, setRapidModeScore] = useState<number>(0);
-
-    const [isInputSuccess, setIsInputSuccess] = useState<boolean>(false);
+    
     const [isInputError, setIsInputError] = useState<boolean>(false);
 
 
@@ -76,6 +75,7 @@ export const GameHandler: React.FC = () => {
         setYouWin(false);
         setYouLose(false);
         setSolution("");
+        setIsInputError(false);
     }
 
     const getNextWord = () => {
@@ -94,9 +94,9 @@ export const GameHandler: React.FC = () => {
     useEffect(() => {
         const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
             setGameMode(mode as GameModeType);
+            resetGame();
             if (mode == 'WOTD') {
                 setShowPopup(true);
-                resetGame();
                 setSolution(WORD_OF_THE_DAY().solution);
                 const loaded = loadGameState();
                 console.log("loaded", loaded);
@@ -134,11 +134,9 @@ export const GameHandler: React.FC = () => {
                 getNextWord();
             }
             else if (mode == 'C') {
-                resetGame();
                 setShowPopup(true);
             } else if (mode == 'R') {
                 console.log("load Rapid mode");
-                resetGame();
                 setSolution("TIMER");
                 setRapidModeScore(0);
                 setShowPopup(true);
@@ -179,9 +177,7 @@ export const GameHandler: React.FC = () => {
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'center',
-            }}
-            TransitionComponent={Collapse}
-            >
+            }} >
             <div className="Game">
 
                 <NavigationBar stats={stats} />
@@ -272,7 +268,7 @@ export const GameHandler: React.FC = () => {
                             <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
                         )}
 
-                        {rapidModeScore && !youLose && (
+                        {rapidModeScore > 0 && !youLose && (
                             <div className="rapid-score">
                                 <h4>Score:</h4>
                                 <div className="score-value">{rapidModeScore}</div>

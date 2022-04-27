@@ -157,7 +157,6 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
     const updatePlayerStats = (win: boolean): PlayerStats => {
         const gameStats: PlayerStats = { ...props.stats }
         gameStats.gamesPlayed += 1;
-        console.log(win);
         if (win) {
             gameStats.wins += 1;
             gameStats.trysPerWin[props.guessedWords.length] += 1;
