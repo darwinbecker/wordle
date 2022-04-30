@@ -1,3 +1,4 @@
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import './App.css';
 import { GameHandler } from './components/GameHandler';
@@ -5,6 +6,13 @@ import { Main } from './components/Main/Main';
 
 function App() {
   return (
+    
+    <SnackbarProvider
+    maxSnack={1}
+    anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+    }} >
     <div className="App">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -27,6 +35,8 @@ function App() {
 
 
     </div>
+    
+    </SnackbarProvider>
   );
 }
 
