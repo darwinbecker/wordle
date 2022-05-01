@@ -52,7 +52,7 @@ export const TRMode = (props: TRModeProps) => {
 
     return (
         <>
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses}></Grid>
+            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={false}></Grid>
 
 
             {(props.youWin || props.youLose) && (

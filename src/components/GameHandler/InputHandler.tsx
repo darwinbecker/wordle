@@ -46,7 +46,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
     
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    const handleChange = (value: string) => {
+    const handleChange = (value: string): void => {
         if (props.youWin || props.youLose) return;
         // && guesses.length < MAX_CHALLENGES && !isGameWon
         if (props.guessedWord.length < MAX_WORD_LENGTH) {
@@ -58,7 +58,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
         }
     }
 
-    const handleRemove = () => {
+    const handleRemove = (): void => {
         if (props.guessedWord.length > 0) {
             // props.setIsInputError(false);
             props.setGuessedWord(props.guessedWord.slice(0, -1));
@@ -66,7 +66,7 @@ export const InputHandler: React.FC<InputHandlerProps> = (props: InputHandlerPro
         }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (): void => {
         // console.log("Solution:");
         // console.log(props.solution);
 

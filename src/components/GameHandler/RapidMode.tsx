@@ -11,7 +11,7 @@ export const RapidMode = (props: RapidModeProps) => {
 
     return (
         <>
-        <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses}></Grid>
+        <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={false}></Grid>
         </>
     );
 }
