@@ -7,6 +7,7 @@ import { PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, l
 import { checkstatus, WordStatusType } from "../WordStatus";
 import { WinService } from "./WinService";
 import { useSnackbar } from "notistack";
+import { isInDictionary } from "../../Config/Dictionary";
 
 type InputHandlerProps = {
     mode: GameModeType;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { MAX_GUESSES } from "../../Config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
 import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats } from "../LocalStorage";
@@ -15,7 +15,22 @@ import { useSnackbar } from 'notistack';
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 
+const initialState = { count: 0 };
+
+// function reducer(state: any, action: any): {} {
+//     switch (action.type) {
+//         case 'increment':
+//             return { count: state.count + 1 };
+//         case 'reset':
+//             return initialState;
+//         default:
+//             throw new Error();
+//     }
+// }
+
 export const GameHandler: React.FC = () => {
+
+    // const [state, dispatch] = useReducer(reducer, initialState);
 
     const [gameMode, setGameMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
@@ -165,9 +180,7 @@ export const GameHandler: React.FC = () => {
             setTimer(t);
         }
 
-
-        setShowPopup(!showPopup);
-        // setShowPopup(false);
+        setShowPopup(false);
     }
 
     return (
@@ -217,31 +230,9 @@ export const GameHandler: React.FC = () => {
                                     <h4>Score:</h4>
                                     <div className="score-value">{rapidModeScore}</div>
 
-                                    {/* TODO: DISPLAY HIGHEST STREAK IN A GOOD WAY */}
-                                    {/* {rapidMode == 1 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore1Min()}</div>
-                                    </>
-                                )}
-                                {rapidMode == 3 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore3Min()}</div>
-                                    </>
-                                )}
-                                {rapidMode == 5 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore5Min()}</div>
-                                    </>
-                                )} */}
-
                                 </div>
 
-                                {/* <div className="timer"> */}
                                 <Timer expiryTimestamp={timer ? timer : 0} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
-                                {/* </div> */}
 
                                 <div className="gameover-feedback">
                                     <h4>gesuchtes Wort war:</h4>
@@ -255,8 +246,6 @@ export const GameHandler: React.FC = () => {
                         </>
                     )}
 
-
-
                     {timer && !youLose && (
                         <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
                     )}
@@ -269,74 +258,9 @@ export const GameHandler: React.FC = () => {
 
                     )}
 
-                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 60 * 1000} /> */}
-                    {/* <Timer expiryTimestamp={new Date().getTime() + 1 * 15 * 1000} /> */}
-
-
                 </div>
             )}
 
-
-
-
-
-
-
-
-
-            {/* {gameMode === 'R' && (
-                <div className="rapid">
-                    {youLose && (
-                        <>
-                            <div className="rapid-score">
-                                <h4>Score:</h4>
-                                <div className="score-value">{rapidModeScore}</div>
-                                {rapidModeMinutes == 1 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore1Min()}</div>
-                                    </>
-                                )}
-                                {rapidModeMinutes == 3 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore3Min()}</div>
-                                    </>
-                                )}
-                                {rapidModeMinutes == 5 && (
-                                    <>
-                                        <h4>höchste Serie:</h4>
-                                        <div className="score-value">{loadRapidScore5Min()}</div>
-                                    </>
-                                )}
-
-                            </div>
-
-                            <div className="timer">
-                                {console.log(timer)}
-                                <FreezeTimer targetDate={timer} />
-                            </div>
-
-                            <div className="gameover-feedback">
-                                <h4>gesuchtes Wort war:</h4>
-                                <div className="solution-word">{solution}</div>
-                            </div>
-                        </>
-                    )}
-
-                    {freezeTimer && !youLose && (
-                        <div className="timer">
-                            <FreezeTimer targetDate={displayTimerFreezeValue} />
-                        </div>
-                    )}
-
-                    {!youLose && !freezeTimer && (
-                        <div className="timer">
-                            <CountdownTimer targetDate={timer} setYouLose={setYouLose} />
-                        </div>
-                    )}
-                </div>
-            )} */}
 
             {gameMode === 'WOTD' && (youLose) && (
                 <div className="gameover-feedback">
@@ -356,5 +280,3 @@ export const GameHandler: React.FC = () => {
         </div>
     );
 }
-
-// export default GameHandler; 
