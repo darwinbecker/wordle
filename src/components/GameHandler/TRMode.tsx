@@ -2,62 +2,36 @@ import { useEffect } from "react";
 import { GameModeHandlerService } from ".";
 import { getRandomWord } from "../../Config/Wordlist";
 import { Grid } from "../Grid";
+import { Keyboard } from "../Keyboard";
 import { WordStatusType } from "../WordStatus";
 
 type TRModeProps = {
     guessedWord: string;
     guessedWords: string[];
     wordStatuses: WordStatusType[][];
-    youWin: boolean;
-    setYouWin: (value: boolean) => void;
-    youLose: boolean;
-    setYouLose: (value: boolean) => void;
     solution: string;
-    setSolution: (value: string) => void;
+    handleChange: (value: string) => void;
+    handleSubmit: () => void;
+    handleRemove: () => void;
+    isInputError: boolean;
+    youWin: boolean;
+    youLose: boolean;
     resetGame: () => void;
+    getNextWord: () => void;
 }
 
 export const TRMode = (props: TRModeProps) => {
 
-
-    // const resetGame = () => {
-    // GameModeHandlerService.resetGame();
-    //     setGuessedWords([]);
-    //     setRowIndex(0);
-    //     setColumnIndex(0);
-    //     setGuessedWord("");
-    //     setWordStatuses([]);
-    //     setYouWin(false);
-    //     setYouLose(false);
-    //     setSolution("");
-    //     setTimerStarted(false);
-    // }
-
-    const getNextWord = () => {
-        props.resetGame();
-        props.setSolution(getRandomWord());
-    }
-
-    useEffect(() => {
-        const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
-            if (mode == 'TR') {
-                // getNextWord();
-            }
-        });
-
-        return () => {
-            subscription.unsubscribe();
-        }
-    }, []);
-
     return (
         <>
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={false}></Grid>
+            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
 
+            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
+                handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
 
             {(props.youWin || props.youLose) && (
                 <div className="gameover-feedback">
-                    <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
+                    <button className="next-word" onClick={props.getNextWord}>nächstes Wort</button>
                     <h4>gesuchtes Wort war:</h4>
                     <div className="solution-word">{props.solution}</div>
                 </div>

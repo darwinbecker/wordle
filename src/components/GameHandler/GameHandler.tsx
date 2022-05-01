@@ -219,7 +219,7 @@ export const GameHandler: React.FC = () => {
         return gameStats;
     }
 
-    
+
     useEffect(() => {
         if (youWin || youLose) return;
 
@@ -294,7 +294,7 @@ export const GameHandler: React.FC = () => {
                             setYouWin(true);
                             setYouLose(false);
                             Confetti();
-                            enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
+                            // enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
                             return;
                         } else if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
                             // WinService.setWin(false);
@@ -329,7 +329,7 @@ export const GameHandler: React.FC = () => {
         }
     }, []);
 
-    const togglePopup = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
         console.log("load category dictionary");
         console.log(gameMode)
         console.log(event.currentTarget.value);
@@ -353,7 +353,6 @@ export const GameHandler: React.FC = () => {
             <NavigationBar stats={stats} />
 
             {/* <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} isInputError={isInputError} ></Grid> */}
-
             {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
 
             {gameMode === 'C' && showPopup && (
@@ -368,15 +367,20 @@ export const GameHandler: React.FC = () => {
                 </>
             )}
 
-            {gameMode === 'WOTD' && showPopup && (youWin || youLose) && (
+            {gameMode === 'WOTD' && (
                 <>
-                    <Popup content={'stats'} closePopup={togglePopup} forceInput={false} animationDelay={true} stats={stats}></Popup>
+                    <WOTDMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
                 </>
             )}
-
-            {gameMode === 'WOTD' && (
-                <WOTDMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution} 
-                handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError} />
+            
+            {gameMode === 'TR' && (
+                <>
+                    <TRMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} resetGame={resetGame} getNextWord={getNextWord} />
+                </>
             )}
 
 
@@ -431,20 +435,20 @@ export const GameHandler: React.FC = () => {
             )}
 
 
-            {gameMode === 'WOTD' && (youLose) && (
+            {/* {gameMode === 'WOTD' && (youLose) && (
                 <div className="gameover-feedback">
                     <h4>gesuchtes Wort war:</h4>
                     <div className="solution-word">{solution}</div>
                 </div>
-            )}
+            )} */}
 
-            {gameMode === 'TR' && (youWin || youLose) && (
+            {/* {gameMode === 'TR' && (youWin || youLose) && (
                 <div className="gameover-feedback">
                     <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
                     <h4>gesuchtes Wort war:</h4>
                     <div className="solution-word">{solution}</div>
                 </div>
-            )}
+            )} */}
 
         </div>
     );
