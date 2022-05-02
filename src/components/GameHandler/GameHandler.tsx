@@ -70,7 +70,7 @@ export const GameHandler: React.FC = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const resetRapidMode = () => {
+    const resetRapidMode = (): void => {
         resetGame();
         setSolution("TIMER");
         setRapidModeScore(0);
@@ -79,7 +79,7 @@ export const GameHandler: React.FC = () => {
         setTimer(t);
     }
 
-    const resetGame = () => {
+    const resetGame = (): void => {
         setGuessedWords([]);
         setRowIndex(0);
         setColumnIndex(0);
@@ -91,7 +91,7 @@ export const GameHandler: React.FC = () => {
         setIsInputError(false);
     }
 
-    const getNextWord = () => {
+    const getNextWord = (): void => {
         resetGame();
         // setSolution(getRandomWord());
         setSolution("TIMER");
@@ -352,21 +352,6 @@ export const GameHandler: React.FC = () => {
 
             <NavigationBar stats={stats} />
 
-            {/* <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} isInputError={isInputError} ></Grid> */}
-            {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
-
-            {gameMode === 'C' && showPopup && (
-                <>
-                    <Popup content={'categories'} closePopup={togglePopup} forceInput={true} stats={stats}></Popup>
-                </>
-            )}
-
-            {gameMode === 'R' && showPopup && (
-                <>
-                    <Popup content={'rapid'} closePopup={togglePopup} forceInput={true} stats={stats}></Popup>
-                </>
-            )}
-
             {gameMode === 'WOTD' && (
                 <>
                     <WOTDMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
@@ -374,7 +359,7 @@ export const GameHandler: React.FC = () => {
                         youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
                 </>
             )}
-            
+
             {gameMode === 'TR' && (
                 <>
                     <TRMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
@@ -383,72 +368,23 @@ export const GameHandler: React.FC = () => {
                 </>
             )}
 
-
-            {/* <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
-                solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
-                guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
-                rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex}
-                pauseTimer={pauseTimer} setPauseTimer={setPauseTimer}
-                getNextWord={getNextWord} rapidModeScore={rapidModeScore} setRapidModeScore={setRapidModeScore}
-                rapidMode={rapidMode} setIsInputError={setIsInputError} /> */}
-
-            {gameMode === 'R' && (
-                <div className="rapid">
-
-                    {youLose && (
-                        <>
-                            <div className="game-summary">
-
-                                <div className="rapid-score">
-                                    <h4>Score:</h4>
-                                    <div className="score-value">{rapidModeScore}</div>
-
-                                </div>
-
-                                <Timer expiryTimestamp={timer ? timer : 0} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
-
-                                <div className="gameover-feedback">
-                                    <h4>gesuchtes Wort war:</h4>
-                                    <div className="solution-word">{solution}</div>
-                                </div>
-
-                            </div>
-                            <div>
-                                <button className="new-game-button" onClick={resetRapidMode}>Neues Spiel</button>
-                            </div>
-                        </>
-                    )}
-
-                    {timer && !youLose && (
-                        <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
-                    )}
-
-                    {rapidModeScore > 0 && !youLose && (
-                        <div className="rapid-score">
-                            <h4>Score:</h4>
-                            <div className="score-value">{rapidModeScore}</div>
-                        </div>
-
-                    )}
-
-                </div>
+            {gameMode === 'C' && (
+                <>
+                    <CategoryMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
+                </>
             )}
 
-
-            {/* {gameMode === 'WOTD' && (youLose) && (
-                <div className="gameover-feedback">
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{solution}</div>
-                </div>
-            )} */}
-
-            {/* {gameMode === 'TR' && (youWin || youLose) && (
-                <div className="gameover-feedback">
-                    <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{solution}</div>
-                </div>
-            )} */}
+            {gameMode === 'R' && (
+                <>
+                    <RapidMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youLose={youLose} setYouLose={setYouLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats}
+                        rapidModeScore={rapidModeScore} resetRapidMode={resetRapidMode} timer={timer} setTimer={setTimer}
+                        pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} />
+                </>
+            )}
 
         </div>
     );

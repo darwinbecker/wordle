@@ -25,12 +25,11 @@ export const WOTDMode = (props: WOTDModeProps) => {
     return (
         <>
             {props.showPopup && (props.youWin || props.youLose) && (
-                <>
-                    <Popup content={'stats'} closePopup={props.togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
-                </>
+                <Popup content={'stats'} closePopup={props.togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
             )}
 
             <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
+
             <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
                 handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
 
