@@ -224,10 +224,10 @@ export const GameHandler: React.FC = () => {
         if (youWin || youLose) return;
 
         const listener = (event: globalThis.KeyboardEvent): any => {
-            if (event.code === 'Enter') {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter') {
                 handleSubmit();
                 return;
-            } else if (event.code === 'Backspace') {
+            } else if (event.code === 'Backspace' || event.code === 'Delete') {
                 handleRemove();
                 return;
             }
@@ -337,6 +337,7 @@ export const GameHandler: React.FC = () => {
         // TODO: load category dictionary if mode is C, or timer if mode is R
         if (gameMode === "C") {
             const category = event.currentTarget.value;
+            console.log(category);
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
             setRapidMode(rapidModeTimerValue);
