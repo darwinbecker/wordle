@@ -1,36 +1,19 @@
-import { useEffect, useReducer, useState } from "react";
-import { MAX_GUESSES } from "../../Config/Settings";
+import { useEffect, useState } from "react";
+import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../Config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
-import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats } from "../LocalStorage";
-import { WordStatusType } from "../WordStatus";
-import { Popup } from "../Popup";
+import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, saveRapidScore3Min, loadRapidScore5Min, saveRapidScore5Min } from "../LocalStorage";
+import { checkstatus, WordStatusType } from "../WordStatus";
 import { GameModeHandlerService } from "./GameModeHandlerService";
 import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
-import { Grid } from "../Grid";
-import { CategoryMode, InputHandler, RapidMode, TRMode, WOTDMode } from ".";
-import { Timer } from "../Timer";
+import { WinService } from ".";
+import { CategoryMode,  RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from 'notistack';
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
 
-const initialState = { count: 0 };
-
-// function reducer(state: any, action: any): {} {
-//     switch (action.type) {
-//         case 'increment':
-//             return { count: state.count + 1 };
-//         case 'reset':
-//             return initialState;
-//         default:
-//             throw new Error();
-//     }
-// }
-
 export const GameHandler: React.FC = () => {
-
-    // const [state, dispatch] = useReducer(reducer, initialState);
 
     const [gameMode, setGameMode] = useState<GameModeType>("WOTD");
     const [showPopup, setShowPopup] = useState(true);
@@ -70,7 +53,7 @@ export const GameHandler: React.FC = () => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const resetRapidMode = () => {
+    const resetRapidMode = (): void => {
         resetGame();
         setSolution("TIMER");
         setRapidModeScore(0);
@@ -79,7 +62,7 @@ export const GameHandler: React.FC = () => {
         setTimer(t);
     }
 
-    const resetGame = () => {
+    const resetGame = (): void => {
         setGuessedWords([]);
         setRowIndex(0);
         setColumnIndex(0);
@@ -91,11 +74,163 @@ export const GameHandler: React.FC = () => {
         setIsInputError(false);
     }
 
-    const getNextWord = () => {
+    const getNextWord = (): void => {
         resetGame();
         // setSolution(getRandomWord());
         setSolution("TIMER");
     }
+
+
+    const handleChange = (value: string): void => {
+        if (youWin || youLose) return;
+
+        if (gameMode == 'R' && pauseTimer) {
+            setPauseTimer(false);
+        }
+
+        if (guessedWord.length < MAX_WORD_LENGTH) {
+            // props.setIsInputError(false);
+            setGuessedWord(`${guessedWord}${value}`);
+            setColumnIndex(columnIndex + 1);
+        } else {
+            // TODO: display feedback for user
+            enqueueSnackbar('Du kannst nur 5 Buchstaben eingeben.', { variant: 'warning', preventDuplicate: true, });
+        }
+    }
+
+    const handleRemove = (): void => {
+        if (youWin || youLose) return;
+        if (guessedWord.length > 0) {
+            setGuessedWord(guessedWord.slice(0, -1));
+            setColumnIndex(columnIndex - 1);
+        }
+    }
+
+    const handleSubmit = (): void => {
+        if (youWin || youLose) return;
+
+        if (guessedWord.length == 5) {
+            if (guessedWords.length < MAX_GUESSES) {
+                // TODO check if guessWord is in dictionary
+                // if (!isInDictionary(props.guessedWord)) {
+                //     console.log("WORD IS NOT IN DICTIONARY");
+                //     return;
+                // }
+
+                setIsInputError(false);
+                setRowIndex(rowIndex + 1);
+                setColumnIndex(0);
+                setGuessedWord("");
+                setGuessedWords([...guessedWords, guessedWord]);
+                const status = checkstatus(guessedWord, solution);
+                setWordStatuses([...wordStatuses, status]);
+
+                // set win
+                if (guessedWord === solution) {
+                    if (gameMode === "WOTD") {
+                        const newStats = updatePlayerStats(true);
+                        setStats(newStats);
+                        savePlayerStats(newStats);
+                        enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
+                    }
+
+                    if (gameMode == "R") {
+                        setRapidModeScore(rapidModeScore + 1);
+                        getNextWord();
+                    } else {
+                        setYouWin(true);
+                        Confetti();
+                    }
+                    WinService.setWin(true);
+
+                    return;
+                }
+
+                // last guess, set lose
+                if (guessedWords.length == MAX_GUESSES - 1) {
+                    if (guessedWord !== solution) {
+                        console.log("YOU LOSE!");
+                        if (gameMode === "WOTD") {
+                            const newStats = updatePlayerStats(false);
+                            setStats(newStats);
+                            savePlayerStats(newStats);
+                            enqueueSnackbar(`Du hast das heutige Wort: "${solution}" leider nicht erraten`, { variant: 'error' });
+                        }
+
+                        if (gameMode == "R") {
+                            setPauseTimer(true);
+                            console.log("rapidModeTimerMinutes")
+                            console.log(rapidMode)
+                            if (rapidMode == 1) {
+                                const loadedRapidScore = loadRapidScore1Min();
+                                if (loadedRapidScore <= rapidModeScore) saveRapidScore1Min(rapidModeScore);
+                            } else if (rapidMode == 3) {
+                                const loadedRapidScore = loadRapidScore3Min();
+                                if (loadedRapidScore <= rapidModeScore) saveRapidScore3Min(rapidModeScore);
+                            } else if (rapidMode == 5) {
+                                const loadedRapidScore = loadRapidScore5Min();
+                                if (loadedRapidScore <= rapidModeScore) saveRapidScore5Min(rapidModeScore);
+                            }
+                        }
+
+                        setYouLose(true);
+                        return;
+                    }
+                }
+
+            }
+        }
+        else {
+            // TODO enter 5 characters => shake animation
+            console.log("enter 5 characters");
+            setIsInputError(false);
+            setIsInputError(true);
+            enqueueSnackbar('Bitte 5 Buchstaben eingeben.', { variant: 'error', preventDuplicate: true, });
+        }
+    }
+
+    const updatePlayerStats = (win: boolean): PlayerStats => {
+        const gameStats: PlayerStats = { ...stats }
+        gameStats.gamesPlayed += 1;
+        if (win) {
+            gameStats.wins += 1;
+            gameStats.trysPerWin[guessedWords.length] += 1;
+            gameStats.winStreak += 1;
+            gameStats.bestWinStreak = (gameStats.winStreak >= gameStats.bestWinStreak) ? gameStats.winStreak : gameStats.bestWinStreak;
+        } else {
+            gameStats.losses += 1;
+            gameStats.winStreak = 0;
+        }
+
+        return gameStats;
+    }
+
+
+    useEffect(() => {
+        const listener = (event: globalThis.KeyboardEvent): any => {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+                handleSubmit();
+                // return;
+            } else if (event.code === 'Backspace' || event.code === 'Delete') {
+                handleRemove();
+                // return;
+            }
+            else {
+                const key = event.key.toLocaleUpperCase();
+                // TODO A-Z => problem with german letters üäö 
+                if (key.length == 1 && key >= 'A' && key <= 'Z') {
+                    handleChange(key);
+                }
+                // return;
+            }
+        }
+        window.addEventListener('keyup', listener);
+        return () => {
+            window.removeEventListener('keyup', listener);
+        }
+
+    }, [handleSubmit, handleRemove, handleChange, youWin, youLose]);
+
 
     useEffect(() => {
         if (gameMode === "WOTD") {
@@ -130,7 +265,6 @@ export const GameHandler: React.FC = () => {
                             setYouWin(true);
                             setYouLose(false);
                             Confetti();
-                            enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
                             return;
                         } else if (loaded.guessedWords.length === MAX_GUESSES && !gameWasWon) {
                             // WinService.setWin(false);
@@ -165,7 +299,7 @@ export const GameHandler: React.FC = () => {
         }
     }, []);
 
-    const togglePopup = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
         console.log("load category dictionary");
         console.log(gameMode)
         console.log(event.currentTarget.value);
@@ -173,6 +307,7 @@ export const GameHandler: React.FC = () => {
         // TODO: load category dictionary if mode is C, or timer if mode is R
         if (gameMode === "C") {
             const category = event.currentTarget.value;
+            console.log(category);
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
             setRapidMode(rapidModeTimerValue);
@@ -188,93 +323,38 @@ export const GameHandler: React.FC = () => {
 
             <NavigationBar stats={stats} />
 
-            <Grid letter={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} isInputError={isInputError} ></Grid>
-
-            {/* <Keyboard wordStatuses={wordStatuses} guessedWords={guessedWords} solution={solution} /> */}
-
-            {gameMode === 'C' && showPopup && (
+            {gameMode === 'WOTD' && (
                 <>
-                    <Popup content={'categories'} closePopup={togglePopup} forceInput={true} stats={stats}></Popup>
+                    <WOTDMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
                 </>
             )}
 
-            {gameMode === 'R' && showPopup && (
+            {gameMode === 'TR' && (
                 <>
-                    <Popup content={'rapid'} closePopup={togglePopup} forceInput={true} stats={stats}></Popup>
+                    <TRMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} resetGame={resetGame} getNextWord={getNextWord} />
                 </>
             )}
 
-            {gameMode === 'WOTD' && showPopup && (youWin || youLose) && (
+            {gameMode === 'C' && (
                 <>
-                    <Popup content={'stats'} closePopup={togglePopup} forceInput={false} animationDelay={true} stats={stats}></Popup>
+                    <CategoryMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
                 </>
             )}
-
-
-            <InputHandler mode={gameMode} youWin={youWin} youLose={youLose} setYouWin={setYouWin} setYouLose={setYouLose}
-                solution={solution} stats={stats} setStats={setStats} guessedWord={guessedWord} setGuessedWord={setGuessedWord}
-                guessedWords={guessedWords} setGuessedWords={setGuessedWords} wordStatuses={wordStatuses} setWordStatuses={setWordStatuses}
-                rowIndex={rowIndex} setRowIndex={setRowIndex} columnIndex={columnIndex} setColumnIndex={setColumnIndex}
-                pauseTimer={pauseTimer} setPauseTimer={setPauseTimer}
-                getNextWord={getNextWord} rapidModeScore={rapidModeScore} setRapidModeScore={setRapidModeScore}
-                rapidMode={rapidMode} setIsInputError={setIsInputError} />
 
             {gameMode === 'R' && (
-                <div className="rapid">
-
-                    {youLose && (
-                        <>
-                            <div className="game-summary">
-
-                                <div className="rapid-score">
-                                    <h4>Score:</h4>
-                                    <div className="score-value">{rapidModeScore}</div>
-
-                                </div>
-
-                                <Timer expiryTimestamp={timer ? timer : 0} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
-
-                                <div className="gameover-feedback">
-                                    <h4>gesuchtes Wort war:</h4>
-                                    <div className="solution-word">{solution}</div>
-                                </div>
-
-                            </div>
-                            <div>
-                                <button className="new-game-button" onClick={resetRapidMode}>Neues Spiel</button>
-                            </div>
-                        </>
-                    )}
-
-                    {timer && !youLose && (
-                        <Timer expiryTimestamp={timer} setExpiryTimestamp={setTimer} pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} youLose={youLose} setYoulose={setYouLose} />
-                    )}
-
-                    {rapidModeScore > 0 && !youLose && (
-                        <div className="rapid-score">
-                            <h4>Score:</h4>
-                            <div className="score-value">{rapidModeScore}</div>
-                        </div>
-
-                    )}
-
-                </div>
-            )}
-
-
-            {gameMode === 'WOTD' && (youLose) && (
-                <div className="gameover-feedback">
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{solution}</div>
-                </div>
-            )}
-
-            {gameMode === 'TR' && (youWin || youLose) && (
-                <div className="gameover-feedback">
-                    <button className="next-word" onClick={getNextWord}>nächstes Wort</button>
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{solution}</div>
-                </div>
+                <>
+                    <RapidMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
+                        handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
+                        youLose={youLose} setYouLose={setYouLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats}
+                        rapidModeScore={rapidModeScore} resetRapidMode={resetRapidMode} timer={timer} setTimer={setTimer}
+                        pauseTimer={pauseTimer} setPauseTimer={setPauseTimer} />
+                </>
             )}
 
         </div>
