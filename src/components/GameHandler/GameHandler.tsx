@@ -8,7 +8,8 @@ import { GameModeHandlerService } from "./GameModeHandlerService";
 import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
 import { Grid } from "../Grid";
-import { CategoryMode, InputHandler, RapidMode, TRMode, WinService, WOTDMode } from ".";
+import { WinService } from ".";
+import { CategoryMode,  RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { Timer } from "../Timer";
 import { useSnackbar } from 'notistack';
 
