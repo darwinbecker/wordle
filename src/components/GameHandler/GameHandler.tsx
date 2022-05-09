@@ -154,6 +154,7 @@ export const GameHandler: React.FC = () => {
                             const newStats = updatePlayerStats(false);
                             setStats(newStats);
                             savePlayerStats(newStats);
+                            enqueueSnackbar(`Du hast das heutige Wort: "${solution}" leider nicht erraten`, { variant: 'error' });
                         }
 
                         if (gameMode == "R") {
