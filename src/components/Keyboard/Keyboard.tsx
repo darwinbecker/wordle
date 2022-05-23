@@ -1,6 +1,4 @@
 import React from "react";
-import { idText } from "typescript";
-import { WORD_OF_THE_DAY } from "../../Config/Wordlist";
 import { getStatuses, WordStatusClassNames, WordStatusType } from "../WordStatus";
 
 type KeyboardProps = {
@@ -18,10 +16,10 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
     const thirdRow: string[] = ["ENTER", "Y", "X", "C", "V", "B", "N", "M", "DELETE"];
     const charStatuses = getStatuses(props.guessedWords, props.solution);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-        const buttonValue = event.currentTarget.value;
-        console.log(buttonValue);
-    }
+    // const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    //     const buttonValue = event.currentTarget.value;
+    //     console.log(buttonValue);
+    // }
 
     return (
         <div className="Keyboard">
@@ -41,11 +39,11 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
             </div>
             <div className="thirdRow">
                 {thirdRow.map((letter, index) => {
-                    if (index == 0) {
+                    if (index === 0) {
                         return (
                             <button className={WordStatusClassNames('Key Enter-Key', charStatuses[letter])} onClick={props.handeSubmit} value={letter} key={index}><i className="fa-regular fa-circle-check"></i></button>
                         )
-                    } else if (index == 8) {
+                    } else if (index === 8) {
                         return (
                             <button className={WordStatusClassNames('Key Delete-Key', charStatuses[letter])} onClick={props.handleRemove} value={letter} key={index}><i className="fa-solid fa-delete-left"></i></button>
                         )

@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { GameModeHandlerService } from "../GameHandler";
-import { getRandomWord } from "../../Config/Wordlist";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 import { WordStatusType } from "../WordStatus";
