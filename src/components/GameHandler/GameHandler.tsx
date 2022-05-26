@@ -9,6 +9,8 @@ import { NavigationBar } from "../Navigation";
 import { WinService } from ".";
 import { CategoryMode,  RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from 'notistack';
+import { isInDictionary, DICTIONARY } from "../../Config/Dictionary";
+import { category } from "../../Types/Category";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -50,6 +52,8 @@ export const GameHandler: React.FC = () => {
     const [rapidModeScore, setRapidModeScore] = useState<number>(0);
 
     const [isInputError, setIsInputError] = useState<boolean>(false);
+
+    const [currentDictionary, setCurrentDictionary] = useState<string[]>(DICTIONARY);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -112,10 +116,10 @@ export const GameHandler: React.FC = () => {
         if (guessedWord.length == 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                // if (!isInDictionary(props.guessedWord)) {
-                //     console.log("WORD IS NOT IN DICTIONARY");
-                //     return;
-                // }
+                if (!isInDictionary(guessedWord, currentDictionary)) {
+                    console.log("WORD IS NOT IN DICTIONARY");
+                    return;
+                }
 
                 setIsInputError(false);
                 setRowIndex(rowIndex + 1);
@@ -306,8 +310,9 @@ export const GameHandler: React.FC = () => {
 
         // TODO: load category dictionary if mode is C, or timer if mode is R
         if (gameMode === "C") {
-            const category = event.currentTarget.value;
+            const category: category = event.currentTarget.value as category;
             console.log(category);
+            // setCurrentDictionary(category);
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
             setRapidMode(rapidModeTimerValue);

@@ -1,8 +1,8 @@
-export const isInDictionary = (guessedWord: string) => {
-    return DICTIONARY.includes(guessedWord);
+export const isInDictionary = (guessedWord: string, dictionary: string[]) => {
+    return dictionary.includes(guessedWord);
 }
 
-export const DICTIONARY = [
+export const DICTIONARY: string[] = [
     "ABART",
     "ABBAU",
     "ABECE",

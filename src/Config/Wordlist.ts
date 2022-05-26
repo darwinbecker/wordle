@@ -34,7 +34,7 @@ export const getRandomWord = (): string => {
     return WORDLIST[random];
 }
 
-export const WORDLIST = [
+const WORDLIST = [
     "ABART",
     "ABBAU",
     "ABECE",

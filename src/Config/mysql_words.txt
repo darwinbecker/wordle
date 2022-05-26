@@ -603,7 +603,7 @@ insert into words values (default, "Frist", "festgesetzte Zeitspanne, nach deren
 insert into words values (default, "Fritz", "von Ausländern (besonders Engländern) verwendete Bezeichnung für Deutscher");
 insert into words values (default, "fromm", "Gott ganz ergeben, gottesfürchtig");
 insert into words values (default, "Front", "Vorderseite, Stirnseite, vorderste Gefechtslinie der kämpfenden Truppe");
-insert into words values (default, "Frost");
+insert into words values (default, "Frost", "arktische Kälte, Eiseskälte, eisige Kälte, Minustemperatur(en)");
 insert into words values (default, "frueh");
 insert into words values (default, "Frunk");
 insert into words values (default, "Frust");

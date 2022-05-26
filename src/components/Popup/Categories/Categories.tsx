@@ -95,7 +95,7 @@ export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) =>
                     <img src={Medizin} alt="Medizin" />
                     Medizin
                 </button>
-                <button onClick={props.closePopup} value="musik">
+                <button onClick={props.closePopup} value="music">
                     <img src={Musik} alt="Musik" />
                     Musik
                 </button>
