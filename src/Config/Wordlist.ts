@@ -34,6 +34,13 @@ export const getRandomWord = (): string => {
     return WORDLIST[random];
 }
 
+export const getRandomWordFromDictionary = (dictionary: object): string => {
+    const random = Math.floor(Math.random() * Object.keys(dictionary).length);
+    console.log(random);
+    console.log(Object.keys(dictionary)[random]);
+    return Object.keys(dictionary)[random];
+}
+
 const WORDLIST = [
     "ABART",
     "ABBAU",

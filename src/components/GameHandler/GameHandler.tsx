@@ -11,6 +11,8 @@ import { CategoryMode,  RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from 'notistack';
 import { isInDictionary, DICTIONARY } from "../../Config/Dictionary";
 import { category } from "../../Types/Category";
+import { astronomy, architecture } from "../../Config/database";
+import { getRandomWordFromDictionary } from "../../Config/Wordlist";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -53,7 +55,8 @@ export const GameHandler: React.FC = () => {
 
     const [isInputError, setIsInputError] = useState<boolean>(false);
 
-    const [currentDictionary, setCurrentDictionary] = useState<string[]>(DICTIONARY);
+    const [category, setCategory] = useState<category>("architecture");
+    const [currentDictionary, setCurrentDictionary] = useState<object>(architecture);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -82,6 +85,11 @@ export const GameHandler: React.FC = () => {
         resetGame();
         // setSolution(getRandomWord());
         setSolution("TIMER");
+    }
+
+    function getNextCategoryWord(): void {
+        resetGame();
+        setSolution(getRandomWordFromDictionary(currentDictionary));
     }
 
 
@@ -116,10 +124,10 @@ export const GameHandler: React.FC = () => {
         if (guessedWord.length == 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                if (!isInDictionary(guessedWord, currentDictionary)) {
-                    console.log("WORD IS NOT IN DICTIONARY");
-                    return;
-                }
+                // if (!isInDictionary(guessedWord, currentDictionary)) {
+                //     console.log("WORD IS NOT IN DICTIONARY");
+                //     return;
+                // }
 
                 setIsInputError(false);
                 setRowIndex(rowIndex + 1);
@@ -304,15 +312,21 @@ export const GameHandler: React.FC = () => {
     }, []);
 
     const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
-        console.log("load category dictionary");
-        console.log(gameMode)
-        console.log(event.currentTarget.value);
-
         // TODO: load category dictionary if mode is C, or timer if mode is R
         if (gameMode === "C") {
+            // console.log("load category dictionary");
+            // console.log(event.currentTarget.value);
             const category: category = event.currentTarget.value as category;
             console.log(category);
             // setCurrentDictionary(category);
+            if(category === "astronomy"){
+                setCategory("astronomy");
+                setCurrentDictionary(astronomy);
+                const solution = getRandomWordFromDictionary(astronomy);
+                console.log(solution);
+                setSolution(solution);
+            }
+
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
             setRapidMode(rapidModeTimerValue);
@@ -348,7 +362,8 @@ export const GameHandler: React.FC = () => {
                 <>
                     <CategoryMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
                         handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
-                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} category={category} 
+                        getNextCategoryWord={getNextCategoryWord} />
                 </>
             )}
 

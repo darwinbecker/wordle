@@ -1,4 +1,4 @@
-export const biologie = {
+export const biology = {
   aerob: "Luftsauerstoff (zum Leben) benötigend, auf Sauerstoff aus der Luft angewiesen",
   Alula: "Federn am Daumen des Vogelflügels",
   Ambra: "fettige Ausscheidung aus dem Darm des Pottwals",
