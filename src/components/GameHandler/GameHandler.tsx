@@ -96,7 +96,7 @@ export const GameHandler: React.FC = () => {
     const handleChange = (value: string): void => {
         if (youWin || youLose) return;
 
-        if (gameMode == 'R' && pauseTimer) {
+        if (gameMode === 'R' && pauseTimer) {
             setPauseTimer(false);
         }
 
@@ -121,7 +121,7 @@ export const GameHandler: React.FC = () => {
     const handleSubmit = (): void => {
         if (youWin || youLose) return;
 
-        if (guessedWord.length == 5) {
+        if (guessedWord.length === 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
                 // if (!isInDictionary(guessedWord, currentDictionary)) {
@@ -146,7 +146,7 @@ export const GameHandler: React.FC = () => {
                         enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
                     }
 
-                    if (gameMode == "R") {
+                    if (gameMode === "R") {
                         setRapidModeScore(rapidModeScore + 1);
                         getNextWord();
                     } else {
@@ -159,7 +159,7 @@ export const GameHandler: React.FC = () => {
                 }
 
                 // last guess, set lose
-                if (guessedWords.length == MAX_GUESSES - 1) {
+                if (guessedWords.length === MAX_GUESSES - 1) {
                     if (guessedWord !== solution) {
                         console.log("YOU LOSE!");
                         if (gameMode === "WOTD") {
@@ -169,17 +169,17 @@ export const GameHandler: React.FC = () => {
                             enqueueSnackbar(`Du hast das heutige Wort: "${solution}" leider nicht erraten`, { variant: 'error' });
                         }
 
-                        if (gameMode == "R") {
+                        if (gameMode === "R") {
                             setPauseTimer(true);
                             console.log("rapidModeTimerMinutes")
                             console.log(rapidMode)
-                            if (rapidMode == 1) {
+                            if (rapidMode === 1) {
                                 const loadedRapidScore = loadRapidScore1Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore1Min(rapidModeScore);
-                            } else if (rapidMode == 3) {
+                            } else if (rapidMode === 3) {
                                 const loadedRapidScore = loadRapidScore3Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore3Min(rapidModeScore);
-                            } else if (rapidMode == 5) {
+                            } else if (rapidMode === 5) {
                                 const loadedRapidScore = loadRapidScore5Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore5Min(rapidModeScore);
                             }
@@ -230,7 +230,7 @@ export const GameHandler: React.FC = () => {
             else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
-                if (key.length == 1 && key >= 'A' && key <= 'Z') {
+                if (key.length === 1 && key >= 'A' && key <= 'Z') {
                     handleChange(key);
                 }
                 // return;
@@ -255,7 +255,7 @@ export const GameHandler: React.FC = () => {
         const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
             setGameMode(mode as GameModeType);
             resetGame();
-            if (mode == 'WOTD') {
+            if (mode === 'WOTD') {
                 setShowPopup(true);
                 setSolution(WORD_OF_THE_DAY().solution);
                 const loaded = loadGameState();
@@ -290,12 +290,12 @@ export const GameHandler: React.FC = () => {
                     }
                 }
             }
-            else if (mode == 'TR') {
+            else if (mode === 'TR') {
                 getNextWord();
             }
-            else if (mode == 'C') {
+            else if (mode === 'C') {
                 setShowPopup(true);
-            } else if (mode == 'R') {
+            } else if (mode === 'R') {
                 console.log("load Rapid mode");
                 setSolution("TIMER");
                 setRapidModeScore(0);
