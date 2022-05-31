@@ -32,4 +32,8 @@ export const food = {
   Farin: "feiner, nicht raffinierter, gelblich brauner, leicht feuchter Zucker oder Puderzucker",
   Filet: "zartes Lendenstück vom Schwein oder Rind, das zum Braten geeignet ist; Fischstück ohne Gräten und Haut; Bruststück vom Geflügel",
   Fisch: "schuppiges, wechselwarmes Wirbeltier (mit seitlich abgeflachtem Körper), das im Wasser lebt und dazu mit Schwimmblase, Kiemen und Flossen ausgestattet ist",
+  garen: "garen, dämpfen, dünsten, kochen, schmoren",
+  Gelee: "durchsichtige, gallertartige Masse: (unter Zusatz von Zucker) eingedickter Fruchtsaft oder durch Gelatine gesteifte Süßspeise",
+
+
 }

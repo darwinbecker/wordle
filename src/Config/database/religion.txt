@@ -15,6 +15,9 @@ insert into words values (default, "Ethik", "philosophische Lehre vom sittlichen
 insert into words values (default, "Ethos", "sittliche Gesamthaltung des Menschen, die die Grundlage seines Wollens und Handelns bildet");
 insert into words values (default, "Fatum", "Schicksal, Geschick");
 insert into words values (default, "fromm", "Gott ganz ergeben, gottesfürchtig");
+insert into words values (default, "Gatte", "Ehemann, Ehepartner (maskulin)");
+insert into words values (default, "Gebet", "Gebet, Fürbitte, Gespräch mit Gott; eine zentrale Glaubenspraxis");
+insert into words values (default, "Gebot", "Befehl, Kommando; moralisches oder religiöses Gesetz, das ein bestimmtes Handeln oder Verhalten vorschreibt");
 
 
 

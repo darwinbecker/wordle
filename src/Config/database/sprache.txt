@@ -82,7 +82,13 @@ insert into words values (default, "Fonem", "Phonem, kleinstmögliche lautliche 
 insert into words values (default, "Frass", "Fressen, Essen; schlecht zubereitetes, wenig nahrhaftes Essen, Gemeinschaftsessen, das einem nicht schmeckt");
 insert into words values (default, "Fratz", "niedliches, schelmisches, (eitles) kleines Kind, besonders Mädchen");
 insert into words values (default, "Fraud", "erwachsene Person weiblichen Geschlechts, Ehefrau");
-
+insert into words values (default, "Frunk", "(englisch) vorderer Kofferraum");
+insert into words values (default, "Futon", "Futon (japanisch), Matratze, Matte, Polster, Bett");
+insert into words values (default, "Futur", "Futur (fachspr.), Zukunft; grammatikalische Kategorien des Verbs, die zur Kennzeichnung von Zukünftigem verwendet werden");
+insert into words values (default, "Gamer", "Gamer, Spieler, Zocker, Glücksspieler");
+insert into words values (default, "Gauch", 'Gauch ist eigentlich ein veralteter Name für den heute Kuckuck genannten Vogel, von jeher hat das Wort aber auch die Doppelbedeutung „Narr, Tor, Dummkopf“');
+insert into words values (default, "Gelse", "österreichisch: Mücke, Stechmücke, Moskito");
+insert into words values (default, "Genus", "grammatisches Geschlecht, grammatikalische Kategorie des Nomen");
 
 
 

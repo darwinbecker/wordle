@@ -25,4 +25,8 @@ export const biology = {
   Figur: "äußere menschliche Gestalt, Erscheinung; (künstlerische) Menschendarstellung, Tierdarstellung",
   Flaum: "Gesamtheit der Flaumfedern oder feiner, weicher Haarwuchs, besonders der erste sprossende Bart",
   Fluke: "quer stehende Schwanzflosse des Wals",
+  Gamet: "Geschlechtszelle, Keimzelle; der geschlechtlichen Fortpflanzung dienende Zelle",
+  Genom: "Gen(e), Erbgut; Gesamtheit der Erbinformation eines vielzelligen Organismus, einer Zelle oder eines Virus",
+  
+
 }

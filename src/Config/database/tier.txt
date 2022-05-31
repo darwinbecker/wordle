@@ -26,6 +26,10 @@ insert into words values (default, "Finne", "blasenartige Larve des Bandwurmes, 
 insert into words values (default, "Fisch", "schuppiges, wechselwarmes Wirbeltier (mit seitlich abgeflachtem Körper), das im Wasser lebt und dazu mit Schwimmblase, Kiemen und Flossen ausgestattet ist");
 insert into words values (default, "Fluke", "quer stehende Schwanzflosse des Wals");
 insert into words values (default, "Frett", "Frett, Frettchen");
+insert into words values (default, "Fuchs", 'Fuchs: heimisches Raubtier in der Größe eines mittleren Hundes mit rötlich-braunem Fell und buschigem Schwanz, das als besonders listig gilt; Rotfuchs: ist der einzige mitteleuropäische Vertreter der Füchse und wird daher meistens als „der Fuchs“ bezeichnet. Er ist in Europa der häufigste Wildhund');
+insert into words values (default, "Geiss", "Geiß, weibliche Ziege, weibliches Tier des Gemswildes und Steinwildes");
+insert into words values (default, "Gelse", "österreichisch: Mücke, Stechmücke, Moskito");
+
 
 
 

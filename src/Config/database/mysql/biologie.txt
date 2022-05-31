@@ -24,6 +24,8 @@ insert into words values (default, "Ferse", "hinterster, gewölbter Teil des Fu�
 insert into words values (default, "Figur", "äußere menschliche Gestalt, Erscheinung; (künstlerische) Menschendarstellung, Tierdarstellung");
 insert into words values (default, "Flaum"; "Gesamtheit der Flaumfedern oder feiner, weicher Haarwuchs, besonders der erste sprossende Bart");
 insert into words values (default, "Fluke", "quer stehende Schwanzflosse des Wals");
+insert into words values (default, "Gamet", "Geschlechtszelle, Keimzelle; der geschlechtlichen Fortpflanzung dienende Zelle");
+insert into words values (default, "Genom", "Gen(e), Erbgut; Gesamtheit der Erbinformation eines vielzelligen Organismus, einer Zelle oder eines Virus");
 
 
 

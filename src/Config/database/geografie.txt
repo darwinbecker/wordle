@@ -48,6 +48,7 @@ insert into words values (default, "Fluid", "Flüssigkeit, flüssiges Mittel; zu
 insert into words values (default, "Fluss", "größeres fließendes Gewässer des Festlandes");
 insert into words values (default, "Foehn", "beim Überströmen von Luft über ein Gebirge, Hochgebirge entstehender warmer, trockener Fallwind");
 insert into words values (default, "Foehr", "Insel in Schleswig-Holstein (nordfriesische Insel). Föhr ist die größte und bevölkerungsreichste deutsche Insel ohne Landverbindung");
+insert into words values (default, "Gabun", "Land in Zentralafrika (Hauptstadt: Libreville)");
 
 
 

@@ -33,4 +33,10 @@ export const botany = {
   Forke: "große Gabel mit drei oder vier Zinken an einem langen Stiel für die Arbeit im Garten, im Stall o.Ä.",
   Forle: "Die Kiefern, Föhren, Sjüren, Forlen oder Dählen bilden eine Pflanzengattung in der Familie der Kieferngewächse innerhalb der Nadelholzgewächse",
   Forst: "bewirtschaftete Waldfläche",
+  Gagel: "Gagelstrauch, auch Gagel oder Moor-Gagel und Talgstrauch, -busch sowie Talgbaum genannt, ist eine Pflanzenart in der Familie der Gagelstrauchgewächse. Er ist in Nordamerika und im nordwestlichen Europa weitverbreitet und ist in Europa die einzige Art der Familie Myricaceae",
+  Garbe: "Eine Garbe ist in der Landwirtschaft ein Bündel aus Getreidehalmen, einschließlich der sich am oberen Ende befindenden Ähren. Mehrere Garben werden auf dem Feld zu Diemen zum Trocknen zusammengestellt",
+  Gemma: "Knospe; In der Botanik ist Knospe (auch Auge, lateinisch oculus oder Gemma genannt) der jugendliche Zustand eines Sprosses, in welchem die Stängelglieder desselben noch ganz kurz, die an denselben befindlichen Blätter daher noch dicht zusammengedrängt und in ihrer Entwicklung ebenfalls noch wenig fortgeschritten sind",
+  
+
+
 }

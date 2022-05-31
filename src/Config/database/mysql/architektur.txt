@@ -12,6 +12,8 @@ insert into words values (default, "Feste", "Festung, Burg, Bastion, Bollwerk");
 insert into words values (default, "Fiale", "schlankes, spitzes gotisches Türmchen");
 insert into words values (default, "First", "oberste Kante des Daches");
 insert into words values (default, "flach", "in der Breite ausgedehnt und ohne (größere) Erhebung, eben; niedrig, ohne größere Tiefe");
+insert into words values (default, "Gasse", "schmale Straße zwischen zwei Reihen von Häusern");
+insert into words values (default, "Gaube", "Dachgaube oder kurz Gaube (vereinzelt auch Dachgaupe, in Teilen Österreichs auch Dachkapfer und in der Schweiz Lukarne genannt) ist ein Dachaufbau im geneigten Dach eines Gebäudes. Die Dachgaube dient zur Belichtung und Belüftung des Dachraumes");
 
 
 
