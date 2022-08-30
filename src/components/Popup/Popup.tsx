@@ -25,7 +25,7 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
     const popupClasses = classnames(
         'popup',
         {
-            'popup-delay': props.animationDelay == true
+            'popup-delay': props.animationDelay === true
         });
 
     return (
@@ -33,19 +33,19 @@ export const Popup: React.FC<ModeProps> = (props: ModeProps) => {
             <div className='popup-content animate__animated animate__fadeInUp'>
                 {/* TODO:  */}
                 {/* <button onClick={props.closePopup}>X</button> */}
-                {props.content == 'categories' && (
+                {props.content === 'categories' && (
                     <Categories closePopup={props.closePopup} />
                 )}
 
-                {props.content == 'rapid' && (
+                {props.content === 'rapid' && (
                     <Rapid closePopup={props.closePopup} />
                 )}
 
-                {props.content == 'info' && (
+                {props.content === 'info' && (
                     <Info />
                 )}
 
-                {props.content == 'stats' && (
+                {props.content === 'stats' && (
                     <Stats stats={props.stats} />
                 )}
             </div>

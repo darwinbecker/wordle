@@ -18,6 +18,7 @@ import Sport from "../../../Static/CategoryIcons/Sport.png";
 import Sprache from "../../../Static/CategoryIcons/Sprache.png";
 import Technik from "../../../Static/CategoryIcons/Technik.png";
 import Tiere from "../../../Static/CategoryIcons/Tiere.png";
+import { category } from "../../../Types/Category";
 
 // Architektur: https://www.flaticon.com/free-icon/blueprint_1624005
 // Astronomie: https://www.flaticon.com/de/premium-icon/astronomie_2141436
@@ -46,86 +47,89 @@ type CategoriesProps = {
 export const Categories: React.FC<CategoriesProps> = (
     props: CategoriesProps
 ) => {
+    const categories: category[] = [
+        "architecture",
+        "astronomy",
+        "biology",
+        "botany",
+        "chemistry",
+        "food",
+        "movie",
+        "geography",
+        "it",
+        "law",
+        "maths",
+        "medicine",
+        "music",
+        "physics",
+        "religion",
+        "sport",
+        "language",
+        "tech",
+        "animals",
+    ];
+
+    function getIcon(category: string): string {
+        if (category === "architecture") {
+            return Architektur;
+        } else if (category === "astronomy") {
+            return Astronomie;
+        } else if (category === "biology") {
+            return Biologie;
+        } else if (category === "botany") {
+            return Botanik;
+        } else if (category === "chemistry") {
+            return Chemie;
+        } else if (category === "food") {
+            return Essen;
+        } else if (category === "movie") {
+            return Film;
+        } else if (category === "geography") {
+            return Geographie;
+        } else if (category === "it") {
+            return IT;
+        } else if (category === "law") {
+            return Jura;
+        } else if (category === "maths") {
+            return Mathe;
+        } else if (category === "medicine") {
+            return Medizin;
+        } else if (category === "music") {
+            return Musik;
+        } else if (category === "physics") {
+            return Physik;
+        } else if (category === "religion") {
+            return Religion;
+        } else if (category === "sport") {
+            return Sport;
+        } else if (category === "language") {
+            return Sprache;
+        } else if (category === "tech") {
+            return Technik;
+        } else if (category === "animals") {
+            return Tiere;
+        } else {
+            return "";
+        }
+    }
+
     return (
         <>
             <h1>Wähle eine Kategorie</h1>
             <div className="item-list">
-                <button onClick={props.closePopup} value="architecture">
-                    <img src={Architektur} alt="Architektur" />
-                    Architektur
-                </button>
-                <button onClick={props.closePopup} value="astronomy">
-                    <img src={Astronomie} alt="Astronomie" />
-                    Astronomie
-                </button>
-                <button onClick={props.closePopup} value="biology">
-                    <img src={Biologie} alt="Biologie" />
-                    Biologie
-                </button>
-                <button onClick={props.closePopup} value="botany">
-                    <img src={Botanik} alt="Botanik" />
-                    Botanik
-                </button>
-                <button onClick={props.closePopup} value="chemistry">
-                    <img src={Chemie} alt="Chemie" />
-                    Chemie
-                </button>
-                <button onClick={props.closePopup} value="food">
-                    <img src={Essen} alt="Essen" />
-                    Essen
-                </button>
-                <button onClick={props.closePopup} value="movie">
-                    <img src={Film} alt="Film" />
-                    Film
-                </button>
-                <button onClick={props.closePopup} value="geography">
-                    <img src={Geographie} alt="Geographie" />
-                    Geographie
-                </button>
-                <button onClick={props.closePopup} value="it">
-                    <img src={IT} alt="IT" />
-                    IT
-                </button>
-                <button onClick={props.closePopup} value="law">
-                    <img src={Jura} alt="Jura" />
-                    Jura
-                </button>
-                <button onClick={props.closePopup} value="maths">
-                    <img src={Mathe} alt="Mathe" />
-                    Mathe
-                </button>
-                <button onClick={props.closePopup} value="medicine">
-                    <img src={Medizin} alt="Medizin" />
-                    Medizin
-                </button>
-                <button onClick={props.closePopup} value="music">
-                    <img src={Musik} alt="Musik" />
-                    Musik
-                </button>
-                <button onClick={props.closePopup} value="physics">
-                    <img src={Physik} alt="Physik" />
-                    Physik
-                </button>
-                <button onClick={props.closePopup} value="religion">
-                    <img src={Religion} alt="Religion" />
-                    Religion
-                </button>
-                <button onClick={props.closePopup} value="sport">
-                    <img src={Sport} alt="Sport" />
-                    Sport
-                </button>
-                <button onClick={props.closePopup} value="language">
-                    <img src={Sprache} alt="Sprache" />
-                    Sprache
-                </button>
-                <button onClick={props.closePopup} value="tech">
-                    <img src={Technik} alt="Technik" />
-                    Technik
-                </button>
-                <button onClick={props.closePopup} value="animals">
-                    <img src={Tiere} alt="Tiere" />
-                    Tiere
-                </button>
+                {categories.map((category) => {
+                    return (
+                        <button
+                            className="category-button"
+                            onClick={props.closePopup}
+                            key={category}
+                            value={category}
+                        >
+                            <img src={getIcon(category)} alt={category} />
+                            {category}
+                        </button>
+                    );
+                })}
             </div>
         </>
     );
