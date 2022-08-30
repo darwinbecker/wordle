@@ -31,12 +31,7 @@ export const PopupProvider = (props: any) => {
   const unSetPopupContent = useCallback(() => {
     setPopupContent(null);
   }, [setPopupContent]);
-  // <Dialog open={popupContent != null} onClose={unSetPopupContent}>
-  //   <Box sx={popupStyle}>
-  //     <DialogContent>{popupContent}</DialogContent>
-  //   </Box>
-  // </Dialog>
-  <></>;
+
   const handlePopup = (event: any) => {
     if (!props.forceInput) {
       props.closePopup(event);
@@ -68,7 +63,6 @@ export const PopupProvider = (props: any) => {
     event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>
   ) => {
     const clickedTarget = event.target as HTMLButtonElement;
-console.log(clickedTarget)
     if (clickedTarget.value) {
       unSetPopupContent();
     } else {

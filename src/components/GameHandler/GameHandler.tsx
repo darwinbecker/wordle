@@ -26,47 +26,38 @@ import { isInDictionary, DICTIONARY } from "../../Config/Dictionary";
 import { category } from "../../Types/Category";
 import { astronomy, architecture } from "../../Config/database";
 import { getRandomWordFromDictionary } from "../../Config/Wordlist";
+import { useStats } from "../Context/Stats/Stats";
+import { useGamestate } from "../Context/Gamestate/Gamestate";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = "WOTD" | "TR" | "C" | "R";
 
 export const GameHandler: React.FC = () => {
-  const [gameMode, setGameMode] = useState<GameModeType>("WOTD");
+  const {
+    gameMode,
+    setGameMode,
+    youWin,
+    setYouWin,
+    youLose,
+    setYouLose,
+
+    guessedWord,
+    setGuessedWord,
+    guessedWords,
+    setGuessedWords,
+    wordStatuses,
+    setWordStatuses,
+    solution,
+    setSolution,
+
+    rowIndex,
+    setRowIndex,
+    columnIndex,
+    setColumnIndex,
+  } = useGamestate();
+  const { stats, setStats, updatePlayerStats } = useStats();
+
   const [showPopup, setShowPopup] = useState<boolean>(true);
-
-  const loadedGameState: GameState = loadGameState();
-  const loadedPlayerStats: PlayerStats = loadPlayerStats();
-
-  const [youWin, setYouWin] = useState<boolean>(() => {
-    return loadedGameState.guessedWords.includes(WORD_OF_THE_DAY().solution)
-      ? true
-      : false;
-  });
-  const [youLose, setYouLose] = useState<boolean>(() => {
-    return loadedGameState.guessedWords.length === MAX_GUESSES &&
-      !loadedGameState.guessedWords.includes(WORD_OF_THE_DAY().solution)
-      ? true
-      : false;
-  });
-  const [solution, setSolution] = useState<string>(() => {
-    console.log(WORD_OF_THE_DAY().solution);
-    return WORD_OF_THE_DAY().solution;
-  });
-  const [guessedWord, setGuessedWord] = useState<string>("");
-  const [guessedWords, setGuessedWords] = useState<string[]>(() => {
-    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
-      ? []
-      : loadedGameState.guessedWords;
-  });
-  const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
-    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
-      ? []
-      : loadedGameState.wordStatuses;
-  });
-
-  const [rowIndex, setRowIndex] = useState<number>(0);
-  const [columnIndex, setColumnIndex] = useState<number>(0);
-  const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
   const [timer, setTimer] = useState<number>();
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
@@ -91,7 +82,7 @@ export const GameHandler: React.FC = () => {
     setTimer(t);
   };
 
-  const resetGame = (): void => {
+  const resetGame = useCallback((): void => {
     setGuessedWords([]);
     setRowIndex(0);
     setColumnIndex(0);
@@ -101,40 +92,28 @@ export const GameHandler: React.FC = () => {
     setYouLose(false);
     setSolution("");
     setIsInputError(false);
-  };
+  }, [
+    setGuessedWords,
+    setRowIndex,
+    setColumnIndex,
+    setGuessedWord,
+    setWordStatuses,
+    setYouWin,
+    setYouLose,
+    setSolution,
+    setIsInputError,
+  ]);
 
   const getNextWord = useCallback((): void => {
     resetGame();
     // setSolution(getRandomWord());
     setSolution("TIMER");
-  }, []);
+  }, [resetGame, setSolution]);
 
   function getNextCategoryWord(): void {
     resetGame();
     setSolution(getRandomWordFromDictionary(currentDictionary));
   }
-
-  const updatePlayerStats = useCallback(
-    (win: boolean): PlayerStats => {
-      const gameStats: PlayerStats = { ...stats };
-      gameStats.gamesPlayed += 1;
-      if (win) {
-        gameStats.wins += 1;
-        gameStats.trysPerWin[guessedWords.length] += 1;
-        gameStats.winStreak += 1;
-        gameStats.bestWinStreak =
-          gameStats.winStreak >= gameStats.bestWinStreak
-            ? gameStats.winStreak
-            : gameStats.bestWinStreak;
-      } else {
-        gameStats.losses += 1;
-        gameStats.winStreak = 0;
-      }
-
-      return gameStats;
-    },
-    [guessedWords.length, stats]
-  );
 
   const handleChange = useCallback(
     (value: string): void => {
@@ -162,6 +141,8 @@ export const GameHandler: React.FC = () => {
       gameMode,
       guessedWord,
       pauseTimer,
+      setColumnIndex,
+      setGuessedWord,
       youLose,
       youWin,
     ]
@@ -173,7 +154,14 @@ export const GameHandler: React.FC = () => {
       setGuessedWord(guessedWord.slice(0, -1));
       setColumnIndex(columnIndex - 1);
     }
-  }, [columnIndex, guessedWord, youLose, youWin]);
+  }, [
+    columnIndex,
+    guessedWord,
+    setColumnIndex,
+    setGuessedWord,
+    youLose,
+    youWin,
+  ]);
 
   const handleSubmit = useCallback((): void => {
     if (youWin || youLose) return;
@@ -274,6 +262,14 @@ export const GameHandler: React.FC = () => {
     rapidMode,
     rapidModeScore,
     rowIndex,
+    setColumnIndex,
+    setGuessedWord,
+    setGuessedWords,
+    setRowIndex,
+    setStats,
+    setWordStatuses,
+    setYouLose,
+    setYouWin,
     solution,
     updatePlayerStats,
     wordStatuses,
@@ -317,7 +313,7 @@ export const GameHandler: React.FC = () => {
         setGameMode(mode as GameModeType);
         resetGame();
         if (mode === "WOTD") {
-          setShowPopup(true);
+          // setShowPopup(true);
           setSolution(WORD_OF_THE_DAY().solution);
           const loaded = loadGameState();
           console.log("loaded", loaded);
@@ -374,7 +370,16 @@ export const GameHandler: React.FC = () => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [getNextWord]);
+  }, [
+    getNextWord,
+    resetGame,
+    setGameMode,
+    setGuessedWords,
+    setSolution,
+    setWordStatuses,
+    setYouLose,
+    setYouWin,
+  ]);
 
   const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
     // TODO: load category dictionary if mode is C, or timer if mode is R
