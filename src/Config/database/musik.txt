@@ -10,6 +10,7 @@ insert into words values (default, "Drive", "durch die Spannung zwischen Beat un
 insert into words values (default, "Duett", "Komposition für zwei gleichberechtigte Singstimmen mit oder ohne Instrumentalbegleitung");
 insert into words values (default, "dumpf", "gedämpft, hohl, tief (klingend)");
 insert into words values (default, "Elvis", "Elvis Presley, (der) King of Rock'n Roll");
-
+insert into words values (default, "Geige", "Streichinstrument mit vier in Quinten gestimmten Saiten, Violine");
+insert into words values (default, "Genre", "Musikgenre, Musikart, Gattung in der Musik");
 
 

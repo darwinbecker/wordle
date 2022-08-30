@@ -14,4 +14,7 @@ export const architecture = {
   Fiale: "schlankes, spitzes gotisches Türmchen",
   First: "oberste Kante des Daches",
   flach: "in der Breite ausgedehnt und ohne (größere) Erhebung, eben; niedrig, ohne größere Tiefe",
+  Gasse: "schmale Straße zwischen zwei Reihen von Häusern",
+  Gaube: "Dachgaube oder kurz Gaube (vereinzelt auch Dachgaupe, in Teilen Österreichs auch Dachkapfer und in der Schweiz Lukarne genannt) ist ein Dachaufbau im geneigten Dach eines Gebäudes. Die Dachgaube dient zur Belichtung und Belüftung des Dachraumes",
+
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../Config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
 import { loadGameState, loadPlayerStats, saveGameState, GameState, PlayerStats, savePlayerStats, loadRapidScore1Min, saveRapidScore1Min, loadRapidScore3Min, saveRapidScore3Min, loadRapidScore5Min, saveRapidScore5Min } from "../LocalStorage";
@@ -11,6 +11,8 @@ import { CategoryMode,  RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from 'notistack';
 import { isInDictionary, DICTIONARY } from "../../Config/Dictionary";
 import { category } from "../../Types/Category";
+import { astronomy, architecture } from "../../Config/database";
+import { getRandomWordFromDictionary } from "../../Config/Wordlist";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = 'WOTD' | 'TR' | 'C' | 'R';
@@ -53,7 +55,8 @@ export const GameHandler: React.FC = () => {
 
     const [isInputError, setIsInputError] = useState<boolean>(false);
 
-    const [currentDictionary, setCurrentDictionary] = useState<string[]>(DICTIONARY);
+    const [category, setCategory] = useState<category>("architecture");
+    const [currentDictionary, setCurrentDictionary] = useState<object>(architecture);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -78,17 +81,37 @@ export const GameHandler: React.FC = () => {
         setIsInputError(false);
     }
 
-    const getNextWord = (): void => {
+    const getNextWord = useCallback((): void => {
         resetGame();
         // setSolution(getRandomWord());
         setSolution("TIMER");
+    }, []);
+
+    function getNextCategoryWord(): void {
+        resetGame();
+        setSolution(getRandomWordFromDictionary(currentDictionary));
     }
 
+    const updatePlayerStats = useCallback((win: boolean): PlayerStats => {
+        const gameStats: PlayerStats = { ...stats }
+        gameStats.gamesPlayed += 1;
+        if (win) {
+            gameStats.wins += 1;
+            gameStats.trysPerWin[guessedWords.length] += 1;
+            gameStats.winStreak += 1;
+            gameStats.bestWinStreak = (gameStats.winStreak >= gameStats.bestWinStreak) ? gameStats.winStreak : gameStats.bestWinStreak;
+        } else {
+            gameStats.losses += 1;
+            gameStats.winStreak = 0;
+        }
 
-    const handleChange = (value: string): void => {
+        return gameStats;
+    }, [guessedWords.length, stats]);
+    
+    const handleChange = useCallback((value: string): void => {
         if (youWin || youLose) return;
 
-        if (gameMode == 'R' && pauseTimer) {
+        if (gameMode === 'R' && pauseTimer) {
             setPauseTimer(false);
         }
 
@@ -100,26 +123,26 @@ export const GameHandler: React.FC = () => {
             // TODO: display feedback for user
             enqueueSnackbar('Du kannst nur 5 Buchstaben eingeben.', { variant: 'warning', preventDuplicate: true, });
         }
-    }
+    }, [columnIndex, enqueueSnackbar, gameMode, guessedWord, pauseTimer, youLose, youWin]);
 
-    const handleRemove = (): void => {
+    const handleRemove = useCallback((): void => {
         if (youWin || youLose) return;
         if (guessedWord.length > 0) {
-            setGuessedWord(guessedWord.slice(0, -1));
-            setColumnIndex(columnIndex - 1);
-        }
-    }
+                setGuessedWord(guessedWord.slice(0, -1));
+                setColumnIndex(columnIndex - 1);
+            }
+        }, [columnIndex, guessedWord, youLose, youWin]);
 
-    const handleSubmit = (): void => {
+    const handleSubmit = useCallback((): void => {
         if (youWin || youLose) return;
 
-        if (guessedWord.length == 5) {
+        if (guessedWord.length === 5) {
             if (guessedWords.length < MAX_GUESSES) {
                 // TODO check if guessWord is in dictionary
-                if (!isInDictionary(guessedWord, currentDictionary)) {
-                    console.log("WORD IS NOT IN DICTIONARY");
-                    return;
-                }
+                // if (!isInDictionary(guessedWord, currentDictionary)) {
+                //     console.log("WORD IS NOT IN DICTIONARY");
+                //     return;
+                // }
 
                 setIsInputError(false);
                 setRowIndex(rowIndex + 1);
@@ -138,7 +161,7 @@ export const GameHandler: React.FC = () => {
                         enqueueSnackbar('Du hast das heutige Wort richtig erraten! 🎉', { variant: 'success' });
                     }
 
-                    if (gameMode == "R") {
+                    if (gameMode === "R") {
                         setRapidModeScore(rapidModeScore + 1);
                         getNextWord();
                     } else {
@@ -151,7 +174,7 @@ export const GameHandler: React.FC = () => {
                 }
 
                 // last guess, set lose
-                if (guessedWords.length == MAX_GUESSES - 1) {
+                if (guessedWords.length === MAX_GUESSES - 1) {
                     if (guessedWord !== solution) {
                         console.log("YOU LOSE!");
                         if (gameMode === "WOTD") {
@@ -161,17 +184,17 @@ export const GameHandler: React.FC = () => {
                             enqueueSnackbar(`Du hast das heutige Wort: "${solution}" leider nicht erraten`, { variant: 'error' });
                         }
 
-                        if (gameMode == "R") {
+                        if (gameMode === "R") {
                             setPauseTimer(true);
                             console.log("rapidModeTimerMinutes")
                             console.log(rapidMode)
-                            if (rapidMode == 1) {
+                            if (rapidMode === 1) {
                                 const loadedRapidScore = loadRapidScore1Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore1Min(rapidModeScore);
-                            } else if (rapidMode == 3) {
+                            } else if (rapidMode === 3) {
                                 const loadedRapidScore = loadRapidScore3Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore3Min(rapidModeScore);
-                            } else if (rapidMode == 5) {
+                            } else if (rapidMode === 5) {
                                 const loadedRapidScore = loadRapidScore5Min();
                                 if (loadedRapidScore <= rapidModeScore) saveRapidScore5Min(rapidModeScore);
                             }
@@ -191,23 +214,8 @@ export const GameHandler: React.FC = () => {
             setIsInputError(true);
             enqueueSnackbar('Bitte 5 Buchstaben eingeben.', { variant: 'error', preventDuplicate: true, });
         }
-    }
+    }, [enqueueSnackbar, gameMode, getNextWord, guessedWord, guessedWords, rapidMode, rapidModeScore, rowIndex, solution, updatePlayerStats, wordStatuses, youLose, youWin]);
 
-    const updatePlayerStats = (win: boolean): PlayerStats => {
-        const gameStats: PlayerStats = { ...stats }
-        gameStats.gamesPlayed += 1;
-        if (win) {
-            gameStats.wins += 1;
-            gameStats.trysPerWin[guessedWords.length] += 1;
-            gameStats.winStreak += 1;
-            gameStats.bestWinStreak = (gameStats.winStreak >= gameStats.bestWinStreak) ? gameStats.winStreak : gameStats.bestWinStreak;
-        } else {
-            gameStats.losses += 1;
-            gameStats.winStreak = 0;
-        }
-
-        return gameStats;
-    }
 
 
     useEffect(() => {
@@ -222,7 +230,7 @@ export const GameHandler: React.FC = () => {
             else {
                 const key = event.key.toLocaleUpperCase();
                 // TODO A-Z => problem with german letters üäö 
-                if (key.length == 1 && key >= 'A' && key <= 'Z') {
+                if (key.length === 1 && key >= 'A' && key <= 'Z') {
                     handleChange(key);
                 }
                 // return;
@@ -241,13 +249,13 @@ export const GameHandler: React.FC = () => {
             const solution = WORD_OF_THE_DAY().solution;
             saveGameState({ guessedWords, wordStatuses, solution });
         }
-    }, [guessedWords, wordStatuses]);
+    }, [gameMode, guessedWords, wordStatuses]);
 
     useEffect(() => {
         const subscription = GameModeHandlerService.onGameModeChange().subscribe(mode => {
             setGameMode(mode as GameModeType);
             resetGame();
-            if (mode == 'WOTD') {
+            if (mode === 'WOTD') {
                 setShowPopup(true);
                 setSolution(WORD_OF_THE_DAY().solution);
                 const loaded = loadGameState();
@@ -282,12 +290,12 @@ export const GameHandler: React.FC = () => {
                     }
                 }
             }
-            else if (mode == 'TR') {
+            else if (mode === 'TR') {
                 getNextWord();
             }
-            else if (mode == 'C') {
+            else if (mode === 'C') {
                 setShowPopup(true);
-            } else if (mode == 'R') {
+            } else if (mode === 'R') {
                 console.log("load Rapid mode");
                 setSolution("TIMER");
                 setRapidModeScore(0);
@@ -301,18 +309,24 @@ export const GameHandler: React.FC = () => {
         return () => {
             subscription.unsubscribe();
         }
-    }, []);
+    }, [getNextWord]);
 
     const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
-        console.log("load category dictionary");
-        console.log(gameMode)
-        console.log(event.currentTarget.value);
-
         // TODO: load category dictionary if mode is C, or timer if mode is R
         if (gameMode === "C") {
+            // console.log("load category dictionary");
+            // console.log(event.currentTarget.value);
             const category: category = event.currentTarget.value as category;
             console.log(category);
             // setCurrentDictionary(category);
+            if(category === "astronomy"){
+                setCategory("astronomy");
+                setCurrentDictionary(astronomy);
+                const solution = getRandomWordFromDictionary(astronomy);
+                console.log(solution);
+                setSolution(solution);
+            }
+
         } else if (gameMode === "R") {
             const rapidModeTimerValue = parseInt(event.currentTarget.value);
             setRapidMode(rapidModeTimerValue);
@@ -348,7 +362,8 @@ export const GameHandler: React.FC = () => {
                 <>
                     <CategoryMode guessedWord={guessedWord} guessedWords={guessedWords} wordStatuses={wordStatuses} solution={solution}
                         handleChange={handleChange} handleSubmit={handleSubmit} handleRemove={handleRemove} isInputError={isInputError}
-                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} />
+                        youWin={youWin} youLose={youLose} showPopup={showPopup} togglePopup={togglePopup} stats={stats} category={category} 
+                        getNextCategoryWord={getNextCategoryWord} />
                 </>
             )}
 

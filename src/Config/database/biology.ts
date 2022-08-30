@@ -1,4 +1,4 @@
-export const biologie = {
+export const biology = {
   aerob: "Luftsauerstoff (zum Leben) benötigend, auf Sauerstoff aus der Luft angewiesen",
   Alula: "Federn am Daumen des Vogelflügels",
   Ambra: "fettige Ausscheidung aus dem Darm des Pottwals",
@@ -25,4 +25,8 @@ export const biologie = {
   Figur: "äußere menschliche Gestalt, Erscheinung; (künstlerische) Menschendarstellung, Tierdarstellung",
   Flaum: "Gesamtheit der Flaumfedern oder feiner, weicher Haarwuchs, besonders der erste sprossende Bart",
   Fluke: "quer stehende Schwanzflosse des Wals",
+  Gamet: "Geschlechtszelle, Keimzelle; der geschlechtlichen Fortpflanzung dienende Zelle",
+  Genom: "Gen(e), Erbgut; Gesamtheit der Erbinformation eines vielzelligen Organismus, einer Zelle oder eines Virus",
+  
+
 }

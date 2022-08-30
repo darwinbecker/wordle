@@ -1,22 +1,23 @@
-import Architektur from '../../../Static/CategoryIcons/Architektur.png';
-import Astronomie from '../../../Static/CategoryIcons/Astronomie.png';
-import Biologie from '../../../Static/CategoryIcons/Biologie.png';
-import Botanik from '../../../Static/CategoryIcons/Botanik.png';
-import Chemie from '../../../Static/CategoryIcons/Chemie.png';
-import Essen from '../../../Static/CategoryIcons/Essen.png';
-import Film from '../../../Static/CategoryIcons/Film.png';
-import Geographie from '../../../Static/CategoryIcons/Geographie.png';
-import IT from '../../../Static/CategoryIcons/IT.png';
-import Jura from '../../../Static/CategoryIcons/Jura.png';
-import Mathe from '../../../Static/CategoryIcons/Mathe.png';
-import Medizin from '../../../Static/CategoryIcons/Medizin.png';
-import Musik from '../../../Static/CategoryIcons/Musik.png';
-import Physik from '../../../Static/CategoryIcons/Physik.png';
-import Religion from '../../../Static/CategoryIcons/Religion.png';
-import Sport from '../../../Static/CategoryIcons/Sport.png';
-import Sprache from '../../../Static/CategoryIcons/Sprache.png';
-import Technik from '../../../Static/CategoryIcons/Technik.png';
-import Tiere from '../../../Static/CategoryIcons/Tiere.png';
+import { useState } from "react";
+import Architektur from "../../../Static/CategoryIcons/Architektur.png";
+import Astronomie from "../../../Static/CategoryIcons/Astronomie.png";
+import Biologie from "../../../Static/CategoryIcons/Biologie.png";
+import Botanik from "../../../Static/CategoryIcons/Botanik.png";
+import Chemie from "../../../Static/CategoryIcons/Chemie.png";
+import Essen from "../../../Static/CategoryIcons/Essen.png";
+import Film from "../../../Static/CategoryIcons/Film.png";
+import Geographie from "../../../Static/CategoryIcons/Geographie.png";
+import IT from "../../../Static/CategoryIcons/IT.png";
+import Jura from "../../../Static/CategoryIcons/Jura.png";
+import Mathe from "../../../Static/CategoryIcons/Mathe.png";
+import Medizin from "../../../Static/CategoryIcons/Medizin.png";
+import Musik from "../../../Static/CategoryIcons/Musik.png";
+import Physik from "../../../Static/CategoryIcons/Physik.png";
+import Religion from "../../../Static/CategoryIcons/Religion.png";
+import Sport from "../../../Static/CategoryIcons/Sport.png";
+import Sprache from "../../../Static/CategoryIcons/Sprache.png";
+import Technik from "../../../Static/CategoryIcons/Technik.png";
+import Tiere from "../../../Static/CategoryIcons/Tiere.png";
 
 // Architektur: https://www.flaticon.com/free-icon/blueprint_1624005
 // Astronomie: https://www.flaticon.com/de/premium-icon/astronomie_2141436
@@ -38,12 +39,13 @@ import Tiere from '../../../Static/CategoryIcons/Tiere.png';
 // Technik: https://www.flaticon.com/de/kostenloses-icon/technologie_4152006
 // Tiere: https://www.flaticon.com/de/kostenloses-icon/igel_1998675
 
-
 type CategoriesProps = {
     closePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
-export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) => {
+export const Categories: React.FC<CategoriesProps> = (
+    props: CategoriesProps
+) => {
     return (
         <>
             <h1>Wähle eine Kategorie</h1>
@@ -52,11 +54,11 @@ export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) =>
                     <img src={Architektur} alt="Architektur" />
                     Architektur
                 </button>
-                <button onClick={props.closePopup} value="astronomie">
+                <button onClick={props.closePopup} value="astronomy">
                     <img src={Astronomie} alt="Astronomie" />
                     Astronomie
                 </button>
-                <button onClick={props.closePopup} value="biologie">
+                <button onClick={props.closePopup} value="biology">
                     <img src={Biologie} alt="Biologie" />
                     Biologie
                 </button>
@@ -76,7 +78,7 @@ export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) =>
                     <img src={Film} alt="Film" />
                     Film
                 </button>
-                <button onClick={props.closePopup} value="geographie">
+                <button onClick={props.closePopup} value="geography">
                     <img src={Geographie} alt="Geographie" />
                     Geographie
                 </button>
@@ -86,7 +88,8 @@ export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) =>
                 </button>
                 <button onClick={props.closePopup} value="law">
                     <img src={Jura} alt="Jura" />
-                    Jura</button>
+                    Jura
+                </button>
                 <button onClick={props.closePopup} value="maths">
                     <img src={Mathe} alt="Mathe" />
                     Mathe
@@ -126,5 +129,4 @@ export const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) =>
             </div>
         </>
     );
-
-}
+};
