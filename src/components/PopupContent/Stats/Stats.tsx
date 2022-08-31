@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Countdown from 'react-countdown';
-import { WORD_OF_THE_DAY } from '../../../Config/Wordlist';
+import { WORD_OF_THE_DAY } from '../../../config/Wordlist';
 import { loadPlayerStats, loadRapidScore1Min, loadRapidScore3Min, loadRapidScore5Min, PlayerStats } from '../../LocalStorage';
 import { Histogram } from './Histogram';
 

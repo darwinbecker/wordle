@@ -1,4 +1,4 @@
-export type category =
+export type Category =
   | "architecture"
   | "astronomy"
   | "biology"

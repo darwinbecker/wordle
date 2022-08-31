@@ -7,6 +7,8 @@ export interface IPopUp {
   unSetPopupContent: () => void;
   forceInput: boolean;
   setForceInput: (forceInput: boolean) => void;
+  animationDelay: boolean;
+  setAnimationDelay: (animationDelay: boolean) => void;
 }
 
 export const Popup = createContext<IPopUp>({
@@ -15,6 +17,8 @@ export const Popup = createContext<IPopUp>({
   unSetPopupContent: () => {},
   forceInput: false,
   setForceInput: () => {},
+  animationDelay: false,
+  setAnimationDelay: () => {},
 });
 
 export const usePopup = () => useContext(Popup);
@@ -27,6 +31,7 @@ const popupStyle = {
 export const PopupProvider = (props: any) => {
   const [popupContent, setPopupContent] = useState<any>(null);
   const [forceInput, setForceInput] = useState<boolean>(false);
+  const [animationDelay, setAnimationDelay] = useState<boolean>(false);
 
   const unSetPopupContent = useCallback(() => {
     setPopupContent(null);
@@ -39,7 +44,7 @@ export const PopupProvider = (props: any) => {
   };
 
   const popupClasses = classnames("popup", {
-    "popup-delay": props.animationDelay === true,
+    "popup-delay": animationDelay === true,
   });
 
   // const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -81,6 +86,8 @@ export const PopupProvider = (props: any) => {
         setPopupContent,
         unSetPopupContent,
         setForceInput,
+        animationDelay,
+        setAnimationDelay,
       }}
       {...props}
     >

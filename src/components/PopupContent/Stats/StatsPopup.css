@@ -1,7 +1,3 @@
-:root{
-    --blue: rgb(0, 146, 214);
-}
-
 /* Stats */
 .stats .main{
     display: flex;
@@ -32,6 +28,7 @@
 }
 
 .streakNumber{
+    --blue: rgb(0, 146, 214);
     color: var(--blue);
     text-shadow: 0 0 1px var(--blue);
 }

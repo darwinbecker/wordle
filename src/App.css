@@ -1,14 +1,17 @@
-@import url("./components/Animations/style.css");
-@import url("./components/Grid/Root/style.css");
-@import url("./components/Grid/Row/style.css");
-@import url("./components/Grid/Tile/style.css");
-@import url("./components/GameHandler/style.css");
-@import url("./components/Popup/style.css");
-@import url("./components/Popup/Info/style.css");
-@import url("./components/Popup/Stats/style.css");
-@import url("./components/Navigation/style.css");
-@import url("./components/Keyboard/style.css");
-@import url("./components/Timer/style.css");
+@import url("./components/Animations/Confetti.css");
+@import url("./components/Grid/Root/Grid.css");
+@import url("./components/Grid/Row/Row.css");
+@import url("./components/Grid/Tile/Tile.css");
+@import url("./components/GameHandler/GameHandler.css");
+@import url("./components/GameModes/GameModes.css");
+@import url("./components/Popup/Popup.css");
+@import url("./components/Popup/Info/InfoPopup.css");
+@import url("./components/Popup/Stats/StatsPopup.css");
+@import url("./components/Popup/Categories/CategoriesPopup.css");
+@import url("./components/Popup/Rapid/RapidPopup.css");
+@import url("./components/Navigation/Navigation.css");
+@import url("./components/Keyboard/Keyboard.css");
+@import url("./components/Timer/Timer.css");
 
 :root {
   --light: rgb(230, 230, 230);

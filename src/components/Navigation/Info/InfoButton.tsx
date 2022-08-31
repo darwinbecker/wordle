@@ -1,8 +1,8 @@
 import { usePopup } from "../../Context/Popup/Popup";
-import { Info } from "../../Popup";
+import { Info } from "../../PopupContent";
 
 export const InfoButton = () => {
-  const { setPopupContent } = usePopup();
+  const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   //   const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
   //     const navButton = event.currentTarget.value;
@@ -23,7 +23,14 @@ export const InfoButton = () => {
 
   return (
     <>
-      <button value="info" onClick={() => setPopupContent(<Info />)}>
+      <button
+        value="info"
+        onClick={() => {
+          setPopupContent(<Info />);
+          setForceInput(false);
+          setAnimationDelay(false);
+        }}
+      >
         <i className="fa-solid fa-circle-info"></i>
       </button>
     </>

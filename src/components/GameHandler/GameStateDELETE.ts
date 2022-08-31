@@ -1,7 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 import  { GameModeType } from '.';
-import { MAX_GUESSES } from '../../Config/Settings';
-import { WORD_OF_THE_DAY } from '../../Config/Wordlist';
+import { MAX_GUESSES } from '../../config/Settings';
+import { WORD_OF_THE_DAY } from '../../config/Wordlist';
 import { GameState, loadGameState, loadPlayerStats, PlayerStats } from '../LocalStorage';
 
 

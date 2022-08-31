@@ -1,49 +1,58 @@
-import { category } from "../../Types/Category";
+import { useEffect } from "react";
+import { Category } from "../../types/Category";
+import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 import { PlayerStats } from "../LocalStorage";
-import { Popup } from "../Popup";
+import { Categories } from "../PopupContent";
 import { WordStatusType } from "../WordStatus";
 
 type CategoryModeProps = {
-    guessedWord: string;
-    guessedWords: string[];
-    wordStatuses: WordStatusType[][];
-    solution: string;
-    handleChange: (value: string) => void;
-    handleSubmit: () => void;
-    handleRemove: () => void;
-    isInputError: boolean;
-    youWin: boolean;
-    youLose: boolean;
-    showPopup: boolean;
-    togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    stats: PlayerStats;
-    category: category;
-    getNextCategoryWord: () => void;
-}
+  guessedWord: string;
+  guessedWords: string[];
+  wordStatuses: WordStatusType[][];
+  handleChange: (value: string) => void;
+  handleSubmit: () => void;
+  handleRemove: () => void;
+  isInputError: boolean;
+  showPopup: boolean;
+  togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  stats: PlayerStats;
+  category: Category;
+  getNextCategoryWord: () => void;
+};
 
 export const CategoryMode = (props: CategoryModeProps) => {
+  const { solution, youLose, youWin } = useGamestate();
+  const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
-    return (
-        <>
-            {props.showPopup && (
-                <Popup content={'categories'} closePopup={props.togglePopup} forceInput={true} stats={props.stats} ></Popup>
-            )}
+  useEffect(() => {
+    // set popup content
+    setPopupContent(<Categories />);
+    setForceInput(true);
+    setAnimationDelay(false);
+  }, [setForceInput, setPopupContent, setAnimationDelay]);
 
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
+  return (
+    <>
+      <Grid isInputError={props.isInputError}></Grid>
 
-            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
-                handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
+      <Keyboard
+        handleChange={props.handleChange}
+        handeSubmit={props.handleSubmit}
+        handleRemove={props.handleRemove}
+      />
 
-            {(props.youWin || props.youLose) && (
-                <div className="gameover-feedback">
-                    <button className="next-word" onClick={props.getNextCategoryWord}>nächstes Wort</button>
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{props.solution}</div>
-                </div>
-            )}
-
-        </>
-    );
-}
+      {(youWin || youLose) && (
+        <div className="gameover-feedback">
+          <button className="next-word" onClick={props.getNextCategoryWord}>
+            nächstes Wort
+          </button>
+          <h4>gesuchtes Wort war:</h4>
+          <div className="solution-word">{solution}</div>
+        </div>
+      )}
+    </>
+  );
+};

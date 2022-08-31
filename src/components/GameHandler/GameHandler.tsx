@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../Config/Settings";
-import { WORD_OF_THE_DAY, getRandomWord } from "../../Config/Wordlist";
+import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../config/Settings";
+import { WORD_OF_THE_DAY, getRandomWord } from "../../config/Wordlist";
 import {
   loadGameState,
-  loadPlayerStats,
   saveGameState,
-  GameState,
-  PlayerStats,
   savePlayerStats,
   loadRapidScore1Min,
   saveRapidScore1Min,
@@ -22,10 +19,10 @@ import { NavigationBar } from "../Navigation";
 import { WinService } from ".";
 import { CategoryMode, RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from "notistack";
-import { isInDictionary, DICTIONARY } from "../../Config/Dictionary";
-import { category } from "../../Types/Category";
-import { astronomy, architecture } from "../../Config/database";
-import { getRandomWordFromDictionary } from "../../Config/Wordlist";
+import { isInDictionary, DICTIONARY } from "../../config/Dictionary";
+import { Category } from "../../types/Category";
+import { astronomy, architecture } from "../../config/database";
+import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { useStats } from "../Context/Stats/Stats";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 
@@ -67,7 +64,7 @@ export const GameHandler: React.FC = () => {
 
   const [isInputError, setIsInputError] = useState<boolean>(false);
 
-  const [category, setCategory] = useState<category>("architecture");
+  const [category, setCategory] = useState<Category>("architecture");
   const [currentDictionary, setCurrentDictionary] =
     useState<object>(architecture);
 
@@ -386,7 +383,7 @@ export const GameHandler: React.FC = () => {
     if (gameMode === "C") {
       // console.log("load category dictionary");
       // console.log(event.currentTarget.value);
-      const category: category = event.currentTarget.value as category;
+      const category: Category = event.currentTarget.value as Category;
       console.log(category);
       // setCurrentDictionary(category);
       if (category === "astronomy") {
@@ -455,13 +452,13 @@ export const GameHandler: React.FC = () => {
             guessedWord={guessedWord}
             guessedWords={guessedWords}
             wordStatuses={wordStatuses}
-            solution={solution}
+            // solution={solution}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleRemove={handleRemove}
             isInputError={isInputError}
-            youWin={youWin}
-            youLose={youLose}
+            // youWin={youWin}
+            // youLose={youLose}
             showPopup={showPopup}
             togglePopup={togglePopup}
             stats={stats}

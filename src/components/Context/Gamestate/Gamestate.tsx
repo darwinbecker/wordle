@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { GameModeType } from "../../GameHandler";
-import { architecture } from "../../../Config/database";
-import { MAX_GUESSES } from "../../../Config/Settings";
-import { WORD_OF_THE_DAY } from "../../../Config/Wordlist";
+import { architecture } from "../../../config/database";
+import { MAX_GUESSES } from "../../../config/Settings";
+import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
 import { GameState, loadGameState } from "../../LocalStorage";
 import { WordStatusType } from "../../WordStatus";
-import { category } from "../../../Types/Category";
+import { Category } from "../../../types/Category";
 
 export interface IGameState {
   gameMode: GameModeType;
@@ -111,7 +111,7 @@ export const GamestateProvider = (props: any) => {
 
   const [isInputError, setIsInputError] = useState<boolean>(false);
 
-  const [category, setCategory] = useState<category>("architecture");
+  const [category, setCategory] = useState<Category>("architecture");
   const [currentDictionary, setCurrentDictionary] =
     useState<object>(architecture);
 

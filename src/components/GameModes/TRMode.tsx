@@ -21,10 +21,9 @@ export const TRMode = (props: TRModeProps) => {
 
     return (
         <>
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
+            <Grid isInputError={props.isInputError}></Grid>
 
-            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
-                handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
+            <Keyboard handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
 
             {(props.youWin || props.youLose) && (
                 <div className="gameover-feedback">

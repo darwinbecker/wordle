@@ -1,0 +1,63 @@
+/* Rapid Mode Styling */
+.game-summary {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 30%;
+  margin: 10px auto;
+}
+
+.game-summary>* {
+  flex: 1 1;
+}
+
+.game-summary>*>h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.game-summary>*:nth-child(2) {
+  color: red;
+}
+
+
+.rapid-score>.score-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+
+}
+
+.rapid-score h4 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.rapid-score {
+  color: var(--secondary-color);
+}
+
+.new-game-button {
+  color: var(--secondary-color);
+  background: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 0.2rem;
+  margin: 2px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.new-game-button:hover {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.new-game-button:active {
+  transform: scale(1.025);
+}
