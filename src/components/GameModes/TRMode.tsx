@@ -1,38 +1,47 @@
+import { useCallback, useEffect } from "react";
+import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
-import { WordStatusType } from "../WordStatus";
 
 type TRModeProps = {
-    guessedWord: string;
-    guessedWords: string[];
-    wordStatuses: WordStatusType[][];
-    solution: string;
-    handleChange: (value: string) => void;
-    handleSubmit: () => void;
-    handleRemove: () => void;
-    isInputError: boolean;
-    youWin: boolean;
-    youLose: boolean;
-    resetGame: () => void;
-    getNextWord: () => void;
-}
+  handleChange: (value: string) => void;
+  handleSubmit: () => void;
+  handleRemove: () => void;
+  isInputError: boolean;
+};
 
 export const TRMode = (props: TRModeProps) => {
+  const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
 
-    return (
-        <>
-            <Grid isInputError={props.isInputError}></Grid>
+  useEffect(() => {
+    getNextWord();
+  }, []);
 
-            <Keyboard handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
+  const getNextWord = useCallback((): void => {
+    resetGame();
+    // setSolution(getRandomWord());
+    setSolution("TIMER");
+  }, [resetGame, setSolution]);
 
-            {(props.youWin || props.youLose) && (
-                <div className="gameover-feedback">
-                    <button className="next-word" onClick={props.getNextWord}>nächstes Wort</button>
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{props.solution}</div>
-                </div>
-            )}
+  return (
+    <>
+      <Grid isInputError={props.isInputError}></Grid>
 
-        </>
-    );
-}
+      <Keyboard
+        handleChange={props.handleChange}
+        handeSubmit={props.handleSubmit}
+        handleRemove={props.handleRemove}
+      />
+
+      {(youWin || youLose) && (
+        <div className="gameover-feedback">
+          <button className="next-word" onClick={getNextWord}>
+            nächstes Wort
+          </button>
+          <h4>gesuchtes Wort war:</h4>
+          <div className="solution-word">{solution}</div>
+        </div>
+      )}
+    </>
+  );
+};

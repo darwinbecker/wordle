@@ -1,4 +1,5 @@
 export type Category =
+  | "animals"
   | "architecture"
   | "astronomy"
   | "biology"
@@ -8,6 +9,7 @@ export type Category =
   | "movie"
   | "geography"
   | "it"
+  | "language"
   | "law"
   | "maths"
   | "medicine"
@@ -15,6 +17,4 @@ export type Category =
   | "physics"
   | "religion"
   | "sport"
-  | "language"
-  | "tech"
-  | "animals";
+  | "tech";

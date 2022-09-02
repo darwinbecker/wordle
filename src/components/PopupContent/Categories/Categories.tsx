@@ -19,6 +19,7 @@ import Technik from "../../../static/categoryIcons/Technik.png";
 import Tiere from "../../../static/categoryIcons/Tiere.png";
 import { Category } from "../../../types/Category";
 import { usePopup } from "../../Context/Popup/Popup";
+import wordlistData from "../../../config/database/categories.json";
 
 // Architektur: https://www.flaticon.com/free-icon/blueprint_1624005
 // Astronomie: https://www.flaticon.com/de/premium-icon/astronomie_2141436
@@ -41,13 +42,15 @@ import { usePopup } from "../../Context/Popup/Popup";
 // Tiere: https://www.flaticon.com/de/kostenloses-icon/igel_1998675
 
 type CategoriesProps = {
-  // closePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  setCategory: (category: Category) => void;
+  setCurrentDictionary: (dictionary: object) => void;
 };
 
 export const Categories: React.FC<CategoriesProps> = (
   props: CategoriesProps
 ) => {
   const { unSetPopupContent } = usePopup();
+
   const categories: Category[] = [
     "architecture",
     "astronomy",
@@ -123,18 +126,11 @@ export const Categories: React.FC<CategoriesProps> = (
             <button
               className="category-button"
               onClick={(e) => {
-                // console.log("load category dictionary");
-                // console.log(event.currentTarget.value);
                 const category: Category = e.currentTarget.value as Category;
                 console.log(category);
-                // setCurrentDictionary(category);
-                // if (category === "astronomy") {
-                //   setCategory("astronomy");
-                //   setCurrentDictionary(astronomy);
-                //   const solution = getRandomWordFromDictionary(astronomy);
-                //   console.log(solution);
-                //   setSolution(solution);
-                // }
+                props.setCategory(category);
+                console.log(wordlistData[category]);
+                props.setCurrentDictionary(wordlistData[category]);
                 unSetPopupContent();
               }}
               key={category}

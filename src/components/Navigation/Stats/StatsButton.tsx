@@ -1,12 +1,7 @@
 import { usePopup } from "../../Context/Popup/Popup";
-import { PlayerStats } from "../../LocalStorage";
 import { Stats } from "../../PopupContent";
 
-type StatsProps = {
-  stats: PlayerStats;
-};
-
-export const StatsButton = (props: StatsProps) => {
+export const StatsButton = () => {
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   return (

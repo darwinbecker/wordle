@@ -21,7 +21,6 @@ import { CategoryMode, RapidMode, TRMode, WOTDMode } from "../GameModes";
 import { useSnackbar } from "notistack";
 import { isInDictionary, DICTIONARY } from "../../config/Dictionary";
 import { Category } from "../../types/Category";
-import { astronomy, architecture } from "../../config/database";
 import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { useStats } from "../Context/Stats/Stats";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
@@ -51,6 +50,9 @@ export const GameHandler: React.FC = () => {
     setRowIndex,
     columnIndex,
     setColumnIndex,
+
+    resetGame,
+    getNextWord,
   } = useGamestate();
   const { stats, setStats, updatePlayerStats } = useStats();
 
@@ -64,53 +66,27 @@ export const GameHandler: React.FC = () => {
 
   const [isInputError, setIsInputError] = useState<boolean>(false);
 
-  const [category, setCategory] = useState<Category>("architecture");
-  const [currentDictionary, setCurrentDictionary] =
-    useState<object>(architecture);
-
   const { enqueueSnackbar } = useSnackbar();
 
-  const resetRapidMode = (): void => {
-    resetGame();
-    setSolution("TIMER");
-    setRapidModeScore(0);
-    setPauseTimer(true);
-    const t = new Date().getTime() + rapidMode * 60 * 1000;
-    setTimer(t);
-  };
+  // const resetRapidMode = (): void => {
+  //   resetGame();
+  //   setSolution("TIMER");
+  //   setRapidModeScore(0);
+  //   setPauseTimer(true);
+  //   const t = new Date().getTime() + rapidMode * 60 * 1000;
+  //   setTimer(t);
+  // };
 
-  const resetGame = useCallback((): void => {
-    setGuessedWords([]);
-    setRowIndex(0);
-    setColumnIndex(0);
-    setGuessedWord("");
-    setWordStatuses([]);
-    setYouWin(false);
-    setYouLose(false);
-    setSolution("");
-    setIsInputError(false);
-  }, [
-    setGuessedWords,
-    setRowIndex,
-    setColumnIndex,
-    setGuessedWord,
-    setWordStatuses,
-    setYouWin,
-    setYouLose,
-    setSolution,
-    setIsInputError,
-  ]);
+  // const getNextWord = useCallback((): void => {
+  //   resetGame();
+  //   // setSolution(getRandomWord());
+  //   setSolution("TIMER");
+  // }, [resetGame, setSolution]);
 
-  const getNextWord = useCallback((): void => {
-    resetGame();
-    // setSolution(getRandomWord());
-    setSolution("TIMER");
-  }, [resetGame, setSolution]);
-
-  function getNextCategoryWord(): void {
-    resetGame();
-    setSolution(getRandomWordFromDictionary(currentDictionary));
-  }
+  // function getNextCategoryWord(): void {
+  //   resetGame();
+  //   setSolution(getRandomWordFromDictionary(currentDictionary));
+  // }
 
   const handleChange = useCallback(
     (value: string): void => {
@@ -180,7 +156,7 @@ export const GameHandler: React.FC = () => {
         setWordStatuses([...wordStatuses, status]);
 
         // set win
-        if (guessedWord === solution) {
+        if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
           if (gameMode === "WOTD") {
             const newStats = updatePlayerStats(true);
             setStats(newStats);
@@ -204,7 +180,9 @@ export const GameHandler: React.FC = () => {
 
         // last guess, set lose
         if (guessedWords.length === MAX_GUESSES - 1) {
-          if (guessedWord !== solution) {
+          if (
+            guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
+          ) {
             console.log("YOU LOSE!");
             if (gameMode === "WOTD") {
               const newStats = updatePlayerStats(false);
@@ -349,14 +327,14 @@ export const GameHandler: React.FC = () => {
             }
           }
         } else if (mode === "TR") {
-          getNextWord();
+          // getNextWord();
         } else if (mode === "C") {
-          setShowPopup(true);
+          // setShowPopup(true);
         } else if (mode === "R") {
           console.log("load Rapid mode");
           setSolution("TIMER");
           setRapidModeScore(0);
-          setShowPopup(true);
+          // setShowPopup(true);
           setTimer(0);
           setPauseTimer(true);
         }
@@ -378,51 +356,42 @@ export const GameHandler: React.FC = () => {
     setYouWin,
   ]);
 
-  const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // TODO: load category dictionary if mode is C, or timer if mode is R
-    if (gameMode === "C") {
-      // console.log("load category dictionary");
-      // console.log(event.currentTarget.value);
-      const category: Category = event.currentTarget.value as Category;
-      console.log(category);
-      // setCurrentDictionary(category);
-      if (category === "astronomy") {
-        setCategory("astronomy");
-        setCurrentDictionary(astronomy);
-        const solution = getRandomWordFromDictionary(astronomy);
-        console.log(solution);
-        setSolution(solution);
-      }
-    } else if (gameMode === "R") {
-      const rapidModeTimerValue = parseInt(event.currentTarget.value);
-      setRapidMode(rapidModeTimerValue);
-      const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
-      setTimer(t);
-    }
+  // const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  //   // TODO: load category dictionary if mode is C, or timer if mode is R
+  //   if (gameMode === "C") {
+  //     // console.log("load category dictionary");
+  //     // console.log(event.currentTarget.value);
+  //     const category: Category = event.currentTarget.value as Category;
+  //     console.log(category);
+  //     // setCurrentDictionary(category);
+  //     if (category === "astronomy") {
+  //       setCategory("astronomy");
+  //       setCurrentDictionary(astronomy);
+  //       const solution = getRandomWordFromDictionary(astronomy);
+  //       console.log(solution);
+  //       setSolution(solution);
+  //     }
+  //   } else if (gameMode === "R") {
+  //     const rapidModeTimerValue = parseInt(event.currentTarget.value);
+  //     setRapidMode(rapidModeTimerValue);
+  //     const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
+  //     setTimer(t);
+  //   }
 
-    setShowPopup(false);
-  };
+  //   setShowPopup(false);
+  // };
 
   return (
     <div className="Game">
-      <NavigationBar stats={stats} />
+      <NavigationBar />
 
       {gameMode === "WOTD" && (
         <>
           <WOTDMode
-            guessedWord={guessedWord}
-            guessedWords={guessedWords}
-            wordStatuses={wordStatuses}
-            solution={solution}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleRemove={handleRemove}
             isInputError={isInputError}
-            youWin={youWin}
-            youLose={youLose}
-            showPopup={showPopup}
-            togglePopup={togglePopup}
-            stats={stats}
           />
         </>
       )}
@@ -430,18 +399,10 @@ export const GameHandler: React.FC = () => {
       {gameMode === "TR" && (
         <>
           <TRMode
-            guessedWord={guessedWord}
-            guessedWords={guessedWords}
-            wordStatuses={wordStatuses}
-            solution={solution}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleRemove={handleRemove}
             isInputError={isInputError}
-            youWin={youWin}
-            youLose={youLose}
-            resetGame={resetGame}
-            getNextWord={getNextWord}
           />
         </>
       )}
@@ -449,21 +410,10 @@ export const GameHandler: React.FC = () => {
       {gameMode === "C" && (
         <>
           <CategoryMode
-            guessedWord={guessedWord}
-            guessedWords={guessedWords}
-            wordStatuses={wordStatuses}
-            // solution={solution}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleRemove={handleRemove}
             isInputError={isInputError}
-            // youWin={youWin}
-            // youLose={youLose}
-            showPopup={showPopup}
-            togglePopup={togglePopup}
-            stats={stats}
-            category={category}
-            getNextCategoryWord={getNextCategoryWord}
           />
         </>
       )}
@@ -471,25 +421,10 @@ export const GameHandler: React.FC = () => {
       {gameMode === "R" && (
         <>
           <RapidMode
-            guessedWord={guessedWord}
-            guessedWords={guessedWords}
-            wordStatuses={wordStatuses}
-            solution={solution}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleRemove={handleRemove}
             isInputError={isInputError}
-            youLose={youLose}
-            setYouLose={setYouLose}
-            showPopup={showPopup}
-            togglePopup={togglePopup}
-            stats={stats}
-            rapidModeScore={rapidModeScore}
-            resetRapidMode={resetRapidMode}
-            timer={timer}
-            setTimer={setTimer}
-            pauseTimer={pauseTimer}
-            setPauseTimer={setPauseTimer}
           />
         </>
       )}

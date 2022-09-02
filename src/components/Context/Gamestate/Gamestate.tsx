@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 import { GameModeType } from "../../GameHandler";
 import { architecture } from "../../../config/database";
 import { MAX_GUESSES } from "../../../config/Settings";
@@ -28,6 +28,8 @@ export interface IGameState {
   setRowIndex: (rowIndex: number) => void;
   columnIndex: number;
   setColumnIndex: (columnIndex: number) => void;
+  resetGame: () => void;
+  getNextWord: () => void;
 }
 
 const loadedGameState: GameState = loadGameState();
@@ -65,6 +67,8 @@ export const Gamestate = createContext<IGameState>({
   setRowIndex: () => {},
   columnIndex: 0,
   setColumnIndex: () => {},
+  resetGame: () => {},
+  getNextWord: () => {},
 });
 
 export const useGamestate = () => useContext(Gamestate);
@@ -115,6 +119,34 @@ export const GamestateProvider = (props: any) => {
   const [currentDictionary, setCurrentDictionary] =
     useState<object>(architecture);
 
+  const resetGame = useCallback((): void => {
+    setGuessedWords([]);
+    setRowIndex(0);
+    setColumnIndex(0);
+    setGuessedWord("");
+    setWordStatuses([]);
+    setYouWin(false);
+    setYouLose(false);
+    setSolution("");
+    setIsInputError(false);
+  }, [
+    setGuessedWords,
+    setRowIndex,
+    setColumnIndex,
+    setGuessedWord,
+    setWordStatuses,
+    setYouWin,
+    setYouLose,
+    setSolution,
+    setIsInputError,
+  ]);
+
+  const getNextWord = useCallback((): void => {
+    resetGame();
+    // setSolution(getRandomWord());
+    setSolution("TIMER");
+  }, [resetGame, setSolution]);
+
   return (
     <Gamestate.Provider
       value={{
@@ -138,6 +170,9 @@ export const GamestateProvider = (props: any) => {
         setRowIndex,
         columnIndex,
         setColumnIndex,
+
+        resetGame,
+        getNextWord,
       }}
       {...props}
     />

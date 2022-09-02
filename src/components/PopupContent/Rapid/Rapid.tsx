@@ -2,7 +2,8 @@ import { RAPID_MODE_MINUTES } from "../../../config/Settings";
 import { usePopup } from "../../Context/Popup/Popup";
 
 type RapidProps = {
-  //   closePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  setRapidMode: (value: number) => void;
+  setTimer: (value: number) => void;
 };
 
 export const Rapid: React.FC<RapidProps> = (props: RapidProps) => {
@@ -15,11 +16,11 @@ export const Rapid: React.FC<RapidProps> = (props: RapidProps) => {
           <button
             key={index}
             onClick={(e) => {
-              // const rapidModeTimerValue = parseInt(e.currentTarget.value);
-              // setRapidMode(rapidModeTimerValue);
-              // const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
-              // console.log(t);
-              // setTimer(t);
+              const rapidModeTimerValue = parseInt(e.currentTarget.value);
+              props.setRapidMode(rapidModeTimerValue);
+              const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
+              console.log(t);
+              props.setTimer(t);
               unSetPopupContent();
             }}
             value={item}

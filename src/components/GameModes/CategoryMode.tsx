@@ -1,38 +1,81 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { Category } from "../../types/Category";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
-import { PlayerStats } from "../LocalStorage";
 import { Categories } from "../PopupContent";
-import { WordStatusType } from "../WordStatus";
 
 type CategoryModeProps = {
-  guessedWord: string;
-  guessedWords: string[];
-  wordStatuses: WordStatusType[][];
   handleChange: (value: string) => void;
   handleSubmit: () => void;
   handleRemove: () => void;
   isInputError: boolean;
-  showPopup: boolean;
-  togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  stats: PlayerStats;
-  category: Category;
-  getNextCategoryWord: () => void;
 };
 
 export const CategoryMode = (props: CategoryModeProps) => {
-  const { solution, youLose, youWin } = useGamestate();
+  const {
+    youLose,
+    youWin,
+    solution,
+    setSolution,
+    resetGame,
+    guessedWord,
+    guessedWords,
+  } = useGamestate();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
+
+  const [category, setCategory] = useState<Category | null>(null);
+  const [currentDictionary, setCurrentDictionary] = useState<object | null>(
+    null
+  );
 
   useEffect(() => {
     // set popup content
-    setPopupContent(<Categories />);
+    setPopupContent(
+      <Categories
+        setCategory={setCategory}
+        setCurrentDictionary={setCurrentDictionary}
+      />
+    );
     setForceInput(true);
     setAnimationDelay(false);
   }, [setForceInput, setPopupContent, setAnimationDelay]);
+
+  useEffect(() => {
+    if (category !== null && currentDictionary !== null) {
+      const randomWord = getRandomWordFromDictionary(currentDictionary);
+      setSolution(randomWord);
+    }
+  }, [category, currentDictionary, setCategory, setSolution]);
+
+  const getNextCategoryWord = (): void => {
+    resetGame();
+    setSolution(getRandomWordFromDictionary(currentDictionary!));
+  };
+
+  // const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  //   // TODO: load category dictionary if mode is C, or timer if mode is R
+  //   if (gameMode === "C") {
+  //     // console.log("load category dictionary");
+  //     // console.log(event.currentTarget.value);
+  //     const category: Category = event.currentTarget.value as Category;
+  //     console.log(category);
+  //     // setCurrentDictionary(category);
+  //     if (category === "astronomy") {
+  //       setCategory("astronomy");
+  //       setCurrentDictionary(astronomy);
+  //       const solution = getRandomWordFromDictionary(astronomy);
+  //       console.log(solution);
+  //       setSolution(solution);
+  //     }
+  //   } else if (gameMode === "R") {
+  //     const rapidModeTimerValue = parseInt(event.currentTarget.value);
+  //     setRapidMode(rapidModeTimerValue);
+  //     const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
+  //     setTimer(t);
+  //   }
 
   return (
     <>
@@ -46,7 +89,7 @@ export const CategoryMode = (props: CategoryModeProps) => {
 
       {(youWin || youLose) && (
         <div className="gameover-feedback">
-          <button className="next-word" onClick={props.getNextCategoryWord}>
+          <button className="next-word" onClick={getNextCategoryWord}>
             nächstes Wort
           </button>
           <h4>gesuchtes Wort war:</h4>
