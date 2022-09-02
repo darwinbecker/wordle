@@ -63,7 +63,7 @@ export const Timer = (props: TimerProps) => {
     } else {
       start();
     }
-  }, [props.pauseTimer]);
+  }, [pause, props.pauseTimer, start]);
 
   const onExpire = () => {
     console.warn("onExpire called");

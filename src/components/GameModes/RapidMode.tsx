@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
@@ -33,20 +33,60 @@ export const RapidMode = (props: RapidModeProps) => {
   const { youLose, solution, setSolution, resetGame } = useGamestate();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
-  const [timer, setTimer] = useState<number>();
+  const [timer, setTimer] = useState<number | null>(null);
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
 
   const [rapidMode, setRapidMode] = useState<number>(0);
   const [rapidModeScore, setRapidModeScore] = useState<number>(0);
 
-  const resetRapidMode = (): void => {
+  // TODO: add useInput context hook and set pauseTimer to false
+
+  // TODO 1:
+  // handleChange
+  // if (gameMode === "R" && pauseTimer) {
+  //   setPauseTimer(false);
+  // }
+
+  // TODO 2:
+  // handleSubmit:
+  // on lose:
+  // if (gameMode === "R") {
+  //   setPauseTimer(true);
+  //   console.log("rapidModeTimerMinutes");
+  //   console.log(rapidMode);
+  //   if (rapidMode === 1) {
+  //     const loadedRapidScore = loadRapidScore1Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore1Min(rapidModeScore);
+  //   } else if (rapidMode === 3) {
+  //     const loadedRapidScore = loadRapidScore3Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore3Min(rapidModeScore);
+  //   } else if (rapidMode === 5) {
+  //     const loadedRapidScore = loadRapidScore5Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore5Min(rapidModeScore);
+  //   }
+  // }
+
+  const resetRapidMode = useCallback((): void => {
     resetGame();
     setSolution("TIMER");
     setRapidModeScore(0);
     setPauseTimer(true);
     const t = new Date().getTime() + rapidMode * 60 * 1000;
     setTimer(t);
-  };
+  }, [rapidMode, resetGame, setSolution]);
+
+  useEffect(() => {
+    resetRapidMode();
+  }, [resetRapidMode]);
+
+  useEffect(() => {
+    if (!pauseTimer) {
+      console.log("TIMER UNPAUSED");
+    }
+  }, [pauseTimer]);
 
   useEffect(() => {
     // set popup content
