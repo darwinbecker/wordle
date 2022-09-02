@@ -14,7 +14,7 @@ export const checkstatus = (
 
   const status: WordStatusType[] = [];
 
-  guessChars.map((char, index) => {
+  guessChars.forEach((char, index) => {
     if (char === solutionChars[index]) {
       status[index] = "correct";
     } else if (solutionChars.includes(char)) {
@@ -24,7 +24,7 @@ export const checkstatus = (
     }
   });
 
-  guessChars.map((char, index) => {
+  guessChars.forEach((char, index) => {
     if (status[index] === "semi") {
       const charCount = solution.split(char);
 

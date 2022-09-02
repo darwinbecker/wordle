@@ -13,15 +13,15 @@ type TRModeProps = {
 export const TRMode = (props: TRModeProps) => {
   const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
 
-  useEffect(() => {
-    getNextWord();
-  }, []);
-
   const getNextWord = useCallback((): void => {
     resetGame();
     // setSolution(getRandomWord());
     setSolution("TIMER");
   }, [resetGame, setSolution]);
+
+  useEffect(() => {
+    getNextWord();
+  }, [getNextWord]);
 
   return (
     <>

@@ -107,17 +107,10 @@ export const GamestateProvider = (props: any) => {
   const [rowIndex, setRowIndex] = useState<number>(0);
   const [columnIndex, setColumnIndex] = useState<number>(0);
 
+  // put this in a separate context file ?
+  const [isInputError, setIsInputError] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>();
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
-
-  const [rapidMode, setRapidMode] = useState<number>(0);
-  const [rapidModeScore, setRapidModeScore] = useState<number>(0);
-
-  const [isInputError, setIsInputError] = useState<boolean>(false);
-
-  const [category, setCategory] = useState<Category>("architecture");
-  const [currentDictionary, setCurrentDictionary] =
-    useState<object>(architecture);
 
   const resetGame = useCallback((): void => {
     setGuessedWords([]);

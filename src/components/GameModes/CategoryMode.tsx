@@ -15,15 +15,7 @@ type CategoryModeProps = {
 };
 
 export const CategoryMode = (props: CategoryModeProps) => {
-  const {
-    youLose,
-    youWin,
-    solution,
-    setSolution,
-    resetGame,
-    guessedWord,
-    guessedWords,
-  } = useGamestate();
+  const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   const [category, setCategory] = useState<Category | null>(null);

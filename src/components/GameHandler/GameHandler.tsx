@@ -54,9 +54,7 @@ export const GameHandler: React.FC = () => {
     resetGame,
     getNextWord,
   } = useGamestate();
-  const { stats, setStats, updatePlayerStats } = useStats();
-
-  const [showPopup, setShowPopup] = useState<boolean>(true);
+  const { setStats, updatePlayerStats } = useStats();
 
   const [timer, setTimer] = useState<number>();
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
@@ -332,11 +330,11 @@ export const GameHandler: React.FC = () => {
           // setShowPopup(true);
         } else if (mode === "R") {
           console.log("load Rapid mode");
-          setSolution("TIMER");
-          setRapidModeScore(0);
+          // setSolution("TIMER");
+          // setRapidModeScore(0);
           // setShowPopup(true);
-          setTimer(0);
-          setPauseTimer(true);
+          // setTimer(0);
+          // setPauseTimer(true);
         }
       }
     );
