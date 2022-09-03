@@ -1,36 +1,44 @@
-.Tile{
-    width: 4rem;
-    height: 4rem;
-    margin: 2px;
-    font-size: 1.8rem;
-    line-height: 4rem;
-    color: var(--secondary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 0.2rem;
-    background: var(--primary-color);
+.Tile {
+  width: 4rem;
+  height: 4rem;
+  /* TODO: responsive approach? */
+  /* width: calc(50vh / 6); */
+  /* height: calc(50vh / 6); */
+  margin: 2px;
+  /* TODO: responsive approach? */
+  /* font-size: ? */
+  font-size: 1.8rem;
+  line-height: 4rem;
+  /* TODO: responsive approach? */
+  /* line-height: calc(50vh / 6); */
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 0.2rem;
+  background: var(--primary-color);
 }
 
-.text-shadow{
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    /* text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; */
+.text-shadow {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  /* text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; */
 }
 
-.correct{
-    background-color: #1a9f1a !important;
+.correct {
+  background-color: #1a9f1a !important;
 }
 
-.semi{
-    background-color: #dba53d !important;
+.semi {
+  background-color: #dba53d !important;
 }
 
-.wrong{
-    background-color: darkgrey !important;
+.wrong {
+  background-color: darkgrey !important;
 }
 
-.correct-high-contrast{
-    background-color: var(--high-contrast-correct) !important;
+.correct-high-contrast {
+  background-color: var(--high-contrast-correct) !important;
 }
 
-.semi-high-contrast{
-    background-color: var(--high-contrast-semi) !important;
+.semi-high-contrast {
+  background-color: var(--high-contrast-semi) !important;
 }

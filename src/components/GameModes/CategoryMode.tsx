@@ -24,6 +24,7 @@ export const CategoryMode = (props: CategoryModeProps) => {
   );
 
   useEffect(() => {
+    resetGame();
     // set popup content
     setPopupContent(
       <Categories
