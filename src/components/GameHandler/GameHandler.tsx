@@ -24,6 +24,7 @@ import { Category } from "../../types/Category";
 import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { useStats } from "../Context/Stats/Stats";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
 
 // WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
 export type GameModeType = "WOTD" | "TR" | "C" | "R";
@@ -36,6 +37,16 @@ export const GameHandler: React.FC = () => {
     setYouWin,
     youLose,
     setYouLose,
+    solution,
+    setSolution,
+
+    resetGame,
+    getNextWord,
+  } = useGamestate();
+  const {
+    handleChange,
+    handleRemove,
+    handleSubmit,
 
     guessedWord,
     setGuessedWord,
@@ -43,17 +54,11 @@ export const GameHandler: React.FC = () => {
     setGuessedWords,
     wordStatuses,
     setWordStatuses,
-    solution,
-    setSolution,
-
     rowIndex,
     setRowIndex,
     columnIndex,
     setColumnIndex,
-
-    resetGame,
-    getNextWord,
-  } = useGamestate();
+  } = useInput();
   const { setStats, updatePlayerStats } = useStats();
 
   const [timer, setTimer] = useState<number>();
@@ -86,169 +91,169 @@ export const GameHandler: React.FC = () => {
   //   setSolution(getRandomWordFromDictionary(currentDictionary));
   // }
 
-  const handleChange = useCallback(
-    (value: string): void => {
-      if (youWin || youLose) return;
+  // const handleChange = useCallback(
+  //   (value: string): void => {
+  //     if (youWin || youLose) return;
 
-      if (gameMode === "R" && pauseTimer) {
-        setPauseTimer(false);
-      }
+  //     if (gameMode === "R" && pauseTimer) {
+  //       setPauseTimer(false);
+  //     }
 
-      if (guessedWord.length < MAX_WORD_LENGTH) {
-        // props.setIsInputError(false);
-        setGuessedWord(`${guessedWord}${value}`);
-        setColumnIndex(columnIndex + 1);
-      } else {
-        // TODO: display feedback for user
-        enqueueSnackbar("Du kannst nur 5 Buchstaben eingeben.", {
-          variant: "warning",
-          preventDuplicate: true,
-        });
-      }
-    },
-    [
-      columnIndex,
-      enqueueSnackbar,
-      gameMode,
-      guessedWord,
-      pauseTimer,
-      setColumnIndex,
-      setGuessedWord,
-      youLose,
-      youWin,
-    ]
-  );
+  //     if (guessedWord.length < MAX_WORD_LENGTH) {
+  //       // props.setIsInputError(false);
+  //       setGuessedWord(`${guessedWord}${value}`);
+  //       setColumnIndex(columnIndex + 1);
+  //     } else {
+  //       // TODO: display feedback for user
+  //       enqueueSnackbar("Du kannst nur 5 Buchstaben eingeben.", {
+  //         variant: "warning",
+  //         preventDuplicate: true,
+  //       });
+  //     }
+  //   },
+  //   [
+  //     columnIndex,
+  //     enqueueSnackbar,
+  //     gameMode,
+  //     guessedWord,
+  //     pauseTimer,
+  //     setColumnIndex,
+  //     setGuessedWord,
+  //     youLose,
+  //     youWin,
+  //   ]
+  // );
 
-  const handleRemove = useCallback((): void => {
-    if (youWin || youLose) return;
-    if (guessedWord.length > 0) {
-      setGuessedWord(guessedWord.slice(0, -1));
-      setColumnIndex(columnIndex - 1);
-    }
-  }, [
-    columnIndex,
-    guessedWord,
-    setColumnIndex,
-    setGuessedWord,
-    youLose,
-    youWin,
-  ]);
+  // const handleRemove = useCallback((): void => {
+  //   if (youWin || youLose) return;
+  //   if (guessedWord.length > 0) {
+  //     setGuessedWord(guessedWord.slice(0, -1));
+  //     setColumnIndex(columnIndex - 1);
+  //   }
+  // }, [
+  //   columnIndex,
+  //   guessedWord,
+  //   setColumnIndex,
+  //   setGuessedWord,
+  //   youLose,
+  //   youWin,
+  // ]);
 
-  const handleSubmit = useCallback((): void => {
-    if (youWin || youLose) return;
+  // const handleSubmit = useCallback((): void => {
+  //   if (youWin || youLose) return;
 
-    if (guessedWord.length === 5) {
-      if (guessedWords.length < MAX_GUESSES) {
-        // TODO check if guessWord is in dictionary
-        // if (!isInDictionary(guessedWord, currentDictionary)) {
-        //     console.log("WORD IS NOT IN DICTIONARY");
-        //     return;
-        // }
+  //   if (guessedWord.length === 5) {
+  //     if (guessedWords.length < MAX_GUESSES) {
+  //       // TODO check if guessWord is in dictionary
+  //       // if (!isInDictionary(guessedWord, currentDictionary)) {
+  //       //     console.log("WORD IS NOT IN DICTIONARY");
+  //       //     return;
+  //       // }
 
-        setIsInputError(false);
-        setRowIndex(rowIndex + 1);
-        setColumnIndex(0);
-        setGuessedWord("");
-        setGuessedWords([...guessedWords, guessedWord]);
-        const status = checkstatus(guessedWord, solution);
-        setWordStatuses([...wordStatuses, status]);
+  //       setIsInputError(false);
+  //       setRowIndex(rowIndex + 1);
+  //       setColumnIndex(0);
+  //       setGuessedWord("");
+  //       setGuessedWords([...guessedWords, guessedWord]);
+  //       const status = checkstatus(guessedWord, solution);
+  //       setWordStatuses([...wordStatuses, status]);
 
-        // set win
-        if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
-          if (gameMode === "WOTD") {
-            const newStats = updatePlayerStats(true);
-            setStats(newStats);
-            savePlayerStats(newStats);
-            enqueueSnackbar("Du hast das heutige Wort richtig erraten! 🎉", {
-              variant: "success",
-            });
-          }
+  //       // set win
+  //       if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
+  //         if (gameMode === "WOTD") {
+  //           const newStats = updatePlayerStats(true);
+  //           setStats(newStats);
+  //           savePlayerStats(newStats);
+  //           enqueueSnackbar("Du hast das heutige Wort richtig erraten! 🎉", {
+  //             variant: "success",
+  //           });
+  //         }
 
-          if (gameMode === "R") {
-            setRapidModeScore(rapidModeScore + 1);
-            getNextWord();
-          } else {
-            setYouWin(true);
-            Confetti();
-          }
-          WinService.setWin(true);
+  //         if (gameMode === "R") {
+  //           setRapidModeScore(rapidModeScore + 1);
+  //           getNextWord();
+  //         } else {
+  //           setYouWin(true);
+  //           Confetti();
+  //         }
+  //         WinService.setWin(true);
 
-          return;
-        }
+  //         return;
+  //       }
 
-        // last guess, set lose
-        if (guessedWords.length === MAX_GUESSES - 1) {
-          if (
-            guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
-          ) {
-            console.log("YOU LOSE!");
-            if (gameMode === "WOTD") {
-              const newStats = updatePlayerStats(false);
-              setStats(newStats);
-              savePlayerStats(newStats);
-              enqueueSnackbar(
-                `Du hast das heutige Wort: "${solution}" leider nicht erraten`,
-                { variant: "error" }
-              );
-            }
+  //       // last guess, set lose
+  //       if (guessedWords.length === MAX_GUESSES - 1) {
+  //         if (
+  //           guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
+  //         ) {
+  //           console.log("YOU LOSE!");
+  //           if (gameMode === "WOTD") {
+  //             const newStats = updatePlayerStats(false);
+  //             setStats(newStats);
+  //             savePlayerStats(newStats);
+  //             enqueueSnackbar(
+  //               `Du hast das heutige Wort: "${solution}" leider nicht erraten`,
+  //               { variant: "error" }
+  //             );
+  //           }
 
-            if (gameMode === "R") {
-              setPauseTimer(true);
-              console.log("rapidModeTimerMinutes");
-              console.log(rapidMode);
-              if (rapidMode === 1) {
-                const loadedRapidScore = loadRapidScore1Min();
-                if (loadedRapidScore <= rapidModeScore)
-                  saveRapidScore1Min(rapidModeScore);
-              } else if (rapidMode === 3) {
-                const loadedRapidScore = loadRapidScore3Min();
-                if (loadedRapidScore <= rapidModeScore)
-                  saveRapidScore3Min(rapidModeScore);
-              } else if (rapidMode === 5) {
-                const loadedRapidScore = loadRapidScore5Min();
-                if (loadedRapidScore <= rapidModeScore)
-                  saveRapidScore5Min(rapidModeScore);
-              }
-            }
+  //           if (gameMode === "R") {
+  //             setPauseTimer(true);
+  //             console.log("rapidModeTimerMinutes");
+  //             console.log(rapidMode);
+  //             if (rapidMode === 1) {
+  //               const loadedRapidScore = loadRapidScore1Min();
+  //               if (loadedRapidScore <= rapidModeScore)
+  //                 saveRapidScore1Min(rapidModeScore);
+  //             } else if (rapidMode === 3) {
+  //               const loadedRapidScore = loadRapidScore3Min();
+  //               if (loadedRapidScore <= rapidModeScore)
+  //                 saveRapidScore3Min(rapidModeScore);
+  //             } else if (rapidMode === 5) {
+  //               const loadedRapidScore = loadRapidScore5Min();
+  //               if (loadedRapidScore <= rapidModeScore)
+  //                 saveRapidScore5Min(rapidModeScore);
+  //             }
+  //           }
 
-            setYouLose(true);
-            return;
-          }
-        }
-      }
-    } else {
-      // TODO enter 5 characters => shake animation
-      console.log("enter 5 characters");
-      setIsInputError(false);
-      setIsInputError(true);
-      enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
-        variant: "error",
-        preventDuplicate: true,
-      });
-    }
-  }, [
-    enqueueSnackbar,
-    gameMode,
-    getNextWord,
-    guessedWord,
-    guessedWords,
-    rapidMode,
-    rapidModeScore,
-    rowIndex,
-    setColumnIndex,
-    setGuessedWord,
-    setGuessedWords,
-    setRowIndex,
-    setStats,
-    setWordStatuses,
-    setYouLose,
-    setYouWin,
-    solution,
-    updatePlayerStats,
-    wordStatuses,
-    youLose,
-    youWin,
-  ]);
+  //           setYouLose(true);
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     // TODO enter 5 characters => shake animation
+  //     console.log("enter 5 characters");
+  //     setIsInputError(false);
+  //     setIsInputError(true);
+  //     enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
+  //       variant: "error",
+  //       preventDuplicate: true,
+  //     });
+  //   }
+  // }, [
+  //   enqueueSnackbar,
+  //   gameMode,
+  //   getNextWord,
+  //   guessedWord,
+  //   guessedWords,
+  //   rapidMode,
+  //   rapidModeScore,
+  //   rowIndex,
+  //   setColumnIndex,
+  //   setGuessedWord,
+  //   setGuessedWords,
+  //   setRowIndex,
+  //   setStats,
+  //   setWordStatuses,
+  //   setYouLose,
+  //   setYouWin,
+  //   solution,
+  //   updatePlayerStats,
+  //   wordStatuses,
+  //   youLose,
+  //   youWin,
+  // ]);
 
   useEffect(() => {
     const listener = (event: globalThis.KeyboardEvent): any => {

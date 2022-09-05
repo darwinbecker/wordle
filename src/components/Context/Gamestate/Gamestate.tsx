@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { GameModeType } from "../../GameHandler";
 import { architecture } from "../../../config/database";
 import { MAX_GUESSES } from "../../../config/Settings";
@@ -6,6 +6,7 @@ import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
 import { GameState, loadGameState } from "../../LocalStorage";
 import { WordStatusType } from "../../WordStatus";
 import { Category } from "../../../types/Category";
+import { useInput } from "../Input/Input";
 
 export interface IGameState {
   gameMode: GameModeType;
@@ -74,6 +75,7 @@ export const Gamestate = createContext<IGameState>({
 export const useGamestate = () => useContext(Gamestate);
 
 export const GamestateProvider = (props: any) => {
+  const { handleChange } = useInput();
   const [gameMode, setGameMode] = useState<GameModeType>("WOTD");
 
   const [youLose, setYouLose] = useState<boolean>(() => {
@@ -111,6 +113,10 @@ export const GamestateProvider = (props: any) => {
   const [isInputError, setIsInputError] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>();
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
+
+  useEffect(() => {
+    console.log("HANDLE CHANGE")
+  }, [handleChange]);
 
   const resetGame = useCallback((): void => {
     setGuessedWords([]);

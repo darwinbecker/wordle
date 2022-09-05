@@ -15,38 +15,73 @@ export interface IInput {
   handleChange: (value: string) => void;
   handleRemove: () => void;
   handleSubmit: () => void;
+  guessedWord: string;
+  setGuessedWord: (value: string) => void;
+  guessedWords: string[];
+  setGuessedWords: (value: string[]) => void;
+  wordStatuses: WordStatusType[][];
+  setWordStatuses: (value: WordStatusType[][]) => void;
+  rowIndex: number;
+  setRowIndex: (value: number) => void;
+  columnIndex: number;
+  setColumnIndex: (value: number) => void;
 }
+
+const loadedGameState: GameState = loadGameState();
 
 export const Input = createContext<IInput>({
   handleChange: () => {},
   handleRemove: () => {},
   handleSubmit: () => {},
+
+  guessedWord: "",
+  setGuessedWord: () => {},
+  guessedWords:
+    loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.guessedWords,
+  setGuessedWords: () => {},
+  wordStatuses:
+    loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.wordStatuses,
+  setWordStatuses: () => {},
+
+  rowIndex: 0,
+  setRowIndex: () => {},
+  columnIndex: 0,
+  setColumnIndex: () => {},
 });
 
 export const useInput = () => useContext(Input);
 
 export const InputProvider = (props: any) => {
   const {
+    gameMode,
     youWin,
     setYouWin,
     youLose,
     setYouLose,
-    gameMode,
-    guessedWord,
-    setGuessedWord,
-    columnIndex,
-    setColumnIndex,
-    rowIndex,
-    setRowIndex,
-    guessedWords,
-    setGuessedWords,
-    wordStatuses,
-    setWordStatuses,
     solution,
     getNextWord,
   } = useGamestate();
   const { setStats, updatePlayerStats } = useStats();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [guessedWord, setGuessedWord] = useState<string>("");
+  const [guessedWords, setGuessedWords] = useState<string[]>(() => {
+    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.guessedWords;
+  });
+  const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
+    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.wordStatuses;
+  });
+
+  const [rowIndex, setRowIndex] = useState<number>(0);
+  const [columnIndex, setColumnIndex] = useState<number>(0);
 
   // put this in a separate context file ?
   const [isInputError, setIsInputError] = useState<boolean>(false);
@@ -55,6 +90,7 @@ export const InputProvider = (props: any) => {
 
   const handleChange = useCallback(
     (value: string): void => {
+      console.log(value);
       if (youWin || youLose) return;
 
       if (gameMode === "R" && pauseTimer) {
@@ -131,13 +167,15 @@ export const InputProvider = (props: any) => {
             });
           }
 
-          if (gameMode === "R") {
-            // setRapidModeScore(rapidModeScore + 1);
-            // getNextWord();
-          } else {
-            setYouWin(true);
-            Confetti();
-          }
+          // if (gameMode === "R") {
+          //   // setRapidModeScore(rapidModeScore + 1);
+          //   // getNextWord();
+          // } else {
+          //   setYouWin(true);
+          //   Confetti();
+          // }
+          setYouWin(true);
+          Confetti();
           WinService.setWin(true);
 
           return;
@@ -223,6 +261,12 @@ export const InputProvider = (props: any) => {
         handleChange,
         handleRemove,
         handleSubmit,
+        guessedWord,
+        guessedWords,
+        wordStatuses,
+        isInputError,
+        // rowIndex,
+        // columnIndex,
       }}
       {...props}
     />

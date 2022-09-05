@@ -3,13 +3,15 @@ import { MAX_WORD_LENGTH } from "../../../config/Settings";
 import { MAX_GUESSES } from "../../../config/Settings";
 import { WordStatusType } from "../../WordStatus";
 import { useGamestate } from "../../Context/Gamestate/Gamestate";
+import { useInput } from "../../Context/Input/Input";
 
 type GridProps = {
   isInputError: boolean;
 };
 
 const Rows: React.FC<GridProps> = (props: GridProps) => {
-  const { guessedWord, guessedWords, wordStatuses } = useGamestate();
+  const { guessedWord, guessedWords, wordStatuses } = useInput();
+
   return (
     <>
       {

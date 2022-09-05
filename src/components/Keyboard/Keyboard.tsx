@@ -1,5 +1,6 @@
 import React from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
 import { getStatuses, WordStatusClassNames } from "../WordStatus";
 
 type KeyboardProps = {
@@ -9,7 +10,8 @@ type KeyboardProps = {
 };
 
 export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
-  const { guessedWords, solution } = useGamestate();
+  const { solution } = useGamestate();
+  const { guessedWords } = useInput();
   const firstRow: string[] = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P"];
   const secondRow: string[] = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const thirdRow: string[] = [
