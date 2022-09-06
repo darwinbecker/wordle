@@ -1,70 +1,117 @@
-import { createContext, useContext, useState, useCallback } from "react";
-import { GameModeType, WinService } from "../../GameHandler";
-import { architecture } from "../../../config/database";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../../config/Settings";
-import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
-import { GameState, loadGameState, savePlayerStats } from "../../LocalStorage";
+import { getRandomWord, WORD_OF_THE_DAY } from "../../../config/Wordlist";
+import { GameState, loadGameState } from "../../LocalStorage";
 import { checkstatus, WordStatusType } from "../../WordStatus";
-import { Category } from "../../../types/Category";
 import { useGamestate } from "../Gamestate/Gamestate";
 import { useStats } from "../Stats/Stats";
 import { useSnackbar } from "notistack";
-import { Confetti } from "../../Animations";
+import { InputService } from "../../Observables/InputService";
+import { DICTIONARY, isInDictionary } from "../../../config/Dictionary";
+import { WinService } from "../../Observables/WinService";
 
 export interface IInput {
   handleChange: (value: string) => void;
   handleRemove: () => void;
   handleSubmit: () => void;
+
+  guessedWord: string;
+  setGuessedWord: (value: string) => void;
+  guessedWords: string[];
+  setGuessedWords: (value: string[]) => void;
+  wordStatuses: WordStatusType[][];
+  setWordStatuses: (value: WordStatusType[][]) => void;
+  isInputError: boolean;
+  setIsInputError: (value: boolean) => void;
+
+  rowIndex: number;
+  setRowIndex: (value: number) => void;
+  columnIndex: number;
+  setColumnIndex: (value: number) => void;
+
+  resetGame: () => void;
+  getNextWord: () => void;
 }
+
+const loadedGameState: GameState = loadGameState();
 
 export const Input = createContext<IInput>({
   handleChange: () => {},
   handleRemove: () => {},
   handleSubmit: () => {},
+
+  guessedWord: "",
+  setGuessedWord: () => {},
+  guessedWords:
+    loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.guessedWords,
+  setGuessedWords: () => {},
+  wordStatuses:
+    loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.wordStatuses,
+  setWordStatuses: () => {},
+  isInputError: false,
+  setIsInputError: () => {},
+
+  rowIndex: 0,
+  setRowIndex: () => {},
+  columnIndex: 0,
+  setColumnIndex: () => {},
+
+  resetGame: () => {},
+  getNextWord: () => {},
 });
 
 export const useInput = () => useContext(Input);
 
 export const InputProvider = (props: any) => {
   const {
+    gameMode,
     youWin,
     setYouWin,
     youLose,
     setYouLose,
-    gameMode,
-    guessedWord,
-    setGuessedWord,
-    columnIndex,
-    setColumnIndex,
-    rowIndex,
-    setRowIndex,
-    guessedWords,
-    setGuessedWords,
-    wordStatuses,
-    setWordStatuses,
     solution,
-    getNextWord,
+    setSolution,
   } = useGamestate();
   const { setStats, updatePlayerStats } = useStats();
   const { enqueueSnackbar } = useSnackbar();
 
+  const [guessedWord, setGuessedWord] = useState<string>("");
+  const [guessedWords, setGuessedWords] = useState<string[]>(() => {
+    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.guessedWords;
+  });
+  const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
+    return loadedGameState.solution !== WORD_OF_THE_DAY().solution
+      ? []
+      : loadedGameState.wordStatuses;
+  });
+
+  const [rowIndex, setRowIndex] = useState<number>(0);
+  const [columnIndex, setColumnIndex] = useState<number>(0);
+
   // put this in a separate context file ?
   const [isInputError, setIsInputError] = useState<boolean>(false);
-  const [timer, setTimer] = useState<number>();
-  const [pauseTimer, setPauseTimer] = useState<boolean>(true);
 
   const handleChange = useCallback(
     (value: string): void => {
+      // console.log(value);
       if (youWin || youLose) return;
-
-      if (gameMode === "R" && pauseTimer) {
-        setPauseTimer(false);
-      }
-
       if (guessedWord.length < MAX_WORD_LENGTH) {
-        // props.setIsInputError(false);
+        setIsInputError(false);
         setGuessedWord(`${guessedWord}${value}`);
         setColumnIndex(columnIndex + 1);
+        InputService.setChangeInput();
       } else {
         // TODO: display feedback for user
         enqueueSnackbar("Du kannst nur 5 Buchstaben eingeben.", {
@@ -76,9 +123,7 @@ export const InputProvider = (props: any) => {
     [
       columnIndex,
       enqueueSnackbar,
-      gameMode,
       guessedWord,
-      pauseTimer,
       setColumnIndex,
       setGuessedWord,
       youLose,
@@ -91,6 +136,7 @@ export const InputProvider = (props: any) => {
     if (guessedWord.length > 0) {
       setGuessedWord(guessedWord.slice(0, -1));
       setColumnIndex(columnIndex - 1);
+      InputService.setRemoveInput();
     }
   }, [
     columnIndex,
@@ -103,11 +149,10 @@ export const InputProvider = (props: any) => {
 
   const handleSubmit = useCallback((): void => {
     if (youWin || youLose) return;
-
     if (guessedWord.length === 5) {
       if (guessedWords.length < MAX_GUESSES) {
         // TODO check if guessWord is in dictionary
-        // if (!isInDictionary(guessedWord, currentDictionary)) {
+        // if (!isInDictionary(guessedWord, DICTIONARY)) {
         //     console.log("WORD IS NOT IN DICTIONARY");
         //     return;
         // }
@@ -122,24 +167,7 @@ export const InputProvider = (props: any) => {
 
         // set win
         if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
-          if (gameMode === "WOTD") {
-            const newStats = updatePlayerStats(true);
-            setStats(newStats);
-            savePlayerStats(newStats);
-            enqueueSnackbar("Du hast das heutige Wort richtig erraten! 🎉", {
-              variant: "success",
-            });
-          }
-
-          if (gameMode === "R") {
-            // setRapidModeScore(rapidModeScore + 1);
-            // getNextWord();
-          } else {
-            setYouWin(true);
-            Confetti();
-          }
           WinService.setWin(true);
-
           return;
         }
 
@@ -148,37 +176,7 @@ export const InputProvider = (props: any) => {
           if (
             guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
           ) {
-            console.log("YOU LOSE!");
-            if (gameMode === "WOTD") {
-              const newStats = updatePlayerStats(false);
-              setStats(newStats);
-              savePlayerStats(newStats);
-              enqueueSnackbar(
-                `Du hast das heutige Wort: "${solution}" leider nicht erraten`,
-                { variant: "error" }
-              );
-            }
-
-            // if (gameMode === "R") {
-            //   setPauseTimer(true);
-            //   console.log("rapidModeTimerMinutes");
-            //   console.log(rapidMode);
-            //   if (rapidMode === 1) {
-            //     const loadedRapidScore = loadRapidScore1Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore1Min(rapidModeScore);
-            //   } else if (rapidMode === 3) {
-            //     const loadedRapidScore = loadRapidScore3Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore3Min(rapidModeScore);
-            //   } else if (rapidMode === 5) {
-            //     const loadedRapidScore = loadRapidScore5Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore5Min(rapidModeScore);
-            //   }
-            // }
-
-            setYouLose(true);
+            WinService.setWin(false);
             return;
           }
         }
@@ -186,7 +184,7 @@ export const InputProvider = (props: any) => {
     } else {
       // TODO enter 5 characters => shake animation
       console.log("enter 5 characters");
-      setIsInputError(false);
+      // setIsInputError(false);
       setIsInputError(true);
       enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
         variant: "error",
@@ -195,27 +193,66 @@ export const InputProvider = (props: any) => {
     }
   }, [
     enqueueSnackbar,
-    gameMode,
-    getNextWord,
     guessedWord,
     guessedWords,
-    // rapidMode,
-    // rapidModeScore,
     rowIndex,
     setColumnIndex,
     setGuessedWord,
     setGuessedWords,
     setRowIndex,
-    setStats,
     setWordStatuses,
-    setYouLose,
-    setYouWin,
     solution,
-    updatePlayerStats,
     wordStatuses,
     youLose,
     youWin,
   ]);
+
+  useEffect(() => {
+    const listener = (event: globalThis.KeyboardEvent): any => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        handleSubmit();
+      } else if (event.code === "Backspace" || event.code === "Delete") {
+        handleRemove();
+      } else {
+        const key = event.key.toLocaleUpperCase();
+        // TODO A-Z => problem with german letters üäö
+        if (key.length === 1 && key >= "A" && key <= "Z") {
+          handleChange(key);
+        }
+      }
+    };
+    window.addEventListener("keyup", listener);
+    return () => {
+      window.removeEventListener("keyup", listener);
+    };
+  }, [handleSubmit, handleRemove, handleChange, youWin, youLose]);
+
+  const resetGame = useCallback((): void => {
+    setGuessedWords([]);
+    setRowIndex(0);
+    setColumnIndex(0);
+    setGuessedWord("");
+    setWordStatuses([]);
+    setYouWin(false);
+    setYouLose(false);
+    setSolution("");
+    setIsInputError(false);
+  }, [
+    setGuessedWords,
+    setRowIndex,
+    setColumnIndex,
+    setGuessedWord,
+    setWordStatuses,
+    setYouWin,
+    setYouLose,
+    setSolution,
+  ]);
+
+  const getNextWord = useCallback((): void => {
+    resetGame();
+    // setSolution(getRandomWord());
+    setSolution("TIMER");
+  }, [resetGame, setSolution]);
 
   return (
     <Input.Provider
@@ -223,6 +260,22 @@ export const InputProvider = (props: any) => {
         handleChange,
         handleRemove,
         handleSubmit,
+
+        guessedWord,
+        setGuessedWord,
+        guessedWords,
+        setGuessedWords,
+        wordStatuses,
+        setWordStatuses,
+
+        rowIndex,
+        setRowIndex,
+        columnIndex,
+        setColumnIndex,
+        isInputError,
+
+        resetGame,
+        getNextWord,
       }}
       {...props}
     />

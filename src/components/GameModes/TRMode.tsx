@@ -1,37 +1,42 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
+import { Confetti } from "../Animations/Confetti";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
+import { WinService } from "../Observables/WinService";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 
-type TRModeProps = {
-  handleChange: (value: string) => void;
-  handleSubmit: () => void;
-  handleRemove: () => void;
-  isInputError: boolean;
-};
+export const TRMode = () => {
+  const { youLose, setYouLose, youWin, setYouWin, solution } = useGamestate();
+  const { getNextWord } = useInput();
 
-export const TRMode = (props: TRModeProps) => {
-  const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
-
-  const getNextWord = useCallback((): void => {
-    resetGame();
-    // setSolution(getRandomWord());
-    setSolution("TIMER");
-  }, [resetGame, setSolution]);
-
+  // get next word
   useEffect(() => {
     getNextWord();
   }, [getNextWord]);
 
+  // on win => show confetti
+  useEffect(() => {
+    const subscription = WinService.onWinChange().subscribe((win) => {
+      if (win) {
+        setYouWin(true);
+        Confetti();
+      } else {
+        setYouLose(true);
+        console.log("YOU LOST!");
+      }
+    });
+
+    // note: return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [setYouLose, setYouWin]);
+
   return (
     <>
-      <Grid isInputError={props.isInputError}></Grid>
-
-      <Keyboard
-        handleChange={props.handleChange}
-        handeSubmit={props.handleSubmit}
-        handleRemove={props.handleRemove}
-      />
+      <Grid></Grid>
+      <Keyboard />
 
       {(youWin || youLose) && (
         <div className="gameover-feedback">

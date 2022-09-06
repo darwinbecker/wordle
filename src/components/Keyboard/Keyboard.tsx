@@ -1,15 +1,11 @@
 import React from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
 import { getStatuses, WordStatusClassNames } from "../WordStatus";
 
-type KeyboardProps = {
-  handleChange: (value: string) => void;
-  handeSubmit: () => void;
-  handleRemove: () => void;
-};
-
-export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
-  const { guessedWords, solution } = useGamestate();
+export const Keyboard: React.FC = () => {
+  const { solution } = useGamestate();
+  const { handleChange, handleSubmit, handleRemove, guessedWords } = useInput();
   const firstRow: string[] = ["Q", "W", "E", "R", "T", "Z", "U", "I", "O", "P"];
   const secondRow: string[] = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const thirdRow: string[] = [
@@ -37,7 +33,7 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
           return (
             <button
               className={WordStatusClassNames("Key", charStatuses[letter])}
-              onClick={(e) => props.handleChange(e.currentTarget.value)}
+              onClick={(e) => handleChange(e.currentTarget.value)}
               value={letter}
               key={index}
             >
@@ -51,7 +47,7 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
           return (
             <button
               className={WordStatusClassNames("Key", charStatuses[letter])}
-              onClick={(e) => props.handleChange(e.currentTarget.value)}
+              onClick={(e) => handleChange(e.currentTarget.value)}
               value={letter}
               key={index}
             >
@@ -69,7 +65,7 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
                   "Key Enter-Key",
                   charStatuses[letter]
                 )}
-                onClick={props.handeSubmit}
+                onClick={handleSubmit}
                 value={letter}
                 key={index}
               >
@@ -83,7 +79,7 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
                   "Key Delete-Key",
                   charStatuses[letter]
                 )}
-                onClick={props.handleRemove}
+                onClick={handleRemove}
                 value={letter}
                 key={index}
               >
@@ -94,7 +90,7 @@ export const Keyboard: React.FC<KeyboardProps> = (props: KeyboardProps) => {
             return (
               <button
                 className={WordStatusClassNames("Key", charStatuses[letter])}
-                onClick={(e) => props.handleChange(e.currentTarget.value)}
+                onClick={(e) => handleChange(e.currentTarget.value)}
                 value={letter}
                 key={index}
               >

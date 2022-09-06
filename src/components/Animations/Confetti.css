@@ -1,51 +1,53 @@
-#confetti-canvas{
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    /* bottom: 0; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    margin: auto;
-    width: 25rem;
-    height: 27rem;
+#confetti-canvas {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 25rem;
+  height: 27rem;
 }
 
-.animate__animated.animate__fadeInUp{
-    --animate-duration: 0.5s;
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 0.5s;
 }
 
-.added-extra-time.animate__animated.animate__fadeOutUp{
-    --animate-delay: 0.1s;
-    --animate-duration: 0.75s;
+.added-extra-time.animate__animated.animate__fadeOutUp {
+  --animate-delay: 0.1s;
+  --animate-duration: 0.75s;
 }
 
-.input-error{
-    transition: 0.2s ease-out;
-    box-shadow: 0px 0px 5px 2px rgba(255, 0, 0, 0.8);
+.input-error {
+  transition: 0.2s ease-out;
+  box-shadow: 0px 0px 5px 2px rgba(255, 0, 0, 0.8);
 }
 
-.shake{
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-    animation-iteration-count: 1;
+.shake {
+  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+  animation-iteration-count: 1;
 }
-
 
 
 @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
-    }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
-    }
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }

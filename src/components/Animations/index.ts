@@ -1,1 +1,1 @@
-export { Confetti } from './Confetti';
+export { Confetti } from "./Confetti";

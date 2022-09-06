@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import { PlayerStats, loadPlayerStats } from "../../LocalStorage";
-import { useGamestate } from "../Gamestate/Gamestate";
+import { useInput } from "../Input/Input";
 
 export interface IStats {
   stats: PlayerStats;
@@ -19,7 +19,7 @@ export const Stats = createContext<IStats>({
 export const useStats = () => useContext(Stats);
 
 export const StatsProvider = (props: any) => {
-  const { guessedWords } = useGamestate();
+  const { guessedWords } = useInput();
   const [stats, setStats] = useState<PlayerStats>(loadedPlayerStats);
 
   const updatePlayerStats = useCallback(
@@ -28,7 +28,7 @@ export const StatsProvider = (props: any) => {
       gameStats.gamesPlayed += 1;
       if (win) {
         gameStats.wins += 1;
-        gameStats.trysPerWin[guessedWords.length] += 1;
+        gameStats.trysPerWin[guessedWords.length - 1] += 1;
         gameStats.winStreak += 1;
         gameStats.bestWinStreak =
           gameStats.winStreak >= gameStats.bestWinStreak

@@ -4,27 +4,28 @@ import { loadDarkMode, saveDarkMode } from "../../LocalStorage";
 type Theme = "light" | "dark";
 
 export const DarkModeButton = () => {
+  const body = document.body;
+  const lightTheme: Theme = "light";
+  const darkTheme: Theme = "dark";
+  const [theme, setTheme] = useState<Theme>(loadDarkMode());
 
-    const body = document.body;
-    const lightTheme: Theme = "light";
-    const darkTheme: Theme = "dark";
-    const [theme, setTheme] = useState<Theme>(loadDarkMode());
-
-    const toggleDarkmode = (event: React.MouseEvent<HTMLButtonElement>) => {
-        console.log("toggle darkmode");
-        if (theme == lightTheme) {
-            body.classList.replace(lightTheme, darkTheme);
-            saveDarkMode(darkTheme);
-            setTheme(darkTheme);
-        } else {
-            body.classList.replace(darkTheme, lightTheme);
-            saveDarkMode(lightTheme);
-            setTheme(lightTheme);
-        }
+  const toggleDarkmode = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("toggle darkmode");
+    if (theme === lightTheme) {
+      body.classList.replace(lightTheme, darkTheme);
+      saveDarkMode(darkTheme);
+      setTheme(darkTheme);
+    } else {
+      body.classList.replace(darkTheme, lightTheme);
+      saveDarkMode(lightTheme);
+      setTheme(lightTheme);
     }
-    body.classList.add(theme);
+  };
+  body.classList.add(theme);
 
-    return (
-        <button onClick={toggleDarkmode}><i className="fa-solid fa-moon"></i></button>
-    );
-}
+  return (
+    <button onClick={toggleDarkmode}>
+      <i className="fa-solid fa-moon"></i>
+    </button>
+  );
+};

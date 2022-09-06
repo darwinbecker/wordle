@@ -1,109 +1,106 @@
 import { useCallback, useEffect, useState } from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
+import { WinService } from "../Observables/WinService";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
+import { InputService } from "../Observables/InputService";
 import { Rapid } from "../PopupContent";
 import { Timer } from "../Timer";
+import {
+  loadRapidScore1Min,
+  saveRapidScore1Min,
+  loadRapidScore3Min,
+  saveRapidScore3Min,
+  loadRapidScore5Min,
+  saveRapidScore5Min,
+} from "../LocalStorage";
 
-type RapidModeProps = {
-  // guessedWord: string;
-  // guessedWords: string[];
-  // wordStatuses: WordStatusType[][];
-  // solution: string;
-  handleChange: (value: string) => void;
-  handleSubmit: () => void;
-  handleRemove: () => void;
-  isInputError: boolean;
-  // youWin: boolean;
-  // youLose: boolean;
-  // setYouLose: (value: boolean) => void;
-  // showPopup: boolean;
-  // togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  // stats: PlayerStats;
-  // rapidModeScore: number;
-  // resetRapidMode: () => void;
-  // timer: number | undefined;
-  // setTimer: (value: number) => void;
-  // pauseTimer: boolean;
-  // setPauseTimer: (value: boolean) => void;
-};
-
-export const RapidMode = (props: RapidModeProps) => {
-  const { youLose, solution, setSolution, resetGame } = useGamestate();
+export const RapidMode = () => {
+  const { youLose, setYouLose, setYouWin, solution, setSolution } =
+    useGamestate();
+  const { resetGame, getNextWord } = useInput();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   const [timer, setTimer] = useState<number | null>(null);
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
 
-  const [rapidMode, setRapidMode] = useState<number>(0);
+  const [rapidMode, setRapidMode] = useState<number | null>(null);
   const [rapidModeScore, setRapidModeScore] = useState<number>(0);
 
-  // TODO: add useInput context hook and set pauseTimer to false
-
-  // TODO 1:
-  // handleChange
-  // if (gameMode === "R" && pauseTimer) {
-  //   setPauseTimer(false);
-  // }
-
-  // TODO 2:
-  // handleSubmit:
-  // on lose:
-  // if (gameMode === "R") {
-  //   setPauseTimer(true);
-  //   console.log("rapidModeTimerMinutes");
-  //   console.log(rapidMode);
-  //   if (rapidMode === 1) {
-  //     const loadedRapidScore = loadRapidScore1Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore1Min(rapidModeScore);
-  //   } else if (rapidMode === 3) {
-  //     const loadedRapidScore = loadRapidScore3Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore3Min(rapidModeScore);
-  //   } else if (rapidMode === 5) {
-  //     const loadedRapidScore = loadRapidScore5Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore5Min(rapidModeScore);
-  //   }
-  // }
-
+  // reset game
   const resetRapidMode = useCallback((): void => {
     resetGame();
     setSolution("TIMER");
     setRapidModeScore(0);
     setPauseTimer(true);
-    const t = new Date().getTime() + rapidMode * 60 * 1000;
+    const t = new Date().getTime() + rapidMode! * 60 * 1000;
     setTimer(t);
-  }, [rapidMode, resetGame, setSolution]);
+  }, [resetGame, setSolution, rapidMode]);
 
   useEffect(() => {
     resetRapidMode();
   }, [resetRapidMode]);
 
+  // set popup content
   useEffect(() => {
-    if (!pauseTimer) {
-      console.log("TIMER UNPAUSED");
-    }
-  }, [pauseTimer]);
-
-  useEffect(() => {
-    // set popup content
-    setPopupContent(<Rapid setRapidMode={setRapidMode} setTimer={setTimer} />);
+    setPopupContent(<Rapid setRapidMode={setRapidMode} />);
     setForceInput(true);
     setAnimationDelay(false);
   }, [setAnimationDelay, setForceInput, setPopupContent]);
 
+  // on input change => start timer if not started
+  useEffect(() => {
+    const subscription = InputService.onInputChange().subscribe(() => {
+      if (pauseTimer) {
+        const t = new Date().getTime() + rapidMode! * 60 * 1000;
+        setTimer(t);
+        setPauseTimer(false);
+      }
+    });
+
+    // note: return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [pauseTimer, rapidMode]);
+
+  // on win => get next word & calculate score or save score if game over
+  useEffect(() => {
+    const subscription = WinService.onWinChange().subscribe((win) => {
+      if (win) {
+        setRapidModeScore(rapidModeScore + 1);
+        getNextWord();
+      } else {
+        setPauseTimer(true);
+        setYouLose(true);
+        if (rapidMode === 1) {
+          const loadedRapidScore = loadRapidScore1Min();
+          if (loadedRapidScore <= rapidModeScore)
+            saveRapidScore1Min(rapidModeScore);
+        } else if (rapidMode === 3) {
+          const loadedRapidScore = loadRapidScore3Min();
+          if (loadedRapidScore <= rapidModeScore)
+            saveRapidScore3Min(rapidModeScore);
+        } else if (rapidMode === 5) {
+          const loadedRapidScore = loadRapidScore5Min();
+          if (loadedRapidScore <= rapidModeScore)
+            saveRapidScore5Min(rapidModeScore);
+        }
+      }
+    });
+
+    // note: return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [getNextWord, rapidMode, rapidModeScore, setYouLose, setYouWin]);
+
   return (
     <>
-      <Grid isInputError={props.isInputError}></Grid>
-
-      <Keyboard
-        handleChange={props.handleChange}
-        handeSubmit={props.handleSubmit}
-        handleRemove={props.handleRemove}
-      />
+      <Grid></Grid>
+      <Keyboard />
 
       <div className="rapid">
         {youLose && (
@@ -134,9 +131,9 @@ export const RapidMode = (props: RapidModeProps) => {
           </>
         )}
 
-        {timer && !youLose && (
+        {rapidMode && timer && !youLose && (
           <Timer
-            expiryTimestamp={timer}
+            expiryTimestamp={new Date().getTime() + rapidMode! * 60 * 1000}
             setExpiryTimestamp={setTimer}
             pauseTimer={pauseTimer}
             setPauseTimer={setPauseTimer}

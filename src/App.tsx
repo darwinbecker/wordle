@@ -1,6 +1,7 @@
 import { SnackbarProvider } from "notistack";
 import "./App.css";
 import { GamestateProvider } from "./components/Context/Gamestate/Gamestate";
+import { InputProvider } from "./components/Context/Input/Input";
 import { PopupProvider } from "./components/Context/Popup/Popup";
 import { StatsProvider } from "./components/Context/Stats/Stats";
 import { GameHandler } from "./components/GameHandler";
@@ -17,10 +18,11 @@ function App() {
     >
       <StatsProvider>
         <GamestateProvider>
-          <PopupProvider>
-            <StatsProvider>
-              <div className="App">
-                {/* <header className="App-header">
+          <InputProvider>
+            <PopupProvider>
+              <StatsProvider>
+                <div className="App">
+                  {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -35,12 +37,13 @@ function App() {
         </a>
       </header> */}
 
-                {/* <Main></Main> */}
-                <GameHandler />
-                <canvas id="confetti-canvas"></canvas>
-              </div>
-            </StatsProvider>
-          </PopupProvider>
+                  {/* <Main></Main> */}
+                  <GameHandler />
+                  <canvas id="confetti-canvas"></canvas>
+                </div>
+              </StatsProvider>
+            </PopupProvider>
+          </InputProvider>
         </GamestateProvider>
       </StatsProvider>
     </SnackbarProvider>

@@ -1,8 +1,8 @@
 // https://www.npmjs.com/package/react-timer-hook
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
-import { WinService } from "../GameHandler";
+import { WinService } from "../Observables/WinService";
 
 type TimerProps = {
   expiryTimestamp: number;
@@ -13,65 +13,23 @@ type TimerProps = {
 };
 
 export const Timer = (props: TimerProps) => {
-  // const expiryDate: Date = new Date(props.expiryTimestamp);
   const { youLose, setYouLose } = useGamestate();
   const [expiryDate, setExpiryDate] = useState<Date>(
     new Date(props.expiryTimestamp)
   );
 
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({
+  const { seconds, minutes, isRunning, start, pause, restart } = useTimer({
     autoStart: false,
     expiryTimestamp: expiryDate,
     onExpire: () => onExpire(),
   });
 
-  // const [expired, setExpired] = useState<boolean>(false);
   const extraTimeInSeconds = 5;
   const [displayAddedExtraTime, setDisplayAddedExtraTime] =
     useState<boolean>(false);
 
-  useEffect(() => {
-    if (displayAddedExtraTime) {
-      setDisplayAddedExtraTime(false);
-    }
-    const subscription = WinService.onWinChange().subscribe((win) => {
-      AddExtraTime();
-      setDisplayAddedExtraTime(true);
-    });
-
-    // return unsubscribe method to execute when component unmounts
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [seconds]);
-
-  useEffect(() => {
-    // console.log("props.pauseTimer")
-    // console.log(props.pauseTimer)
-    if (props.pauseTimer) {
-      pause();
-    } else {
-      start();
-    }
-  }, [pause, props.pauseTimer, start]);
-
-  const onExpire = () => {
-    console.warn("onExpire called");
-    props.setPauseTimer(true);
-    setYouLose(true);
-  };
-
-  const AddExtraTime = () => {
+  // add extra time if guessed word is correct (helper function)
+  const AddExtraTime = useCallback(() => {
     const extraTime =
       Date.now() + minutes * 60000 + (seconds + extraTimeInSeconds) * 1000;
     const newExpiryDate = new Date(extraTime);
@@ -79,9 +37,41 @@ export const Timer = (props: TimerProps) => {
     props.setExpiryTimestamp(extraTime);
     setExpiryDate(newExpiryDate);
     restart(newExpiryDate);
+  }, [minutes, props, restart, seconds]);
+
+  // add extra time if guessed word is correct
+  useEffect(() => {
+    if (displayAddedExtraTime) {
+      setDisplayAddedExtraTime(false);
+    }
+    const subscription = WinService.onWinChange().subscribe(() => {
+      AddExtraTime();
+      setDisplayAddedExtraTime(true);
+    });
+
+    // note: return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [seconds]); // important: <-- just add seconds as a dependency to re-run effect when seconds change (every second)
+
+  // start timer if user starts to type
+  useEffect(() => {
+    if (props.pauseTimer) {
+      pause();
+    } else {
+      start();
+    }
+  }, [pause, props.pauseTimer, start]);
+
+  // on timer expire => set you lose & stop timer
+  const onExpire = () => {
+    console.warn("onExpire called");
+    props.setPauseTimer(true);
+    setYouLose(true);
   };
 
-  const isDanger = minutes == 0 && seconds < 10;
+  const isDanger = minutes === 0 && seconds < 10;
   return (
     <div className="timer">
       {youLose && <h4>Zeit:</h4>}
@@ -95,15 +85,11 @@ export const Timer = (props: TimerProps) => {
             : "countdown"
         }
       >
-        {/* <span>{days}</span>:<span>{hours}</span>: */}
-        {/* <span>{minutes < 10 ? "0" + minutes : minutes}</span>: */}
-        {/* <span className={isDanger ? 'countdown danger' : 'countdown'}>{seconds < 10 ? "0" + seconds : seconds}</span> */}
         <span>{minutes < 10 ? "0" + minutes : minutes}</span>:
         <span>{seconds < 10 ? "0" + seconds : seconds}</span>
       </div>
 
       {!youLose && !isRunning && (
-        // <p>{isRunning ? 'Running' : 'Not running'}</p>
         <p>- Drücke einen Buchstaben, um den Timer zu starten -</p>
       )}
 
@@ -111,25 +97,7 @@ export const Timer = (props: TimerProps) => {
         <div className="added-extra-time animate__animated animate__fadeOutUp animate__delay-2s">
           +5 Sekunden
         </div>
-        // <div className='added-extra-time'>+5 Sekunden</div>
       )}
-
-      {/* {!displayAddedExtraTime && (
-                <div className='added-extra-time animate__animated animate__fadeInUp animate__fadeOutUp'>+5 Sekunden</div>
-            )} */}
-
-      {/* <button onClick={AddExtraTime}>Add 5 secs</button> */}
-
-      {/* <button onClick={start}>Start</button>
-            <button onClick={pause}>Pause</button>
-            <button onClick={resume}>Resume</button>
-            <button onClick={() => {
-                // Restarts to 5 minutes timer
-                const time = new Date();
-                time.setSeconds(time.getSeconds() + 12);
-                setExpired(false);
-                restart(time)
-            }}>Restart</button> */}
     </div>
   );
 };

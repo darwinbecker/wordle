@@ -1,35 +1,36 @@
-import classnames from 'classnames';
-import { useEffect, useState } from 'react';
-import { loadHighContrast } from '../LocalStorage';
-import { HighContrastService } from '../Navigation';
-import { WordStatusType } from './WordStatus';
+import classnames from "classnames";
+import { useEffect, useState } from "react";
+import { loadHighContrast } from "../LocalStorage";
+import { HighContrastService } from "../Observables/HighContrastService";
+import { WordStatusType } from "./WordStatus";
 
-export const WordStatusClassNames = (className: string, status?: WordStatusType): string => {
+export const WordStatusClassNames = (
+  className: string,
+  status?: WordStatusType
+): string => {
+  const [contrastMode, setContrastMode] = useState<Boolean>(loadHighContrast());
 
-    const [contrastMode, setContrastMode] = useState<Boolean>(loadHighContrast());
+  useEffect(() => {
+    const subscription = HighContrastService.onHighContrastChange().subscribe(
+      (isHighContrast) => {
+        isHighContrast ? setContrastMode(true) : setContrastMode(false);
+      }
+    );
 
-    useEffect(() => {
-        const subscription = HighContrastService.onHighContrastChange().subscribe(isHighContrast => {
-            isHighContrast ? setContrastMode(true) : setContrastMode(false);
-        });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
-        return () => {
-            subscription.unsubscribe();
-        }
-    }, []);
-
-
-    if(status){
-        return classnames(
-            className,
-            {
-                'correct': status === 'correct' && !contrastMode,
-                'correct-high-contrast': status === 'correct' && contrastMode,
-                'semi': status === 'semi' && !contrastMode,
-                'semi-high-contrast': status === 'semi' && contrastMode,
-                'wrong': status === 'wrong'
-            });
-    } else{
-        return className;
-    }
-}
+  if (status) {
+    return classnames(className, {
+      correct: status === "correct" && !contrastMode,
+      "correct-high-contrast": status === "correct" && contrastMode,
+      semi: status === "semi" && !contrastMode,
+      "semi-high-contrast": status === "semi" && contrastMode,
+      wrong: status === "wrong",
+    });
+  } else {
+    return className;
+  }
+};

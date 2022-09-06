@@ -23,10 +23,10 @@ export const Popup = createContext<IPopUp>({
 
 export const usePopup = () => useContext(Popup);
 
-const popupStyle = {
-  bgcolor: "var(--grey)",
-  color: "var(--font-color-primary)",
-};
+// const popupStyle = {
+//   bgcolor: "var(--grey)",
+//   color: "var(--font-color-primary)",
+// };
 
 export const PopupProvider = (props: any) => {
   const [popupContent, setPopupContent] = useState<any>(null);
@@ -37,11 +37,11 @@ export const PopupProvider = (props: any) => {
     setPopupContent(null);
   }, [setPopupContent]);
 
-  const handlePopup = (event: any) => {
-    if (!props.forceInput) {
-      props.closePopup(event);
-    }
-  };
+  // const handlePopup = (event: any) => {
+  //   if (!props.forceInput) {
+  //     props.closePopup(event);
+  //   }
+  // };
 
   const popupClasses = classnames("popup", {
     "popup-delay": animationDelay === true,
