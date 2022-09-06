@@ -1,5 +1,5 @@
 // https://www.npmjs.com/package/react-timer-hook
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { WinService } from "../GameHandler";
@@ -22,12 +22,12 @@ export const Timer = (props: TimerProps) => {
   const {
     seconds,
     minutes,
-    hours,
-    days,
+    // hours,
+    // days,
     isRunning,
     start,
     pause,
-    resume,
+    // resume,
     restart,
   } = useTimer({
     autoStart: false,
@@ -40,11 +40,21 @@ export const Timer = (props: TimerProps) => {
   const [displayAddedExtraTime, setDisplayAddedExtraTime] =
     useState<boolean>(false);
 
+  const AddExtraTime = useCallback(() => {
+    const extraTime =
+      Date.now() + minutes * 60000 + (seconds + extraTimeInSeconds) * 1000;
+    const newExpiryDate = new Date(extraTime);
+
+    props.setExpiryTimestamp(extraTime);
+    setExpiryDate(newExpiryDate);
+    restart(newExpiryDate);
+  }, [minutes, props, restart, seconds]);
+
   useEffect(() => {
     if (displayAddedExtraTime) {
       setDisplayAddedExtraTime(false);
     }
-    const subscription = WinService.onWinChange().subscribe((win) => {
+    const subscription = WinService.onWinChange().subscribe(() => {
       AddExtraTime();
       setDisplayAddedExtraTime(true);
     });
@@ -56,8 +66,6 @@ export const Timer = (props: TimerProps) => {
   }, [seconds]);
 
   useEffect(() => {
-    // console.log("props.pauseTimer")
-    // console.log(props.pauseTimer)
     if (props.pauseTimer) {
       pause();
     } else {
@@ -71,17 +79,7 @@ export const Timer = (props: TimerProps) => {
     setYouLose(true);
   };
 
-  const AddExtraTime = () => {
-    const extraTime =
-      Date.now() + minutes * 60000 + (seconds + extraTimeInSeconds) * 1000;
-    const newExpiryDate = new Date(extraTime);
-
-    props.setExpiryTimestamp(extraTime);
-    setExpiryDate(newExpiryDate);
-    restart(newExpiryDate);
-  };
-
-  const isDanger = minutes == 0 && seconds < 10;
+  const isDanger = minutes === 0 && seconds < 10;
   return (
     <div className="timer">
       {youLose && <h4>Zeit:</h4>}

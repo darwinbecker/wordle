@@ -27,8 +27,17 @@ export const loadPlayerStats = (): PlayerStats => {
   return stats ? (JSON.parse(stats) as PlayerStats) : emptyPlayerStats;
 };
 
-const rapidScore1MinKey = "RapidScore1Minute";
+// TOD=: use this in the future and delete other stuff below
+// export const saveRapidScore = (rapidScore: number, key: string): void => {
+//   localStorage.setItem(key, JSON.stringify(rapidScore));
+// };
 
+// export const loadRapidScore = (key: string): number => {
+//   const rapidScore = localStorage.getItem(key);
+//   return rapidScore ? JSON.parse(rapidScore) : 0;
+// };
+
+const rapidScore1MinKey = "RapidScore1Minute";
 export const saveRapidScore1Min = (rapidScore: number): void => {
   localStorage.setItem(rapidScore1MinKey, JSON.stringify(rapidScore));
 };

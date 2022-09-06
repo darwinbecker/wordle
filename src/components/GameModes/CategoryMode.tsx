@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { Category } from "../../types/Category";
+import { Confetti } from "../Animations";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
+import { WinService } from "../GameHandler";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 import { Categories } from "../PopupContent";
@@ -15,7 +18,8 @@ type CategoryModeProps = {
 };
 
 export const CategoryMode = (props: CategoryModeProps) => {
-  const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
+  const { youLose, youWin, setYouWin, solution, setSolution } = useGamestate();
+  const { resetGame } = useInput();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   const [category, setCategory] = useState<Category | null>(null);
@@ -34,7 +38,7 @@ export const CategoryMode = (props: CategoryModeProps) => {
     );
     setForceInput(true);
     setAnimationDelay(false);
-  }, [setForceInput, setPopupContent, setAnimationDelay]);
+  }, [setForceInput, setPopupContent, setAnimationDelay, resetGame]);
 
   useEffect(() => {
     if (category !== null && currentDictionary !== null) {
@@ -69,6 +73,19 @@ export const CategoryMode = (props: CategoryModeProps) => {
   //     const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
   //     setTimer(t);
   //   }
+  useEffect(() => {
+    const subscription = WinService.onWinChange().subscribe((win) => {
+      if (win) {
+        setYouWin(true);
+        Confetti();
+      }
+    });
+
+    // return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [setYouWin]);
 
   return (
     <>

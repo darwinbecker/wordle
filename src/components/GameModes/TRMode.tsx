@@ -1,5 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
+import { Confetti } from "../Animations/Confetti";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { useInput } from "../Context/Input/Input";
+import { WinService } from "../GameHandler/WinService";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 
@@ -11,17 +14,26 @@ type TRModeProps = {
 };
 
 export const TRMode = (props: TRModeProps) => {
-  const { youLose, youWin, solution, setSolution, resetGame } = useGamestate();
-
-  const getNextWord = useCallback((): void => {
-    resetGame();
-    // setSolution(getRandomWord());
-    setSolution("TIMER");
-  }, [resetGame, setSolution]);
+  const { youLose, youWin, setYouWin, solution } = useGamestate();
+  const { getNextWord } = useInput();
 
   useEffect(() => {
     getNextWord();
   }, [getNextWord]);
+
+  useEffect(() => {
+    const subscription = WinService.onWinChange().subscribe((win) => {
+      if (win) {
+        setYouWin(true);
+        Confetti();
+      }
+    });
+
+    // return unsubscribe method to execute when component unmounts
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [setYouWin]);
 
   return (
     <>

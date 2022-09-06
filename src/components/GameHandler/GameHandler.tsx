@@ -1,28 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../config/Settings";
 import { WORD_OF_THE_DAY, getRandomWord } from "../../config/Wordlist";
-import {
-  loadGameState,
-  saveGameState,
-  savePlayerStats,
-  loadRapidScore1Min,
-  saveRapidScore1Min,
-  loadRapidScore3Min,
-  saveRapidScore3Min,
-  loadRapidScore5Min,
-  saveRapidScore5Min,
-} from "../LocalStorage";
+import { loadGameState, saveGameState } from "../LocalStorage";
 import { checkstatus, WordStatusType } from "../WordStatus";
 import { GameModeHandlerService } from "./GameModeHandlerService";
 import { Confetti } from "../Animations";
 import { NavigationBar } from "../Navigation";
-import { WinService } from ".";
 import { CategoryMode, RapidMode, TRMode, WOTDMode } from "../GameModes";
-import { useSnackbar } from "notistack";
 import { isInDictionary, DICTIONARY } from "../../config/Dictionary";
-import { Category } from "../../types/Category";
 import { getRandomWordFromDictionary } from "../../config/Wordlist";
-import { useStats } from "../Context/Stats/Stats";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 
@@ -30,36 +16,22 @@ import { useInput } from "../Context/Input/Input";
 export type GameModeType = "WOTD" | "TR" | "C" | "R";
 
 export const GameHandler: React.FC = () => {
-  const {
-    gameMode,
-    setGameMode,
-    youWin,
-    setYouWin,
-    youLose,
-    setYouLose,
-    solution,
-    setSolution,
+  const { gameMode, setGameMode, setYouWin, setYouLose, setSolution } =
+    useGamestate();
 
-    resetGame,
-    getNextWord,
-  } = useGamestate();
   const {
     handleChange,
     handleRemove,
     handleSubmit,
 
-    guessedWord,
-    setGuessedWord,
     guessedWords,
     setGuessedWords,
     wordStatuses,
     setWordStatuses,
-    rowIndex,
-    setRowIndex,
-    columnIndex,
-    setColumnIndex,
+
+    resetGame,
+    getNextWord,
   } = useInput();
-  const { setStats, updatePlayerStats } = useStats();
 
   const [timer, setTimer] = useState<number>();
   const [pauseTimer, setPauseTimer] = useState<boolean>(true);
@@ -69,8 +41,6 @@ export const GameHandler: React.FC = () => {
 
   const [isInputError, setIsInputError] = useState<boolean>(false);
 
-  const { enqueueSnackbar } = useSnackbar();
-
   // const resetRapidMode = (): void => {
   //   resetGame();
   //   setSolution("TIMER");
@@ -79,12 +49,6 @@ export const GameHandler: React.FC = () => {
   //   const t = new Date().getTime() + rapidMode * 60 * 1000;
   //   setTimer(t);
   // };
-
-  // const getNextWord = useCallback((): void => {
-  //   resetGame();
-  //   // setSolution(getRandomWord());
-  //   setSolution("TIMER");
-  // }, [resetGame, setSolution]);
 
   // function getNextCategoryWord(): void {
   //   resetGame();
@@ -256,29 +220,6 @@ export const GameHandler: React.FC = () => {
   // ]);
 
   useEffect(() => {
-    const listener = (event: globalThis.KeyboardEvent): any => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        handleSubmit();
-        // return;
-      } else if (event.code === "Backspace" || event.code === "Delete") {
-        handleRemove();
-        // return;
-      } else {
-        const key = event.key.toLocaleUpperCase();
-        // TODO A-Z => problem with german letters üäö
-        if (key.length === 1 && key >= "A" && key <= "Z") {
-          handleChange(key);
-        }
-        // return;
-      }
-    };
-    window.addEventListener("keyup", listener);
-    return () => {
-      window.removeEventListener("keyup", listener);
-    };
-  }, [handleSubmit, handleRemove, handleChange, youWin, youLose]);
-
-  useEffect(() => {
     if (gameMode === "WOTD") {
       const solution = WORD_OF_THE_DAY().solution;
       saveGameState({ guessedWords, wordStatuses, solution });
@@ -349,7 +290,6 @@ export const GameHandler: React.FC = () => {
       subscription.unsubscribe();
     };
   }, [
-    getNextWord,
     resetGame,
     setGameMode,
     setGuessedWords,
