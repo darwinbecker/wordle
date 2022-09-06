@@ -18,6 +18,7 @@
 .nav-select{
     /* display: block; */
     margin: auto;
+    padding: 0.0625em 0.875em;
     /* border: 1px solid #77777780; */
     border: 1px solid var(--secondary-color);
     border-radius: 0.2rem;
@@ -52,6 +53,7 @@
     border: 1px solid var(--secondary-color);
     border-radius: 0.2rem;
     margin: 0 5px;
+    padding: 0.125em 0.875em;
     cursor: pointer;
     /* border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133)); */
     transition: 0.2s ease-out;

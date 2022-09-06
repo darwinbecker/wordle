@@ -1,16 +1,17 @@
-
-@import url("./components/Main/style.css");
-@import url("./components/Animations/style.css");
-@import url("./components/Grid/Root/style.css");
-@import url("./components/Grid/Row/style.css");
-@import url("./components/Grid/Tile/style.css");
-@import url("./components/GameHandler/style.css");
-@import url("./components/Popup/style.css");
-@import url("./components/Popup/Info/style.css");
-@import url("./components/Popup/Stats/style.css");
-@import url("./components/Navigation/style.css");
-@import url("./components/Keyboard/style.css"); 
-@import url("./components/Timer/style.css");
+@import url("./components/Animations/Confetti.css");
+@import url("./components/Grid/Root/Grid.css");
+@import url("./components/Grid/Row/Row.css");
+@import url("./components/Grid/Tile/Tile.css");
+@import url("./components/GameHandler/GameHandler.css");
+@import url("./components/GameModes/GameModes.css");
+@import url("./components/PopupContent/Popup.css");
+@import url("./components/PopupContent/Info/InfoPopup.css");
+@import url("./components/PopupContent/Stats/StatsPopup.css");
+@import url("./components/PopupContent/Categories/CategoriesPopup.css");
+@import url("./components/PopupContent/Rapid/RapidPopup.css");
+@import url("./components/Navigation/Navigation.css");
+@import url("./components/Keyboard/Keyboard.css");
+@import url("./components/Timer/Timer.css");
 
 :root {
   --light: rgb(230, 230, 230);
@@ -23,24 +24,31 @@
   --high-contrast-semi: rgb(133 192 249);
 }
 
-*{
+* {
   font-family: 'Nunito', sans-serif;
 }
 
-html, 
+html,
 body {
   min-height: 100%;
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   /* margin: 0; */
   padding: 0;
 }
+
 ul {
   margin: 0;
   padding: 0;
 }
+
 p {
   margin: 0;
   padding: 0;
@@ -56,7 +64,7 @@ body {
 
 body.light {
   --background-color: var(--light);
-  
+
   --primary-color: var(--light-detail);
   --secondary-color: var(--dark-detail);
   /* --text-color: var(--dark); */
@@ -64,7 +72,7 @@ body.light {
 
 body.dark {
   --background-color: var(--dark);
-  
+
   --primary-color: var(--dark-detail);
   --secondary-color: var(--light-detail);
   /* --text-color: var(--light); */
@@ -105,6 +113,7 @@ body.dark {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

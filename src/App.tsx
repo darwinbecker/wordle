@@ -1,20 +1,26 @@
-import { SnackbarProvider } from 'notistack';
-import React from 'react';
-import './App.css';
-import { GameHandler } from './components/GameHandler';
+import { SnackbarProvider } from "notistack";
+import "./App.css";
+import { GamestateProvider } from "./components/Context/Gamestate/Gamestate";
+import { PopupProvider } from "./components/Context/Popup/Popup";
+import { StatsProvider } from "./components/Context/Stats/Stats";
+import { GameHandler } from "./components/GameHandler";
 // import { Main } from './components/Main/Main';
 
 function App() {
   return (
-    
     <SnackbarProvider
-    maxSnack={1}
-    anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-    }} >
-    <div className="App">
-      {/* <header className="App-header">
+      maxSnack={1}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+      }}
+    >
+      <StatsProvider>
+        <GamestateProvider>
+          <PopupProvider>
+            <StatsProvider>
+              <div className="App">
+                {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -29,13 +35,14 @@ function App() {
         </a>
       </header> */}
 
-      {/* <Main></Main> */}
-      <GameHandler/>
-      <canvas id="confetti-canvas"></canvas>
-
-
-    </div>
-    
+                {/* <Main></Main> */}
+                <GameHandler />
+                <canvas id="confetti-canvas"></canvas>
+              </div>
+            </StatsProvider>
+          </PopupProvider>
+        </GamestateProvider>
+      </StatsProvider>
     </SnackbarProvider>
   );
 }

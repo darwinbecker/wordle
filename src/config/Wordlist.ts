@@ -13,6 +13,7 @@ export const WORD_OF_THE_DAY = () => {
     // console.log(index % WORDLIST.length);
     // console.log(WORDLIST[index % WORDLIST.length].toUpperCase());
     // console.log(nextday);
+    // console.log(new Date(Date.now() + (7 * 24 * 60 * 60 * 1000)));
     // console.log();
 
     return {

@@ -1,44 +1,46 @@
+import { useEffect } from "react";
+import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
-import { PlayerStats } from "../LocalStorage";
-import { Popup } from "../Popup";
-import { WordStatusType } from "../WordStatus";
+import { Stats } from "../PopupContent";
 
 type WOTDModeProps = {
-    guessedWord: string;
-    guessedWords: string[];
-    wordStatuses: WordStatusType[][];
-    solution: string;
-    handleChange: (value: string) => void;
-    handleSubmit: () => void;
-    handleRemove: () => void;
-    isInputError: boolean;
-    youWin: boolean;
-    youLose: boolean;
-    showPopup: boolean;
-    togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    stats: PlayerStats;
-}
+  handleChange: (value: string) => void;
+  handleSubmit: () => void;
+  handleRemove: () => void;
+  isInputError: boolean;
+};
 
 export const WOTDMode = (props: WOTDModeProps) => {
+  const { youLose, youWin, solution } = useGamestate();
+  const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
-    return (
-        <>
-            {props.showPopup && (props.youWin || props.youLose) && (
-                <Popup content={'stats'} closePopup={props.togglePopup} forceInput={false} animationDelay={true} stats={props.stats}></Popup>
-            )}
+  useEffect(() => {
+    // set popup content
+    if (youLose || youWin) {
+      setPopupContent(<Stats />);
+      setForceInput(false);
+      setAnimationDelay(true);
+    }
+  }, [setAnimationDelay, setForceInput, setPopupContent, youLose, youWin]);
 
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
+  return (
+    <>
+      <Grid isInputError={props.isInputError}></Grid>
 
-            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
-                handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
+      <Keyboard
+        handleChange={props.handleChange}
+        handeSubmit={props.handleSubmit}
+        handleRemove={props.handleRemove}
+      />
 
-            {props.youLose && (
-                <div className="gameover-feedback">
-                    <h4>gesuchtes Wort war:</h4>
-                    <div className="solution-word">{props.solution}</div>
-                </div>
-            )}
-        </>
-    );
-}
+      {youLose && (
+        <div className="gameover-feedback">
+          <h4>gesuchtes Wort war:</h4>
+          <div className="solution-word">{solution}</div>
+        </div>
+      )}
+    </>
+  );
+};

@@ -1,87 +1,155 @@
+import { useCallback, useEffect, useState } from "react";
+import { useGamestate } from "../Context/Gamestate/Gamestate";
+import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
-import { PlayerStats } from "../LocalStorage";
-import { Popup } from "../Popup";
+import { Rapid } from "../PopupContent";
 import { Timer } from "../Timer";
-import { WordStatusType } from "../WordStatus";
 
 type RapidModeProps = {
-    guessedWord: string;
-    guessedWords: string[];
-    wordStatuses: WordStatusType[][];
-    solution: string;
-    handleChange: (value: string) => void;
-    handleSubmit: () => void;
-    handleRemove: () => void;
-    isInputError: boolean;
-    // youWin: boolean;
-    youLose: boolean;
-    setYouLose: (value: boolean) => void;
-    showPopup: boolean;
-    togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    stats: PlayerStats;
-    rapidModeScore: number;
-    resetRapidMode: () => void;
-    timer: number | undefined;
-    setTimer: (value: number) => void;
-    pauseTimer: boolean;
-    setPauseTimer: (value: boolean) => void;
-}
+  // guessedWord: string;
+  // guessedWords: string[];
+  // wordStatuses: WordStatusType[][];
+  // solution: string;
+  handleChange: (value: string) => void;
+  handleSubmit: () => void;
+  handleRemove: () => void;
+  isInputError: boolean;
+  // youWin: boolean;
+  // youLose: boolean;
+  // setYouLose: (value: boolean) => void;
+  // showPopup: boolean;
+  // togglePopup: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  // stats: PlayerStats;
+  // rapidModeScore: number;
+  // resetRapidMode: () => void;
+  // timer: number | undefined;
+  // setTimer: (value: number) => void;
+  // pauseTimer: boolean;
+  // setPauseTimer: (value: boolean) => void;
+};
 
 export const RapidMode = (props: RapidModeProps) => {
+  const { youLose, solution, setSolution, resetGame } = useGamestate();
+  const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
-    return (
-        <>
-            {props.showPopup && (
-                <Popup content={'rapid'} closePopup={props.togglePopup} forceInput={true} stats={props.stats}></Popup>
-            )}
+  const [timer, setTimer] = useState<number | null>(null);
+  const [pauseTimer, setPauseTimer] = useState<boolean>(true);
 
-            <Grid letter={props.guessedWord} guessedWords={props.guessedWords} wordStatuses={props.wordStatuses} isInputError={props.isInputError}></Grid>
+  const [rapidMode, setRapidMode] = useState<number>(0);
+  const [rapidModeScore, setRapidModeScore] = useState<number>(0);
 
-            <Keyboard wordStatuses={props.wordStatuses} guessedWords={props.guessedWords} solution={props.solution}
-                handleChange={props.handleChange} handeSubmit={props.handleSubmit} handleRemove={props.handleRemove} />
+  // TODO: add useInput context hook and set pauseTimer to false
 
-            <div className="rapid">
+  // TODO 1:
+  // handleChange
+  // if (gameMode === "R" && pauseTimer) {
+  //   setPauseTimer(false);
+  // }
 
-                {props.youLose && (
-                    <>
-                        <div className="game-summary">
+  // TODO 2:
+  // handleSubmit:
+  // on lose:
+  // if (gameMode === "R") {
+  //   setPauseTimer(true);
+  //   console.log("rapidModeTimerMinutes");
+  //   console.log(rapidMode);
+  //   if (rapidMode === 1) {
+  //     const loadedRapidScore = loadRapidScore1Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore1Min(rapidModeScore);
+  //   } else if (rapidMode === 3) {
+  //     const loadedRapidScore = loadRapidScore3Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore3Min(rapidModeScore);
+  //   } else if (rapidMode === 5) {
+  //     const loadedRapidScore = loadRapidScore5Min();
+  //     if (loadedRapidScore <= rapidModeScore)
+  //       saveRapidScore5Min(rapidModeScore);
+  //   }
+  // }
 
-                            <div className="rapid-score">
-                                <h4>Score:</h4>
-                                <div className="score-value">{props.rapidModeScore}</div>
+  const resetRapidMode = useCallback((): void => {
+    resetGame();
+    setSolution("TIMER");
+    setRapidModeScore(0);
+    setPauseTimer(true);
+    const t = new Date().getTime() + rapidMode * 60 * 1000;
+    setTimer(t);
+  }, [rapidMode, resetGame, setSolution]);
 
-                            </div>
+  useEffect(() => {
+    resetRapidMode();
+  }, [resetRapidMode]);
 
-                            <Timer expiryTimestamp={props.timer ? props.timer : 0} setExpiryTimestamp={props.setTimer}
-                                pauseTimer={props.pauseTimer} setPauseTimer={props.setPauseTimer} youLose={props.youLose} setYoulose={props.setYouLose} />
+  useEffect(() => {
+    if (!pauseTimer) {
+      console.log("TIMER UNPAUSED");
+    }
+  }, [pauseTimer]);
 
-                            <div className="gameover-feedback">
-                                <h4>gesuchtes Wort war:</h4>
-                                <div className="solution-word">{props.solution}</div>
-                            </div>
+  useEffect(() => {
+    // set popup content
+    setPopupContent(<Rapid setRapidMode={setRapidMode} setTimer={setTimer} />);
+    setForceInput(true);
+    setAnimationDelay(false);
+  }, [setAnimationDelay, setForceInput, setPopupContent]);
 
-                        </div>
-                        <div>
-                            <button className="new-game-button" onClick={props.resetRapidMode}>Neues Spiel</button>
-                        </div>
-                    </>
-                )}
+  return (
+    <>
+      <Grid isInputError={props.isInputError}></Grid>
 
-                {props.timer && !props.youLose && (
-                    <Timer expiryTimestamp={props.timer} setExpiryTimestamp={props.setTimer}
-                        pauseTimer={props.pauseTimer} setPauseTimer={props.setPauseTimer} youLose={props.youLose} setYoulose={props.setYouLose} />
-                )}
+      <Keyboard
+        handleChange={props.handleChange}
+        handeSubmit={props.handleSubmit}
+        handleRemove={props.handleRemove}
+      />
 
-                {props.rapidModeScore > 0 && !props.youLose && (
-                    <div className="rapid-score">
-                        <h4>Score:</h4>
-                        <div className="score-value">{props.rapidModeScore}</div>
-                    </div>
+      <div className="rapid">
+        {youLose && (
+          <>
+            <div className="game-summary">
+              <div className="rapid-score">
+                <h4>Score:</h4>
+                <div className="score-value">{rapidModeScore}</div>
+              </div>
 
-                )}
+              <Timer
+                expiryTimestamp={timer ? timer : 0}
+                setExpiryTimestamp={setTimer}
+                pauseTimer={pauseTimer}
+                setPauseTimer={setPauseTimer}
+              />
 
+              <div className="gameover-feedback">
+                <h4>gesuchtes Wort war:</h4>
+                <div className="solution-word">{solution}</div>
+              </div>
             </div>
-        </>
-    );
-}
+            <div>
+              <button className="new-game-button" onClick={resetRapidMode}>
+                Neues Spiel
+              </button>
+            </div>
+          </>
+        )}
+
+        {timer && !youLose && (
+          <Timer
+            expiryTimestamp={timer}
+            setExpiryTimestamp={setTimer}
+            pauseTimer={pauseTimer}
+            setPauseTimer={setPauseTimer}
+          />
+        )}
+
+        {rapidModeScore > 0 && !youLose && (
+          <div className="rapid-score">
+            <h4>Score:</h4>
+            <div className="score-value">{rapidModeScore}</div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
