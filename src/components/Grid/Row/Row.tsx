@@ -1,7 +1,6 @@
 import { Tile } from "../Tile";
 import { MAX_WORD_LENGTH } from "../../../config/Settings";
 import { WordStatusType } from "../../WordStatus";
-import { useInput } from "../../Context/Input/Input";
 
 type RowProps = {
   letter: string;

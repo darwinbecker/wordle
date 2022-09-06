@@ -2,12 +2,7 @@ import { Row } from "../Row";
 import { MAX_WORD_LENGTH } from "../../../config/Settings";
 import { MAX_GUESSES } from "../../../config/Settings";
 import { WordStatusType } from "../../WordStatus";
-import { useGamestate } from "../../Context/Gamestate/Gamestate";
 import { useInput } from "../../Context/Input/Input";
-
-// type GridProps = {
-//   isInputError: boolean;
-// };
 
 const Rows: React.FC = () => {
   const { guessedWord, guessedWords, wordStatuses, isInputError } = useInput();
@@ -17,7 +12,6 @@ const Rows: React.FC = () => {
       {
         // set already guessed words in row
         guessedWords.map((char, index) => {
-          // if (wordStatuses) {
           return (
             <Row
               key={index}
@@ -26,7 +20,6 @@ const Rows: React.FC = () => {
               isInputError={false}
             ></Row>
           );
-          // }
         })
       }
       {

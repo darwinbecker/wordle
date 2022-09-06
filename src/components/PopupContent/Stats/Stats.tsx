@@ -40,7 +40,7 @@ export const Stats = (props: StatsProps) => {
               aktuelle Siegesserie:
               <span
                 className={
-                  stats.winStreak == stats.bestWinStreak ? "streakNumber" : ""
+                  stats.winStreak === stats.bestWinStreak ? "streakNumber" : ""
                 }
               >
                 {" "}
