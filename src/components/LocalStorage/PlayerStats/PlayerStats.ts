@@ -27,7 +27,7 @@ export const loadPlayerStats = (): PlayerStats => {
   return stats ? (JSON.parse(stats) as PlayerStats) : emptyPlayerStats;
 };
 
-// TOD=: use this in the future and delete other stuff below
+// TODO: use this in the future and delete other stuff below
 // export const saveRapidScore = (rapidScore: number, key: string): void => {
 //   localStorage.setItem(key, JSON.stringify(rapidScore));
 // };

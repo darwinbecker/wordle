@@ -5,12 +5,12 @@ import { WordStatusType } from "../../WordStatus";
 import { useGamestate } from "../../Context/Gamestate/Gamestate";
 import { useInput } from "../../Context/Input/Input";
 
-type GridProps = {
-  isInputError: boolean;
-};
+// type GridProps = {
+//   isInputError: boolean;
+// };
 
-const Rows: React.FC<GridProps> = (props: GridProps) => {
-  const { guessedWord, guessedWords, wordStatuses } = useInput();
+const Rows: React.FC = () => {
+  const { guessedWord, guessedWords, wordStatuses, isInputError } = useInput();
 
   return (
     <>
@@ -37,7 +37,7 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
               <Row
                 key={index}
                 letter={guessedWord}
-                isInputError={props.isInputError}
+                isInputError={isInputError}
               ></Row>
             );
           })
@@ -61,10 +61,10 @@ const Rows: React.FC<GridProps> = (props: GridProps) => {
   );
 };
 
-export const Grid: React.FC<GridProps> = (props: GridProps) => {
+export const Grid: React.FC = () => {
   return (
     <div className="Grid">
-      <Rows isInputError={props.isInputError} />
+      <Rows />
     </div>
   );
 };

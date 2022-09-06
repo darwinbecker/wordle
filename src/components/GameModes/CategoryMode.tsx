@@ -5,20 +5,14 @@ import { Confetti } from "../Animations";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
-import { WinService } from "../GameHandler";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
+import { WinService } from "../Observables/WinService";
 import { Categories } from "../PopupContent";
 
-type CategoryModeProps = {
-  handleChange: (value: string) => void;
-  handleSubmit: () => void;
-  handleRemove: () => void;
-  isInputError: boolean;
-};
-
-export const CategoryMode = (props: CategoryModeProps) => {
-  const { youLose, youWin, setYouWin, solution, setSolution } = useGamestate();
+export const CategoryMode = () => {
+  const { youLose, setYouLose, youWin, setYouWin, solution, setSolution } =
+    useGamestate();
   const { resetGame } = useInput();
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
@@ -27,9 +21,14 @@ export const CategoryMode = (props: CategoryModeProps) => {
     null
   );
 
+  const getNextCategoryWord = (): void => {
+    resetGame();
+    setSolution(getRandomWordFromDictionary(currentDictionary!));
+  };
+
+  // set popup content
   useEffect(() => {
     resetGame();
-    // set popup content
     setPopupContent(
       <Categories
         setCategory={setCategory}
@@ -40,6 +39,7 @@ export const CategoryMode = (props: CategoryModeProps) => {
     setAnimationDelay(false);
   }, [setForceInput, setPopupContent, setAnimationDelay, resetGame]);
 
+  // get random solution-word from dictionary
   useEffect(() => {
     if (category !== null && currentDictionary !== null) {
       const randomWord = getRandomWordFromDictionary(currentDictionary);
@@ -47,55 +47,28 @@ export const CategoryMode = (props: CategoryModeProps) => {
     }
   }, [category, currentDictionary, setCategory, setSolution]);
 
-  const getNextCategoryWord = (): void => {
-    resetGame();
-    setSolution(getRandomWordFromDictionary(currentDictionary!));
-  };
-
-  // const togglePopup = (event: React.MouseEvent<HTMLButtonElement>): void => {
-  //   // TODO: load category dictionary if mode is C, or timer if mode is R
-  //   if (gameMode === "C") {
-  //     // console.log("load category dictionary");
-  //     // console.log(event.currentTarget.value);
-  //     const category: Category = event.currentTarget.value as Category;
-  //     console.log(category);
-  //     // setCurrentDictionary(category);
-  //     if (category === "astronomy") {
-  //       setCategory("astronomy");
-  //       setCurrentDictionary(astronomy);
-  //       const solution = getRandomWordFromDictionary(astronomy);
-  //       console.log(solution);
-  //       setSolution(solution);
-  //     }
-  //   } else if (gameMode === "R") {
-  //     const rapidModeTimerValue = parseInt(event.currentTarget.value);
-  //     setRapidMode(rapidModeTimerValue);
-  //     const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
-  //     setTimer(t);
-  //   }
+  // on win => show confetti
   useEffect(() => {
     const subscription = WinService.onWinChange().subscribe((win) => {
       if (win) {
         setYouWin(true);
         Confetti();
+      } else {
+        setYouLose(true);
+        console.log("YOU LOST!");
       }
     });
 
-    // return unsubscribe method to execute when component unmounts
+    // note: return unsubscribe method to execute when component unmounts
     return () => {
       subscription.unsubscribe();
     };
-  }, [setYouWin]);
+  }, [setYouLose, setYouWin]);
 
   return (
     <>
-      <Grid isInputError={props.isInputError}></Grid>
-
-      <Keyboard
-        handleChange={props.handleChange}
-        handeSubmit={props.handleSubmit}
-        handleRemove={props.handleRemove}
-      />
+      <Grid></Grid>
+      <Keyboard />
 
       {(youWin || youLose) && (
         <div className="gameover-feedback">

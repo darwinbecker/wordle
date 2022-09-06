@@ -3,7 +3,6 @@ import { usePopup } from "../../Context/Popup/Popup";
 
 type RapidProps = {
   setRapidMode: (value: number) => void;
-  // setTimer: (value: number) => void;
 };
 
 export const Rapid: React.FC<RapidProps> = (props: RapidProps) => {
@@ -18,9 +17,6 @@ export const Rapid: React.FC<RapidProps> = (props: RapidProps) => {
             onClick={(e) => {
               const rapidModeTimerValue = parseInt(e.currentTarget.value);
               props.setRapidMode(rapidModeTimerValue);
-              // const t = new Date().getTime() + rapidModeTimerValue * 60 * 1000;
-              // console.log(t);
-              // props.setTimer(t);
               unSetPopupContent();
             }}
             value={item}

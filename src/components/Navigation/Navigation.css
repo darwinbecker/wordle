@@ -1,5 +1,4 @@
-
-.nav-wrapper{
+.nav-wrapper {
     display: flex;
     max-width: 40%;
     margin: auto;
@@ -7,7 +6,7 @@
     align-items: center;
 }
 
-.nav-wrapper > *{
+.nav-wrapper>* {
     flex: 1 auto;
     font-size: 1.5rem;
     /* line-height: 2rem; */
@@ -15,7 +14,7 @@
     margin: 0 5px;
 }
 
-.nav-select{
+.nav-select {
     /* display: block; */
     margin: auto;
     padding: 0.0625em 0.875em;
@@ -30,19 +29,19 @@
     font-weight: 800;
 }
 
-.nav-select:active{
+.nav-select:active {
     border-color: black;
 }
 
-.nav-select option{
+.nav-select option {
     font-weight: 600;
 }
 
-.nav-icons-wrapper{
+.nav-icons-wrapper {
     display: flex;
 }
 
-.nav-icons-wrapper > button{
+.nav-icons-wrapper>button {
     flex: 1 auto;
     font-size: 1.5rem;
     line-height: 2rem;
@@ -59,15 +58,15 @@
     transition: 0.2s ease-out;
 }
 
-.nav-icons-wrapper > button:hover{
+.nav-icons-wrapper>button:hover {
     /* background: rgb(240, 240, 240);
     color: rgb(25, 25, 25); */
-    
+
     background-color: var(--secondary-color);
     color: var(--primary-color);
 }
 
-.nav-icons-wrapper > button:active{
+.nav-icons-wrapper>button:active {
     /* border-color: var(--primary-color); */
     /* background: var(--primary-color);
     color: var(--secondary-color); */
@@ -75,7 +74,6 @@
 }
 
 
-.icon{
+.icon {
     color: var(--secondary-color);
 }
-

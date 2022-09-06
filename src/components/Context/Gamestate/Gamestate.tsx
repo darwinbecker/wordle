@@ -55,11 +55,6 @@ export const GamestateProvider = (props: any) => {
     return WORD_OF_THE_DAY().solution;
   });
 
-  // put this in a separate context file ?
-  const [isInputError, setIsInputError] = useState<boolean>(false);
-  const [timer, setTimer] = useState<number>();
-  const [pauseTimer, setPauseTimer] = useState<boolean>(true);
-
   return (
     <Gamestate.Provider
       value={{

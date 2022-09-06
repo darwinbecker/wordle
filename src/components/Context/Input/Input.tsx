@@ -5,15 +5,16 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { WinService } from "../../GameHandler";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../../config/Settings";
-import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
+import { getRandomWord, WORD_OF_THE_DAY } from "../../../config/Wordlist";
 import { GameState, loadGameState } from "../../LocalStorage";
 import { checkstatus, WordStatusType } from "../../WordStatus";
 import { useGamestate } from "../Gamestate/Gamestate";
 import { useStats } from "../Stats/Stats";
 import { useSnackbar } from "notistack";
 import { InputService } from "../../Observables/InputService";
+import { DICTIONARY, isInDictionary } from "../../../config/Dictionary";
+import { WinService } from "../../Observables/WinService";
 
 export interface IInput {
   handleChange: (value: string) => void;
@@ -26,6 +27,8 @@ export interface IInput {
   setGuessedWords: (value: string[]) => void;
   wordStatuses: WordStatusType[][];
   setWordStatuses: (value: WordStatusType[][]) => void;
+  isInputError: boolean;
+  setIsInputError: (value: boolean) => void;
 
   rowIndex: number;
   setRowIndex: (value: number) => void;
@@ -55,6 +58,8 @@ export const Input = createContext<IInput>({
       ? []
       : loadedGameState.wordStatuses,
   setWordStatuses: () => {},
+  isInputError: false,
+  setIsInputError: () => {},
 
   rowIndex: 0,
   setRowIndex: () => {},
@@ -147,7 +152,7 @@ export const InputProvider = (props: any) => {
     if (guessedWord.length === 5) {
       if (guessedWords.length < MAX_GUESSES) {
         // TODO check if guessWord is in dictionary
-        // if (!isInDictionary(guessedWord, currentDictionary)) {
+        // if (!isInDictionary(guessedWord, DICTIONARY)) {
         //     console.log("WORD IS NOT IN DICTIONARY");
         //     return;
         // }
@@ -162,17 +167,7 @@ export const InputProvider = (props: any) => {
 
         // set win
         if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
-          // if (gameMode === "R") {
-          //   // setRapidModeScore(rapidModeScore + 1);
-          //   // getNextWord();
-          // } else {
-          //   setYouWin(true);
-          //   Confetti();
-          // }
           WinService.setWin(true);
-          // setYouWin(true);
-          // Confetti();
-
           return;
         }
 
@@ -181,30 +176,7 @@ export const InputProvider = (props: any) => {
           if (
             guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
           ) {
-            console.log("YOU LOSE!");
-
             WinService.setWin(false);
-
-            // TODO: LOSE SERVICE
-            // if (gameMode === "R") {
-            //   setPauseTimer(true);
-            //   console.log("rapidModeTimerMinutes");
-            //   console.log(rapidMode);
-            //   if (rapidMode === 1) {
-            //     const loadedRapidScore = loadRapidScore1Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore1Min(rapidModeScore);
-            //   } else if (rapidMode === 3) {
-            //     const loadedRapidScore = loadRapidScore3Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore3Min(rapidModeScore);
-            //   } else if (rapidMode === 5) {
-            //     const loadedRapidScore = loadRapidScore5Min();
-            //     if (loadedRapidScore <= rapidModeScore)
-            //       saveRapidScore5Min(rapidModeScore);
-            //   }
-            // }
-
             return;
           }
         }
@@ -212,7 +184,7 @@ export const InputProvider = (props: any) => {
     } else {
       // TODO enter 5 characters => shake animation
       console.log("enter 5 characters");
-      setIsInputError(false);
+      // setIsInputError(false);
       setIsInputError(true);
       enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
         variant: "error",
@@ -221,7 +193,6 @@ export const InputProvider = (props: any) => {
     }
   }, [
     enqueueSnackbar,
-    gameMode,
     guessedWord,
     guessedWords,
     rowIndex,
@@ -229,10 +200,8 @@ export const InputProvider = (props: any) => {
     setGuessedWord,
     setGuessedWords,
     setRowIndex,
-    setStats,
     setWordStatuses,
     solution,
-    updatePlayerStats,
     wordStatuses,
     youLose,
     youWin,

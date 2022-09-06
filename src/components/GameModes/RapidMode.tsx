@@ -1,10 +1,8 @@
-import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useState } from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
-import { useStats } from "../Context/Stats/Stats";
-import { WinService } from "../GameHandler/WinService";
+import { WinService } from "../Observables/WinService";
 import { Grid } from "../Grid";
 import { Keyboard } from "../Keyboard";
 import { InputService } from "../Observables/InputService";
@@ -19,14 +17,7 @@ import {
   saveRapidScore5Min,
 } from "../LocalStorage";
 
-type RapidModeProps = {
-  handleChange: (value: string) => void;
-  handleSubmit: () => void;
-  handleRemove: () => void;
-  isInputError: boolean;
-};
-
-export const RapidMode = (props: RapidModeProps) => {
+export const RapidMode = () => {
   const { youLose, setYouLose, setYouWin, solution, setSolution } =
     useGamestate();
   const { resetGame, getNextWord } = useInput();
@@ -38,40 +29,7 @@ export const RapidMode = (props: RapidModeProps) => {
   const [rapidMode, setRapidMode] = useState<number | null>(null);
   const [rapidModeScore, setRapidModeScore] = useState<number>(0);
 
-  // TODO: add useInput context hook and set pauseTimer to false
-
-  // TODO 1:
-  // handleChange
-  // if (gameMode === "R" && pauseTimer) {
-  //   setPauseTimer(false);
-  // }
-
-  // TODO 2:
-  // handleSubmit:
-  // on lose:
-  // if (gameMode === "R") {
-  //   setPauseTimer(true);
-  //   console.log("rapidModeTimerMinutes");
-  //   console.log(rapidMode);
-  //   if (rapidMode === 1) {
-  //     const loadedRapidScore = loadRapidScore1Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore1Min(rapidModeScore);
-  //   } else if (rapidMode === 3) {
-  //     const loadedRapidScore = loadRapidScore3Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore3Min(rapidModeScore);
-  //   } else if (rapidMode === 5) {
-  //     const loadedRapidScore = loadRapidScore5Min();
-  //     if (loadedRapidScore <= rapidModeScore)
-  //       saveRapidScore5Min(rapidModeScore);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (!rapidMode) return;
-  // }, []);
-
+  // reset game
   const resetRapidMode = useCallback((): void => {
     resetGame();
     setSolution("TIMER");
@@ -85,16 +43,16 @@ export const RapidMode = (props: RapidModeProps) => {
     resetRapidMode();
   }, [resetRapidMode]);
 
+  // set popup content
   useEffect(() => {
-    // set popup content
     setPopupContent(<Rapid setRapidMode={setRapidMode} />);
     setForceInput(true);
     setAnimationDelay(false);
   }, [setAnimationDelay, setForceInput, setPopupContent]);
 
+  // on input change => start timer if not started
   useEffect(() => {
     const subscription = InputService.onInputChange().subscribe(() => {
-      // console.log("REMOVE");
       if (pauseTimer) {
         const t = new Date().getTime() + rapidMode! * 60 * 1000;
         setTimer(t);
@@ -102,24 +60,21 @@ export const RapidMode = (props: RapidModeProps) => {
       }
     });
 
-    // return unsubscribe method to execute when component unmounts
+    // note: return unsubscribe method to execute when component unmounts
     return () => {
       subscription.unsubscribe();
     };
   }, [pauseTimer, rapidMode]);
 
+  // on win => get next word & calculate score or save score if game over
   useEffect(() => {
     const subscription = WinService.onWinChange().subscribe((win) => {
       if (win) {
-        // TODO: CHECK IF THIS WORKS?!
-        // setYouWin(false);
         setRapidModeScore(rapidModeScore + 1);
         getNextWord();
       } else {
         setPauseTimer(true);
         setYouLose(true);
-        console.log("rapidModeTimerMinutes");
-        console.log(rapidMode);
         if (rapidMode === 1) {
           const loadedRapidScore = loadRapidScore1Min();
           if (loadedRapidScore <= rapidModeScore)
@@ -136,7 +91,7 @@ export const RapidMode = (props: RapidModeProps) => {
       }
     });
 
-    // return unsubscribe method to execute when component unmounts
+    // note: return unsubscribe method to execute when component unmounts
     return () => {
       subscription.unsubscribe();
     };
@@ -144,13 +99,8 @@ export const RapidMode = (props: RapidModeProps) => {
 
   return (
     <>
-      <Grid isInputError={props.isInputError}></Grid>
-
-      <Keyboard
-        handleChange={props.handleChange}
-        handeSubmit={props.handleSubmit}
-        handleRemove={props.handleRemove}
-      />
+      <Grid></Grid>
+      <Keyboard />
 
       <div className="rapid">
         {youLose && (

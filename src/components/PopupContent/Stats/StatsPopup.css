@@ -1,49 +1,49 @@
 /* Stats */
-.stats .main{
+.stats .main {
     display: flex;
     align-items: stretch;
     margin: 20px auto;
 }
 
-.stats .main .game-stats{
+.stats .main .game-stats {
     flex: 1;
     margin: auto;
 }
 
 
 /* game-stats */
-.wins-and-losses{
+.wins-and-losses {
     display: inline-block;
     margin-left: 5px;
 }
 
-.wins-and-losses .wins{
+.wins-and-losses .wins {
     color: green;
     text-shadow: 0 0 1px green;
 }
 
-.wins-and-losses .losses{
+.wins-and-losses .losses {
     color: red;
     text-shadow: 0 0 1px red;
 }
 
-.streakNumber{
+.streakNumber {
     --blue: rgb(0, 146, 214);
     color: var(--blue);
     text-shadow: 0 0 1px var(--blue);
 }
 
-.rapidStreak{
+.rapidStreak {
     margin-top: 20px;
 }
 
-.rapidStreakList{
+.rapidStreakList {
     display: flex;
     max-width: 80%;
     margin: auto;
 }
 
-.rapidStreakList > *{
+.rapidStreakList>* {
     flex: 1;
     /* border: 2px solid var(--secondary-color); */
     /* box-shadow: 0 0 5px var(--secondary-color); */
@@ -54,32 +54,32 @@
 
 
 /* divider */
-.stats .main .divider{
+.stats .main .divider {
     width: 2px;
     background: var(--secondary-color);
 }
 
 
 /* Histogram */
-.stats .main .histogram{
+.stats .main .histogram {
     flex: 1;
     margin: auto;
 }
 
-.histogram-bar-item{
+.histogram-bar-item {
     margin: 5px 0;
 }
 
-.histogram-bar-item > *{
+.histogram-bar-item>* {
     display: inline-block;
     margin: 0 5px;
 }
 
-.histogram-bar-wrapper{
+.histogram-bar-wrapper {
     width: 70%;
 }
 
-.histogram-bar{
+.histogram-bar {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border-top-right-radius: 5px;
@@ -88,12 +88,12 @@
 
 
 /* Timer */
-.next-word-timer{
+.next-word-timer {
     margin-bottom: 20px;
     font-size: 1.1rem;
     font-weight: 600;
 }
 
-.next-word-timer h3{
+.next-word-timer h3 {
     text-decoration: underline;
 }

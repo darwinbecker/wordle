@@ -127,9 +127,8 @@ export const Categories: React.FC<CategoriesProps> = (
               className="category-button"
               onClick={(e) => {
                 const category: Category = e.currentTarget.value as Category;
-                console.log(category);
+                console.log("selected category:", category);
                 props.setCategory(category);
-                console.log(wordlistData[category]);
                 props.setCurrentDictionary(wordlistData[category]);
                 unSetPopupContent();
               }}

@@ -1,4 +1,4 @@
-.timer{
+.timer {
   color: var(--secondary-color);
   /* font-size: 1.8rem; */
   font-weight: 600;
@@ -9,12 +9,12 @@
   font-size: 1rem;
 }
 
-.countdown{
+.countdown {
   display: inline-block;
   font-size: 1.8rem;
 }
 
-.rapid > .timer > .countdown{
+.rapid>.timer>.countdown {
   margin-top: 20px;
   font-size: 1.8rem;
 }
@@ -27,7 +27,7 @@
   color: #ff0000 !important;
 }
 
-.added-extra-time{
+.added-extra-time {
   color: rgb(0, 160, 0);
   display: inline-block;
   line-height: 1.8rem;
@@ -38,7 +38,7 @@
 }
 
 
-.added-extra-time{
+.added-extra-time {
   /* --animation-delay: 1.2s; */
   /* opacity: 0; */
   /* visibility: hidden; */
