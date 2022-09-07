@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loadDarkMode, saveDarkMode } from "../../LocalStorage";
+import { loadDarkMode, saveDarkMode } from "../../../libs/LocalStorage";
 
 type Theme = "light" | "dark";
 

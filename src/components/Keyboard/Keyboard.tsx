@@ -1,7 +1,7 @@
 import React from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
-import { getStatuses, WordStatusClassNames } from "../WordStatus";
+import { getStatuses, WordStatusClassNames } from "../../libs/WordStatus";
 
 export const Keyboard: React.FC = () => {
   const { solution } = useGamestate();

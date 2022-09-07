@@ -7,14 +7,16 @@ import {
 } from "react";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../../config/Settings";
 import { getRandomWord, WORD_OF_THE_DAY } from "../../../config/Wordlist";
-import { GameState, loadGameState } from "../../LocalStorage";
-import { checkstatus, WordStatusType } from "../../WordStatus";
+import { loadGameState } from "../../../libs/LocalStorage";
+import { checkstatus } from "../../../libs/WordStatus";
 import { useGamestate } from "../Gamestate/Gamestate";
 import { useStats } from "../Stats/Stats";
 import { useSnackbar } from "notistack";
-import { InputService } from "../../Observables/InputService";
+import { InputService } from "../../../libs/Observables/InputService";
 import { DICTIONARY, isInDictionary } from "../../../config/Dictionary";
-import { WinService } from "../../Observables/WinService";
+import { WinService } from "../../../libs/Observables/WinService";
+import { WordStatus } from "../../../types/WordStatus";
+import { GameState } from "../../../types";
 
 export interface IInput {
   handleChange: (value: string) => void;
@@ -25,8 +27,8 @@ export interface IInput {
   setGuessedWord: (value: string) => void;
   guessedWords: string[];
   setGuessedWords: (value: string[]) => void;
-  wordStatuses: WordStatusType[][];
-  setWordStatuses: (value: WordStatusType[][]) => void;
+  wordStatuses: WordStatus[][];
+  setWordStatuses: (value: WordStatus[][]) => void;
   isInputError: boolean;
   setIsInputError: (value: boolean) => void;
 
@@ -91,7 +93,7 @@ export const InputProvider = (props: any) => {
       ? []
       : loadedGameState.guessedWords;
   });
-  const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
+  const [wordStatuses, setWordStatuses] = useState<WordStatus[][]>(() => {
     return loadedGameState.solution !== WORD_OF_THE_DAY().solution
       ? []
       : loadedGameState.wordStatuses;
@@ -183,7 +185,7 @@ export const InputProvider = (props: any) => {
       }
     } else {
       // TODO enter 5 characters => shake animation
-      console.log("enter 5 characters");
+      // console.log("enter 5 characters");
       // setIsInputError(false);
       setIsInputError(true);
       enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {

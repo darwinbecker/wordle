@@ -1,7 +1,7 @@
-import { Row } from "../Row";
+import { Row } from "../";
 import { MAX_WORD_LENGTH } from "../../../config/Settings";
 import { MAX_GUESSES } from "../../../config/Settings";
-import { WordStatusType } from "../../WordStatus";
+import { WordStatus } from "../../../types/WordStatus";
 import { useInput } from "../../Context/Input/Input";
 
 const Rows: React.FC = () => {
@@ -16,7 +16,7 @@ const Rows: React.FC = () => {
             <Row
               key={index}
               letter={char}
-              wordStatus={wordStatuses[index] as WordStatusType[]}
+              wordStatus={wordStatuses[index] as WordStatus[]}
               isInputError={false}
             ></Row>
           );

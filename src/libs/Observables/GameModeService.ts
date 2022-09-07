@@ -1,8 +1,8 @@
 import { Subject } from "rxjs";
-import { GameModeType } from "../GameHandler/GameHandler";
+import { GameMode } from "../../types/GameMode";
 
 const subject = new Subject();
 export const GameModeService = {
-  setGameMode: (mode: GameModeType) => subject.next(mode),
+  setGameMode: (mode: GameMode) => subject.next(mode),
   onGameModeChange: () => subject.asObservable(),
 };

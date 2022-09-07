@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { loadHighContrast, saveHighContrast } from "../../LocalStorage";
-import { HighContrastService } from "../../Observables/HighContrastService";
+import { loadHighContrast, saveHighContrast } from "../../../libs/LocalStorage";
+import { HighContrastService } from "../../../libs/Observables/HighContrastService";
 
 export const HighContrastButton = () => {
   const [highContrast, setHighContrast] = useState<Boolean>(loadHighContrast());

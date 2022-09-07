@@ -6,8 +6,8 @@ import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
 import { Grid } from "../Grid";
-import { Keyboard } from "../Keyboard";
-import { WinService } from "../Observables/WinService";
+import { Keyboard } from "../Keyboard/Keyboard";
+import { WinService } from "../../libs/Observables/WinService";
 import { Categories } from "../PopupContent";
 
 export const CategoryMode = () => {

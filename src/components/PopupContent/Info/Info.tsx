@@ -1,4 +1,4 @@
-import { WordStatusClassNames } from "../../WordStatus";
+import { WordStatusClassNames } from "../../../libs/WordStatus";
 
 export const Info = () => {
   return (

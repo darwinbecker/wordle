@@ -1,4 +1,4 @@
-import { PlayerStats } from "../../LocalStorage";
+import { PlayerStats } from "../../../types";
 
 type HistogramProps = {
   stats: PlayerStats;

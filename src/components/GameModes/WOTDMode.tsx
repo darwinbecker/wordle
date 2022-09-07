@@ -7,16 +7,16 @@ import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
 import { useStats } from "../Context/Stats/Stats";
-import { WinService } from "../Observables/WinService";
+import { WinService } from "../../libs/Observables/WinService";
 import { Grid } from "../Grid";
-import { Keyboard } from "../Keyboard";
+import { Keyboard } from "../Keyboard/Keyboard";
 import {
   loadGameState,
   saveGameState,
-} from "../LocalStorage/GameState/GameState";
-import { savePlayerStats } from "../LocalStorage/PlayerStats/PlayerStats";
+} from "../../libs/LocalStorage/GameState/GameState";
+import { savePlayerStats } from "../../libs/LocalStorage/PlayerStats/PlayerStats";
 import { Stats } from "../PopupContent";
-import { WordStatusType } from "../WordStatus/WordStatus";
+import { WordStatus } from "../../types/WordStatus";
 
 export const WOTDMode = () => {
   const { youLose, setYouLose, youWin, setYouWin, solution, setSolution } =
@@ -42,13 +42,13 @@ export const WOTDMode = () => {
   useEffect(() => {
     setSolution(WORD_OF_THE_DAY().solution);
     const loadedGameState = loadGameState();
-    console.log("loaded:", loadedGameState);
+    // console.log("loaded:", loadedGameState);
 
     // if the loaded gamestate is not the word of the day, reset the game
     if (loadedGameState.solution !== WORD_OF_THE_DAY().solution) {
       const data: string[] = [];
       setGuessedWords(data);
-      const wordStatuses: WordStatusType[][] = [];
+      const wordStatuses: WordStatus[][] = [];
       setWordStatuses(wordStatuses);
     } else {
       // if the loaded gamestate is the word of the day, load the gamestate
@@ -57,7 +57,7 @@ export const WOTDMode = () => {
       );
       const data: string[] = loadedGameState.guessedWords;
       setGuessedWords(data);
-      const wordStatuses: WordStatusType[][] = loadedGameState.wordStatuses;
+      const wordStatuses: WordStatus[][] = loadedGameState.wordStatuses;
       setWordStatuses(wordStatuses);
 
       if (gameWasWon) {

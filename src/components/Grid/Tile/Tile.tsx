@@ -1,9 +1,9 @@
-import { WordStatusType } from "../../WordStatus";
-import { WordStatusClassNames } from "../../WordStatus";
+import { WordStatus } from "../../../types/WordStatus";
+import { WordStatusClassNames } from "../../../libs/WordStatus";
 
 type TileProps = {
   letter: string;
-  status?: WordStatusType;
+  status?: WordStatus;
   isInputError: boolean;
 };
 

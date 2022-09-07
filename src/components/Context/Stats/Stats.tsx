@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { PlayerStats, loadPlayerStats } from "../../LocalStorage";
+import { loadPlayerStats } from "../../../libs/LocalStorage";
+import { PlayerStats } from "../../../types";
 import { useInput } from "../Input/Input";
 
 export interface IStats {

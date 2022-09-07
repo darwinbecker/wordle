@@ -2,7 +2,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
-import { WinService } from "../Observables/WinService";
+import { WinService } from "../../libs/Observables/WinService";
+import { usePopup } from "../Context/Popup/Popup";
+import { Stats } from "../PopupContent";
+import { loadRapidScore, saveRapidScore } from "../../libs/LocalStorage";
 
 type TimerProps = {
   expiryTimestamp: number;
@@ -10,6 +13,8 @@ type TimerProps = {
   pauseTimer: boolean;
   setPauseTimer: (value: boolean) => void;
   addExtraTimeAlert?: boolean;
+  rapidMode: number;
+  rapidModeScore: number;
 };
 
 export const Timer = (props: TimerProps) => {
@@ -17,6 +22,7 @@ export const Timer = (props: TimerProps) => {
   const [expiryDate, setExpiryDate] = useState<Date>(
     new Date(props.expiryTimestamp)
   );
+  const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
 
   const { seconds, minutes, isRunning, start, pause, restart } = useTimer({
     autoStart: false,
@@ -64,11 +70,21 @@ export const Timer = (props: TimerProps) => {
     }
   }, [pause, props.pauseTimer, start]);
 
-  // on timer expire => set you lose & stop timer
+  // on timer expire => set you lose, stop timer, save stats & show stats
   const onExpire = () => {
     console.warn("onExpire called");
     props.setPauseTimer(true);
     setYouLose(true);
+
+    // save score to local storage
+    const loadedRapidScore = loadRapidScore(props.rapidMode.toString());
+    if (loadedRapidScore <= props.rapidModeScore)
+      saveRapidScore(props.rapidMode.toString(), props.rapidModeScore);
+
+    // set popup content
+    setPopupContent(<Stats />);
+    setForceInput(false);
+    setAnimationDelay(true);
   };
 
   const isDanger = minutes === 0 && seconds < 10;

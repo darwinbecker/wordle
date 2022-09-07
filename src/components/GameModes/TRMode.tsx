@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { Confetti } from "../Animations/Confetti";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
-import { WinService } from "../Observables/WinService";
+import { WinService } from "../../libs/Observables/WinService";
 import { Grid } from "../Grid";
-import { Keyboard } from "../Keyboard";
+import { Keyboard } from "../Keyboard/Keyboard";
 
 export const TRMode = () => {
   const { youLose, setYouLose, youWin, setYouWin, solution } = useGamestate();

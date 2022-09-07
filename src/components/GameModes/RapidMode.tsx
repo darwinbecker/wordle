@@ -2,20 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { usePopup } from "../Context/Popup/Popup";
-import { WinService } from "../Observables/WinService";
+import { WinService } from "../../libs/Observables/WinService";
 import { Grid } from "../Grid";
-import { Keyboard } from "../Keyboard";
-import { InputService } from "../Observables/InputService";
-import { Rapid } from "../PopupContent";
-import { Timer } from "../Timer";
-import {
-  loadRapidScore1Min,
-  saveRapidScore1Min,
-  loadRapidScore3Min,
-  saveRapidScore3Min,
-  loadRapidScore5Min,
-  saveRapidScore5Min,
-} from "../LocalStorage";
+import { Keyboard } from "../Keyboard/Keyboard";
+import { InputService } from "../../libs/Observables/InputService";
+import { Rapid, Stats } from "../PopupContent";
+import { Timer } from "../Timer/Timer";
+import { loadRapidScore, saveRapidScore } from "../../libs/LocalStorage";
 
 export const RapidMode = () => {
   const { youLose, setYouLose, setYouWin, solution, setSolution } =
@@ -75,19 +68,16 @@ export const RapidMode = () => {
       } else {
         setPauseTimer(true);
         setYouLose(true);
-        if (rapidMode === 1) {
-          const loadedRapidScore = loadRapidScore1Min();
-          if (loadedRapidScore <= rapidModeScore)
-            saveRapidScore1Min(rapidModeScore);
-        } else if (rapidMode === 3) {
-          const loadedRapidScore = loadRapidScore3Min();
-          if (loadedRapidScore <= rapidModeScore)
-            saveRapidScore3Min(rapidModeScore);
-        } else if (rapidMode === 5) {
-          const loadedRapidScore = loadRapidScore5Min();
-          if (loadedRapidScore <= rapidModeScore)
-            saveRapidScore5Min(rapidModeScore);
-        }
+
+        // save score to local storage
+        const loadedRapidScore = loadRapidScore(rapidMode!.toString());
+        if (loadedRapidScore <= rapidModeScore)
+          saveRapidScore(rapidMode!.toString(), rapidModeScore);
+
+        // set popup content
+        setPopupContent(<Stats />);
+        setForceInput(false);
+        setAnimationDelay(true);
       }
     });
 
@@ -95,7 +85,16 @@ export const RapidMode = () => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [getNextWord, rapidMode, rapidModeScore, setYouLose, setYouWin]);
+  }, [
+    getNextWord,
+    rapidMode,
+    rapidModeScore,
+    setAnimationDelay,
+    setForceInput,
+    setPopupContent,
+    setYouLose,
+    setYouWin,
+  ]);
 
   return (
     <>
@@ -103,7 +102,7 @@ export const RapidMode = () => {
       <Keyboard />
 
       <div className="rapid">
-        {youLose && (
+        {rapidMode && youLose && (
           <>
             <div className="game-summary">
               <div className="rapid-score">
@@ -116,6 +115,8 @@ export const RapidMode = () => {
                 setExpiryTimestamp={setTimer}
                 pauseTimer={pauseTimer}
                 setPauseTimer={setPauseTimer}
+                rapidMode={rapidMode}
+                rapidModeScore={rapidModeScore}
               />
 
               <div className="gameover-feedback">
@@ -137,6 +138,8 @@ export const RapidMode = () => {
             setExpiryTimestamp={setTimer}
             pauseTimer={pauseTimer}
             setPauseTimer={setPauseTimer}
+            rapidMode={rapidMode}
+            rapidModeScore={rapidModeScore}
           />
         )}
 

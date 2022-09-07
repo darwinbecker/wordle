@@ -1,10 +1,10 @@
-import { GameModeType } from "../../GameHandler";
-import { GameModeService } from "../../Observables/GameModeService";
+import { GameMode } from "../../../types/GameMode";
+import { GameModeService } from "../../../libs/Observables/GameModeService";
 
 export const SelectGameMode = () => {
   const handleMode = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     event.target.blur();
-    const selectedMode = event.target.value as GameModeType;
+    const selectedMode = event.target.value as GameMode;
     GameModeService.setGameMode(selectedMode);
   };
 

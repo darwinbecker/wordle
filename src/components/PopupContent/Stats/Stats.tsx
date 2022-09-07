@@ -1,12 +1,8 @@
 import Countdown from "react-countdown";
+import { RAPID_MODE_MINUTES } from "../../../config/Settings";
 import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
-import {
-  loadPlayerStats,
-  loadRapidScore1Min,
-  loadRapidScore3Min,
-  loadRapidScore5Min,
-  PlayerStats,
-} from "../../LocalStorage";
+import { loadPlayerStats, loadRapidScore } from "../../../libs/LocalStorage";
+import { PlayerStats } from "../../../types";
 import { Histogram } from "./Histogram";
 
 type StatsProps = {
@@ -15,9 +11,6 @@ type StatsProps = {
 
 export const Stats = (props: StatsProps) => {
   const stats = props.stats ? props.stats : loadPlayerStats();
-  const rapidStats1Min = loadRapidScore1Min();
-  const rapidStats3Min = loadRapidScore3Min();
-  const rapidStats5Min = loadRapidScore5Min();
   return (
     <div className="stats">
       <h1>Statistiken</h1>
@@ -58,18 +51,12 @@ export const Stats = (props: StatsProps) => {
           <div className="rapidStreak">
             <div>höchster Blitz-Modus Score:</div>
             <div className="rapidStreakList">
-              <div>
-                1 Minute:
-                <div className="streakNumber">{rapidStats1Min}</div>
+              {RAPID_MODE_MINUTES.map((item, index) => (
+                <div key={index}>
+                  {item === "1" ? "1 Minute" : `${item} Minuten`}:
+                <div className="streakNumber">{loadRapidScore(item)}</div>
               </div>
-              <div>
-                3 Minuten:
-                <div className="streakNumber">{rapidStats3Min}</div>
-              </div>
-              <div>
-                5 Minuten:
-                <div className="streakNumber">{rapidStats5Min}</div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

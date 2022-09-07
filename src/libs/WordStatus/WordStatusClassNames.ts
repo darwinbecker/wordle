@@ -1,12 +1,12 @@
 import classnames from "classnames";
 import { useEffect, useState } from "react";
+import { WordStatus } from "../../types/WordStatus";
 import { loadHighContrast } from "../LocalStorage";
 import { HighContrastService } from "../Observables/HighContrastService";
-import { WordStatusType } from "./WordStatus";
 
 export const WordStatusClassNames = (
   className: string,
-  status?: WordStatusType
+  status?: WordStatus
 ): string => {
   const [contrastMode, setContrastMode] = useState<Boolean>(loadHighContrast());
 
