@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/wordle/static/css/main.4e89bd1a.css",
+    "main.js": "/wordle/static/js/main.bc0a743f.js",
+    "static/js/787.e01666d6.chunk.js": "/wordle/static/js/787.e01666d6.chunk.js",
+    "static/media/Sport.png": "/wordle/static/media/Sport.3e1a8951393259186b8b.png",
+    "static/media/Astronomie.png": "/wordle/static/media/Astronomie.db772232b05c0332c279.png",
+    "static/media/Technik.png": "/wordle/static/media/Technik.1b6084c8149dde5a55fd.png",
+    "static/media/Geographie.png": "/wordle/static/media/Geographie.63ee50fd1969c24b0455.png",
+    "static/media/Sprache.png": "/wordle/static/media/Sprache.b6a1a975a840ee526848.png",
+    "static/media/Chemie.png": "/wordle/static/media/Chemie.a2f2ce4300c4dd30f36c.png",
+    "static/media/Botanik.png": "/wordle/static/media/Botanik.8591c434bf126e7f672a.png",
+    "static/media/Tiere.png": "/wordle/static/media/Tiere.eb9b49ba04f2061ad061.png",
+    "static/media/Biologie.png": "/wordle/static/media/Biologie.b7ac042045c27ea24d63.png",
+    "static/media/Musik.png": "/wordle/static/media/Musik.7d92199b191b87a4eace.png",
+    "static/media/Essen.png": "/wordle/static/media/Essen.b813e27d6e5244b1fada.png",
+    "static/media/Medizin.png": "/wordle/static/media/Medizin.1462fc99b5b0731a299f.png",
+    "static/media/Religion.png": "/wordle/static/media/Religion.11df223917eafe1fe6fb.png",
+    "static/media/Jura.png": "/wordle/static/media/Jura.8012f5e7506419da32c3.png",
+    "static/media/Film.png": "/wordle/static/media/Film.29d1488d7d74be3f0a68.png",
+    "static/media/IT.png": "/wordle/static/media/IT.c26668d55bd7248e68a3.png",
+    "static/media/Architektur.png": "/wordle/static/media/Architektur.f59e357803bb13940445.png",
+    "static/media/Mathe.png": "/wordle/static/media/Mathe.dc23a4896bd288b61592.png",
+    "index.html": "/wordle/index.html",
+    "main.4e89bd1a.css.map": "/wordle/static/css/main.4e89bd1a.css.map",
+    "main.bc0a743f.js.map": "/wordle/static/js/main.bc0a743f.js.map",
+    "787.e01666d6.chunk.js.map": "/wordle/static/js/787.e01666d6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e89bd1a.css",
+    "static/js/main.bc0a743f.js"
+  ]
+}
