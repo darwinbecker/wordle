@@ -29,6 +29,9 @@ export interface IInput {
   setGuessedWords: (value: string[]) => void;
   wordStatuses: WordStatus[][];
   setWordStatuses: (value: WordStatus[][]) => void;
+
+  // currentDictionary: object;
+  // setCurrentDictionary: (value: object) => void;
   isInputError: boolean;
   setIsInputError: (value: boolean) => void;
 
@@ -151,47 +154,42 @@ export const InputProvider = (props: any) => {
 
   const handleSubmit = useCallback((): void => {
     if (youWin || youLose) return;
-    if (guessedWord.length === 5) {
-      if (guessedWords.length < MAX_GUESSES) {
-        // TODO check if guessWord is in dictionary
-        // if (!isInDictionary(guessedWord, DICTIONARY)) {
-        //     console.log("WORD IS NOT IN DICTIONARY");
-        //     return;
-        // }
-
-        setIsInputError(false);
-        setRowIndex(rowIndex + 1);
-        setColumnIndex(0);
-        setGuessedWord("");
-        setGuessedWords([...guessedWords, guessedWord]);
-        const status = checkstatus(guessedWord, solution);
-        setWordStatuses([...wordStatuses, status]);
-
-        // set win
-        if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
-          WinService.setWin(true);
-          return;
-        }
-
-        // last guess, set lose
-        if (guessedWords.length === MAX_GUESSES - 1) {
-          if (
-            guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
-          ) {
-            WinService.setWin(false);
-            return;
-          }
-        }
-      }
-    } else {
-      // TODO enter 5 characters => shake animation
-      // console.log("enter 5 characters");
-      // setIsInputError(false);
+    if (guessedWord.length !== 5) {
       setIsInputError(true);
       enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
         variant: "error",
         preventDuplicate: true,
       });
+      return;
+    }
+    if (guessedWords.length < MAX_GUESSES) {
+      // TODO check if guessWord is in dictionary
+      // if (!isInDictionary(guessedWord, DICTIONARY)) {
+      //     console.log("WORD IS NOT IN DICTIONARY");
+      //     return;
+      // }
+
+      setIsInputError(false);
+      setRowIndex(rowIndex + 1);
+      setColumnIndex(0);
+      setGuessedWord("");
+      setGuessedWords([...guessedWords, guessedWord]);
+      const status = checkstatus(guessedWord, solution);
+      setWordStatuses([...wordStatuses, status]);
+
+      // set win
+      if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
+        WinService.setWin(true);
+        return;
+      }
+
+      // last guess, set lose
+      if (guessedWords.length === MAX_GUESSES - 1) {
+        if (guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()) {
+          WinService.setWin(false);
+          return;
+        }
+      }
     }
   }, [
     enqueueSnackbar,
