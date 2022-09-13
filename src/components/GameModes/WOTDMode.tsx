@@ -32,17 +32,10 @@ export const WOTDMode = () => {
   const { setStats, updatePlayerStats } = useStats();
   const { enqueueSnackbar } = useSnackbar();
 
-  // get word of the day
-  useEffect(() => {
-    const solution = WORD_OF_THE_DAY().solution;
-    saveGameState({ guessedWords, wordStatuses, solution });
-  }, [guessedWords, wordStatuses]);
-
   // load gamestate from localstorage
   useEffect(() => {
     setSolution(WORD_OF_THE_DAY().solution);
     const loadedGameState = loadGameState();
-    // console.log("loaded:", loadedGameState);
 
     // if the loaded gamestate is not the word of the day, reset the game
     if (loadedGameState.solution !== WORD_OF_THE_DAY().solution) {
@@ -74,7 +67,12 @@ export const WOTDMode = () => {
         return;
       }
     }
-  }, []);
+  }, [setGuessedWords, setSolution, setWordStatuses, setYouLose, setYouWin]);
+
+  useEffect(() => {
+    const solution = WORD_OF_THE_DAY().solution;
+    saveGameState({ guessedWords, wordStatuses, solution });
+  }, [guessedWords, wordStatuses]);
 
   // set popup content
   useEffect(() => {
