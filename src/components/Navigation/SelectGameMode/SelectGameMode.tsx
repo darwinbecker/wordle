@@ -10,8 +10,8 @@ export const SelectGameMode = () => {
 
   return (
     <select className="nav-select" onChange={handleMode}>
-      <option value="WOTD">Wort des Tages</option>
-      <option value="TR">Training</option>
+      <option value="WOTD">💡 Wort des Tages</option>
+      <option value="TR">🎓 Training</option>
       <option value="C">Kategorie</option>
       <option value="R">Blitz</option>
     </select>

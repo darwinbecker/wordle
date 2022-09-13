@@ -3,6 +3,7 @@ import { RAPID_MODE_MINUTES } from "../../../config/Settings";
 import { WORD_OF_THE_DAY } from "../../../config/Wordlist";
 import { loadPlayerStats, loadRapidScore } from "../../../libs/LocalStorage";
 import { PlayerStats } from "../../../types";
+import { useGamestate } from "../../Context/Gamestate/Gamestate";
 import { Histogram } from "./Histogram";
 
 type StatsProps = {
@@ -10,6 +11,7 @@ type StatsProps = {
 };
 
 export const Stats = (props: StatsProps) => {
+  const { youLose, youWin, solution } = useGamestate();
   const stats = props.stats ? props.stats : loadPlayerStats();
   return (
     <div className="stats">
@@ -54,8 +56,8 @@ export const Stats = (props: StatsProps) => {
               {RAPID_MODE_MINUTES.map((item, index) => (
                 <div key={index}>
                   {item === "1" ? "1 Minute" : `${item} Minuten`}:
-                <div className="streakNumber">{loadRapidScore(item)}</div>
-              </div>
+                  <div className="streakNumber">{loadRapidScore(item)}</div>
+                </div>
               ))}
             </div>
           </div>
@@ -65,6 +67,15 @@ export const Stats = (props: StatsProps) => {
       <div className="next-word-timer">
         <div>nächstes Wort in:</div>
         <Countdown date={WORD_OF_THE_DAY().tomorrow} daysInHours={true} />
+      </div>
+
+      <div>
+        {(youLose || youWin) && (
+          <>
+            <div>Das gesuchte Wort war:</div>
+            <div className="solution-word">{solution}</div>
+          </>
+        )}
       </div>
     </div>
   );
