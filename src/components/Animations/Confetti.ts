@@ -12,7 +12,6 @@ export const Confetti = () => {
   myConfetti({
     particleCount: 400,
     spread: 60,
-    // startVelocity: 60,
     gravity: 0.9,
     origin: {
       x: 0.5,

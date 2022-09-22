@@ -13,7 +13,6 @@ export const SelectGameMode = () => {
       <option value="WOTD">💡 Wort des Tages</option>
       <option value="TR">🎓 Training</option>
       <option value="C">Kategorie</option>
-      <option value="R">Blitz</option>
     </select>
   );
 };

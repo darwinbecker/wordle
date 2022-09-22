@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { GameModeService } from "../../libs/Observables/GameModeService";
 import { NavigationBar } from "../Navigation";
-import { CategoryMode, RapidMode, TRMode, WOTDMode } from "../GameModes";
-// import { isInDictionary, DICTIONARY } from "../../config/Dictionary";
-// import { getRandomWordFromDictionary } from "../../config/Wordlist";
+import { CategoryMode, TRMode, WOTDMode } from "../GameModes";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
 import { GameMode } from "../../types/GameMode";
@@ -45,8 +43,6 @@ export const GameHandler: React.FC = () => {
       {gameMode === "TR" && <TRMode />}
 
       {gameMode === "C" && <CategoryMode />}
-
-      {gameMode === "R" && <RapidMode />}
     </div>
   );
 };

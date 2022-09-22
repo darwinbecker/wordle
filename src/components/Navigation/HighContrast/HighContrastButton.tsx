@@ -13,7 +13,7 @@ export const HighContrastButton = () => {
     saveHighContrast(toggleContrast);
     HighContrastService.setHighContrast(toggleContrast);
     enqueueSnackbar(
-      "Hoher-Kontrast " + (toggleContrast ? "aktiviert" : "deaktiviert"),
+      "Hohen-Kontrast " + (toggleContrast ? "aktiviert" : "deaktiviert"),
       {
         variant: "info",
         autoHideDuration: 2000,
