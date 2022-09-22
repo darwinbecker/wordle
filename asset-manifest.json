@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/wordle/static/css/main.4e89bd1a.css",
-    "main.js": "/wordle/static/js/main.bc0a743f.js",
+    "main.css": "/wordle/static/css/main.6aa79ffb.css",
+    "main.js": "/wordle/static/js/main.d82715e5.js",
     "static/js/787.e01666d6.chunk.js": "/wordle/static/js/787.e01666d6.chunk.js",
     "static/media/Sport.png": "/wordle/static/media/Sport.3e1a8951393259186b8b.png",
     "static/media/Astronomie.png": "/wordle/static/media/Astronomie.db772232b05c0332c279.png",
@@ -22,12 +22,12 @@
     "static/media/Architektur.png": "/wordle/static/media/Architektur.f59e357803bb13940445.png",
     "static/media/Mathe.png": "/wordle/static/media/Mathe.dc23a4896bd288b61592.png",
     "index.html": "/wordle/index.html",
-    "main.4e89bd1a.css.map": "/wordle/static/css/main.4e89bd1a.css.map",
-    "main.bc0a743f.js.map": "/wordle/static/js/main.bc0a743f.js.map",
+    "main.6aa79ffb.css.map": "/wordle/static/css/main.6aa79ffb.css.map",
+    "main.d82715e5.js.map": "/wordle/static/js/main.d82715e5.js.map",
     "787.e01666d6.chunk.js.map": "/wordle/static/js/787.e01666d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e89bd1a.css",
-    "static/js/main.bc0a743f.js"
+    "static/css/main.6aa79ffb.css",
+    "static/js/main.d82715e5.js"
   ]
 }
