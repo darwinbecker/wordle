@@ -1,6 +1,4 @@
-
 insert into words values (default, "Arena", "Kampfplatz, Vorführungsplatz");
-insert into words values (default, "dopen", "aus dem Sport: jemanden (unerlaubt) durch Anregungsmittel zu einer vorübergehenden Leistungssteigerung aufputschen");
 insert into words values (default, "Biker", "jemand der Motorrad fährt oder eine Person, die, als Sport oder in der Freizeit, mit dem Fahrrad, besonders mit dem Mountainbike unterwegs ist");
 insert into words values (default, "Board", "Sportgerät, das aus einem Brett besteht und je nach Art der Fortbewegung wie dem Gleiten auf Schnee oder Wasser (Snowboard, Surfboard, Kiteboard) oder dem Rollen auf Fahrbahnen (Skateboard, Kickboard) unterschiedlich ausgestattet ist");
 insert into words values (default, "Bogen", "Schusswaffe, die aus einem federnden Holzstab und einer straff gespannten Sehne besteht und mit der Pfeile abgeschnellt werden");
