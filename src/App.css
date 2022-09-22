@@ -88,6 +88,10 @@ body.dark {
   pointer-events: none;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

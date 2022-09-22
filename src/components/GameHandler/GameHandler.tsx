@@ -1,14 +1,12 @@
 import { useEffect } from "react";
-import { GameModeService } from "../Observables/GameModeService";
+import { GameModeService } from "../../libs/Observables/GameModeService";
 import { NavigationBar } from "../Navigation";
 import { CategoryMode, RapidMode, TRMode, WOTDMode } from "../GameModes";
 // import { isInDictionary, DICTIONARY } from "../../config/Dictionary";
 // import { getRandomWordFromDictionary } from "../../config/Wordlist";
 import { useGamestate } from "../Context/Gamestate/Gamestate";
 import { useInput } from "../Context/Input/Input";
-
-// WOTD = Word Of The Day / TR = Training / C = Category / R = Rapid
-export type GameModeType = "WOTD" | "TR" | "C" | "R";
+import { GameMode } from "../../types/GameMode";
 
 export const GameHandler: React.FC = () => {
   const { gameMode, setGameMode, setYouWin, setYouLose, setSolution } =
@@ -19,7 +17,7 @@ export const GameHandler: React.FC = () => {
   useEffect(() => {
     const subscription = GameModeService.onGameModeChange().subscribe(
       (mode) => {
-        setGameMode(mode as GameModeType);
+        setGameMode(mode as GameMode);
         resetGame();
       }
     );

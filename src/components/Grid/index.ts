@@ -1,3 +1,3 @@
-export { Grid } from './Root';
-export { Row } from './Row';
-export { Tile } from './Tile';
+export { Grid } from "./Root/Grid";
+export { Row } from "./Row/Row";
+export { Tile } from "./Tile/Tile";

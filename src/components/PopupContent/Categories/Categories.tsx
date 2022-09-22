@@ -19,7 +19,7 @@ import Technik from "../../../static/categoryIcons/Technik.png";
 import Tiere from "../../../static/categoryIcons/Tiere.png";
 import { Category } from "../../../types/Category";
 import { usePopup } from "../../Context/Popup/Popup";
-import wordlistData from "../../../config/database/categories.json";
+import wordlistData from "../../../config/categoryWordlists.json";
 
 // Architektur: https://www.flaticon.com/free-icon/blueprint_1624005
 // Astronomie: https://www.flaticon.com/de/premium-icon/astronomie_2141436

@@ -1,13 +1,8 @@
 // source: https://github.com/cwackerfuss/react-wordle/blob/main/src/lib/localStorage.ts
-import { WordStatusType } from "../../WordStatus";
+
+import { GameState } from "../../../types/GameState";
 
 const gameStateKey = "GameState";
-
-export type GameState = {
-  guessedWords: string[];
-  wordStatuses: WordStatusType[][];
-  solution: string;
-};
 
 const emptyGameState: GameState = {
   guessedWords: [],

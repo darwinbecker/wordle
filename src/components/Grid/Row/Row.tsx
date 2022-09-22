@@ -1,10 +1,10 @@
-import { Tile } from "../Tile";
+import { Tile } from "../";
 import { MAX_WORD_LENGTH } from "../../../config/Settings";
-import { WordStatusType } from "../../WordStatus";
+import { WordStatus } from "../../../types/WordStatus";
 
 type RowProps = {
   letter: string;
-  wordStatus?: WordStatusType[];
+  wordStatus?: WordStatus[];
   isInputError: boolean;
 };
 

@@ -7,14 +7,16 @@ import {
 } from "react";
 import { MAX_GUESSES, MAX_WORD_LENGTH } from "../../../config/Settings";
 import { getRandomWord, WORD_OF_THE_DAY } from "../../../config/Wordlist";
-import { GameState, loadGameState } from "../../LocalStorage";
-import { checkstatus, WordStatusType } from "../../WordStatus";
+import { loadGameState } from "../../../libs/LocalStorage";
+import { checkstatus } from "../../../libs/WordStatus";
 import { useGamestate } from "../Gamestate/Gamestate";
 import { useStats } from "../Stats/Stats";
 import { useSnackbar } from "notistack";
-import { InputService } from "../../Observables/InputService";
+import { InputService } from "../../../libs/Observables/InputService";
 import { DICTIONARY, isInDictionary } from "../../../config/Dictionary";
-import { WinService } from "../../Observables/WinService";
+import { WinService } from "../../../libs/Observables/WinService";
+import { WordStatus } from "../../../types/WordStatus";
+import { GameState } from "../../../types";
 
 export interface IInput {
   handleChange: (value: string) => void;
@@ -25,8 +27,11 @@ export interface IInput {
   setGuessedWord: (value: string) => void;
   guessedWords: string[];
   setGuessedWords: (value: string[]) => void;
-  wordStatuses: WordStatusType[][];
-  setWordStatuses: (value: WordStatusType[][]) => void;
+  wordStatuses: WordStatus[][];
+  setWordStatuses: (value: WordStatus[][]) => void;
+
+  // currentDictionary: object;
+  // setCurrentDictionary: (value: object) => void;
   isInputError: boolean;
   setIsInputError: (value: boolean) => void;
 
@@ -91,7 +96,7 @@ export const InputProvider = (props: any) => {
       ? []
       : loadedGameState.guessedWords;
   });
-  const [wordStatuses, setWordStatuses] = useState<WordStatusType[][]>(() => {
+  const [wordStatuses, setWordStatuses] = useState<WordStatus[][]>(() => {
     return loadedGameState.solution !== WORD_OF_THE_DAY().solution
       ? []
       : loadedGameState.wordStatuses;
@@ -149,47 +154,43 @@ export const InputProvider = (props: any) => {
 
   const handleSubmit = useCallback((): void => {
     if (youWin || youLose) return;
-    if (guessedWord.length === 5) {
-      if (guessedWords.length < MAX_GUESSES) {
-        // TODO check if guessWord is in dictionary
-        // if (!isInDictionary(guessedWord, DICTIONARY)) {
-        //     console.log("WORD IS NOT IN DICTIONARY");
-        //     return;
-        // }
-
-        setIsInputError(false);
-        setRowIndex(rowIndex + 1);
-        setColumnIndex(0);
-        setGuessedWord("");
-        setGuessedWords([...guessedWords, guessedWord]);
-        const status = checkstatus(guessedWord, solution);
-        setWordStatuses([...wordStatuses, status]);
-
-        // set win
-        if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
-          WinService.setWin(true);
-          return;
-        }
-
-        // last guess, set lose
-        if (guessedWords.length === MAX_GUESSES - 1) {
-          if (
-            guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()
-          ) {
-            WinService.setWin(false);
-            return;
-          }
-        }
-      }
-    } else {
-      // TODO enter 5 characters => shake animation
-      console.log("enter 5 characters");
-      // setIsInputError(false);
+    if (guessedWord.length !== 5) {
       setIsInputError(true);
       enqueueSnackbar("Bitte 5 Buchstaben eingeben.", {
         variant: "error",
         preventDuplicate: true,
       });
+      return;
+    }
+    if (guessedWords.length < MAX_GUESSES) {
+      // TODO check if guessWord is in dictionary
+      if (!isInDictionary(guessedWord, DICTIONARY)) {
+        setIsInputError(true);
+        console.log("WORD IS NOT IN DICTIONARY");
+        return;
+      }
+
+      setIsInputError(false);
+      setRowIndex(rowIndex + 1);
+      setColumnIndex(0);
+      setGuessedWord("");
+      setGuessedWords([...guessedWords, guessedWord]);
+      const status = checkstatus(guessedWord, solution);
+      setWordStatuses([...wordStatuses, status]);
+
+      // set win
+      if (guessedWord.toLocaleUpperCase() === solution.toLocaleUpperCase()) {
+        WinService.setWin(true);
+        return;
+      }
+
+      // last guess, set lose
+      if (guessedWords.length === MAX_GUESSES - 1) {
+        if (guessedWord.toLocaleUpperCase() !== solution.toLocaleUpperCase()) {
+          WinService.setWin(false);
+          return;
+        }
+      }
     }
   }, [
     enqueueSnackbar,
@@ -250,8 +251,8 @@ export const InputProvider = (props: any) => {
 
   const getNextWord = useCallback((): void => {
     resetGame();
-    // setSolution(getRandomWord());
-    setSolution("TIMER");
+    setSolution(getRandomWord());
+    // setSolution("TIMER");
   }, [resetGame, setSolution]);
 
   return (

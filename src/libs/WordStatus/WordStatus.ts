@@ -1,18 +1,10 @@
-export type WordStatusType =
-  | "correct"
-  | "semi"
-  | "wrong"
-  | "correct-high-contrast"
-  | "semi-high-contrast";
+import { WordStatus } from "../../types/WordStatus";
 
-export const checkstatus = (
-  guess: string,
-  solution: string
-): WordStatusType[] => {
+export const checkstatus = (guess: string, solution: string): WordStatus[] => {
   const guessChars = guess.toLocaleUpperCase().split("");
   const solutionChars = solution.toLocaleUpperCase().split("");
 
-  const status: WordStatusType[] = [];
+  const status: WordStatus[] = [];
 
   guessChars.forEach((char, index) => {
     if (char === solutionChars[index]) {
@@ -71,8 +63,8 @@ export const checkstatus = (
 export const getStatuses = (
   guesses: string[],
   solution: string
-): { [key: string]: WordStatusType } => {
-  const charObj: { [key: string]: WordStatusType } = {};
+): { [key: string]: WordStatus } => {
+  const charObj: { [key: string]: WordStatus } = {};
   const solutionChars = solution.toLocaleUpperCase().split("");
 
   guesses.forEach((word) => {

@@ -1,24 +1,10 @@
-import { WordStatusClassNames } from "../../WordStatus";
+import { WordStatusClassNames } from "../../../libs/WordStatus";
 
 export const Info = () => {
   return (
     <div className="info">
       <h1>Spielanleitung</h1>
       <div className="main">
-        <h3>Input:</h3>
-        <ul className="input-list">
-          <li>Eingabe von Buchstaben erfolgt über die Tastatur</li>
-          <li>Gültig: Buchstaben von A-Z</li>
-          <li>
-            Ungültig:
-            <ul>
-              <li>Umlaute wie ä, ö, ü, ß</li>
-              <li>Sonderzeichen, Leerzeichen</li>
-              <li>Zahlen von 0-9</li>
-            </ul>
-          </li>
-        </ul>
-
         <h3>Regeln:</h3>
         <ul className="rules-list">
           <li>
@@ -46,8 +32,21 @@ export const Info = () => {
           </li>
         </ul>
 
-        <h3>Buchstaben-Feedback:</h3>
+        <h3>Input:</h3>
+        <ul className="input-list">
+          <li>Eingabe von Buchstaben erfolgt über die Tastatur</li>
+          <li>Gültig: Buchstaben von A-Z</li>
+          <li>
+            Ungültig:
+            <ul>
+              <li>Umlaute wie ä, ö, ü, ß</li>
+              <li>Sonderzeichen, Leerzeichen</li>
+              <li>Zahlen von 0-9</li>
+            </ul>
+          </li>
+        </ul>
 
+        <h3>Buchstaben-Feedback:</h3>
         <div className="text">
           <div>
             Nach der Eingabe eines Wortes, gibt es Feedback zu den einzelnen
@@ -83,28 +82,55 @@ export const Info = () => {
         <ul className="modes-list">
           <li>Wort des Tages</li>
           <div>
-            Jeden Morgen ab 6:00 Uhr gibt es ein neues Wort, welches zu erraten
-            gilt.
+            Jeden Morgen um 6:00 Uhr wird es ein neues Wort ausgewählt, welches
+            zu erraten gilt.
+            <br />
+            In diesem Spiel-Modus werden Statistiken gespeichert.
+            <br />
+            Wird das Wort innerhalb der nächsten 24 Stunden nicht erraten, kann
+            man immer noch das nächste Wort, welches ab 6:00 Uhr freigeschaltet
+            wird, erraten ohne die Siegesserie zu verlieren.
+            <br />
+            Sind alle 6 Versuche aufgebraucht, gilt das Wort als{" "}
+            <span className="underline">nicht</span> erraten und die aktuelle
+            Siegesserie wird auf 0 zurückgesetzt.
           </div>
 
           <li>Training</li>
           <div>
-            Im Trainingsmodus müssen zufällig ausgewählte Wörter erraten werden.
-            In diesem Modus gibt es keine Statistiken.
+            Im Trainingsmodus kann man das Spiel so oft gespielt wie man möchte.
+            <br />
+            Das Wort, das es zu erraten gilt, wird zufällig ausgewählt.
+            <br />
+            In diesem Modus werden Niederlagen und Siege{" "}
+            <span className="underline">nicht</span> mit in die Statistiken
+            eingerechnet.
           </div>
 
           <li>Kategorien</li>
           <div>
             Alle Wörter, die in der Wortliste enthalten sind, wurden in
-            verschiedene Kategorien eingeteilt. In diesem Modus werden nur Worte
-            aus dem ausgewählten Themengebiet gesucht.
+            verschiedene Kategorien eingeteilt. In diesem Modus werden nur
+            Wörter aus dem ausgewählten Themengebiet gesucht.
+            <br />
+            In diesem Modus werden Niederlagen und Siege{" "}
+            <span className="underline">nicht</span> mit in die Statistiken
+            eingerechnet.
           </div>
 
           <li>Blitz</li>
           <div>
-            Im Blitzmodus hat der Spieler nur begrenzt Zeit, um soviele Wörter
-            wie möglich zu erraten. Wird ein Wort richtig erraten, bekommt der
-            Spieler nochmal 5 Sekunden extra Zeit draufgerechnet.
+            Im Blitzmodus hat man nur begrenzt Zeit, um soviele Wörter wie
+            möglich zu erraten.
+            <br />
+            Wird ein Wort richtig erraten, werden 5 extra Sekunden auf den Timer
+            draufgerechnet.
+            <br />
+            Wird ein Wort inenrhalb der 6 Versuche nicht erraten oder läuft die
+            Zeit ab, wird der Timer gestoppt und das Spiel gilt als verloren.
+            <br />
+            Die Anzahl der richtig erratenen Wörter werden gespeichert und
+            können scnhließend in den Stastiken eingesehen werden.
           </div>
         </ul>
       </div>

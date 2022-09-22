@@ -4,7 +4,7 @@ import { GamestateProvider } from "./components/Context/Gamestate/Gamestate";
 import { InputProvider } from "./components/Context/Input/Input";
 import { PopupProvider } from "./components/Context/Popup/Popup";
 import { StatsProvider } from "./components/Context/Stats/Stats";
-import { GameHandler } from "./components/GameHandler";
+import { GameHandler } from "./components/GameHandler/GameHandler";
 
 function App() {
   return (
