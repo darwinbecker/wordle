@@ -1,5 +1,7 @@
 export const isInDictionary = (guessedWord: string, dictionary: string[]) => {
-  return dictionary.includes(guessedWord);
+  return dictionary.some(
+    (word: string) => word.toUpperCase() === guessedWord.toUpperCase()
+  );
 };
 
 export const DICTIONARY: string[] = [

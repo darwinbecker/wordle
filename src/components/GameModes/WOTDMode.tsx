@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MAX_GUESSES } from "../../config/Settings";
 import { WORD_OF_THE_DAY } from "../../config/Wordlist";
 import { Confetti } from "../Animations/Confetti";
@@ -31,6 +31,7 @@ export const WOTDMode = () => {
   const { setPopupContent, setForceInput, setAnimationDelay } = usePopup();
   const { setStats, updatePlayerStats } = useStats();
   const { enqueueSnackbar } = useSnackbar();
+  const [showSolution, setShowSolution] = useState<boolean>(false);
 
   // load gamestate from localstorage
   useEffect(() => {
@@ -57,6 +58,7 @@ export const WOTDMode = () => {
         setYouWin(true);
         setYouLose(false);
         Confetti();
+        setShowSolution(true);
         return;
       } else if (
         loadedGameState.guessedWords.length === MAX_GUESSES &&
@@ -64,8 +66,10 @@ export const WOTDMode = () => {
       ) {
         setYouWin(false);
         setYouLose(true);
+        setShowSolution(true);
         return;
       }
+      setShowSolution(false);
     }
   }, [setGuessedWords, setSolution, setWordStatuses, setYouLose, setYouWin]);
 
@@ -127,7 +131,7 @@ export const WOTDMode = () => {
       <Grid></Grid>
       <Keyboard />
 
-      {youLose && (
+      {showSolution && (
         <div className="gameover-feedback">
           <h4>gesuchtes Wort war:</h4>
           <div className="solution-word">{solution}</div>

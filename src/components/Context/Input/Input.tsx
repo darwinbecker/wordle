@@ -164,10 +164,11 @@ export const InputProvider = (props: any) => {
     }
     if (guessedWords.length < MAX_GUESSES) {
       // TODO check if guessWord is in dictionary
-      // if (!isInDictionary(guessedWord, DICTIONARY)) {
-      //     console.log("WORD IS NOT IN DICTIONARY");
-      //     return;
-      // }
+      if (!isInDictionary(guessedWord, DICTIONARY)) {
+        setIsInputError(true);
+        console.log("WORD IS NOT IN DICTIONARY");
+        return;
+      }
 
       setIsInputError(false);
       setRowIndex(rowIndex + 1);
@@ -250,8 +251,8 @@ export const InputProvider = (props: any) => {
 
   const getNextWord = useCallback((): void => {
     resetGame();
-    // setSolution(getRandomWord());
-    setSolution("TIMER");
+    setSolution(getRandomWord());
+    // setSolution("TIMER");
   }, [resetGame, setSolution]);
 
   return (

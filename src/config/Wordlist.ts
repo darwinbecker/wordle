@@ -692,7 +692,6 @@ const WORDLIST = [
   "getan",
   "Getto",
   "Getue",
-  "gGmbH",
   "Ghana",
   "Gicht",
   "Gilde",

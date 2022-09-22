@@ -23,7 +23,9 @@ export const CategoryMode = () => {
 
   const getNextCategoryWord = (): void => {
     resetGame();
-    setSolution(getRandomWordFromDictionary(currentDictionary!));
+    const t = getRandomWordFromDictionary(currentDictionary!);
+    console.log(t);
+    setSolution(t);
   };
 
   // set popup content
