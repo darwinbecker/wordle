@@ -10,7 +10,6 @@ import { getRandomWord, WORD_OF_THE_DAY } from "../../../config/Wordlist";
 import { loadGameState } from "../../../libs/LocalStorage";
 import { checkstatus } from "../../../libs/WordStatus";
 import { useGamestate } from "../Gamestate/Gamestate";
-import { useStats } from "../Stats/Stats";
 import { useSnackbar } from "notistack";
 import { InputService } from "../../../libs/Observables/InputService";
 import { DICTIONARY, isInDictionary } from "../../../config/Dictionary";
@@ -78,16 +77,8 @@ export const Input = createContext<IInput>({
 export const useInput = () => useContext(Input);
 
 export const InputProvider = (props: any) => {
-  const {
-    gameMode,
-    youWin,
-    setYouWin,
-    youLose,
-    setYouLose,
-    solution,
-    setSolution,
-  } = useGamestate();
-  const { setStats, updatePlayerStats } = useStats();
+  const { youWin, setYouWin, youLose, setYouLose, solution, setSolution } =
+    useGamestate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [guessedWord, setGuessedWord] = useState<string>("");

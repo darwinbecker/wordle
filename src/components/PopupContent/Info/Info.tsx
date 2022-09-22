@@ -117,21 +117,6 @@ export const Info = () => {
             <span className="underline">nicht</span> mit in die Statistiken
             eingerechnet.
           </div>
-
-          <li>Blitz</li>
-          <div>
-            Im Blitzmodus hat man nur begrenzt Zeit, um soviele Wörter wie
-            möglich zu erraten.
-            <br />
-            Wird ein Wort richtig erraten, werden 5 extra Sekunden auf den Timer
-            draufgerechnet.
-            <br />
-            Wird ein Wort inenrhalb der 6 Versuche nicht erraten oder läuft die
-            Zeit ab, wird der Timer gestoppt und das Spiel gilt als verloren.
-            <br />
-            Die Anzahl der richtig erratenen Wörter werden gespeichert und
-            können scnhließend in den Stastiken eingesehen werden.
-          </div>
         </ul>
       </div>
     </div>

@@ -21,11 +21,6 @@ export const Keyboard: React.FC = () => {
   ];
   const charStatuses = getStatuses(guessedWords, solution);
 
-  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-  //     const buttonValue = event.currentTarget.value;
-  //     console.log(buttonValue);
-  // }
-
   return (
     <div className="Keyboard">
       <div className="firstRow">

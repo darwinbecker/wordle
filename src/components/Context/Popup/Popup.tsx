@@ -23,11 +23,6 @@ export const Popup = createContext<IPopUp>({
 
 export const usePopup = () => useContext(Popup);
 
-// const popupStyle = {
-//   bgcolor: "var(--grey)",
-//   color: "var(--font-color-primary)",
-// };
-
 export const PopupProvider = (props: any) => {
   const [popupContent, setPopupContent] = useState<any>(null);
   const [forceInput, setForceInput] = useState<boolean>(false);
@@ -37,32 +32,9 @@ export const PopupProvider = (props: any) => {
     setPopupContent(null);
   }, [setPopupContent]);
 
-  // const handlePopup = (event: any) => {
-  //   if (!props.forceInput) {
-  //     props.closePopup(event);
-  //   }
-  // };
-
   const popupClasses = classnames("popup", {
     "popup-delay": animationDelay === true,
   });
-
-  // const toggleNavButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   const navButton = event.currentTarget.value;
-  //   if (navButton) {
-  //     // if nav button is clicked => set mode
-  //     // props.setPopupMode(navButton as PopupType);
-  //     setShowNavPopup(!showNavPopup);
-  //   } else {
-  //     // if popup is visible & user clicks outside of popup window => hide popup
-  //     const popup = event.target as HTMLDivElement;
-  //     if (popup.classList.contains("popup")) {
-  //       // props.setPopupMode(undefined);
-  //       setShowNavPopup(!showNavPopup);
-  //       // unSetPopupContent();
-  //     }
-  //   }
-  // };
 
   const togglePopup = (
     event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>
