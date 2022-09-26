@@ -1,0 +1,38 @@
+.timer {
+  color: var(--secondary-color);
+  /* font-size: 1.8rem; */
+  font-weight: 600;
+  position: relative;
+}
+
+.timer p {
+  font-size: 1rem;
+}
+
+.countdown {
+  display: inline-block;
+  font-size: 1.8rem;
+}
+
+.rapid>.timer>.countdown {
+  margin-top: 20px;
+  font-size: 1.8rem;
+}
+
+.countdown.danger {
+  color: #ff8800;
+}
+
+.countdown.expired {
+  color: #ff0000 !important;
+}
+
+.added-extra-time {
+  color: rgb(0, 160, 0);
+  display: inline-block;
+  line-height: 1.8rem;
+  position: absolute;
+  top: 40%;
+  margin-left: 10px;
+  font-weight: 700;
+}
