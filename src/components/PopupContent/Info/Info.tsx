@@ -82,14 +82,14 @@ export const Info = () => {
         <ul className="modes-list">
           <li>Wort des Tages</li>
           <div>
-            Jeden Morgen um 6:00 Uhr wird es ein neues Wort ausgewählt, welches
+            Jeden Morgen um 6:00 Uhr wird ein neues Wort ausgewählt, welches
             zu erraten gilt.
             <br />
             In diesem Spiel-Modus werden Statistiken gespeichert.
             <br />
             Wird das Wort innerhalb der nächsten 24 Stunden nicht erraten, kann
             man immer noch das nächste Wort, welches ab 6:00 Uhr freigeschaltet
-            wird, erraten ohne die Siegesserie zu verlieren.
+            wird, erraten, ohne die Siegesserie zu verlieren.
             <br />
             Sind alle 6 Versuche aufgebraucht, gilt das Wort als{" "}
             <span className="underline">nicht</span> erraten und die aktuelle
@@ -98,7 +98,7 @@ export const Info = () => {
 
           <li>Training</li>
           <div>
-            Im Trainingsmodus kann man das Spiel so oft gespielt wie man möchte.
+            Im Trainingsmodus kann man das Spiel so oft spielen, wie man möchte.
             <br />
             Das Wort, das es zu erraten gilt, wird zufällig ausgewählt.
             <br />

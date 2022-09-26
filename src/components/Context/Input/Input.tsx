@@ -157,6 +157,10 @@ export const InputProvider = (props: any) => {
       // TODO check if guessWord is in dictionary
       if (!isInDictionary(guessedWord, DICTIONARY)) {
         setIsInputError(true);
+        enqueueSnackbar("Das Wort ist nicht im Wörterbuch enthalten.", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log("WORD IS NOT IN DICTIONARY");
         return;
       }
