@@ -21,6 +21,8 @@ Example:
 
 *Source: [Game #196 complete in 4 guesses - Wikipedia](https://en.wikipedia.org/wiki/File:Wordle_196_example.svg)*
 
+### Project-Documentation (german)
+[Projektdokumentation](docs/Projektdokumentation.pdf)
 
 ### Database for german words
 > Source: [OpenThesaurus](https://www.openthesaurus.de/)
@@ -29,7 +31,7 @@ Example:
 - words with length of 5: **4.702**
 - unique words with length of 5: **2.734**
 
-Amount of words after cleanup: **~2500**
+Amount of words after cleanup: **2.412**
 
 cleanup means:
 - changing characters like: "ä, ö, ü, ß" to: "ae, oe, ue, ss"
@@ -39,6 +41,8 @@ cleanup means:
 - removing slang & english words that are uncommon: "AFAIK" (as far as i know)
 - removing names like: "Adele", "VW AG"
 - removing words with numbers like: "AMD64", "AK-47"
+
+I created a second wordlist with potential solution-words. This wordlist contains 808 potential solution words.
 
 word descriptions are mostly taken from here:
 > Source: [Digitales Wörterbuch der deutschen Sprache](https://www.dwds.de/)
@@ -68,4 +72,4 @@ The game had 90 players by 1 November, within a month of Wardle making it public
 
 In January 2022, The New York Times Company announced that it had acquired Wordle "for an undisclosed price in the low-seven figures".
 
-17. March, 2022 - Darwin Becker
+28. September, 2022 - Darwin Becker
