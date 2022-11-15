@@ -50,7 +50,7 @@ export const Stats = (props: StatsProps) => {
             </div>
           </div>
 
-          {/* <div className="rapidStreak">
+          <div className="rapidStreak">
             <div>höchster Blitz-Modus Score:</div>
             <div className="rapidStreakList">
               {RAPID_MODE_MINUTES.map((item, index) => (
@@ -60,7 +60,7 @@ export const Stats = (props: StatsProps) => {
                 </div>
               ))}
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
 
