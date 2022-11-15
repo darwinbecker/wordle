@@ -82,8 +82,8 @@ export const Info = () => {
         <ul className="modes-list">
           <li>Wort des Tages</li>
           <div>
-            Jeden Morgen um 6:00 Uhr wird ein neues Wort ausgewählt, welches
-            zu erraten gilt.
+            Jeden Morgen um 6:00 Uhr wird ein neues Wort ausgewählt, welches zu
+            erraten gilt.
             <br />
             In diesem Spiel-Modus werden Statistiken gespeichert.
             <br />
@@ -116,6 +116,21 @@ export const Info = () => {
             In diesem Modus werden Niederlagen und Siege{" "}
             <span className="underline">nicht</span> mit in die Statistiken
             eingerechnet.
+          </div>
+
+          <li>Blitz</li>
+          <div>
+            Im Blitzmodus hat man nur begrenzt Zeit, um so viele Wörter wie
+            möglich zu erraten.
+            <br />
+            Wird ein Wort richtig erraten, werden 5 extra Sekunden auf den Timer
+            draufgerechnet.
+            <br />
+            Wird ein Wort innerhalb der 6 Versuche nicht erraten oder läuft die
+            Zeit ab, wird der Timer gestoppt und das Spiel gilt als verloren.
+            <br />
+            Die Anzahl der richtig erratenen Wörter werden gespeichert und
+            können anschließend in den Statistiken eingesehen werden.
           </div>
         </ul>
       </div>

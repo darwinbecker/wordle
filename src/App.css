@@ -10,6 +10,8 @@
 @import url("./components/PopupContent/Categories/CategoriesPopup.css");
 @import url("./components/Navigation/Navigation.css");
 @import url("./components/Keyboard/Keyboard.css");
+@import url("./components/PopupContent/Rapid/RapidPopup.css");
+@import url("./components/Timer/Timer.css");
 
 :root {
   --light: rgb(230, 230, 230);
