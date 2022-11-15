@@ -50,7 +50,7 @@ export const Stats = (props: StatsProps) => {
             </div>
           </div>
 
-          <div className="rapidStreak">
+          {/* <div className="rapidStreak">
             <div>höchster Blitz-Modus Score:</div>
             <div className="rapidStreakList">
               {RAPID_MODE_MINUTES.map((item, index) => (
@@ -60,7 +60,7 @@ export const Stats = (props: StatsProps) => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -69,14 +69,12 @@ export const Stats = (props: StatsProps) => {
         <Countdown date={WORD_OF_THE_DAY().tomorrow} daysInHours={true} />
       </div>
 
-      <div>
-        {(youLose || youWin) && (
-          <>
-            <div>Das gesuchte Wort war:</div>
-            <div className="solution-word">{solution}</div>
-          </>
-        )}
-      </div>
+      {(youLose || youWin) && (
+        <div className="next-word-timer">
+          <div>Das gesuchte Wort war:</div>
+          <div className="solution-word">{solution}</div>
+        </div>
+      )}
     </div>
   );
 };
