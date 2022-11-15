@@ -18,6 +18,7 @@
 /* Info */
 .info .main {
     max-width: 80ch;
+    padding: 0 10px;
 }
 
 .info .main h3 {
@@ -26,10 +27,11 @@
     text-decoration: underline;
 }
 
-.info .main ul {
+.info .main ul, .text {
     padding-inline-start: 40px;
 }
 
+.text,
 .input-list,
 .rules-list,
 .modes-list,
