@@ -6,6 +6,7 @@
   margin: auto;
   width: 25rem;
   height: 27rem;
+  pointer-events: none;
 }
 
 .animate__animated.animate__fadeInUp {
