@@ -6,6 +6,9 @@ export const checkstatus = (guess: string, solution: string): WordStatus[] => {
 
   const status: WordStatus[] = [];
 
+  const guessHasRepeats = hasRepeats(guess);
+  const repeats = [] as string[];
+
   guessChars.forEach((char, index) => {
     if (char === solutionChars[index]) {
       status[index] = "correct";
@@ -26,11 +29,18 @@ export const checkstatus = (guess: string, solution: string): WordStatus[] => {
       const i = solutionChars.indexOf(char);
 
       // if (charCount.length - 1 == 1)
-      if (status[solutionChars.indexOf(char)] === "correct") {
+      if (status[i] === "correct") {
         status[index] = "wrong";
         guessedCorrect = true;
       }
 
+      if(guessHasRepeats && repeats.includes(char)){
+        console.log("test")
+        status[index] = "wrong";
+        guessedCorrect = true;
+      }
+      repeats.push(char);      
+      
       if (charCount.length - 1 === 2) {
         if (
           status[solutionChars.indexOf(char, i + 1)] === "correct" &&
@@ -85,3 +95,7 @@ export const getStatuses = (
 
   return charObj;
 };
+
+function hasRepeats (str: string) {
+  return /(.).*\1/.test(str);
+}
