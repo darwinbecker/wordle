@@ -97,3 +97,12 @@
 .next-word-timer h3 {
     text-decoration: underline;
 }
+
+.solution-yesterday {
+    margin: 20px 0;
+}
+
+.solution-word {
+    font-weight: bold;
+    font-size: 1.2rem;
+}

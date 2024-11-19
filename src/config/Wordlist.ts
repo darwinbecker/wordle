@@ -3,23 +3,23 @@ export const WORD_OF_THE_DAY = () => {
   const epochMs = new Date(2022, 0).valueOf(); // January 1, 2022 Game Epoch
   const now = Date.now();
   const msInDay = 86400000;
-  const timezoneOffset = 18000000; // 5 hours => next word is at 6:00am
+  // const timezoneOffset = 18000000; // 5 hours => next word is at 6:00am
+  const timezoneOffset = 0; // 0 hours => next word is at 0:00am
   const index = Math.floor((now - timezoneOffset - epochMs) / msInDay);
   const nextday = (index + 1) * msInDay + epochMs + timezoneOffset;
-  // console.log("----WORD_OF_THE_DAY-----");
-  // console.log(epochMs);
-  // console.log(index);
-  // console.log(WORDLIST.length);
-  // console.log(index % WORDLIST.length);
-  // console.log(WORDLIST[index % WORDLIST.length].toUpperCase());
-  // console.log(nextday);
-  // console.log(new Date(Date.now() + (7 * 24 * 60 * 60 * 1000)));
-  // console.log();
+
+  // what is the solution word in 26 days from now?
+  // const indexNew = Math.floor((now - timezoneOffset - epochMs) / msInDay) + 26;
+  // WORDLIST[indexNew % WORDLIST.length].toUpperCase()
+
+  // What is the date in 26 days from now?
+  // const date = new Date(epochMs + indexNew * msInDay + timezoneOffset);
 
   return {
     solution: WORDLIST[index % WORDLIST.length].toUpperCase(),
     solutionIndex: index,
     tomorrow: nextday,
+    solutionYesterday: WORDLIST[(index - 1) % WORDLIST.length].toUpperCase(),
   };
 };
 
@@ -328,7 +328,7 @@ const WORDLIST = [
   "Dosis",
   "Folge",
   "Autor",
-  "Meter",
+  "unten", //"Meter", // 15.12
   "Donau",
   "Alter",
   "Ultra",
