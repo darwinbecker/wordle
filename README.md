@@ -1,75 +1,148 @@
-# **Wordle**
-Wordle is a web-based word game created and developed by the software engineer Josh Wardle. It is owned and published by The New York Times Company since 2022. You can check out and play the original game here:
+<p align="center">
+  <img src="public/Logo.png" alt="Wordle Logo" width="360" />
+</p>
 
-[Original Wordle - The New York Times](https://www.nytimes.com/games/wordle/index.html)
+<h1 align="center">Wordle – German Edition</h1>
 
-### Gameplay
-The player has six attempts to guess a five-letter word, with feedback given for each guess in the form of colored tiles indicating when letters match or occupy the correct position. The player wins, if all five letters were guessed correctly. If the player does not guess all five letters correctly within the six tries, the game will be lost. In this case the searched word will be revealed and the player does not get any points. 
+<p align="center">
+  A German version of the popular Wordle word game, built with React and TypeScript.
+</p>
 
-### How to play
-To play the game simply type on your `keyboard` or use the keyboard displayed in the browser to enter a letter.
-You can type up to 5 letters and sumbit your answer by pressing `enter` on your keyboard. 
-Typos or any spelling mistakes can be corrected by pressing `backspace`. Note: Once submitted, you cannot go back and change your answer!
-After every guess, each letter is marked as either green, yellow or gray: 
-- green indicates that letter is correct and in the correct position
-- yellow means it is in the answer but not in the right position
-- gray indicates it is not in the answer at all.
+<p align="center">
+  <a href="https://darwinbecker.github.io/wordle/">
+    <strong>Play Wordle</strong>
+  </a>
+</p>
 
-Example:
+## Overview
 
-![image info](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Wordle_196_example.svg/311px-Wordle_196_example.svg.png)
+This project is a German implementation of Wordle, the popular browser-based word guessing game.
 
-*Source: [Game #196 complete in 4 guesses - Wikipedia](https://en.wikipedia.org/wiki/File:Wordle_196_example.svg)*
+The goal is to guess a hidden five-letter word within six attempts. After each guess, colored tiles provide feedback to help you find the correct answer.
 
-### Project-Documentation (german)
-[Projektdokumentation](docs/Projektdokumentation.pdf)
+A key part of this project was building and cleaning a German word database to provide a suitable collection of valid words and potential solutions.
 
-### Database for german words
-> Source: [OpenThesaurus](https://www.openthesaurus.de/)
+## How to Play
 
-- Total amount of words: **193.223**
-- words with length of 5: **4.702**
-- unique words with length of 5: **2.734**
+The objective is to guess the hidden five-letter word in six attempts.
 
-Amount of words after cleanup: **2.412**
+1. Type a five-letter word using your physical keyboard or the on-screen keyboard.
+2. Press **Enter** to submit your guess.
+3. Use the colored tiles to figure out which letters are in the solution.
+4. Keep guessing until you find the word or run out of attempts.
 
-cleanup means:
-- changing characters like: "ä, ö, ü, ß" to: "ae, oe, ue, ss"
-- removing special character like: ".", "-", "!", "?"
-- removing words, which contains multiple words like: "zu je", "so so"
-- removing abbreviations like: "ADOER" (Anstalt des öffentlichen Rechts), 
-- removing slang & english words that are uncommon: "AFAIK" (as far as i know)
-- removing names like: "Adele", "VW AG"
-- removing words with numbers like: "AMD64", "AK-47"
+### Color Indicators
 
-I created a second wordlist with potential solution-words. This wordlist contains 808 potential solution words.
+After each guess, every letter is marked with a color:
 
-word descriptions are mostly taken from here:
-> Source: [Digitales Wörterbuch der deutschen Sprache](https://www.dwds.de/)
+<table>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="public/Green.png" width="32" height="32" />
+    </td>
+    <td valign="middle"><strong>Green</strong> – Correct letter and position.</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="public/Yellow.png" width="32" height="32" />
+    </td>
+    <td valign="middle"><strong>Yellow</strong> – Correct letter, wrong position.</td>
+  </tr>
+  <tr>
+    <td align="center" valign="middle">
+      <img src="public/Grey.png" width="32" height="32" />
+    </td>
+    <td valign="middle"><strong>Gray</strong> – Letter is not in the solution.</td>
+  </tr>
+</table>
 
-### Credit
-[Josh Wardle](https://powerlanguage.co.uk/)
+**Example:**
 
-[OpenThesaurus](https://www.openthesaurus.de/)
+The colors provide clues after every guess, helping you narrow down the possible solution.
 
+## Features
 
-## Icons
+- **German Word Database** – A curated collection of German five-letter words.
+- **Interactive Gameplay** – Guess the hidden word in up to six attempts.
+- **Visual Feedback** – Color-coded tiles indicate correct and misplaced letters.
+- **Keyboard Support** – Use your physical keyboard or the on-screen keyboard.
+- **Word Definitions** – Word descriptions sourced primarily from the Digitales Wörterbuch der deutschen Sprache.
 
-[App-icon](https://icon-icons.com/de/symbol/grid-x/184932)
-[Button-icons](https://fontawesome.com/icons)
+## Word Database
 
+The word database is based on data from [OpenThesaurus](https://www.openthesaurus.de/).
 
-#### Bonus information about the game & the creator's story
-Excerpt from [Wikipedia](https://en.wikipedia.org/wiki/Josh_Wardle#Wordle):
+The original dataset contained approximately 193,223 words. I filtered and cleaned the data to create a suitable collection of five-letter words.
 
-In 2013, while working at Reddit, Josh Wardle made a prototype of word game Wordle, a play on his last name.
+The cleanup process included:
 
-In January 2021, he returned to his 2013 prototype to create a word game for his partner, Palak Shah. During the COVID-19 pandemic, he and Shah had played many New York Times games including Spelling Bee, and he wanted to make a new word game that they could play together. Shah played a vital role in the game's development before it went public. She reviewed the English language's 12,000 five-letter words and narrowed them down to 2,500 commonly-known words that could be used in the daily puzzle.
+- Converting German special characters (`ä`, `ö`, `ü`, `ß`) into their respective letter combinations (`ae`, `oe`, `ue`, `ss`).
+- Removing special characters and punctuation.
+- Removing entries containing multiple words.
+- Excluding abbreviations, uncommon slang, and uncommon English words.
+- Excluding names, company names, and words containing numbers.
 
-At first, only Wardle's family played Wordle, until Wardle made it widely available in October 2021 by posting it on his own website, powerlanguage.co.uk. Wordle had no advertisements and Wardle's goal was not to make money. Despite Wordle's success, Wardle did not want it to become his full-time job.
+After cleaning, the database contained:
 
-The game had 90 players by 1 November, within a month of Wardle making it public. Three months later the game had 300,000 daily players, which rose to two million by the following week.
+| Dataset | Word Count |
+|---|---:|
+| Valid five-letter words | 2,412 |
+| Potential solution words | 808 |
 
-In January 2022, The New York Times Company announced that it had acquired Wordle "for an undisclosed price in the low-seven figures".
+A separate list of 808 words was created to serve as potential puzzle solutions.
 
-28. September, 2022 - Darwin Becker
+## Tech Stack
+
+- **React**
+- **TypeScript**
+- **GitHub Pages**
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/darwinbecker/wordle.git
+cd wordle
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Development
+
+Start the local development server:
+
+```bash
+npm start
+```
+
+The application will be available at `http://localhost:3000`.
+
+### Production Build
+
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+### Deployment
+
+The application is hosted on **GitHub Pages**.
+
+## Credits & Data Sources
+
+- [Josh Wardle](https://powerlanguage.co.uk/) – Original Wordle concept
+- [OpenThesaurus](https://www.openthesaurus.de/) – German word database
+- [Digitales Wörterbuch der deutschen Sprache (DWDS)](https://www.dwds.de/) – Word descriptions
