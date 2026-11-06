@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/Logo.png" alt="Wordle Logo" width="360" />
+  <img src="public/Logo.png" alt="Wordle Logo" width="420" />
 </p>
 
 <h1 align="center">Wordle – German Edition</h1>
@@ -14,7 +14,7 @@
   </a>
 </p>
 
-## Overview
+## 📖 Overview
 
 This project is a German implementation of Wordle, the popular browser-based word guessing game.
 
@@ -22,7 +22,11 @@ The goal is to guess a hidden five-letter word within six attempts. After each g
 
 A key part of this project was building and cleaning a German word database to provide a suitable collection of valid words and potential solutions.
 
-## How to Play
+## 📘 Documentation
+
+For more details about the project, implementation, and development process, see the [project documentation (PDF)](docs/Projektdokumentation.pdf).
+
+## 🎮 How to Play
 
 The objective is to guess the hidden five-letter word in six attempts.
 
@@ -31,7 +35,7 @@ The objective is to guess the hidden five-letter word in six attempts.
 3. Use the colored tiles to figure out which letters are in the solution.
 4. Keep guessing until you find the word or run out of attempts.
 
-### Color Indicators
+### 🎨 Color Indicators
 
 After each guess, every letter is marked with a color:
 
@@ -60,7 +64,7 @@ After each guess, every letter is marked with a color:
 
 The colors provide clues after every guess, helping you narrow down the possible solution.
 
-## Features
+## ✨ Features
 
 - **German Word Database** – A curated collection of German five-letter words.
 - **Interactive Gameplay** – Guess the hidden word in up to six attempts.
@@ -68,7 +72,7 @@ The colors provide clues after every guess, helping you narrow down the possible
 - **Keyboard Support** – Use your physical keyboard or the on-screen keyboard.
 - **Word Definitions** – Word descriptions sourced primarily from the Digitales Wörterbuch der deutschen Sprache.
 
-## Word Database
+## 🗂️ Word Database
 
 The word database is based on data from [OpenThesaurus](https://www.openthesaurus.de/).
 
@@ -91,20 +95,20 @@ After cleaning, the database contained:
 
 A separate list of 808 words was created to serve as potential puzzle solutions.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **React**
 - **TypeScript**
 - **GitHub Pages**
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 
 - Node.js
 - npm
 
-### Installation
+### 📦 Installation
 
 Clone the repository:
 
@@ -119,7 +123,7 @@ Install dependencies:
 npm install
 ```
 
-### Development
+### 💻 Development
 
 Start the local development server:
 
@@ -129,7 +133,7 @@ npm start
 
 The application will be available at `http://localhost:3000`.
 
-### Production Build
+### 🏗️ Production Build
 
 Create an optimized production build:
 
@@ -137,11 +141,11 @@ Create an optimized production build:
 npm run build
 ```
 
-### Deployment
+### 🌐 Deployment
 
 The application is hosted on **GitHub Pages**.
 
-## Credits & Data Sources
+## 📚 Credits & Data Sources
 
 - [Josh Wardle](https://powerlanguage.co.uk/) – Original Wordle concept
 - [OpenThesaurus](https://www.openthesaurus.de/) – German word database
