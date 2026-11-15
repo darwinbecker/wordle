@@ -59,7 +59,7 @@ export const Timer = (props: TimerProps) => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [seconds]) // important: <-- just add seconds as a dependency to re-run effect when seconds change (every second)
+  }, [AddExtraTime, displayAddedExtraTime, seconds]) // important: <-- just add seconds as a dependency to re-run effect when seconds change (every second)
 
   // start timer if user starts to type
   useEffect(() => {
