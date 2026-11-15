@@ -55,5 +55,8 @@
   "devDependencies": {
     "@types/canvas-confetti": "^1.4.2",
     "gh-pages": "^6.3.0"
+  },
+  "overrides": {
+    "yaml": "^2.9.1"
   }
 }
